@@ -1,0 +1,5 @@
+# This .gitignore is used for the projectwide ignored folders and files
+.venv
+/Builds/
+.DS_Store
+

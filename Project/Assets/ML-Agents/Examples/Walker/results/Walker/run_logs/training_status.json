@@ -1,0 +1,65 @@
+{
+    "Walker": {
+        "checkpoints": [
+            {
+                "steps": 4461220,
+                "file_path": "results/Walker/Walker/Walker-4461220.onnx",
+                "reward": 27.658407617088656,
+                "creation_time": 1712257348.421107,
+                "auxillary_file_paths": [
+                    "results/Walker/Walker/Walker-4461220.pt"
+                ]
+            },
+            {
+                "steps": 4499996,
+                "file_path": "results/Walker/Walker/Walker-4499996.onnx",
+                "reward": 28.200671534727885,
+                "creation_time": 1712297949.432157,
+                "auxillary_file_paths": [
+                    "results/Walker/Walker/Walker-4499996.pt"
+                ]
+            },
+            {
+                "steps": 4825287,
+                "file_path": "results/Walker/Walker/Walker-4825287.onnx",
+                "reward": 30.518230276222912,
+                "creation_time": 1712298893.3558989,
+                "auxillary_file_paths": [
+                    "results/Walker/Walker/Walker-4825287.pt"
+                ]
+            },
+            {
+                "steps": 4999989,
+                "file_path": "results/Walker/Walker/Walker-4999989.onnx",
+                "reward": 21.885015123393906,
+                "creation_time": 1712306207.071855,
+                "auxillary_file_paths": [
+                    "results/Walker/Walker/Walker-4999989.pt"
+                ]
+            },
+            {
+                "steps": 5296602,
+                "file_path": "results/Walker/Walker/Walker-5296602.onnx",
+                "reward": null,
+                "creation_time": 1712307025.849317,
+                "auxillary_file_paths": [
+                    "results/Walker/Walker/Walker-5296602.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 5296602,
+            "file_path": "results/Walker/Walker.onnx",
+            "reward": null,
+            "creation_time": 1712307025.849317,
+            "auxillary_file_paths": [
+                "results/Walker/Walker/Walker-5296602.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0.dev0",
+        "torch_version": "2.2.2"
+    }
+}
