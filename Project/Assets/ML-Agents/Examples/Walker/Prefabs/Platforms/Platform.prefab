@@ -30,15 +30,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6902107422946006027, guid: f0d7741d9e06247f6843b921a206b978, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.597538
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6902107422946006027, guid: f0d7741d9e06247f6843b921a206b978, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.8809223
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6902107422946006027, guid: f0d7741d9e06247f6843b921a206b978, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15.475426
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6902107422946006027, guid: f0d7741d9e06247f6843b921a206b978, type: 3}
       propertyPath: m_LocalRotation.w
@@ -123,7 +123,7 @@ PrefabInstance:
     - target: {fileID: 3599283675615088294, guid: dd62a2a5a838943fba3d2cbb377a75b3, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 6d789dcf8f9114d25a1947f04f7f5b90, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: ec4f8f9021fb44daea9711743840cd8b, type: 3}
     - target: {fileID: 3599283675615088294, guid: dd62a2a5a838943fba3d2cbb377a75b3, type: 3}
       propertyPath: m_DeterministicInference
       value: 0
