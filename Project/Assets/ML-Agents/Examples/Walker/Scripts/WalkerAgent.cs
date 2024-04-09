@@ -55,7 +55,7 @@ public class WalkerAgent : Agent
     //The indicator graphic gameobject that points towards the target
     DirectionIndicator m_DirectionIndicator;
     JointDriveController m_JdController;
-    EnvironmentParameters m_ResetParams;
+    public EnvironmentParameters m_ResetParams;
 
     public override void Initialize()
     {

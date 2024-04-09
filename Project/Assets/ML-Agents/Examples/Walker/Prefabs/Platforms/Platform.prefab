@@ -123,7 +123,7 @@ PrefabInstance:
     - target: {fileID: 3599283675615088294, guid: dd62a2a5a838943fba3d2cbb377a75b3, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: ec4f8f9021fb44daea9711743840cd8b, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: de362d09237e5422286e5b812b72ee96, type: 3}
     - target: {fileID: 3599283675615088294, guid: dd62a2a5a838943fba3d2cbb377a75b3, type: 3}
       propertyPath: m_DeterministicInference
       value: 0
