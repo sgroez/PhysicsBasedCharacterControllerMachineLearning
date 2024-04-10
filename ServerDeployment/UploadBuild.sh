@@ -1,3 +1,15 @@
 #! /bin/bash
 source ../.env
-scp -r ../.env ../Build $config_path $remote_server_user@$remote_server_address:$remote_path
+#increase version number
+ex ../.env  << EOF
+/^version=/
+c
+version=$((version + 1))
+.
+wq
+EOF
+localFiles="../.env $config_path"
+if [ "$1" != "-onlyconfig" ]; then
+localFiles+=" ../Build"
+fi
+scp -r $localFiles $remote_server_user@$remote_server_address:$remote_path

@@ -7,9 +7,10 @@ public class SpawnEnvironment : MonoBehaviour
     public bool hasInitialEnvironment;
     public GameObject environmentPrefab;
     public WalkerAgent agent;
+    public float defaultEnvCount = 1f;
     void Start()
     {
-        float environmentCount = agent.m_ResetParams.GetWithDefault("environment_count", 1f);
+        float environmentCount = agent.m_ResetParams.GetWithDefault("environment_count", defaultEnvCount);
         for (int i = 0; i < environmentCount; i++)
         {
             if (hasInitialEnvironment && i == 0) continue;
