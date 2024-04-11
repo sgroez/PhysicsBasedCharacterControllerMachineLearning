@@ -10,7 +10,12 @@ public class SpawnEnvironment : MonoBehaviour
     public float defaultEnvCount = 1f;
     void Start()
     {
-        float environmentCount = agent.m_ResetParams.GetWithDefault("environment_count", defaultEnvCount);
+        float environmentCount = defaultEnvCount;
+        if (agent != null)
+        {
+            environmentCount = agent.m_ResetParams.GetWithDefault("environment_count", defaultEnvCount);
+        }
+
         for (int i = 0; i < environmentCount; i++)
         {
             if (hasInitialEnvironment && i == 0) continue;
