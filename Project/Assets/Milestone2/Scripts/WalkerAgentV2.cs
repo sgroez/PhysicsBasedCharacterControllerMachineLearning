@@ -240,7 +240,7 @@ public class WalkerAgentV2 : Agent
         //add backwards walk (negating head forward)
         if (Quaternion.Angle(m_JdController.bodyPartsDict[hips].rb.transform.rotation, m_OrientationCube.transform.rotation) > 160f)
         {
-            headForward = -headForward
+            headForward = -headForward;
         }
         var lookAtTargetReward = (Vector3.Dot(cubeForward, headForward) + 1) * .5F;
 
