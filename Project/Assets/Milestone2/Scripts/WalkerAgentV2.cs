@@ -237,6 +237,11 @@ public class WalkerAgentV2 : Agent
         var headForward = head.forward;
         headForward.y = 0;
         // var lookAtTargetReward = (Vector3.Dot(cubeForward, head.forward) + 1) * .5F;
+        //add backwards walk (negating head forward)
+        if (Quaternion.Angle(m_JdController.bodyPartsDict[hips].rb.transform.rotation, m_OrientationCube.transform.rotation) > 160f)
+        {
+            headForward = -headForward
+        }
         var lookAtTargetReward = (Vector3.Dot(cubeForward, headForward) + 1) * .5F;
 
         //Check for NaNs
