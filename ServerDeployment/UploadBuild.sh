@@ -8,7 +8,7 @@ version=$((version + 1))
 .
 wq
 EOF
-localFiles="../.env $config_path"
+localFiles="../.env $config_path ./RemoteScripts/*"
 if [ "$1" != "-onlyconfig" ]; then
 localFiles+=" ../Build"
 fi
