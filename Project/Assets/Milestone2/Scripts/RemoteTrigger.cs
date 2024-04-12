@@ -7,7 +7,6 @@ public class RemoteTrigger : MonoBehaviour
     private float triggeredAt;
     private void OnTriggerEnter(Collider col)
     {
-        Debug.Log("trigger entered");
         if (!col.transform.CompareTag("target")) return;
         if (Time.time > triggeredAt + 0.1f)
         {

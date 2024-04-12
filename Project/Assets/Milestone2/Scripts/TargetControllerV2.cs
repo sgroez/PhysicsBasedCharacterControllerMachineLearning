@@ -59,7 +59,6 @@ public class TargetControllerV2 : MonoBehaviour
 
     public void TriggerRemote(float triggerTime)
     {
-        Debug.Log("triggered from remote");
         if (!respawnIfTouched) return;
         if (Time.time > triggerTime + respawnDelay)
         {
