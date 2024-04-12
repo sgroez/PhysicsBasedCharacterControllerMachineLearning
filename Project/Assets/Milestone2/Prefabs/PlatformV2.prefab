@@ -182,7 +182,6 @@ GameObject:
   - component: {fileID: 398995961157625078}
   - component: {fileID: 4971112905650857398}
   - component: {fileID: 8554160327900668918}
-  - component: {fileID: 186331376367826162}
   m_Layer: 0
   m_Name: upper_arm_L
   m_TagString: agent
@@ -376,18 +375,6 @@ MonoBehaviour:
   penalizeGroundContact: 1
   groundContactPenalty: -1
   touchingGround: 0
---- !u!114 &186331376367826162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 146128463897095104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f827ad6653acf45a19191ac6c66e969f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &486547842701320133
 GameObject:
   m_ObjectHideFlags: 0
@@ -506,7 +493,6 @@ GameObject:
   - component: {fileID: 430753792662175937}
   - component: {fileID: 6802774475939960540}
   - component: {fileID: 8610612435112055892}
-  - component: {fileID: 3864369253436374141}
   m_Layer: 0
   m_Name: footR
   m_TagString: agent
@@ -697,18 +683,6 @@ MonoBehaviour:
   penalizeGroundContact: 0
   groundContactPenalty: 0
   touchingGround: 0
---- !u!114 &3864369253436374141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1045621208403503733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f827ad6653acf45a19191ac6c66e969f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1287268089056192688
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,7 +779,6 @@ GameObject:
   - component: {fileID: 8409188342068137035}
   - component: {fileID: 2860050974959835264}
   - component: {fileID: 4173916493071848102}
-  - component: {fileID: 4053627513258781706}
   m_Layer: 0
   m_Name: lower_arm_L
   m_TagString: agent
@@ -999,18 +972,6 @@ MonoBehaviour:
   penalizeGroundContact: 1
   groundContactPenalty: -1
   touchingGround: 0
---- !u!114 &4053627513258781706
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1736010552390723121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f827ad6653acf45a19191ac6c66e969f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1753208051451241093
 GameObject:
   m_ObjectHideFlags: 0
@@ -1632,7 +1593,6 @@ GameObject:
   - component: {fileID: 8282023242194626021}
   - component: {fileID: 2981148030577263740}
   - component: {fileID: 7795458459350750500}
-  - component: {fileID: 159928956321188431}
   m_Layer: 0
   m_Name: spine
   m_TagString: agent
@@ -1826,18 +1786,6 @@ MonoBehaviour:
   penalizeGroundContact: 1
   groundContactPenalty: -1
   touchingGround: 0
---- !u!114 &159928956321188431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2596912777221878697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f827ad6653acf45a19191ac6c66e969f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2780994293861555142
 GameObject:
   m_ObjectHideFlags: 0
@@ -2017,7 +1965,6 @@ GameObject:
   - component: {fileID: 3568212613695685834}
   - component: {fileID: 7617205587548097472}
   - component: {fileID: 5423046032420921392}
-  - component: {fileID: 4937917011713270523}
   m_Layer: 0
   m_Name: hips
   m_TagString: agent
@@ -2111,18 +2058,6 @@ MonoBehaviour:
   penalizeGroundContact: 1
   groundContactPenalty: -1
   touchingGround: 0
---- !u!114 &4937917011713270523
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3298682757983410769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f827ad6653acf45a19191ac6c66e969f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3323219369181259932
 GameObject:
   m_ObjectHideFlags: 0
@@ -2183,7 +2118,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: c35d737abbf7d4c50b015aca74fc8206, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 2
   m_BehaviorType: 0
   m_BehaviorName: Walker
@@ -2528,7 +2463,6 @@ GameObject:
   - component: {fileID: 9105315728668351549}
   - component: {fileID: 3376662699483889496}
   - component: {fileID: 6832997232399098887}
-  - component: {fileID: 3213749101242710060}
   m_Layer: 0
   m_Name: hand_R
   m_TagString: agent
@@ -2719,18 +2653,6 @@ MonoBehaviour:
   penalizeGroundContact: 1
   groundContactPenalty: -1
   touchingGround: 0
---- !u!114 &3213749101242710060
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3640133787549437817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f827ad6653acf45a19191ac6c66e969f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3789854278869779600
 GameObject:
   m_ObjectHideFlags: 0
@@ -2744,7 +2666,6 @@ GameObject:
   - component: {fileID: 5548903821761299355}
   - component: {fileID: 4331723389599369097}
   - component: {fileID: 3620783986216770215}
-  - component: {fileID: 3036477456827532141}
   m_Layer: 0
   m_Name: chest
   m_TagString: agent
@@ -2940,18 +2861,6 @@ MonoBehaviour:
   penalizeGroundContact: 1
   groundContactPenalty: -1
   touchingGround: 0
---- !u!114 &3036477456827532141
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3789854278869779600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f827ad6653acf45a19191ac6c66e969f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4084663109786552607
 GameObject:
   m_ObjectHideFlags: 0
@@ -2981,7 +2890,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4084663109786552607}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -3100,7 +3009,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tagToDetect: agent
   spawnRadius: 9
-  respawnIfTouched: 1
+  respawnIfTouched: 0
   respawnIfFallsOffPlatform: 1
   fallDistance: 5
   respawnDelay: 1
@@ -3117,7 +3026,6 @@ GameObject:
   - component: {fileID: 4192923252988494879}
   - component: {fileID: 7294292248170310459}
   - component: {fileID: 3030901931571611212}
-  - component: {fileID: 6459985079363841583}
   m_Layer: 0
   m_Name: shinR
   m_TagString: agent
@@ -3312,18 +3220,6 @@ MonoBehaviour:
   penalizeGroundContact: 0
   groundContactPenalty: -1
   touchingGround: 0
---- !u!114 &6459985079363841583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4470380960360245524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f827ad6653acf45a19191ac6c66e969f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4560131879828692887
 GameObject:
   m_ObjectHideFlags: 0
@@ -3479,7 +3375,6 @@ GameObject:
   - component: {fileID: 993314806469004930}
   - component: {fileID: 4619804539627563856}
   - component: {fileID: 7869814670477746354}
-  - component: {fileID: 7126688445731372650}
   m_Layer: 0
   m_Name: thighL
   m_TagString: agent
@@ -3673,18 +3568,6 @@ MonoBehaviour:
   penalizeGroundContact: 1
   groundContactPenalty: -1
   touchingGround: 0
---- !u!114 &7126688445731372650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4788089219823088248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f827ad6653acf45a19191ac6c66e969f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5121253396843548061
 GameObject:
   m_ObjectHideFlags: 0
@@ -4073,7 +3956,6 @@ GameObject:
   - component: {fileID: 5786802563114234377}
   - component: {fileID: 4063077369118201945}
   - component: {fileID: 6592594196232246930}
-  - component: {fileID: 1186126773815541310}
   m_Layer: 0
   m_Name: shinL
   m_TagString: agent
@@ -4268,18 +4150,6 @@ MonoBehaviour:
   penalizeGroundContact: 0
   groundContactPenalty: -1
   touchingGround: 0
---- !u!114 &1186126773815541310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5815726057882630769}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f827ad6653acf45a19191ac6c66e969f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5817011965878066033
 GameObject:
   m_ObjectHideFlags: 0
@@ -4542,7 +4412,6 @@ GameObject:
   - component: {fileID: 4771934891166248138}
   - component: {fileID: 7942827895510841490}
   - component: {fileID: 5289167097949295579}
-  - component: {fileID: 8440026451723469582}
   m_Layer: 0
   m_Name: head
   m_TagString: agent
@@ -4733,18 +4602,6 @@ MonoBehaviour:
   penalizeGroundContact: 1
   groundContactPenalty: -1
   touchingGround: 0
---- !u!114 &8440026451723469582
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6434274427066329472}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f827ad6653acf45a19191ac6c66e969f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6495165867623241130
 GameObject:
   m_ObjectHideFlags: 0
@@ -5099,7 +4956,6 @@ GameObject:
   - component: {fileID: 7859746620141594888}
   - component: {fileID: 4663170781892217665}
   - component: {fileID: 6180253081644413334}
-  - component: {fileID: 7587625536880008148}
   m_Layer: 0
   m_Name: footL
   m_TagString: agent
@@ -5290,18 +5146,6 @@ MonoBehaviour:
   penalizeGroundContact: 0
   groundContactPenalty: 0
   touchingGround: 0
---- !u!114 &7587625536880008148
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7473769536573470490}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f827ad6653acf45a19191ac6c66e969f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7522001471969490605
 GameObject:
   m_ObjectHideFlags: 0
@@ -5575,7 +5419,6 @@ GameObject:
   - component: {fileID: 218378887913002364}
   - component: {fileID: 3653947632180177904}
   - component: {fileID: 7739755187127013713}
-  - component: {fileID: 1212979914750675618}
   m_Layer: 0
   m_Name: upper_arm_R
   m_TagString: agent
@@ -5769,18 +5612,6 @@ MonoBehaviour:
   penalizeGroundContact: 1
   groundContactPenalty: -1
   touchingGround: 0
---- !u!114 &1212979914750675618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7895235464382181624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f827ad6653acf45a19191ac6c66e969f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8012281073832298499
 GameObject:
   m_ObjectHideFlags: 0
@@ -5961,7 +5792,6 @@ GameObject:
   - component: {fileID: 2970067949113378533}
   - component: {fileID: 5159392379563504440}
   - component: {fileID: 2175296562297223092}
-  - component: {fileID: 2803957880689165981}
   m_Layer: 0
   m_Name: hand_L
   m_TagString: agent
@@ -6152,18 +5982,6 @@ MonoBehaviour:
   penalizeGroundContact: 1
   groundContactPenalty: -1
   touchingGround: 0
---- !u!114 &2803957880689165981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8355345052132032684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f827ad6653acf45a19191ac6c66e969f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8817947969201173287
 GameObject:
   m_ObjectHideFlags: 0
@@ -6362,7 +6180,6 @@ GameObject:
   - component: {fileID: 7622986977195495792}
   - component: {fileID: 4260055350791921479}
   - component: {fileID: 6245992968296283114}
-  - component: {fileID: 3593916231132845257}
   m_Layer: 0
   m_Name: thighR
   m_TagString: agent
@@ -6556,18 +6373,6 @@ MonoBehaviour:
   penalizeGroundContact: 1
   groundContactPenalty: -1
   touchingGround: 0
---- !u!114 &3593916231132845257
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9118258527216762811}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f827ad6653acf45a19191ac6c66e969f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &9125462355686747719
 GameObject:
   m_ObjectHideFlags: 0
@@ -6747,7 +6552,6 @@ GameObject:
   - component: {fileID: 8830197903324421917}
   - component: {fileID: 7340106822111965438}
   - component: {fileID: 7767319011528097451}
-  - component: {fileID: 2423345755658946791}
   m_Layer: 0
   m_Name: lower_arm_R
   m_TagString: agent
@@ -6941,15 +6745,3 @@ MonoBehaviour:
   penalizeGroundContact: 1
   groundContactPenalty: -1
   touchingGround: 0
---- !u!114 &2423345755658946791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9207576684434060723}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f827ad6653acf45a19191ac6c66e969f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
