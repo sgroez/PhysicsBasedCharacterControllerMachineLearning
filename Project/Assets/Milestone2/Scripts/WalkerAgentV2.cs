@@ -136,7 +136,7 @@ public class WalkerAgentV2 : Agent
         var cubeForward = m_OrientationCube.transform.forward;
 
         //velocity we want to match
-        var velGoal = GetGoalVelocity();
+        var velGoal = cubeForward * MTargetWalkingSpeed;
         //ragdoll's avg vel
         var avgVel = GetAvgVelocity();
 
@@ -219,7 +219,7 @@ public class WalkerAgentV2 : Agent
         // Set reward for this step according to mixture of the following elements.
         // a. Match target speed
         //This reward will approach 1 if it matches perfectly and approach zero as it deviates
-        var matchSpeedReward = GetMatchingVelocityReward(GetGoalVelocity(), GetAvgVelocity());
+        var matchSpeedReward = GetMatchingVelocityReward(cubeForward * MTargetWalkingSpeed, GetAvgVelocity());
 
         //Check for NaNs
         if (float.IsNaN(matchSpeedReward))
@@ -237,11 +237,6 @@ public class WalkerAgentV2 : Agent
         var headForward = head.forward;
         headForward.y = 0;
         // var lookAtTargetReward = (Vector3.Dot(cubeForward, head.forward) + 1) * .5F;
-        //add backwards walk (negating head forward)
-        if (Quaternion.Angle(m_JdController.bodyPartsDict[hips].rb.transform.rotation, m_OrientationCube.transform.rotation) > 160f)
-        {
-            headForward = -headForward;
-        }
         var lookAtTargetReward = (Vector3.Dot(cubeForward, headForward) + 1) * .5F;
 
         //Check for NaNs
@@ -293,21 +288,5 @@ public class WalkerAgentV2 : Agent
     public void TouchedTarget()
     {
         AddReward(1f);
-    }
-
-    Vector3 GetGoalVelocity()
-    {
-        var cubeForward = m_OrientationCube.transform.forward;
-        //add backwards walk (negative goal velocity)
-        if (Quaternion.Angle(m_JdController.bodyPartsDict[hips].rb.transform.rotation, m_OrientationCube.transform.rotation) > 160f)
-        {
-            return -cubeForward * MTargetWalkingSpeed;
-        }
-        //add standing still (0, 0, 0 goal velocity)
-        if (Vector3.Distance(m_JdController.bodyPartsDict[hips].rb.transform.position, target.position) < 0.1f)
-        {
-            return Vector3.zero;
-        }
-        return cubeForward * MTargetWalkingSpeed;
     }
 }
