@@ -5,6 +5,14 @@ using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 using Random = UnityEngine.Random;
 
+enum Direction
+{
+    Forward,
+    Right,
+    Backward,
+    Left
+}
+
 public class WalkerAgentV2 : Agent
 {
     [Header("Walk Speed")]
@@ -28,6 +36,7 @@ public class WalkerAgentV2 : Agent
 
     //The direction an agent will walk during training.
     private Vector3 m_WorldDirToWalk = Vector3.right;
+    private Direction walkingDirection;
 
     [Header("Target To Walk Towards")] public Transform target; //Target the agent will walk towards during training.
 
@@ -82,6 +91,9 @@ public class WalkerAgentV2 : Agent
         m_JdController.SetupBodyPart(handR);
 
         m_ResetParams = Academy.Instance.EnvironmentParameters;
+
+        int walkingDirectionIndex = (int)m_ResetParams.GetWithDefault("walking_direction", 0f);
+        walkingDirection = (Direction)walkingDirectionIndex;
     }
 
     /// <summary>
@@ -136,9 +148,12 @@ public class WalkerAgentV2 : Agent
         var cubeForward = m_OrientationCube.transform.forward;
 
         //velocity we want to match
-        var velGoal = cubeForward * MTargetWalkingSpeed;
+        var velGoal = GetGoalVelocity();
         //ragdoll's avg vel
         var avgVel = GetAvgVelocity();
+
+        //add walking direction
+        sensor.AddOneHotObservation((int)walkingDirection, 4);
 
         //current ragdoll velocity. normalized
         sensor.AddObservation(Vector3.Distance(velGoal, avgVel));
@@ -219,7 +234,7 @@ public class WalkerAgentV2 : Agent
         // Set reward for this step according to mixture of the following elements.
         // a. Match target speed
         //This reward will approach 1 if it matches perfectly and approach zero as it deviates
-        var matchSpeedReward = GetMatchingVelocityReward(cubeForward * MTargetWalkingSpeed, GetAvgVelocity());
+        var matchSpeedReward = GetMatchingVelocityReward(GetGoalVelocity(), GetAvgVelocity());
 
         //Check for NaNs
         if (float.IsNaN(matchSpeedReward))
@@ -234,10 +249,7 @@ public class WalkerAgentV2 : Agent
 
         // b. Rotation alignment with target direction.
         //This reward will approach 1 if it faces the target direction perfectly and approach zero as it deviates
-        var headForward = head.forward;
-        headForward.y = 0;
-        // var lookAtTargetReward = (Vector3.Dot(cubeForward, head.forward) + 1) * .5F;
-        var lookAtTargetReward = (Vector3.Dot(cubeForward, headForward) + 1) * .5F;
+        var lookAtTargetReward = (Vector3.Dot(cubeForward, GetLookDirection()) + 1) * .5F;
 
         //Check for NaNs
         if (float.IsNaN(lookAtTargetReward))
@@ -288,5 +300,38 @@ public class WalkerAgentV2 : Agent
     public void TouchedTarget()
     {
         AddReward(1f);
+    }
+
+    public Vector3 GetGoalVelocity()
+    {
+        var cubeForward = m_OrientationCube.transform.forward;
+        var velGoal = cubeForward * MTargetWalkingSpeed;
+        Vector3 hipPosFlattened = hips.transform.position;
+        hipPosFlattened.y = 0f;
+        Vector3 targetPosFlattened = target.transform.position;
+        targetPosFlattened.y = 0f;
+        float distance = Vector3.Distance(hipPosFlattened, targetPosFlattened);
+        //adjust distance to slow down from depending on normal MTargetWalkingSpeed
+        if (distance < 1.0f)
+        {
+            velGoal = Vector3.Scale(velGoal, new Vector3(distance, 0f, distance));
+        }
+        return velGoal;
+    }
+
+    public Vector3 GetLookDirection()
+    {
+        Vector3 lookDirection = head.forward;
+        switch (walkingDirection)
+        {
+            case Direction.Right:
+                return head.right;
+            case Direction.Backward:
+                return -head.forward;
+            case Direction.Left:
+                return -head.right;
+        }
+        lookDirection.y = 0f;
+        return lookDirection;
     }
 }

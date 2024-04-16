@@ -60,7 +60,7 @@ public class TargetControllerV2 : MonoBehaviour
     public void TriggerRemote(float triggerTime)
     {
         if (!respawnIfTouched) return;
-        if (Time.time > triggerTime + respawnDelay)
+        if (Time.time >= triggerTime + respawnDelay)
         {
             MoveTargetToRandomPosition();
         }

@@ -2174,7 +2174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 243
+    VectorObservationSize: 247
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 39
@@ -2183,7 +2183,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: c35d737abbf7d4c50b015aca74fc8206, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 5b0f8167dee6348d7aa09da9747ae516, type: 3}
   m_InferenceDevice: 2
   m_BehaviorType: 0
   m_BehaviorName: Walker
@@ -2978,7 +2978,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4084663109786552607}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 1}
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -3100,7 +3100,7 @@ MonoBehaviour:
   respawnIfTouched: 1
   respawnIfFallsOffPlatform: 1
   fallDistance: 5
-  respawnDelay: 1
+  respawnDelay: 0
 --- !u!1 &4470380960360245524
 GameObject:
   m_ObjectHideFlags: 0

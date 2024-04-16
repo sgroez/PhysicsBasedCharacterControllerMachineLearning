@@ -26,3 +26,4 @@ behaviors:
     summary_freq: 30000
 environment_parameters:
   environment_count: 10.0
+  walking_direction: 3.0
