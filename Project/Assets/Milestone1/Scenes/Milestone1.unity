@@ -318,6 +318,10 @@ PrefabInstance:
       propertyPath: environmentCount
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3607236743596056477, guid: e4dbacf992e054a12922c6f8491a8e08, type: 3}
+      propertyPath: environmentPrefab
+      value: 
+      objectReference: {fileID: 6713178126238440196, guid: 84359146bf7af47e58c229d877e801d7, type: 3}
     - target: {fileID: 9084170212152164896, guid: e4dbacf992e054a12922c6f8491a8e08, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -363,7 +367,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6587401688485203505, guid: e4dbacf992e054a12922c6f8491a8e08, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 9084170212152164896, guid: e4dbacf992e054a12922c6f8491a8e08, type: 3}
       insertIndex: -1

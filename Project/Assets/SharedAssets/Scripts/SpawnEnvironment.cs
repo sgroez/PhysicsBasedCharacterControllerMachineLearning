@@ -1,19 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.MLAgents;
+
 
 public class SpawnEnvironment : MonoBehaviour
 {
     public bool hasInitialEnvironment;
     public GameObject environmentPrefab;
-    public WalkerAgent agent;
     public float defaultEnvCount = 1f;
     void Start()
     {
         float environmentCount = defaultEnvCount;
-        if (agent != null)
+        if (Academy.Instance != null)
         {
-            environmentCount = agent.m_ResetParams.GetWithDefault("environment_count", defaultEnvCount);
+            environmentCount = Academy.Instance.EnvironmentParameters.GetWithDefault("environment_count", defaultEnvCount);
         }
 
         for (int i = 0; i < environmentCount; i++)

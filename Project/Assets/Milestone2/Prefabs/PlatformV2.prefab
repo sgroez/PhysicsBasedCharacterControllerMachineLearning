@@ -2018,6 +2018,7 @@ GameObject:
   - component: {fileID: 7617205587548097472}
   - component: {fileID: 5423046032420921392}
   - component: {fileID: 1965770540430738240}
+  - component: {fileID: 3173075865955430365}
   m_Layer: 0
   m_Name: hips
   m_TagString: agent
@@ -2123,6 +2124,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f827ad6653acf45a19191ac6c66e969f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3173075865955430365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3298682757983410769}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5ebaad8c87df40489e2d62f0db8187c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 5627358733192648835}
+  agent: {fileID: 8741847337107158404}
 --- !u!1 &3323219369181259932
 GameObject:
   m_ObjectHideFlags: 0
@@ -2183,7 +2198,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 5b0f8167dee6348d7aa09da9747ae516, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 9b358e7e08a504146bb1f4d3734176af, type: 3}
   m_InferenceDevice: 2
   m_BehaviorType: 0
   m_BehaviorName: Walker
@@ -2209,6 +2224,10 @@ MonoBehaviour:
   MaxStep: 5000
   m_TargetWalkingSpeed: 10
   randomizeWalkSpeedEachEpisode: 1
+  modelForward: {fileID: 5022602860645237092, guid: 9b358e7e08a504146bb1f4d3734176af, type: 3}
+  modelRight: {fileID: 5022602860645237092, guid: 73b94e513267f4c1cb39aeb9d2ce9501, type: 3}
+  modelBackward: {fileID: 5022602860645237092, guid: 7f096850b737c4412bbda3e1a4b8b427, type: 3}
+  modelLeft: {fileID: 5022602860645237092, guid: cb9879f9843164b7989601a025244dd6, type: 3}
   target: {fileID: 5627358733192648835}
   hips: {fileID: 8012849675277152948}
   chest: {fileID: 8161285914844092806}
@@ -3090,7 +3109,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4084663109786552607}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c59e25c6774749fa8cc31385a0ca4bd, type: 3}
   m_Name: 
