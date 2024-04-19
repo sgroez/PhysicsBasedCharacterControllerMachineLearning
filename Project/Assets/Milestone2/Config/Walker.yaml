@@ -34,7 +34,7 @@ environment_parameters:
           behavior: Walker
           signal_smoothing: true
           min_lesson_length: 100
-          threshold: 0.0
+          threshold: 0.25
         value: 0.0
       - name: Backward # The '-' is important as this is a list
         completion_criteria:
@@ -42,7 +42,7 @@ environment_parameters:
           behavior: Walker
           signal_smoothing: true
           min_lesson_length: 100
-          threshold: 0.25
+          threshold: 0.5
         value: 2.0
       - name: Right # The '-' is important as this is a list
         completion_criteria:
@@ -50,7 +50,7 @@ environment_parameters:
           behavior: Walker
           signal_smoothing: true
           min_lesson_length: 100
-          threshold: 0.5
+          threshold: 0.75
         value: 1.0
       - name: Left # The '-' is important as this is a list
         completion_criteria:
@@ -58,5 +58,5 @@ environment_parameters:
           behavior: Walker
           signal_smoothing: true
           min_lesson_length: 100
-          threshold: 0.75
+          threshold: 1.0
         value: 3.0
