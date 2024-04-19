@@ -2516,7 +2516,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 7f096850b737c4412bbda3e1a4b8b427, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 2
   m_BehaviorType: 0
   m_BehaviorName: Walker
@@ -2542,10 +2542,6 @@ MonoBehaviour:
   MaxStep: 5000
   m_TargetWalkingSpeed: 10
   randomizeWalkSpeedEachEpisode: 1
-  modelForward: {fileID: 5022602860645237092, guid: 9b358e7e08a504146bb1f4d3734176af, type: 3}
-  modelRight: {fileID: 5022602860645237092, guid: 5b0f8167dee6348d7aa09da9747ae516, type: 3}
-  modelBackward: {fileID: 5022602860645237092, guid: 7f096850b737c4412bbda3e1a4b8b427, type: 3}
-  modelLeft: {fileID: 5022602860645237092, guid: cb9879f9843164b7989601a025244dd6, type: 3}
   target: {fileID: 6531506268645658265}
   hips: {fileID: 6916966110553137338}
   chest: {fileID: 9189359890342927430}
