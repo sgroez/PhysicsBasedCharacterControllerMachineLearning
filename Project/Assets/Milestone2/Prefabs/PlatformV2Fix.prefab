@@ -2516,7 +2516,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: c1fbb5e70bcfc4dd1876c3531b89355b, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 2
   m_BehaviorType: 0
   m_BehaviorName: Walker
@@ -2559,6 +2559,7 @@ MonoBehaviour:
   armR: {fileID: 17349883018152993}
   forearmR: {fileID: 1674029714710140016}
   handR: {fileID: 6319124913209071595}
+  showGizmos: 0
 --- !u!114 &900632166713726509
 MonoBehaviour:
   m_ObjectHideFlags: 0

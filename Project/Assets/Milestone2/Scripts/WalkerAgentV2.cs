@@ -150,7 +150,7 @@ public class WalkerAgentV2 : Agent
         var cubeForward = m_OrientationCube.transform.forward;
 
         //velocity we want to match
-        var velGoal = GetGoalVelocity();
+        var velGoal = cubeForward * MTargetWalkingSpeed;
         //ragdoll's avg vel
         var avgVel = GetAvgVelocity();
 
@@ -236,7 +236,7 @@ public class WalkerAgentV2 : Agent
         // Set reward for this step according to mixture of the following elements.
         // a. Match target speed
         //This reward will approach 1 if it matches perfectly and approach zero as it deviates
-        var matchSpeedReward = GetMatchingVelocityReward(GetGoalVelocity(), GetAvgVelocity());
+        var matchSpeedReward = GetMatchingVelocityReward(cubeForward * MTargetWalkingSpeed, GetAvgVelocity());
 
         //Check for NaNs
         if (float.IsNaN(matchSpeedReward))
@@ -302,23 +302,6 @@ public class WalkerAgentV2 : Agent
     public void TouchedTarget()
     {
         AddReward(1f);
-    }
-
-    public Vector3 GetGoalVelocity()
-    {
-        var cubeForward = m_OrientationCube.transform.forward;
-        var velGoal = cubeForward * MTargetWalkingSpeed;
-        Vector3 hipPosFlattened = hips.transform.position;
-        hipPosFlattened.y = 0f;
-        Vector3 targetPosFlattened = target.transform.position;
-        targetPosFlattened.y = 0f;
-        float distance = Vector3.Distance(hipPosFlattened, targetPosFlattened);
-        //adjust distance to slow down from depending on normal MTargetWalkingSpeed
-        if (distance < 1.0f)
-        {
-            velGoal = Vector3.Scale(velGoal, new Vector3(distance, 0f, distance));
-        }
-        return velGoal;
     }
 
     public Vector3 GetLookDirection()
