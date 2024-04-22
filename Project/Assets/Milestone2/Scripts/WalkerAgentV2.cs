@@ -66,6 +66,8 @@ public class WalkerAgentV2 : Agent
     JointDriveController m_JdController;
     public EnvironmentParameters m_ResetParams;
 
+    public bool showGizmos = false;
+
     public override void Initialize()
     {
         m_OrientationCube = GetComponentInChildren<OrientationCubeController>();
@@ -325,13 +327,23 @@ public class WalkerAgentV2 : Agent
         switch (walkingDirection)
         {
             case Direction.Right:
-                return head.right;
+                lookDirection = head.right;
+                break;
             case Direction.Backward:
-                return -head.forward;
+                lookDirection = -head.forward;
+                break;
             case Direction.Left:
-                return -head.right;
+                lookDirection = -head.right;
+                break;
         }
         lookDirection.y = 0f;
         return lookDirection;
+    }
+
+    void OnDrawGizmos()
+    {
+        if (!showGizmos) return;
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(head.position, GetLookDirection());
     }
 }
