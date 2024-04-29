@@ -93,9 +93,6 @@ public class WalkerAgentV2 : Agent
         m_JdController.SetupBodyPart(handR);
 
         m_ResetParams = Academy.Instance.EnvironmentParameters;
-
-        int walkingDirectionIndex = (int)m_ResetParams.GetWithDefault("walking_direction", 0f);
-        walkingDirection = (Direction)walkingDirectionIndex;
     }
 
     /// <summary>
@@ -103,6 +100,10 @@ public class WalkerAgentV2 : Agent
     /// </summary>
     public override void OnEpisodeBegin()
     {
+        //Get Walking direction
+        int walkingDirectionIndex = (int)m_ResetParams.GetWithDefault("walking_direction", 0f);
+        walkingDirection = (Direction)walkingDirectionIndex;
+
         //Reset all of the body parts
         foreach (var bodyPart in m_JdController.bodyPartsDict.Values)
         {
@@ -251,7 +252,7 @@ public class WalkerAgentV2 : Agent
 
         // b. Rotation alignment with target direction.
         //This reward will approach 1 if it faces the target direction perfectly and approach zero as it deviates
-        var lookAtTargetReward = (Vector3.Dot(cubeForward, GetLookDirection()) + 1) * .5F;
+        var lookAtTargetReward = Mathf.Pow((Vector3.Dot(cubeForward, GetLookDirection()) + 1) * .5F, 2f);
 
         //Check for NaNs
         if (float.IsNaN(lookAtTargetReward))
