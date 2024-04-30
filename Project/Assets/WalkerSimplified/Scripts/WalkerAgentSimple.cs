@@ -12,6 +12,7 @@ public class WalkerAgentSimple : Agent
     [Header("Walking Speed")]
     public float maxWalkingSpeed;
     private float walkingSpeed;
+    private Transform walkingDirection;
 
     [Header("Target To Walk Towards")]
     public Transform target;
@@ -28,12 +29,17 @@ public class WalkerAgentSimple : Agent
     [Space(10)]
     public BodypartConfig bpConfig;
 
-    private OrientationCubeController orientationCube;
     public EnvironmentParameters resetParams;
 
     public override void Initialize()
     {
-        orientationCube = GetComponentInChildren<OrientationCubeController>();
+        //create walkingDirectionCube, disable rendering and init walkingDirection Transform
+        GameObject walkingDirectionCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        walkingDirectionCube.GetComponent<MeshRenderer>().enabled = false;
+        walkingDirectionCube.GetComponent<BoxCollider>().enabled = false;
+        walkingDirectionCube.transform.parent = transform;
+        walkingDirection = walkingDirectionCube.transform;
+
         foreach (Transform t in bodypartTransforms)
         {
             var bp = new Bodypart(t, bpConfig, this);
@@ -56,7 +62,7 @@ public class WalkerAgentSimple : Agent
         //Random start rotation to help generalize
         root.rotation = Quaternion.Euler(0, Random.Range(0.0f, 360.0f), 0);
 
-        orientationCube.UpdateOrientation(root, target);
+        UpdateOrientationGoals();
 
         //Set our goal walking speed
         walkingSpeed = Random.Range(0.1f, maxWalkingSpeed);
@@ -69,11 +75,11 @@ public class WalkerAgentSimple : Agent
 
         //Get velocities in the context of our orientation cube's space
         //Note: You can get these velocities in world space as well but it may not train as well.
-        sensor.AddObservation(orientationCube.transform.InverseTransformDirection(bp.rb.velocity));
-        sensor.AddObservation(orientationCube.transform.InverseTransformDirection(bp.rb.angularVelocity));
+        sensor.AddObservation(walkingDirection.InverseTransformDirection(bp.rb.velocity));
+        sensor.AddObservation(walkingDirection.InverseTransformDirection(bp.rb.angularVelocity));
 
         //Get position relative to hips in the context of our orientation cube's space
-        sensor.AddObservation(orientationCube.transform.InverseTransformDirection(bp.rb.position - root.position));
+        sensor.AddObservation(walkingDirection.InverseTransformDirection(bp.rb.position - root.position));
 
         if (bp.rb.transform != root && bp.rb.transform != handL && bp.rb.transform != handR)
         {
@@ -84,26 +90,24 @@ public class WalkerAgentSimple : Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        var cubeForward = orientationCube.transform.forward;
-
         //velocity we want to match
-        var velGoal = cubeForward * walkingSpeed;
+        var velGoal = walkingDirection.forward * walkingSpeed;
         //ragdoll's avg vel
         var avgVel = GetAvgVelocity();
 
         //current ragdoll velocity. normalized
         sensor.AddObservation(Vector3.Distance(velGoal, avgVel));
         //avg body vel relative to cube
-        sensor.AddObservation(orientationCube.transform.InverseTransformDirection(avgVel));
+        sensor.AddObservation(walkingDirection.InverseTransformDirection(avgVel));
         //vel goal relative to cube
-        sensor.AddObservation(orientationCube.transform.InverseTransformDirection(velGoal));
+        sensor.AddObservation(walkingDirection.InverseTransformDirection(velGoal));
 
         //rotation deltas
-        sensor.AddObservation(Quaternion.FromToRotation(root.forward, cubeForward));
-        sensor.AddObservation(Quaternion.FromToRotation(head.forward, cubeForward));
+        sensor.AddObservation(Quaternion.FromToRotation(root.forward, walkingDirection.forward));
+        sensor.AddObservation(Quaternion.FromToRotation(head.forward, walkingDirection.forward));
 
         //Position of target position relative to cube
-        sensor.AddObservation(orientationCube.transform.InverseTransformPoint(target.transform.position));
+        sensor.AddObservation(walkingDirection.InverseTransformPoint(target.transform.position));
 
         foreach (Bodypart bp in bodyPartsDict.Values)
         {
@@ -136,21 +140,19 @@ public class WalkerAgentSimple : Agent
 
     void FixedUpdate()
     {
-        orientationCube.UpdateOrientation(root, target);
-
-        var cubeForward = orientationCube.transform.forward;
+        UpdateOrientationGoals();
 
         // Set reward for this step according to mixture of the following elements.
         // a. Match target speed
         //This reward will approach 1 if it matches perfectly and approach zero as it deviates
-        var matchSpeedReward = GetMatchingVelocityReward(cubeForward * walkingSpeed, GetAvgVelocity());
+        var matchSpeedReward = GetMatchingVelocityReward(walkingDirection.forward * walkingSpeed, GetAvgVelocity());
 
         //Check for NaNs
         if (float.IsNaN(matchSpeedReward))
         {
             throw new ArgumentException(
                 "NaN in moveTowardsTargetReward.\n" +
-                $" cubeForward: {cubeForward}\n" +
+                $" walkingDirection: {walkingDirection.forward}\n" +
                 $" hips.velocity: {bodyPartsDict[root].rb.velocity}\n" +
                 $" maximumWalkingSpeed: {maxWalkingSpeed}"
             );
@@ -160,15 +162,14 @@ public class WalkerAgentSimple : Agent
         //This reward will approach 1 if it faces the target direction perfectly and approach zero as it deviates
         var headForward = head.forward;
         headForward.y = 0;
-        // var lookAtTargetReward = (Vector3.Dot(cubeForward, head.forward) + 1) * .5F;
-        var lookAtTargetReward = (Vector3.Dot(cubeForward, headForward) + 1) * .5F;
+        var lookAtTargetReward = (Vector3.Dot(walkingDirection.forward, headForward) + 1) * .5F;
 
         //Check for NaNs
         if (float.IsNaN(lookAtTargetReward))
         {
             throw new ArgumentException(
                 "NaN in lookAtTargetReward.\n" +
-                $" cubeForward: {cubeForward}\n" +
+                $" walkingDirection: {walkingDirection.forward}\n" +
                 $" head.forward: {head.forward}"
             );
         }
@@ -200,5 +201,18 @@ public class WalkerAgentSimple : Agent
         //return the value on a declining sigmoid shaped curve that decays from 1 to 0
         //This reward will approach 1 if it matches perfectly and approach zero as it deviates
         return Mathf.Pow(1 - Mathf.Pow(velDeltaMagnitude / walkingSpeed, 2), 2);
+    }
+
+    public void UpdateOrientationGoals()
+    {
+        var dirVector = target.position - root.position;
+        dirVector.y = 0; //flatten dir on the y. this will only work on level, uneven surfaces
+        var lookRot =
+            dirVector == Vector3.zero
+                ? Quaternion.identity
+                : Quaternion.LookRotation(dirVector); //get our look rot to the target
+
+        //UPDATE ORIENTATION CUBE POS & ROT
+        walkingDirection.SetPositionAndRotation(root.position, lookRot);
     }
 }
