@@ -42,6 +42,9 @@ public class WalkerAgentSimple : Agent
         }
 
         resetParams = Academy.Instance.EnvironmentParameters;
+
+        //load max walking speed from env params if available
+        maxWalkingSpeed = resetParams.GetWithDefault("maxWalkingSpeed", maxWalkingSpeed);
         //Set our goal walking speed
         walkingSpeed = Random.Range(0.1f, maxWalkingSpeed);
     }

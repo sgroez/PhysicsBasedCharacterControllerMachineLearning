@@ -8,4 +8,4 @@ flags+=" --resume"
 else
 flags+=" --force"
 fi
-mlagents-learn ./Walker.yaml $flags
+mlagents-learn ./$config_name $flags
