@@ -33,12 +33,7 @@ public class WalkerAgentSimple : Agent
 
     public override void Initialize()
     {
-        //create walkingDirectionCube, disable rendering and init walkingDirection Transform
-        GameObject walkingDirectionCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        walkingDirectionCube.GetComponent<MeshRenderer>().enabled = false;
-        walkingDirectionCube.GetComponent<BoxCollider>().enabled = false;
-        walkingDirectionCube.transform.parent = transform;
-        walkingDirection = walkingDirectionCube.transform;
+        InitOrientationGoals();
 
         foreach (Transform t in bodypartTransforms)
         {
@@ -68,7 +63,7 @@ public class WalkerAgentSimple : Agent
         walkingSpeed = Random.Range(0.1f, maxWalkingSpeed);
     }
 
-    public void CollectObservationBodyPart(Bodypart bp, VectorSensor sensor)
+    private void CollectObservationBodyPart(Bodypart bp, VectorSensor sensor)
     {
         //GROUND CHECK
         sensor.AddObservation(bp.groundContact.touchingGround); // Is this bp touching the ground
@@ -103,8 +98,7 @@ public class WalkerAgentSimple : Agent
         sensor.AddObservation(walkingDirection.InverseTransformDirection(velGoal));
 
         //rotation deltas
-        sensor.AddObservation(Quaternion.FromToRotation(root.forward, walkingDirection.forward));
-        sensor.AddObservation(Quaternion.FromToRotation(head.forward, walkingDirection.forward));
+        CollectRotationDeltas(sensor);
 
         //Position of target position relative to cube
         sensor.AddObservation(walkingDirection.InverseTransformPoint(target.transform.position));
@@ -115,14 +109,19 @@ public class WalkerAgentSimple : Agent
         }
     }
 
-    public void OnActionReceivedBodypart(Bodypart bp, float targetRotX, float targetRotY, float targetRotZ, float jointStrength)
+    public virtual void CollectRotationDeltas(VectorSensor sensor)
+    {
+        sensor.AddObservation(Quaternion.FromToRotation(root.forward, walkingDirection.forward));
+        sensor.AddObservation(Quaternion.FromToRotation(head.forward, walkingDirection.forward));
+    }
+
+    private void OnActionReceivedBodypart(Bodypart bp, float targetRotX, float targetRotY, float targetRotZ, float jointStrength)
     {
         bp.SetJointTargetRotation(targetRotX, targetRotY, targetRotZ);
         bp.SetJointStrength(jointStrength);
     }
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
-
     {
         int index = -1;
         var continuousActions = actionBuffers.ContinuousActions;
@@ -145,7 +144,7 @@ public class WalkerAgentSimple : Agent
         // Set reward for this step according to mixture of the following elements.
         // a. Match target speed
         //This reward will approach 1 if it matches perfectly and approach zero as it deviates
-        var matchSpeedReward = GetMatchingVelocityReward(walkingDirection.forward * walkingSpeed, GetAvgVelocity());
+        var matchSpeedReward = GetMatchingVelocityReward();
 
         //Check for NaNs
         if (float.IsNaN(matchSpeedReward))
@@ -160,9 +159,7 @@ public class WalkerAgentSimple : Agent
 
         // b. Rotation alignment with target direction.
         //This reward will approach 1 if it faces the target direction perfectly and approach zero as it deviates
-        var headForward = head.forward;
-        headForward.y = 0;
-        var lookAtTargetReward = (Vector3.Dot(walkingDirection.forward, headForward) + 1) * .5F;
+        var lookAtTargetReward = GetLookAtTargetReward();
 
         //Check for NaNs
         if (float.IsNaN(lookAtTargetReward))
@@ -177,7 +174,7 @@ public class WalkerAgentSimple : Agent
         AddReward(matchSpeedReward * lookAtTargetReward);
     }
 
-    Vector3 GetAvgVelocity()
+    private Vector3 GetAvgVelocity()
     {
         Vector3 velSum = Vector3.zero;
 
@@ -193,8 +190,10 @@ public class WalkerAgentSimple : Agent
         return avgVel;
     }
 
-    public float GetMatchingVelocityReward(Vector3 velocityGoal, Vector3 actualVelocity)
+    private float GetMatchingVelocityReward()
     {
+        Vector3 velocityGoal = walkingDirection.forward * walkingSpeed;
+        Vector3 actualVelocity = GetAvgVelocity();
         //distance between our actual velocity and goal velocity
         var velDeltaMagnitude = Mathf.Clamp(Vector3.Distance(actualVelocity, velocityGoal), 0, walkingSpeed);
 
@@ -203,7 +202,38 @@ public class WalkerAgentSimple : Agent
         return Mathf.Pow(1 - Mathf.Pow(velDeltaMagnitude / walkingSpeed, 2), 2);
     }
 
-    public void UpdateOrientationGoals()
+    public virtual float GetLookAtTargetReward()
+    {
+        var headForward = head.forward;
+        headForward.y = 0;
+        return (Vector3.Dot(walkingDirection.forward, headForward) + 1) * .5F;
+    }
+
+    public virtual void InitOrientationGoals()
+    {
+        walkingDirection = InitDirectionTransform("walkingDirection");
+    }
+
+    public virtual void UpdateOrientationGoals()
+    {
+        UpdateDirectionTransform(walkingDirection, target);
+    }
+
+    protected Transform InitDirectionTransform(string name)
+    {
+        //create cube
+        GameObject walkingDirectionCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        //set name
+        walkingDirectionCube.name = name;
+        //disable rendering and collision components
+        walkingDirectionCube.GetComponent<MeshRenderer>().enabled = false;
+        walkingDirectionCube.GetComponent<BoxCollider>().enabled = false;
+        //set parent
+        walkingDirectionCube.transform.parent = transform;
+        return walkingDirectionCube.transform;
+    }
+
+    protected void UpdateDirectionTransform(Transform directionTransform, Transform target)
     {
         var dirVector = target.position - root.position;
         dirVector.y = 0; //flatten dir on the y. this will only work on level, uneven surfaces
@@ -213,6 +243,6 @@ public class WalkerAgentSimple : Agent
                 : Quaternion.LookRotation(dirVector); //get our look rot to the target
 
         //UPDATE ORIENTATION CUBE POS & ROT
-        walkingDirection.SetPositionAndRotation(root.position, lookRot);
+        directionTransform.SetPositionAndRotation(root.position, lookRot);
     }
 }
