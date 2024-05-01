@@ -25,4 +25,4 @@ behaviors:
     time_horizon: 1000
     summary_freq: 30000
 environment_parameters:
-  environment_count: 10.0
+  environment_count: 20.0
