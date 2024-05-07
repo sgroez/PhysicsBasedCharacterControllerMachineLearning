@@ -2837,7 +2837,7 @@ GameObject:
   - component: {fileID: 4149530276090765319}
   - component: {fileID: 596552230219566591}
   - component: {fileID: 2990324215299970944}
-  - component: {fileID: 2178478194876347785}
+  - component: {fileID: 5043195673141252353}
   m_Layer: 0
   m_Name: DynamicTarget
   m_TagString: target
@@ -2931,7 +2931,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2178478194876347785
+--- !u!114 &5043195673141252353
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2940,7 +2940,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3941248923168544229}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c8f113a8b8d94967b1b1782c549be81, type: 3}
+  m_Script: {fileID: 11500000, guid: 515d56bacb19e4e888f38f641f4e5a6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tagToDetect: agent
@@ -2948,24 +2948,6 @@ MonoBehaviour:
   respawnIfTouched: 1
   respawnIfFallsOffPlatform: 1
   fallDistance: 5
-  onTriggerEnterEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  onTriggerStayEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  onTriggerExitEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  onCollisionEnterEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  onCollisionStayEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  onCollisionExitEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &3973854450244542616
 GameObject:
   m_ObjectHideFlags: 0
@@ -5118,7 +5100,7 @@ GameObject:
   - component: {fileID: 3673400541518056190}
   - component: {fileID: 189897643156766205}
   - component: {fileID: 4415903849479837286}
-  - component: {fileID: 2904630524269610203}
+  - component: {fileID: 4806240793866919645}
   m_Layer: 0
   m_Name: 'DynamicLookAtTarget '
   m_TagString: target
@@ -5191,7 +5173,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2904630524269610203
+--- !u!114 &4806240793866919645
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5200,7 +5182,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7454574577746480466}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c8f113a8b8d94967b1b1782c549be81, type: 3}
+  m_Script: {fileID: 11500000, guid: 515d56bacb19e4e888f38f641f4e5a6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tagToDetect: agent
@@ -5208,24 +5190,6 @@ MonoBehaviour:
   respawnIfTouched: 0
   respawnIfFallsOffPlatform: 1
   fallDistance: 5
-  onTriggerEnterEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  onTriggerStayEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  onTriggerExitEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  onCollisionEnterEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  onCollisionStayEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  onCollisionExitEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &7571780481213746110
 GameObject:
   m_ObjectHideFlags: 0

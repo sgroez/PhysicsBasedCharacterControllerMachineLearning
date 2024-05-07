@@ -503,7 +503,7 @@ GameObject:
   - component: {fileID: 793209723823708146}
   - component: {fileID: 7313036477016317957}
   - component: {fileID: 9161393769619533886}
-  - component: {fileID: 6801597558950307294}
+  - component: {fileID: 2301923982679150005}
   m_Layer: 0
   m_Name: DynamicTarget
   m_TagString: target
@@ -624,7 +624,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
---- !u!114 &6801597558950307294
+--- !u!114 &2301923982679150005
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -633,7 +633,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7083969952287831974}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c8f113a8b8d94967b1b1782c549be81, type: 3}
+  m_Script: {fileID: 11500000, guid: 515d56bacb19e4e888f38f641f4e5a6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tagToDetect: agent
@@ -641,24 +641,6 @@ MonoBehaviour:
   respawnIfTouched: 1
   respawnIfFallsOffPlatform: 1
   fallDistance: 5
-  onTriggerEnterEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  onTriggerStayEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  onTriggerExitEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  onCollisionEnterEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  onCollisionStayEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  onCollisionExitEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &7750364234004037266
 GameObject:
   m_ObjectHideFlags: 0
@@ -776,6 +758,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Y Bot Physical Variant Agent
       objectReference: {fileID: 0}
+    - target: {fileID: 3817448943308824833, guid: 7f0a13028e80349e69509ad8b536f6e6, type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 5022602860645237092, guid: 6afc04b5ea6a34c15b7c69de9dac2a40, type: 3}
     - target: {fileID: 7364591426350044915, guid: 7f0a13028e80349e69509ad8b536f6e6, type: 3}
       propertyPath: m_RootOrder
       value: 0

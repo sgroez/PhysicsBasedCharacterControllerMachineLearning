@@ -17,7 +17,7 @@ public class WalkerAgentSimple : Agent
     [Header("Target To Walk Towards")]
     public Transform target;
 
-    private TargetController targetController;
+    private TargetControllerSimple targetController;
 
     [Header("Body Parts")]
     public Transform root;
@@ -35,7 +35,7 @@ public class WalkerAgentSimple : Agent
 
     public override void Initialize()
     {
-        targetController = target.GetComponent<TargetController>();
+        targetController = target.GetComponent<TargetControllerSimple>();
         InitOrientationGoals();
 
         foreach (Transform t in bodypartTransforms)
