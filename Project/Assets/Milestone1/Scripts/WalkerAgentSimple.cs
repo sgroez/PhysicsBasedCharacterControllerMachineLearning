@@ -17,6 +17,8 @@ public class WalkerAgentSimple : Agent
     [Header("Target To Walk Towards")]
     public Transform target;
 
+    private TargetController targetController;
+
     [Header("Body Parts")]
     public Transform root;
     public Transform head;
@@ -33,6 +35,7 @@ public class WalkerAgentSimple : Agent
 
     public override void Initialize()
     {
+        targetController = target.GetComponent<TargetController>();
         InitOrientationGoals();
 
         foreach (Transform t in bodypartTransforms)
@@ -67,6 +70,8 @@ public class WalkerAgentSimple : Agent
 
         //Random start rotation to help generalize
         root.rotation = Quaternion.Euler(0, Random.Range(0.0f, 360.0f), 0);
+
+        targetController.MoveTargetToRandomPosition();
 
         UpdateOrientationGoals();
 

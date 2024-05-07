@@ -48,10 +48,6 @@ public class TargetController : MonoBehaviour
     void OnEnable()
     {
         m_startingPos = transform.position;
-        if (respawnIfTouched)
-        {
-            MoveTargetToRandomPosition();
-        }
     }
 
     void Update()
