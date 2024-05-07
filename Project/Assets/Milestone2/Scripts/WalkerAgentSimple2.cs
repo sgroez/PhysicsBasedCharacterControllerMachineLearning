@@ -33,7 +33,7 @@ public class WalkerAgentSimple2 : WalkerAgentSimple
     public override void OnEpisodeBegin()
     {
         base.OnEpisodeBegin();
-        lookAtTarget.GetComponent<TargetController>().MoveTargetToRandomPosition();
+        lookAtTarget.GetComponent<TargetControllerSimple>().MoveTargetToRandomPosition();
     }
 
     public override void CollectObservations(VectorSensor sensor)

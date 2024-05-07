@@ -15,7 +15,7 @@ public class TargetControllerSimple : MonoBehaviour
     public bool respawnIfFallsOffPlatform = true; //If the target falls off the platform, reset the position.
     public float fallDistance = 5; //distance below the starting height that will trigger a respawn
 
-    private Vector3 m_startingPos; //the starting position of the target
+    protected Vector3 m_startingPos; //the starting position of the target
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -38,7 +38,7 @@ public class TargetControllerSimple : MonoBehaviour
     /// <summary>
     /// Moves target to a random position within specified radius.
     /// </summary>
-    public void MoveTargetToRandomPosition()
+    public virtual void MoveTargetToRandomPosition()
     {
         var newTargetPos = m_startingPos + (Random.insideUnitSphere * spawnRadius);
         newTargetPos.y = m_startingPos.y;
