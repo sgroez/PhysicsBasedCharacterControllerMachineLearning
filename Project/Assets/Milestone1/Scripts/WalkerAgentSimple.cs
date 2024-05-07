@@ -12,7 +12,7 @@ public class WalkerAgentSimple : Agent
     [Header("Walking Speed")]
     public float maxWalkingSpeed;
     private float walkingSpeed;
-    private Transform walkingDirection;
+    protected Transform walkingDirection;
 
     [Header("Target To Walk Towards")]
     public Transform target;
@@ -40,6 +40,14 @@ public class WalkerAgentSimple : Agent
             var bp = new Bodypart(t, bpConfig, this);
             bodyPartsDict.Add(t, bp);
         }
+
+        float actionCount = 0;
+        foreach (Bodypart bp in bodyPartsDict.Values)
+        {
+            //add up x + y + z + strength if x || y || z is 1
+            actionCount += bp.dof.x + bp.dof.y + bp.dof.z + (bp.dof.sqrMagnitude > 0 ? 1 : 0);
+        }
+        Debug.Log("Continuous actions: " + actionCount);
 
         resetParams = Academy.Instance.EnvironmentParameters;
 
@@ -135,7 +143,7 @@ public class WalkerAgentSimple : Agent
             float targetRotX = bp.dof.x == 1 ? continuousActions[++index] : 0;
             float targetRotY = bp.dof.y == 1 ? continuousActions[++index] : 0;
             float targetRotZ = bp.dof.z == 1 ? continuousActions[++index] : 0;
-            float jointStrength = bp.dof.sqrMagnitude >= 0 ? continuousActions[++index] : 0;
+            float jointStrength = bp.dof.sqrMagnitude > 0 ? continuousActions[++index] : 0;
             OnActionReceivedBodypart(bp, targetRotX, targetRotY, targetRotZ, jointStrength);
         }
     }
