@@ -73,3 +73,6 @@ crashlytics-build.properties
 
 # ignore training results
 /[Aa]ssets/RemoteResults
+
+# ignore timer files
+/[Aa]ssets/ML-Agents/[Tt]imers
