@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1115404979482345221}
   - component: {fileID: 5541953368469544232}
-  - component: {fileID: 5141666278003399290}
+  - component: {fileID: 1950394554578501640}
   - component: {fileID: 9121347680333211308}
   m_Layer: 0
   m_Name: WalkerRagdoll
@@ -57,7 +57,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 5b03c5811638f4d6d8f4e4aa1ed55cc9, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 2
   m_BehaviorType: 0
   m_BehaviorName: Walker
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_UseChildSensors: 1
   m_UseChildActuators: 1
   m_ObservableAttributeHandling: 0
---- !u!114 &5141666278003399290
+--- !u!114 &1950394554578501640
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 125016765840630738}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2201ae3dd19d485f998c1cb83eed793, type: 3}
+  m_Script: {fileID: 11500000, guid: efc268e141e534002b295cac4111108d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agentParameters:

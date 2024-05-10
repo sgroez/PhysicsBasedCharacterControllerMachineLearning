@@ -8,10 +8,10 @@ using Unity.MLAgents;
 [System.Serializable]
 public class BodypartConfig
 {
-    public float maxJointSpring;
-    public float jointDampen;
-    public float maxJointForceLimit;
-    public float k_MaxAngularVelocity;
+    public float maxJointSpring = 40000f;
+    public float jointDampen = 5000f;
+    public float maxJointForceLimit = 20000f;
+    public float k_MaxAngularVelocity = 50f;
 
 }
 
