@@ -14,27 +14,25 @@ enum Direction
 }
 
 
-public class WalkerAgent2_1 : WalkerAgentSimple
+public class WalkerAgent2_1 : WalkerAgent1
 {
-    private Direction lookDirection;
+    private Direction lookDirection = Direction.Forward;
     public VectorSensorComponent goalSensor;
 
-    public override void Initialize()
+    public override void InitEnvParamCallbacks()
     {
-        base.Initialize();
+        resetParams.RegisterCallback("look_direction", (float directionIndex) => lookDirection = (Direction)directionIndex);
+    }
+
+    public override void InitEnvVariables()
+    {
+        base.InitEnvVariables();
         goalSensor = GetComponentInChildren<VectorSensorComponent>();
-        lookDirection = (Direction)resetParams.GetWithDefault("look_direction", 0);
     }
 
-    public override void OnEpisodeBegin()
+    public override void CollectObservationGeneral(VectorSensor sensor)
     {
-        base.OnEpisodeBegin();
-        lookDirection = (Direction)resetParams.GetWithDefault("look_direction", 0);
-    }
-
-    public override void CollectObservations(VectorSensor sensor)
-    {
-        base.CollectObservations(sensor);
+        base.CollectObservationGeneral(sensor);
         goalSensor.GetSensor().AddOneHotObservation((int)lookDirection, 4);
     }
 
@@ -42,17 +40,17 @@ public class WalkerAgent2_1 : WalkerAgentSimple
     {
         var headForward = head.forward;
         headForward.y = 0;
-        Vector3 lookDirectionVector = walkingDirection.forward;
+        Vector3 lookDirectionVector = walkingDirectionGoal.forward;
         switch (lookDirection)
         {
             case Direction.Backward:
-                lookDirectionVector = -walkingDirection.forward;
+                lookDirectionVector = -walkingDirectionGoal.forward;
                 break;
             case Direction.Right:
-                lookDirectionVector = walkingDirection.right;
+                lookDirectionVector = walkingDirectionGoal.right;
                 break;
             case Direction.Left:
-                lookDirectionVector = -walkingDirection.right;
+                lookDirectionVector = -walkingDirectionGoal.right;
                 break;
         }
         lookDirectionVector.y = 0;

@@ -1826,7 +1826,7 @@ GameObject:
   - component: {fileID: 356595074187363446}
   - component: {fileID: 1506147336050550266}
   - component: {fileID: 5126655041690758185}
-  - component: {fileID: 4357259934102652177}
+  - component: {fileID: 1204359720128925971}
   m_Layer: 0
   m_Name: DynamicTarget
   m_TagString: target
@@ -1920,7 +1920,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &4357259934102652177
+--- !u!114 &1204359720128925971
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1929,14 +1929,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2753009823800342339}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 515d56bacb19e4e888f38f641f4e5a6c, type: 3}
+  m_Script: {fileID: 11500000, guid: 47a3b0d959cc44343abb72668a53c7de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   tagToDetect: agent
-  spawnRadius: 9
   respawnIfTouched: 1
-  respawnIfFallsOffPlatform: 1
-  fallDistance: 5
+  minSpawnRadius: 1
+  maxSpawnRadius: 9
+  spawnAngle: 360
 --- !u!1 &2823912647770513936
 GameObject:
   m_ObjectHideFlags: 0
@@ -2834,7 +2834,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1331963994533384562}
   m_Layer: 0
-  m_Name: SimplifiedPlatform2_1
+  m_Name: Platform2_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2941,34 +2941,17 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 5000
-  maxWalkingSpeed: 10
   target: {fileID: 7717692150044255410}
   root: {fileID: 5140504820287331405}
   head: {fileID: 5162350807155165694}
   handL: {fileID: 3178953613891397407}
   handR: {fileID: 8738765395571248344}
-  bodypartTransforms:
-  - {fileID: 5140504820287331405}
-  - {fileID: 8729708574645657996}
-  - {fileID: 8126239023234311443}
-  - {fileID: 5162350807155165694}
-  - {fileID: 5683957107083444340}
-  - {fileID: 2802854933408131156}
-  - {fileID: 6972354038246205673}
-  - {fileID: 4287204562419649148}
-  - {fileID: 6194345686136935041}
-  - {fileID: 7780244236076411038}
-  - {fileID: 520763270014229956}
-  - {fileID: 3746809913985501103}
-  - {fileID: 3178953613891397407}
-  - {fileID: 7105942742215489474}
-  - {fileID: 7972773367268764405}
-  - {fileID: 8738765395571248344}
   bpConfig:
     maxJointSpring: 40000
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  maxWalkingSpeed: 10
   goalSensor: {fileID: 7248542156813411238}
 --- !u!114 &6926142324462627804
 MonoBehaviour:
