@@ -9,10 +9,28 @@ using Random = UnityEngine.Random;
 
 public class WalkerAgent1 : WalkerAgentBase
 {
+    [Header("Head to match look direction")]
+    [Space(10)]
+    public Transform head;
+
+    [Header("Target To Walk Towards")]
+    [Space(10)]
+    public TargetControllerBase targetController;
+
     [Header("Walking Speed")]
     [Space(10)]
     public float maxWalkingSpeed;
     protected float walkingSpeed;
+
+    protected Transform walkingDirectionGoal;
+
+    public override void InitEnvVariables()
+    {
+        //init walking direction transform
+        GameObject walkingDirectionGoalGO = new GameObject("walkingDirectionGoal");
+        walkingDirectionGoalGO.transform.parent = transform;
+        walkingDirectionGoal = walkingDirectionGoalGO.transform;
+    }
 
     public override void InitEnvParamCallbacks()
     {
@@ -21,7 +39,19 @@ public class WalkerAgent1 : WalkerAgentBase
 
     public override void UpdateEnvVariablesOnEpisode()
     {
+        UpdateOrientationTransform(walkingDirectionGoal, targetController.transform);
         walkingSpeed = Random.Range(0.1f, maxWalkingSpeed);
+    }
+
+    public override void UpdateEnvVariablesOnFixedUpdate()
+    {
+        UpdateOrientationTransform(walkingDirectionGoal, targetController.transform);
+    }
+
+    public override void RandomiseStartPositions()
+    {
+        base.RandomiseStartPositions();
+        targetController.MoveTargetToRandomPosition();
     }
 
     public override void CollectObservationGeneral(VectorSensor sensor)
@@ -43,7 +73,7 @@ public class WalkerAgent1 : WalkerAgentBase
         sensor.AddObservation(Quaternion.FromToRotation(head.forward, walkingDirectionGoal.forward));
 
         //Position of target position relative to cube
-        sensor.AddObservation(walkingDirectionGoal.InverseTransformPoint(target.transform.position));
+        sensor.AddObservation(walkingDirectionGoal.InverseTransformPoint(targetController.transform.position));
     }
 
     public override void CollectObservationBodyPart(VectorSensor sensor, Bodypart bp)
@@ -59,7 +89,7 @@ public class WalkerAgent1 : WalkerAgentBase
         //Get position relative to hips in the context of our orientation cube's space
         sensor.AddObservation(walkingDirectionGoal.InverseTransformDirection(bp.rb.position - root.position));
 
-        if (bp.rb.transform != root && bp.rb.transform != handL && bp.rb.transform != handR)
+        if (bp.rb.transform != root && bp.dof.sqrMagnitude > 0)
         {
             sensor.AddObservation(bp.rb.transform.localRotation);
             sensor.AddObservation(bp.joint.slerpDrive.maximumForce / bp.config.maxJointForceLimit);
@@ -79,7 +109,7 @@ public class WalkerAgent1 : WalkerAgentBase
             throw new ArgumentException(
                 "NaN in moveTowardsTargetReward.\n" +
                 $" walkingDirectionGoal: {walkingDirectionGoal.forward}\n" +
-                $" hips.velocity: {bodyPartsDict[root].rb.velocity}\n" +
+                $" hips.velocity: {bodyParts[0].rb.velocity}\n" +
                 $" maximumWalkingSpeed: {maxWalkingSpeed}"
             );
         }
@@ -118,5 +148,37 @@ public class WalkerAgent1 : WalkerAgentBase
         var headForward = head.forward;
         headForward.y = 0;
         return (Vector3.Dot(walkingDirectionGoal.forward, headForward) + 1) * .5F;
+    }
+
+    /*
+    * Helper functions to reduce duplicate code
+    */
+    protected void UpdateOrientationTransform(Transform directionTransform, Transform target)
+    {
+        var dirVector = target.position - root.position;
+        dirVector.y = 0; //flatten dir on the y. this will only work on level, uneven surfaces
+        var lookRot =
+            dirVector == Vector3.zero
+                ? Quaternion.identity
+                : Quaternion.LookRotation(dirVector); //get our look rot to the target
+
+        //update orientation transform
+        directionTransform.SetPositionAndRotation(root.position, lookRot);
+    }
+
+    protected Vector3 GetAvgVelocity()
+    {
+        Vector3 velSum = Vector3.zero;
+
+        //ALL RBS
+        int numOfRb = 0;
+        foreach (Bodypart bp in bodyParts)
+        {
+            numOfRb++;
+            velSum += bp.rb.velocity;
+        }
+
+        var avgVel = velSum / numOfRb;
+        return avgVel;
     }
 }

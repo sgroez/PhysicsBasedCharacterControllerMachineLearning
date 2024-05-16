@@ -2941,16 +2941,14 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 5000
-  target: {fileID: 7717692150044255410}
   root: {fileID: 5140504820287331405}
-  head: {fileID: 5162350807155165694}
-  handL: {fileID: 3178953613891397407}
-  handR: {fileID: 8738765395571248344}
   bpConfig:
     maxJointSpring: 40000
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  head: {fileID: 5162350807155165694}
+  targetController: {fileID: 1204359720128925971}
   maxWalkingSpeed: 10
   goalSensor: {fileID: 7248542156813411238}
 --- !u!114 &6926142324462627804

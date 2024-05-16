@@ -10,15 +10,12 @@ public class WalkerAgent2 : WalkerAgent1
 {
     [Header("Target To Look At")]
     [Space(10)]
-    public Transform lookAtTarget;
-    private TargetControllerBase lookAtTargetController;
+    public TargetControllerBase lookAtTargetController;
     private Transform lookDirectionGoal;
 
     public override void InitEnvVariables()
     {
         base.InitEnvVariables();
-        //init look at target controller
-        lookAtTargetController = lookAtTarget.GetComponent<TargetControllerBase>();
         //init look at target transform
         GameObject lookDirectionGoalGO = new GameObject("lookDirectionGoal");
         lookDirectionGoalGO.transform.parent = transform;
@@ -27,13 +24,13 @@ public class WalkerAgent2 : WalkerAgent1
     public override void UpdateEnvVariablesOnEpisode()
     {
         base.UpdateEnvVariablesOnEpisode();
-        UpdateOrientationTransform(lookDirectionGoal, lookAtTarget);
+        UpdateOrientationTransform(lookDirectionGoal, lookAtTargetController.transform);
     }
 
     public override void UpdateEnvVariablesOnFixedUpdate()
     {
         base.UpdateEnvVariablesOnFixedUpdate();
-        UpdateOrientationTransform(lookDirectionGoal, lookAtTarget);
+        UpdateOrientationTransform(lookDirectionGoal, lookAtTargetController.transform);
     }
 
     public override void RandomiseStartPositions()
@@ -61,7 +58,7 @@ public class WalkerAgent2 : WalkerAgent1
         sensor.AddObservation(Quaternion.FromToRotation(head.forward, lookDirectionGoal.forward));
 
         //Position of target position relative to cube
-        sensor.AddObservation(walkingDirectionGoal.InverseTransformPoint(target.transform.position));
+        sensor.AddObservation(walkingDirectionGoal.InverseTransformPoint(targetController.transform.position));
     }
 
     public override float GetLookAtTargetReward()
