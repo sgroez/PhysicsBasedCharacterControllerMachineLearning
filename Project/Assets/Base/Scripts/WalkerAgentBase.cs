@@ -50,7 +50,7 @@ public class WalkerAgentBase : Agent
     {
         foreach (Bodypart bp in bodyPartsDict.Values)
         {
-            bp.Reset();
+            bp.Reset(bp.startingPos, bp.startingRot);
         }
         UpdateEnvVariablesOnEpisode();
         RandomiseStartPositions();
@@ -157,7 +157,6 @@ public class WalkerAgentBase : Agent
         float lookDirectionReward = GetAngleDeviationNonLinear(head.forward, walkingDirectionGoal.forward);
 
         float reward = -1 + (walkingDirectionReward * lookDirectionReward) * 2;
-        Debug.Log(reward);
         return reward;
     }
 

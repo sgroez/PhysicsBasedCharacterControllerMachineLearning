@@ -23,6 +23,8 @@ public class Bodypart
     public Rigidbody rb;
     [HideInInspector] public Vector3 startingPos;
     [HideInInspector] public Quaternion startingRot;
+    [HideInInspector] public Quaternion startingRotLocal;
+
     [HideInInspector] public BodypartConfig config;
     [HideInInspector] public Vector3 dof = new Vector3(0f, 0f, 0f);
 
@@ -81,10 +83,10 @@ public class Bodypart
     }
 
     //Reset bodypart pos, rot, velocities and contact variables
-    public void Reset()
+    public void Reset(Vector3 resetPos, Quaternion resetRot)
     {
-        rb.transform.position = startingPos;
-        rb.transform.rotation = startingRot;
+        rb.transform.position = resetPos;
+        rb.transform.rotation = resetRot;
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         if (groundContact)
