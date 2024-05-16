@@ -46,16 +46,16 @@ public class WalkerAgent4 : WalkerAgentBase
     public override void CollectObservationBodyPart(VectorSensor sensor, Bodypart bp)
     {
         //Get position relative to hips
-        if (bp.rb.transform != root)
-        {
-            sensor.AddObservation(root.InverseTransformPoint(bp.rb.transform.position));
-            sensor.AddObservation(Quaternion.Inverse(root.rotation) * bp.rb.transform.rotation);
-        }
-        else
+        if (bp.rb.transform == root)
         {
             //add root pos and rot
             sensor.AddObservation(root.position);
             sensor.AddObservation(root.rotation);
+        }
+        else
+        {
+            sensor.AddObservation(root.InverseTransformPoint(bp.rb.transform.position));
+            sensor.AddObservation(Quaternion.Inverse(root.rotation) * bp.rb.transform.rotation);
         }
         //Get velocities in the context of the root transform (hips)
         sensor.AddObservation(root.InverseTransformDirection(bp.rb.velocity));

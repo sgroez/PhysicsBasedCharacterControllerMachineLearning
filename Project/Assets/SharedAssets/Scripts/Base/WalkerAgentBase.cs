@@ -18,6 +18,10 @@ public class WalkerAgentBase : Agent
     [Space(10)]
     public BodypartConfig bpConfig;
 
+    [Header("Enable debug")]
+    [Space(10)]
+    public bool enableDebug;
+
     protected EnvironmentParameters resetParams;
 
 
@@ -36,6 +40,9 @@ public class WalkerAgentBase : Agent
         }
         resetParams = Academy.Instance.EnvironmentParameters;
         InitEnvParamCallbacks();
+        if (!enableDebug) return;
+        //call debug methods
+        DebugActionCount();
     }
     public override void OnEpisodeBegin()
     {
@@ -99,4 +106,19 @@ public class WalkerAgentBase : Agent
     public virtual void CollectObservationBodyPart(VectorSensor sensor, Bodypart bp) { }
 
     public virtual float CalculateReward() { return 1f; }
+
+    private void DebugActionCount()
+    {
+        int actionCount = 0;
+        foreach (Bodypart bp in bodyParts)
+        {
+            int bpActionCount = 0;
+            bpActionCount += (int)bp.dof.x;
+            bpActionCount += (int)bp.dof.y;
+            bpActionCount += (int)bp.dof.z;
+            bpActionCount += bp.dof.sqrMagnitude > 0 ? 1 : 0;
+            actionCount += bpActionCount;
+        }
+        Debug.Log(actionCount);
+    }
 }

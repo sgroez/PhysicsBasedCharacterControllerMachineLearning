@@ -61,15 +61,15 @@ public class Bodypart
             };
             joint.slerpDrive = jd;
             //calculate degrees of freedom
-            if (joint.lowAngularXLimit.limit != 0 || joint.highAngularXLimit.limit != 0)
+            if (joint.angularXMotion != ConfigurableJointMotion.Locked)
             {
                 dof.x = 1;
             }
-            if (joint.angularYLimit.limit != 0)
+            if (joint.angularYMotion != ConfigurableJointMotion.Locked)
             {
                 dof.y = 1;
             }
-            if (joint.angularZLimit.limit != 0)
+            if (joint.angularZMotion != ConfigurableJointMotion.Locked)
             {
                 dof.z = 1;
             }
@@ -101,9 +101,14 @@ public class Bodypart
         y = (y + 1f) * 0.5f;
         z = (z + 1f) * 0.5f;
 
-        var xRot = Mathf.Lerp(joint.lowAngularXLimit.limit, joint.highAngularXLimit.limit, x);
-        var yRot = Mathf.Lerp(-joint.angularYLimit.limit, joint.angularYLimit.limit, y);
-        var zRot = Mathf.Lerp(-joint.angularZLimit.limit, joint.angularZLimit.limit, z);
+        float lowAngularXLimit = joint.angularXMotion == ConfigurableJointMotion.Limited ? joint.lowAngularXLimit.limit : -180f;
+        float highAngularXLimit = joint.angularXMotion == ConfigurableJointMotion.Limited ? joint.highAngularXLimit.limit : 180f;
+        float angularYLimit = joint.angularYMotion == ConfigurableJointMotion.Limited ? joint.angularYLimit.limit : 180f;
+        float angularZLimit = joint.angularZMotion == ConfigurableJointMotion.Limited ? joint.angularZLimit.limit : 180f;
+
+        var xRot = Mathf.Lerp(lowAngularXLimit, highAngularXLimit, x);
+        var yRot = Mathf.Lerp(-angularYLimit, angularYLimit, y);
+        var zRot = Mathf.Lerp(-angularZLimit, angularZLimit, z);
 
         joint.targetRotation = Quaternion.Euler(xRot, yRot, zRot);
     }
