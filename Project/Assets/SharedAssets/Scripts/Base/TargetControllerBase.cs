@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Unity.MLAgents;
+
 
 public class TargetControllerBase : MonoBehaviour
 {
     [Header("Collider Tag To Detect")]
     public string tagToDetect = "agent"; //collider tag to detect
 
-    [Header("Toggle respawn if touched")]
+    [Header("Set behaviour if touched")]
     public bool respawnIfTouched = false;
+    public bool endEpisodeIfTouched = false;
+    [HideInInspector] public Agent agent;
 
     [Header("Target Placement")]
     public float minSpawnRadius;
@@ -26,8 +30,14 @@ public class TargetControllerBase : MonoBehaviour
     {
         if (col.transform.CompareTag(tagToDetect))
         {
-            if (!respawnIfTouched) return;
-            MoveTargetToRandomPosition();
+            if (respawnIfTouched)
+            {
+                MoveTargetToRandomPosition();
+            }
+            if (endEpisodeIfTouched && agent != null)
+            {
+                agent.EndEpisode();
+            }
         }
     }
 

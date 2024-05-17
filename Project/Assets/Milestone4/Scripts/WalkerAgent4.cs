@@ -7,7 +7,7 @@ using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 using Random = UnityEngine.Random;
 
-public class WalkerAgent4 : WalkerAgentBase
+public class WalkerAgent4 : WalkerAgent1
 {
     [Header("Reference Controller To Match Reference Motion From")]
     [Space(10)]
@@ -39,27 +39,9 @@ public class WalkerAgent4 : WalkerAgentBase
     */
     public override void CollectObservationGeneral(VectorSensor sensor)
     {
+        base.CollectObservationGeneral(sensor);
         //add phase variable to observation
         sensor.AddObservation(referenceController.GetCurrentPhase());
-    }
-
-    public override void CollectObservationBodyPart(VectorSensor sensor, Bodypart bp)
-    {
-        //Get position relative to hips
-        if (bp.rb.transform == root)
-        {
-            //add root pos and rot
-            sensor.AddObservation(root.position);
-            sensor.AddObservation(root.rotation);
-        }
-        else
-        {
-            sensor.AddObservation(root.InverseTransformPoint(bp.rb.transform.position));
-            sensor.AddObservation(Quaternion.Inverse(root.rotation) * bp.rb.transform.rotation);
-        }
-        //Get velocities in the context of the root transform (hips)
-        sensor.AddObservation(root.InverseTransformDirection(bp.rb.velocity));
-        sensor.AddObservation(root.InverseTransformDirection(bp.rb.angularVelocity));
     }
 
     /*
@@ -68,6 +50,11 @@ public class WalkerAgent4 : WalkerAgentBase
     */
     public override float CalculateReward()
     {
+        //get goal reward (matchWalkingSpeed and LookAtTarget Reward)
+        float goalRewardWeight = 0.6f;
+        float goalReward = base.CalculateReward();
+
+        //calculate imitation reward
         float poseRewardWeight = .65f;
         float velocityRewardWeight = .1f;
         float endEffectorRewardWeight = .15f;
@@ -76,7 +63,11 @@ public class WalkerAgent4 : WalkerAgentBase
         float velocityReward = CalculateVelocityReward();
         float endEffectorReward = CalculateEndEffectorReward();
         float centerOfMassReward = CalculateCenterOfMassReward();
-        return poseRewardWeight * poseReward + velocityRewardWeight * velocityReward + endEffectorRewardWeight * endEffectorReward + centerOfMassRewardWeight * centerOfMassReward;
+        float imitationReward = poseRewardWeight * poseReward + velocityRewardWeight * velocityReward + endEffectorRewardWeight * endEffectorReward + centerOfMassRewardWeight * centerOfMassReward;
+        float imitationRewardWeight = 0.4f;
+
+        //combine rewards
+        return imitationRewardWeight * imitationReward + goalRewardWeight * goalReward;
     }
 
     IEnumerator DelayResetBodypart(Bodypart bp, Transform referenceBone)
@@ -153,15 +144,30 @@ public class WalkerAgent4 : WalkerAgentBase
         return endEffectorReward;
     }
 
+    //TODO change to use real center of mass instead of hips
     private float CalculateCenterOfMassReward()
     {
-        Bodypart bp = bodyParts[0];
-        ReferenceBodypart referenceBodypart = referenceController.referenceBodyparts[0];
-        Vector3 difference = referenceBodypart.transform.position - bp.rb.transform.position;
+        Vector3 difference = referenceController.CalculateCenterOfMass() - CalculateCenterOfMass();
         float differenceMagnitude = difference.magnitude;
         float differenceMagnitudeSquared = Mathf.Pow(differenceMagnitude, 2f);
         float centerOfMassReward = Mathf.Exp(-10 * differenceMagnitudeSquared);
         //Debug.Log("centerOfMassReward: " + centerOfMassReward);
         return centerOfMassReward;
+    }
+
+    private Vector3 CalculateCenterOfMass()
+    {
+        Vector3 centerOfMass = Vector3.zero;
+        float totalMass = 0f;
+        foreach (Bodypart bp in bodyParts)
+        {
+            centerOfMass += bp.rb.worldCenterOfMass * bp.rb.mass;
+            totalMass += bp.rb.mass;
+        }
+        if (totalMass > 0f)
+        {
+            centerOfMass /= totalMass; // Normalize by total mass
+        }
+        return centerOfMass;
     }
 }

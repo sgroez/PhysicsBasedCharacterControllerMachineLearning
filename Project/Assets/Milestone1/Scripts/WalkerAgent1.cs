@@ -30,6 +30,9 @@ public class WalkerAgent1 : WalkerAgentBase
         GameObject walkingDirectionGoalGO = new GameObject("walkingDirectionGoal");
         walkingDirectionGoalGO.transform.parent = transform;
         walkingDirectionGoal = walkingDirectionGoalGO.transform;
+
+        //set targetController Agent
+        targetController.agent = this;
     }
 
     public override void InitEnvParamCallbacks()

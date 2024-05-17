@@ -11,6 +11,11 @@ public class ReferenceController : MonoBehaviour
     public Transform referenceRoot;
     [HideInInspector] public List<ReferenceBodypart> referenceBodyparts = new List<ReferenceBodypart>();
 
+    [Header("Reset Root transform")]
+    [Space(10)]
+    public bool resetRootTransform;
+    private Vector3 startingPos;
+
     [Header("Min And Max to sample phase start from")]
     [Space(10)]
     public float phaseStartMin;
@@ -27,10 +32,15 @@ public class ReferenceController : MonoBehaviour
                 referenceBodyparts.Add(new ReferenceBodypart(t));
             }
         }
+        startingPos = transform.position;
     }
 
     public void ResetReference()
     {
+        if (resetRootTransform)
+        {
+            transform.position = startingPos;
+        }
         // Call the Play method of the Animator to start playing the animation at a specific point
         float randomPhase = Random.Range(phaseStartMin, phaseStartMax);
         animator.Play(animationName, -1, randomPhase);
@@ -40,5 +50,21 @@ public class ReferenceController : MonoBehaviour
     {
         float phase = animator.GetCurrentAnimatorStateInfo(0).normalizedTime % 1;
         return phase;
+    }
+
+    public Vector3 CalculateCenterOfMass()
+    {
+        Vector3 centerOfMass = Vector3.zero;
+        float totalMass = 0f;
+        foreach (ReferenceBodypart rbp in referenceBodyparts)
+        {
+            centerOfMass += rbp.rb.worldCenterOfMass * rbp.rb.mass;
+            totalMass += rbp.rb.mass;
+        }
+        if (totalMass > 0f)
+        {
+            centerOfMass /= totalMass; // Normalize by total mass
+        }
+        return centerOfMass;
     }
 }

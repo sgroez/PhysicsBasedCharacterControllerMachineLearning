@@ -8,6 +8,7 @@ using Unity.MLAgents;
 public class ReferenceBodypart
 {
     public Transform transform;
+    [HideInInspector] public Rigidbody rb;
     private Vector3 previousPos;
     private Quaternion previousRot;
     private float previousTime;
@@ -18,6 +19,7 @@ public class ReferenceBodypart
         this.previousPos = transform.position;
         this.previousRot = transform.rotation;
         previousTime = Time.time;
+        rb = transform.GetComponent<Rigidbody>();
     }
 
     public void GetVelocities(out Vector3 velocity, out Vector3 angularVelocity)
