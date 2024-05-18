@@ -20,6 +20,25 @@ public class WalkerAgent4 : WalkerAgent1
     public Transform footL;
     public Transform footR;
 
+    public override void UpdateEnvVariablesOnEpisode()
+    {
+        UpdateOrientationTransform(walkingDirectionGoal, targetController.transform);
+        //removed random walking speed
+    }
+
+    public override void UpdateEnvVariablesOnFixedUpdate()
+    {
+        base.UpdateEnvVariablesOnFixedUpdate();
+        Vector3 avgRefVelocity = referenceController.GetAvgVelocity();
+        float avgRefVelocityMag = avgRefVelocity.magnitude;
+        walkingSpeed = avgRefVelocityMag > 0 ? avgRefVelocityMag : 0.1f;
+    }
+
+    public override void InitEnvParamCallbacks()
+    {
+        //remove walking speed env parameter callback
+    }
+
     public override void RandomiseStartPositions()
     {
         //init reference animation at random point

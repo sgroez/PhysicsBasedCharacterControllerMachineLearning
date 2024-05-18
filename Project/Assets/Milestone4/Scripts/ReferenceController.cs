@@ -52,6 +52,22 @@ public class ReferenceController : MonoBehaviour
         return phase;
     }
 
+    public Vector3 GetAvgVelocity()
+    {
+        Vector3 velSum = Vector3.zero;
+
+        int numOfBp = 0;
+        foreach (ReferenceBodypart rbp in referenceBodyparts)
+        {
+            numOfBp++;
+            rbp.GetVelocities(out Vector3 velocity, out Vector3 _);
+            velSum += velocity;
+        }
+
+        var avgVel = velSum / numOfBp;
+        return avgVel;
+    }
+
     public Vector3 CalculateCenterOfMass()
     {
         Vector3 centerOfMass = Vector3.zero;

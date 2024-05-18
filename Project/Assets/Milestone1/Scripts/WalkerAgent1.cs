@@ -113,7 +113,8 @@ public class WalkerAgent1 : WalkerAgentBase
                 "NaN in moveTowardsTargetReward.\n" +
                 $" walkingDirectionGoal: {walkingDirectionGoal.forward}\n" +
                 $" hips.velocity: {bodyParts[0].rb.velocity}\n" +
-                $" maximumWalkingSpeed: {maxWalkingSpeed}"
+                $" maximumWalkingSpeed: {maxWalkingSpeed}\n" +
+                $" walkingSpeed: {walkingSpeed}"
             );
         }
 

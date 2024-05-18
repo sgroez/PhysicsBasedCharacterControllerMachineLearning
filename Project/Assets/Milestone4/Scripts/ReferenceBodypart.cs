@@ -31,7 +31,7 @@ public class ReferenceBodypart
         float deltaTime = currentTime - previousTime;
 
         // Calculate out variable velocity using finite differences
-        velocity = (transform.position - previousPos) / deltaTime;
+        velocity = deltaTime > 0 ? (transform.position - previousPos) / deltaTime : Vector3.zero;
 
         // Calculate out variable angular velocity using finite differences
         Quaternion deltaRotation = transform.rotation * Quaternion.Inverse(previousRot);
