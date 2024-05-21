@@ -51,8 +51,8 @@ public class TargetControllerBase : MonoBehaviour
         float distance = Random.Range(minSpawnRadius, maxSpawnRadius);
 
         // Calculate the 2D offset using trigonometry
-        float offsetX = Mathf.Cos(angle) * distance;
-        float offsetZ = Mathf.Sin(angle) * distance;
+        float offsetX = Mathf.Cos(angle + Mathf.PI / 2) * distance;
+        float offsetZ = Mathf.Sin(angle + Mathf.PI / 2) * distance;
         transform.position = startingPos + new Vector3(offsetX, 0f, offsetZ);
     }
 }

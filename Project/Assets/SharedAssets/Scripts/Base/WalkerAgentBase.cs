@@ -18,6 +18,10 @@ public class WalkerAgentBase : Agent
     [Space(10)]
     public BodypartConfig bpConfig;
 
+    [Header("Randomise Rotation Range")]
+    [Space(10)]
+    public float RotationRandAngle = 180f;
+
     [Header("Enable debug")]
     [Space(10)]
     public bool enableDebug;
@@ -99,7 +103,7 @@ public class WalkerAgentBase : Agent
     public virtual void RandomiseStartPositions()
     {
         //random start rotation to help generalize
-        bodyParts[0].rb.transform.rotation = Quaternion.Euler(0, Random.Range(0.0f, 360.0f), 0);
+        bodyParts[0].rb.transform.rotation = Quaternion.Euler(0, Random.Range(-RotationRandAngle, RotationRandAngle), 0);
     }
 
     public virtual void CollectObservationGeneral(VectorSensor sensor) { }

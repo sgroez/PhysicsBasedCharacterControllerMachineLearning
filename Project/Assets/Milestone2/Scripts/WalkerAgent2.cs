@@ -20,6 +20,10 @@ public class WalkerAgent2 : WalkerAgent1
         GameObject lookDirectionGoalGO = new GameObject("lookDirectionGoal");
         lookDirectionGoalGO.transform.parent = transform;
         lookDirectionGoal = lookDirectionGoalGO.transform;
+
+        //set lookAtTargetController Agent
+        lookAtTargetController.agent = this;
+        lookAtTargetController.spawnAngle = RotationRandAngle;
     }
     public override void UpdateEnvVariablesOnEpisode()
     {
@@ -66,6 +70,8 @@ public class WalkerAgent2 : WalkerAgent1
         var headForward = head.forward;
         headForward.y = 0;
         //using look direction instead of walking direction
-        return (Vector3.Dot(lookDirectionGoal.forward, headForward) + 1) * .5F;
+        float lookAtTargetReward = (Vector3.Dot(lookDirectionGoal.forward, headForward) + 1) * .5F;
+        statsRecorder.Add("Environment/LookAtTargetReward", lookAtTargetReward);
+        return lookAtTargetReward;
     }
 }

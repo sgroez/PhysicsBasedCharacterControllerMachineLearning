@@ -16,13 +16,12 @@ public class WalkerAgent1 : WalkerAgentBase
     [Header("Target To Walk Towards")]
     [Space(10)]
     public TargetControllerBase targetController;
+    protected Transform walkingDirectionGoal;
 
     [Header("Walking Speed")]
     [Space(10)]
     public float maxWalkingSpeed;
     protected float walkingSpeed;
-
-    protected Transform walkingDirectionGoal;
 
     public override void InitEnvVariables()
     {
@@ -33,6 +32,7 @@ public class WalkerAgent1 : WalkerAgentBase
 
         //set targetController Agent
         targetController.agent = this;
+        targetController.spawnAngle = RotationRandAngle;
     }
 
     public override void InitEnvParamCallbacks()
