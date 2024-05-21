@@ -29,9 +29,10 @@ public class WalkerAgent4 : WalkerAgent1
     public override void UpdateEnvVariablesOnFixedUpdate()
     {
         base.UpdateEnvVariablesOnFixedUpdate();
-        Vector3 avgRefVelocity = referenceController.GetAvgVelocity();
-        float avgRefVelocityMag = avgRefVelocity.magnitude;
-        walkingSpeed = avgRefVelocityMag > 0 ? avgRefVelocityMag : 0.1f;
+        Vector3 avgRefVelocity = referenceController.avgVelocity;
+        float avgRefVelocityToTarget = avgRefVelocity.z;
+        walkingSpeed = avgRefVelocityToTarget > 0 ? avgRefVelocityToTarget : 0.1f;
+        statsRecorder.Add("Environment/WalkingSpeed", walkingSpeed);
     }
 
     public override void InitEnvParamCallbacks()
@@ -116,7 +117,7 @@ public class WalkerAgent4 : WalkerAgent1
             i++;
         }
         float poseReward = Mathf.Exp(-2 * sum);
-        //Debug.Log("poseReward: " + poseReward);
+        statsRecorder.Add("Environment/PoseReward", poseReward);
         return poseReward;
     }
     private float CalculateVelocityReward()
@@ -127,15 +128,14 @@ public class WalkerAgent4 : WalkerAgent1
         foreach (Bodypart bp in bodyParts)
         {
             ReferenceBodypart referenceBodypart = referenceController.referenceBodyparts[i];
-            referenceBodypart.GetVelocities(out Vector3 _, out Vector3 referenceAngularVelocity);
-            Vector3 difference = referenceAngularVelocity - bp.rb.angularVelocity;
+            Vector3 difference = referenceBodypart.angularVelocity - bp.rb.angularVelocity;
             float differenceMagnitude = difference.magnitude;
             float differenceMagnitudeSquared = Mathf.Pow(differenceMagnitude, 2f);
             sum += differenceMagnitudeSquared;
             i++;
         }
         float velocityReward = Mathf.Exp(-.1f * sum);
-        //Debug.Log("velocityReward: " + velocityReward);
+        statsRecorder.Add("Environment/VelocityReward", velocityReward);
         return velocityReward;
     }
 
@@ -159,7 +159,7 @@ public class WalkerAgent4 : WalkerAgent1
             i++;
         }
         float endEffectorReward = Mathf.Exp(-40 * sum);
-        //Debug.Log("endEffectorReward: " + endEffectorReward);
+        statsRecorder.Add("Environment/EndEffectorReward", endEffectorReward);
         return endEffectorReward;
     }
 
@@ -170,7 +170,7 @@ public class WalkerAgent4 : WalkerAgent1
         float differenceMagnitude = difference.magnitude;
         float differenceMagnitudeSquared = Mathf.Pow(differenceMagnitude, 2f);
         float centerOfMassReward = Mathf.Exp(-10 * differenceMagnitudeSquared);
-        //Debug.Log("centerOfMassReward: " + centerOfMassReward);
+        statsRecorder.Add("Environment/CenterOfMassReward", centerOfMassReward);
         return centerOfMassReward;
     }
 

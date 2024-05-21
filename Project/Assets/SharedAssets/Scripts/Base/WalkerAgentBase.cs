@@ -23,7 +23,7 @@ public class WalkerAgentBase : Agent
     public bool enableDebug;
 
     protected EnvironmentParameters resetParams;
-
+    protected StatsRecorder statsRecorder;
 
     /*
     * Override Agent functions to comply with ML Agents package &
@@ -39,6 +39,7 @@ public class WalkerAgentBase : Agent
             bodyParts.Add(bp);
         }
         resetParams = Academy.Instance.EnvironmentParameters;
+        statsRecorder = Academy.Instance.StatsRecorder;
         InitEnvParamCallbacks();
         if (!enableDebug) return;
         //call debug methods

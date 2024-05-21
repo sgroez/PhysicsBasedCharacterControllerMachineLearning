@@ -3146,7 +3146,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: f128bcb74517b43e19bc0e6471533aa9, type: 3}
   m_InferenceDevice: 2
   m_BehaviorType: 0
   m_BehaviorName: Walker
@@ -7247,6 +7247,7 @@ MonoBehaviour:
   resetRootTransform: 1
   phaseStartMin: 0
   phaseStartMax: 1
+  avgVelocity: {x: 0, y: 0, z: 0}
 --- !u!1 &453651108977643507 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1082271958561512970, guid: 8f09df86c63f94cdeb9a57829771f6d9, type: 3}

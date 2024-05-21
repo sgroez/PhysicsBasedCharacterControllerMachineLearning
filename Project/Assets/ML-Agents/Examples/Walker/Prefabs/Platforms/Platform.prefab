@@ -26,7 +26,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6902107422946006027, guid: f0d7741d9e06247f6843b921a206b978, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 6902107422946006027, guid: f0d7741d9e06247f6843b921a206b978, type: 3}
       propertyPath: m_LocalPosition.x
@@ -132,6 +132,14 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 140846861312608762}
+    - target: {fileID: 3599283675615088295, guid: dd62a2a5a838943fba3d2cbb377a75b3, type: 3}
+      propertyPath: m_TargetWalkingSpeed
+      value: 1.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3599283675615088295, guid: dd62a2a5a838943fba3d2cbb377a75b3, type: 3}
+      propertyPath: randomizeWalkSpeedEachEpisode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3925309372585159072, guid: dd62a2a5a838943fba3d2cbb377a75b3, type: 3}
       propertyPath: m_RootOrder
       value: 3
