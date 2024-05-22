@@ -56,6 +56,7 @@ public class WalkerAgent : Agent
     DirectionIndicator m_DirectionIndicator;
     JointDriveController m_JdController;
     public EnvironmentParameters m_ResetParams;
+    public StatsRecorder statsRecorder;
 
     public override void Initialize()
     {
@@ -82,6 +83,7 @@ public class WalkerAgent : Agent
         m_JdController.SetupBodyPart(handR);
 
         m_ResetParams = Academy.Instance.EnvironmentParameters;
+        statsRecorder = Academy.Instance.StatsRecorder;
     }
 
     /// <summary>
@@ -238,6 +240,7 @@ public class WalkerAgent : Agent
         headForward.y = 0;
         // var lookAtTargetReward = (Vector3.Dot(cubeForward, head.forward) + 1) * .5F;
         var lookAtTargetReward = (Vector3.Dot(cubeForward, headForward) + 1) * .5F;
+        statsRecorder.Add("Reward/LookAtTargetReward", lookAtTargetReward);
 
         //Check for NaNs
         if (float.IsNaN(lookAtTargetReward))
@@ -279,7 +282,9 @@ public class WalkerAgent : Agent
 
         //return the value on a declining sigmoid shaped curve that decays from 1 to 0
         //This reward will approach 1 if it matches perfectly and approach zero as it deviates
-        return Mathf.Pow(1 - Mathf.Pow(velDeltaMagnitude / MTargetWalkingSpeed, 2), 2);
+        float matchingVelocityReward = Mathf.Pow(1 - Mathf.Pow(velDeltaMagnitude / MTargetWalkingSpeed, 2), 2);
+        statsRecorder.Add("Reward/MatchingVelocityReward", matchingVelocityReward);
+        return matchingVelocityReward;
     }
 
     /// <summary>
