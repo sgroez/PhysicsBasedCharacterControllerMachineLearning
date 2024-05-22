@@ -638,7 +638,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tagToDetect: agent
   respawnIfTouched: 1
-  minSpawnRadius: 1
+  endEpisodeIfTouched: 0
+  agent: {fileID: 0}
+  minSpawnRadius: 0
   maxSpawnRadius: 9
   spawnAngle: 360
 --- !u!1 &7750364234004037266
@@ -764,7 +766,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3817448943308824833, guid: 7f0a13028e80349e69509ad8b536f6e6, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
-      value: 323
+      value: 343
+      objectReference: {fileID: 0}
+    - target: {fileID: 3817448943308824833, guid: 7f0a13028e80349e69509ad8b536f6e6, type: 3}
+      propertyPath: m_BrainParameters.VectorActionSize.Array.data[0]
+      value: 84
+      objectReference: {fileID: 0}
+    - target: {fileID: 3817448943308824833, guid: 7f0a13028e80349e69509ad8b536f6e6, type: 3}
+      propertyPath: m_BrainParameters.m_ActionSpec.m_NumContinuousActions
+      value: 84
       objectReference: {fileID: 0}
     - target: {fileID: 7364591426350044915, guid: 7f0a13028e80349e69509ad8b536f6e6, type: 3}
       propertyPath: m_RootOrder
@@ -816,6 +826,7 @@ PrefabInstance:
       objectReference: {fileID: 119616974326015200}
     m_RemovedComponents:
     - {fileID: 8327758520247034249, guid: 7f0a13028e80349e69509ad8b536f6e6, type: 3}
+    - {fileID: 4569600588454259715, guid: 7f0a13028e80349e69509ad8b536f6e6, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -860,6 +871,8 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  RotationRandAngle: 360
+  enableDebug: 0
   head: {fileID: 6525657653157715728}
   targetController: {fileID: 5807827399037851581}
   maxWalkingSpeed: 10
