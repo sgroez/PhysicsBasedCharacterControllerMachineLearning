@@ -2333,8 +2333,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
@@ -2414,7 +2414,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 10467a99963334f75a481a0e92affae6, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 2
   m_BehaviorType: 0
   m_BehaviorName: Walker
@@ -2449,7 +2449,8 @@ MonoBehaviour:
   head: {fileID: 2228040516193968534}
   targetController: {fileID: 5592770691773718694}
   randomizeWalkingSpeed: 0
-  maxWalkingSpeed: 1.7
+  maxWalkingSpeed: 5
+  reachedTargets: 0
 --- !u!114 &615908649116080045
 MonoBehaviour:
   m_ObjectHideFlags: 0

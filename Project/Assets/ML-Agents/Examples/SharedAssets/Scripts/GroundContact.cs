@@ -29,8 +29,8 @@ public class GroundContact : MonoBehaviour
             {
                 agent.SetReward(groundContactPenalty);
             }
-
-            if (agentDoneOnGroundContact)
+            // Add check for agent step count > 1 to avoid triggering multiple new episodes
+            if (agentDoneOnGroundContact && agent.StepCount > 1)
             {
                 agent.EndEpisode();
             }

@@ -12,7 +12,7 @@ public class TargetControllerBase : MonoBehaviour
     [Header("Set behaviour if touched")]
     public bool respawnIfTouched = false;
     public bool endEpisodeIfTouched = false;
-    [HideInInspector] public Agent agent;
+    [HideInInspector] public WalkerAgent1 agent;
 
     [Header("Target Placement")]
     public float minSpawnRadius;
@@ -38,6 +38,7 @@ public class TargetControllerBase : MonoBehaviour
             {
                 agent.EndEpisode();
             }
+            agent.reachedTargets++;
         }
     }
 

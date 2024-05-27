@@ -24,6 +24,13 @@ public class WalkerAgent1 : WalkerAgentBase
     public float maxWalkingSpeed;
     protected float walkingSpeed;
 
+    /*
+    * Environment stats
+    */
+    private Vector3 previousPos;
+    private float distanceMovedInTargetDirection;
+    [HideInInspector] public int reachedTargets;
+
     public override void InitEnvVariables()
     {
         //init walking direction transform
@@ -52,11 +59,19 @@ public class WalkerAgent1 : WalkerAgentBase
         {
             walkingSpeed = maxWalkingSpeed;
         }
+        //Record then reset distance moved in target direction
+        statsRecorder.Add("Environment/DistanceMovedInTargetDirection", distanceMovedInTargetDirection);
+        distanceMovedInTargetDirection = 0f;
+        previousPos = root.position;
+        //Record then reset targets reached
+        statsRecorder.Add("Environment/ReachedTargets", reachedTargets);
+        reachedTargets = 0;
     }
 
     public override void UpdateEnvVariablesOnFixedUpdate()
     {
         UpdateOrientationTransform(walkingDirectionGoal, targetController.transform);
+        distanceMovedInTargetDirection += GetDistanceMovedInTargetDirection();
     }
 
     public override void RandomiseStartPositions()
@@ -164,6 +179,20 @@ public class WalkerAgent1 : WalkerAgentBase
         float lookAtTargetReward = (Vector3.Dot(walkingDirectionGoal.forward, headForward) + 1) * .5F;
         statsRecorder.Add("Reward/LookAtTargetReward", lookAtTargetReward);
         return lookAtTargetReward;
+    }
+
+    private float GetDistanceMovedInTargetDirection()
+    {
+        // Calculate the displacement vector
+        Vector3 currentPos = root.position;
+        Vector3 displacement = currentPos - previousPos;
+
+        // Project the displacement vector onto the goal direction vector
+        float movementInTargetDirection = Vector3.Dot(displacement, walkingDirectionGoal.forward);
+
+        // Update the previous position for the next frame
+        previousPos = currentPos;
+        return movementInTargetDirection;
     }
 
     /*
