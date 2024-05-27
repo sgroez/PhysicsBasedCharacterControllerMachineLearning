@@ -1645,7 +1645,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: bfc0373211bf04b108be0be3ecbdb66f, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 10467a99963334f75a481a0e92affae6, type: 3}
   m_InferenceDevice: 2
   m_BehaviorType: 0
   m_BehaviorName: Walker
@@ -1679,6 +1679,7 @@ MonoBehaviour:
   enableDebug: 0
   head: {fileID: 6209465010061739261}
   targetController: {fileID: 2897041238847703544}
+  randomizeWalkingSpeed: 0
   maxWalkingSpeed: 10
   lookAtTargetController: {fileID: 3034995820280989021}
 --- !u!114 &6187068066896117659

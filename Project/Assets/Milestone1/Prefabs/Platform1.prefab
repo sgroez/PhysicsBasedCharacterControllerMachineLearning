@@ -2352,6 +2352,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tagToDetect: agent
   respawnIfTouched: 1
+  endEpisodeIfTouched: 0
+  agent: {fileID: 0}
   minSpawnRadius: 1
   maxSpawnRadius: 9
   spawnAngle: 360
@@ -2412,7 +2414,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 3b6a8b63f44cd42f3928b3e18142e229, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 10467a99963334f75a481a0e92affae6, type: 3}
   m_InferenceDevice: 2
   m_BehaviorType: 0
   m_BehaviorName: Walker
@@ -2442,9 +2444,12 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  RotationRandAngle: 360
+  enableDebug: 0
   head: {fileID: 2228040516193968534}
   targetController: {fileID: 5592770691773718694}
-  maxWalkingSpeed: 10
+  randomizeWalkingSpeed: 0
+  maxWalkingSpeed: 1.7
 --- !u!114 &615908649116080045
 MonoBehaviour:
   m_ObjectHideFlags: 0

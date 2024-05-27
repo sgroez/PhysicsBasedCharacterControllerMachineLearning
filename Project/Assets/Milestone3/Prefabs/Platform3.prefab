@@ -763,7 +763,7 @@ PrefabInstance:
     - target: {fileID: 3817448943308824833, guid: 7f0a13028e80349e69509ad8b536f6e6, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: b8b3ff50ff41c4060a154cf9cb99ed6c, type: 3}
+      objectReference: {fileID: 5022602860645237092, guid: d9b07cb4f60964d47b23aefc7fe83d4a, type: 3}
     - target: {fileID: 3817448943308824833, guid: 7f0a13028e80349e69509ad8b536f6e6, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
       value: 343
@@ -875,7 +875,8 @@ MonoBehaviour:
   enableDebug: 0
   head: {fileID: 6525657653157715728}
   targetController: {fileID: 5807827399037851581}
-  maxWalkingSpeed: 10
+  randomizeWalkingSpeed: 0
+  maxWalkingSpeed: 2
 --- !u!4 &6525657653157715728 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 965240381923116597, guid: 7f0a13028e80349e69509ad8b536f6e6, type: 3}

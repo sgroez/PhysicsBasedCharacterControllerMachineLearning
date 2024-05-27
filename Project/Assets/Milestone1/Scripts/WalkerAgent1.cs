@@ -20,6 +20,7 @@ public class WalkerAgent1 : WalkerAgentBase
 
     [Header("Walking Speed")]
     [Space(10)]
+    public bool randomizeWalkingSpeed = false;
     public float maxWalkingSpeed;
     protected float walkingSpeed;
 
@@ -43,7 +44,14 @@ public class WalkerAgent1 : WalkerAgentBase
     public override void UpdateEnvVariablesOnEpisode()
     {
         UpdateOrientationTransform(walkingDirectionGoal, targetController.transform);
-        walkingSpeed = Random.Range(0.1f, maxWalkingSpeed);
+        if (randomizeWalkingSpeed)
+        {
+            walkingSpeed = Random.Range(0.1f, maxWalkingSpeed);
+        }
+        else
+        {
+            walkingSpeed = maxWalkingSpeed;
+        }
     }
 
     public override void UpdateEnvVariablesOnFixedUpdate()
@@ -145,7 +153,7 @@ public class WalkerAgent1 : WalkerAgentBase
         //return the value on a declining sigmoid shaped curve that decays from 1 to 0
         //This reward will approach 1 if it matches perfectly and approach zero as it deviates
         float matchingVelocityReward = Mathf.Pow(1 - Mathf.Pow(velDeltaMagnitude / walkingSpeed, 2), 2);
-        statsRecorder.Add("Environment/MatchingVelocityReward", matchingVelocityReward);
+        statsRecorder.Add("Reward/MatchingVelocityReward", matchingVelocityReward);
         return matchingVelocityReward;
     }
 
@@ -154,7 +162,7 @@ public class WalkerAgent1 : WalkerAgentBase
         var headForward = head.forward;
         headForward.y = 0;
         float lookAtTargetReward = (Vector3.Dot(walkingDirectionGoal.forward, headForward) + 1) * .5F;
-        statsRecorder.Add("Environment/LookAtTargetReward", lookAtTargetReward);
+        statsRecorder.Add("Reward/LookAtTargetReward", lookAtTargetReward);
         return lookAtTargetReward;
     }
 
