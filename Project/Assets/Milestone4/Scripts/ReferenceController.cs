@@ -6,62 +6,55 @@ public class ReferenceController : MonoBehaviour
 {
     [Header("Animator Of Reference Character")]
     [Space(10)]
-    public Animator animator;
     public string animationName;
     public Transform referenceRoot;
-    [HideInInspector] public List<ReferenceBodypart> referenceBodyparts = new List<ReferenceBodypart>();
-
-    [Header("Reset Root transform")]
-    [Space(10)]
-    public bool resetRootTransform;
-    private Vector3 startingPos;
+    private Animator animator;
 
     [Header("Min And Max to sample phase start from")]
     [Space(10)]
     public float phaseStartMin;
     public float phaseStartMax;
 
-    [HideInInspector] public Vector3 avgVelocity = Vector3.zero;
+    [Header("Enable debug")]
+    public bool enableDebug = false;
+
+    private Vector3 startingPos;
+
+    /*
+    * Reference Bodyparts list
+    */
+    [HideInInspector] public List<ReferenceBodypart> referenceBodyparts = new List<ReferenceBodypart>();
+
     void OnEnable()
     {
         // Get a reference to the Animator component
         animator = GetComponent<Animator>();
-        foreach (Transform t in referenceRoot.GetComponentsInChildren<Transform>())
-        {
-            if (t.CompareTag("referenceBone"))
-            {
-                referenceBodyparts.Add(new ReferenceBodypart(t));
-            }
-        }
         startingPos = transform.position;
-    }
-
-    void FixedUpdate()
-    {
-        Vector3 velSum = Vector3.zero;
-        //update avg velocity
-        foreach (ReferenceBodypart rbp in referenceBodyparts)
+        foreach (ReferenceBodypart rbp in referenceRoot.GetComponentsInChildren<ReferenceBodypart>())
         {
-            rbp.Update();
-            velSum += rbp.velocity;
+            referenceBodyparts.Add(rbp);
         }
-        //avgVelocity = referenceBodyparts[0].velocity;
-        avgVelocity = velSum / referenceBodyparts.Count;
-        avgVelocity.y = 0f;
     }
 
     public void ResetReference()
     {
-        if (resetRootTransform)
-        {
-            transform.position = startingPos;
-        }
-        // Call the Play method of the Animator to start playing the animation at a specific point
+        transform.position = startingPos;
+        //call the Play method of the Animator to start playing the animation at a specific point
         float randomPhase = Random.Range(phaseStartMin, phaseStartMax);
         animator.Play(animationName, -1, randomPhase);
+        //reset reference bodyparts on next frame when animation has started from random phase
+        StartCoroutine(ResetBodypartsOnNextFrame());
+    }
+
+    public IEnumerator ResetBodypartsOnNextFrame()
+    {
+        //wait for the next frame
+        yield return null;
+
+        //code to execute on the next frame
         foreach (ReferenceBodypart rbp in referenceBodyparts)
         {
-            StartCoroutine(DelayResetReferenceBodypart(rbp));
+            rbp.Reset();
         }
     }
 
@@ -69,6 +62,15 @@ public class ReferenceController : MonoBehaviour
     {
         float phase = animator.GetCurrentAnimatorStateInfo(0).normalizedTime % 1;
         return phase;
+    }
+
+    void Update()
+    {
+        if (!enableDebug) return;
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            ResetReference();
+        }
     }
 
     public Vector3 CalculateCenterOfMass()
@@ -87,18 +89,13 @@ public class ReferenceController : MonoBehaviour
         return centerOfMass;
     }
 
-    /* void OnDrawGizmos()
+    public Vector3 CalculateAvgVelocity()
     {
-        // Draw a yellow sphere at the transform's position
-        Gizmos.color = Color.yellow;
-        if (referenceBodyparts.Count <= 0) return;
-        Gizmos.DrawRay(referenceBodyparts[0].rb.position, avgVelocity);
-    } */
-
-    IEnumerator DelayResetReferenceBodypart(ReferenceBodypart rbp)
-    {
-        yield return new WaitForSeconds(.001f); // Wait for .001 second
-        // Code to be executed after the delay
-        rbp.Reset();
+        Vector3 sum = Vector3.zero;
+        foreach (ReferenceBodypart rbp in referenceBodyparts)
+        {
+            sum += rbp.velocity;
+        }
+        return sum / referenceBodyparts.Count;
     }
 }

@@ -20,16 +20,10 @@ public class WalkerAgent4 : WalkerAgent1
     public Transform footL;
     public Transform footR;
 
-    public override void UpdateEnvVariablesOnEpisode()
-    {
-        UpdateOrientationTransform(walkingDirectionGoal, targetController.transform);
-        //removed random walking speed
-    }
-
     public override void UpdateEnvVariablesOnFixedUpdate()
     {
         base.UpdateEnvVariablesOnFixedUpdate();
-        Vector3 avgRefVelocity = referenceController.avgVelocity;
+        Vector3 avgRefVelocity = referenceController.CalculateAvgVelocity();
         float avgRefVelocityToTarget = avgRefVelocity.z;
         walkingSpeed = avgRefVelocityToTarget > 0 ? avgRefVelocityToTarget : 0.1f;
         statsRecorder.Add("Environment/WalkingSpeed", walkingSpeed);
@@ -62,6 +56,29 @@ public class WalkerAgent4 : WalkerAgent1
         base.CollectObservationGeneral(sensor);
         //add phase variable to observation
         sensor.AddObservation(referenceController.GetCurrentPhase());
+        foreach (ReferenceBodypart rbp in referenceController.referenceBodyparts)
+        {
+            CollectReferenceBodypartObservation(sensor, rbp);
+        }
+    }
+
+    private void CollectReferenceBodypartObservation(VectorSensor sensor, ReferenceBodypart rbp)
+    {
+        //ground check
+        sensor.AddObservation(rbp.groundContact.touchingGround); // Is this rbp touching the ground
+
+        //get velocities in the context of our orientation cube's space
+        //note: You can get these velocities in world space as well but it may not train as well.
+        sensor.AddObservation(walkingDirectionGoal.InverseTransformDirection(rbp.velocity));
+        sensor.AddObservation(walkingDirectionGoal.InverseTransformDirection(rbp.angularVelocity));
+
+        //get position relative to hips in the context of our orientation cube's space
+        sensor.AddObservation(walkingDirectionGoal.InverseTransformDirection(rbp.transform.position - referenceController.referenceRoot.position));
+
+        if (rbp.transform != referenceController.referenceRoot)
+        {
+            sensor.AddObservation(rbp.transform.localRotation);
+        }
     }
 
     /*
@@ -74,16 +91,25 @@ public class WalkerAgent4 : WalkerAgent1
         float goalRewardWeight = 0.6f;
         float goalReward = base.CalculateReward();
 
-        //calculate imitation reward
+        //set imitation reward weights
         float poseRewardWeight = .65f;
-        float velocityRewardWeight = .1f;
+        float angularVelocityRewardWeight = .1f;
         float endEffectorRewardWeight = .15f;
         float centerOfMassRewardWeight = .1f;
+
+        //calculate imitation rewards
         float poseReward = CalculatePoseReward();
-        float velocityReward = CalculateVelocityReward();
+        float angularVelocityReward = CalculateAngularVelocityReward();
         float endEffectorReward = CalculateEndEffectorReward();
         float centerOfMassReward = CalculateCenterOfMassReward();
-        float imitationReward = poseRewardWeight * poseReward + velocityRewardWeight * velocityReward + endEffectorRewardWeight * endEffectorReward + centerOfMassRewardWeight * centerOfMassReward;
+
+        //Check for NaNs
+        if (float.IsNaN(poseReward)) throw new ArgumentException("NaN in poseReward.");
+        if (float.IsNaN(angularVelocityReward)) throw new ArgumentException("NaN in angularVelocityReward.");
+        if (float.IsNaN(endEffectorReward)) throw new ArgumentException("NaN in endEffectorReward.");
+        if (float.IsNaN(centerOfMassReward)) throw new ArgumentException("NaN in centerOfMassReward.");
+
+        float imitationReward = poseRewardWeight * poseReward + angularVelocityRewardWeight * angularVelocityReward + endEffectorRewardWeight * endEffectorReward + centerOfMassRewardWeight * centerOfMassReward;
         float imitationRewardWeight = 0.4f;
 
         //combine rewards
@@ -117,10 +143,10 @@ public class WalkerAgent4 : WalkerAgent1
             i++;
         }
         float poseReward = Mathf.Exp(-2 * sum);
-        statsRecorder.Add("Environment/PoseReward", poseReward);
+        statsRecorder.Add("Reward/PoseReward", poseReward);
         return poseReward;
     }
-    private float CalculateVelocityReward()
+    private float CalculateAngularVelocityReward()
     {
         int i = 0;
         float sum = 0f;
@@ -134,9 +160,9 @@ public class WalkerAgent4 : WalkerAgent1
             sum += differenceMagnitudeSquared;
             i++;
         }
-        float velocityReward = Mathf.Exp(-.1f * sum);
-        statsRecorder.Add("Environment/VelocityReward", velocityReward);
-        return velocityReward;
+        float angularVelocityReward = Mathf.Exp(-.1f * sum);
+        statsRecorder.Add("Reward/AngularVelocityReward", angularVelocityReward);
+        return angularVelocityReward;
     }
 
     private float CalculateEndEffectorReward()
@@ -159,7 +185,7 @@ public class WalkerAgent4 : WalkerAgent1
             i++;
         }
         float endEffectorReward = Mathf.Exp(-40 * sum);
-        statsRecorder.Add("Environment/EndEffectorReward", endEffectorReward);
+        statsRecorder.Add("Reward/EndEffectorReward", endEffectorReward);
         return endEffectorReward;
     }
 
@@ -170,7 +196,7 @@ public class WalkerAgent4 : WalkerAgent1
         float differenceMagnitude = difference.magnitude;
         float differenceMagnitudeSquared = Mathf.Pow(differenceMagnitude, 2f);
         float centerOfMassReward = Mathf.Exp(-10 * differenceMagnitudeSquared);
-        statsRecorder.Add("Environment/CenterOfMassReward", centerOfMassReward);
+        statsRecorder.Add("Reward/CenterOfMassReward", centerOfMassReward);
         return centerOfMassReward;
     }
 

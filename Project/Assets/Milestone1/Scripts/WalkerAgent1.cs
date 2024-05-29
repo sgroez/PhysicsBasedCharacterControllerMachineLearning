@@ -59,11 +59,13 @@ public class WalkerAgent1 : WalkerAgentBase
         {
             walkingSpeed = maxWalkingSpeed;
         }
-        //Record then reset distance moved in target direction
+        //record walking speed stats
+        statsRecorder.Add("Environment/walkingSpeed", walkingSpeed);
+        //record then reset distance moved in target direction
         statsRecorder.Add("Environment/DistanceMovedInTargetDirection", distanceMovedInTargetDirection);
         distanceMovedInTargetDirection = 0f;
         previousPos = root.position;
-        //Record then reset targets reached
+        //record then reset targets reached
         statsRecorder.Add("Environment/ReachedTargets", reachedTargets);
         reachedTargets = 0;
     }
@@ -98,21 +100,21 @@ public class WalkerAgent1 : WalkerAgentBase
         sensor.AddObservation(Quaternion.FromToRotation(root.forward, walkingDirectionGoal.forward));
         sensor.AddObservation(Quaternion.FromToRotation(head.forward, walkingDirectionGoal.forward));
 
-        //Position of target position relative to cube
+        //position of target position relative to cube
         sensor.AddObservation(walkingDirectionGoal.InverseTransformPoint(targetController.transform.position));
     }
 
     public override void CollectObservationBodyPart(VectorSensor sensor, Bodypart bp)
     {
-        //GROUND CHECK
+        //ground check
         sensor.AddObservation(bp.groundContact.touchingGround); // Is this bp touching the ground
 
-        //Get velocities in the context of our orientation cube's space
-        //Note: You can get these velocities in world space as well but it may not train as well.
+        //get velocities in the context of our orientation cube's space
+        //note: You can get these velocities in world space as well but it may not train as well.
         sensor.AddObservation(walkingDirectionGoal.InverseTransformDirection(bp.rb.velocity));
         sensor.AddObservation(walkingDirectionGoal.InverseTransformDirection(bp.rb.angularVelocity));
 
-        //Get position relative to hips in the context of our orientation cube's space
+        //get position relative to hips in the context of our orientation cube's space
         sensor.AddObservation(walkingDirectionGoal.InverseTransformDirection(bp.rb.position - root.position));
 
         if (bp.rb.transform != root && bp.dof.sqrMagnitude > 0)
@@ -124,9 +126,9 @@ public class WalkerAgent1 : WalkerAgentBase
 
     public override float CalculateReward()
     {
-        // Set reward for this step according to mixture of the following elements.
+        // set reward for this step according to mixture of the following elements.
         // a. Match target speed
-        //This reward will approach 1 if it matches perfectly and approach zero as it deviates
+        //this reward will approach 1 if it matches perfectly and approach zero as it deviates
         var matchSpeedReward = GetMatchingVelocityReward();
 
         //Check for NaNs
@@ -142,10 +144,10 @@ public class WalkerAgent1 : WalkerAgentBase
         }
 
         // b. Rotation alignment with target direction.
-        //This reward will approach 1 if it faces the target direction perfectly and approach zero as it deviates
+        //this reward will approach 1 if it faces the target direction perfectly and approach zero as it deviates
         var lookAtTargetReward = GetLookAtTargetReward();
 
-        //Check for NaNs
+        //check for NaNs
         if (float.IsNaN(lookAtTargetReward))
         {
             throw new ArgumentException(
@@ -183,14 +185,14 @@ public class WalkerAgent1 : WalkerAgentBase
 
     private float GetDistanceMovedInTargetDirection()
     {
-        // Calculate the displacement vector
+        //calculate the displacement vector
         Vector3 currentPos = root.position;
         Vector3 displacement = currentPos - previousPos;
 
-        // Project the displacement vector onto the goal direction vector
+        //project the displacement vector onto the goal direction vector
         float movementInTargetDirection = Vector3.Dot(displacement, walkingDirectionGoal.forward);
 
-        // Update the previous position for the next frame
+        //update the previous position for the next frame
         previousPos = currentPos;
         return movementInTargetDirection;
     }
@@ -215,15 +217,12 @@ public class WalkerAgent1 : WalkerAgentBase
     {
         Vector3 velSum = Vector3.zero;
 
-        //ALL RBS
-        int numOfRb = 0;
         foreach (Bodypart bp in bodyParts)
         {
-            numOfRb++;
             velSum += bp.rb.velocity;
         }
 
-        var avgVel = velSum / numOfRb;
+        var avgVel = velSum / bodyParts.Count;
         return avgVel;
     }
 }
