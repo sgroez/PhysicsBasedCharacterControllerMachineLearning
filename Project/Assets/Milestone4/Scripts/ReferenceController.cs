@@ -88,14 +88,4 @@ public class ReferenceController : MonoBehaviour
         }
         return centerOfMass;
     }
-
-    public Vector3 CalculateAvgVelocity()
-    {
-        Vector3 sum = Vector3.zero;
-        foreach (ReferenceBodypart rbp in referenceBodyparts)
-        {
-            sum += rbp.velocity;
-        }
-        return sum / referenceBodyparts.Count;
-    }
 }

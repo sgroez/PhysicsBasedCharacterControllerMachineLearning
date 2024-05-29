@@ -23,10 +23,6 @@ public class WalkerAgent4 : WalkerAgent1
     public override void UpdateEnvVariablesOnFixedUpdate()
     {
         base.UpdateEnvVariablesOnFixedUpdate();
-        Vector3 avgRefVelocity = referenceController.CalculateAvgVelocity();
-        float avgRefVelocityToTarget = avgRefVelocity.z;
-        walkingSpeed = avgRefVelocityToTarget > 0 ? avgRefVelocityToTarget : 0.1f;
-        statsRecorder.Add("Environment/WalkingSpeed", walkingSpeed);
     }
 
     public override void InitEnvParamCallbacks()

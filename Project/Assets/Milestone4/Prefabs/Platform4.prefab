@@ -3181,7 +3181,7 @@ MonoBehaviour:
   head: {fileID: 5707975928282527492}
   targetController: {fileID: 4213151584313627305}
   randomizeWalkingSpeed: 0
-  maxWalkingSpeed: 10
+  maxWalkingSpeed: 1.72
   reachedTargets: 0
   referenceController: {fileID: 654291674880244810}
   handL: {fileID: 4362514051457775177}

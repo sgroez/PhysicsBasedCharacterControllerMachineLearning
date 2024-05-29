@@ -60,7 +60,7 @@ public class WalkerAgent1 : WalkerAgentBase
             walkingSpeed = maxWalkingSpeed;
         }
         //record walking speed stats
-        statsRecorder.Add("Environment/walkingSpeed", walkingSpeed);
+        statsRecorder.Add("Environment/WalkingSpeed", walkingSpeed);
         //record then reset distance moved in target direction
         statsRecorder.Add("Environment/DistanceMovedInTargetDirection", distanceMovedInTargetDirection);
         distanceMovedInTargetDirection = 0f;
