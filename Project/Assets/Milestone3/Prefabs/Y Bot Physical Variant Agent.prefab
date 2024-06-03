@@ -317,7 +317,7 @@ PrefabInstance:
       addedObject: {fileID: 3817448943308824833}
     - targetCorrespondingSourceObject: {fileID: 6298147197401951604, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8327758520247034249}
+      addedObject: {fileID: 7119732609181192399}
     - targetCorrespondingSourceObject: {fileID: 6298147197401951604, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4286734058835880203}
@@ -410,26 +410,6 @@ MonoBehaviour:
   penalizeGroundContact: 1
   groundContactPenalty: -1
   touchingGround: 0
---- !u!4 &486362464627722174 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5349364731761790101, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
-  m_PrefabInstance: {fileID: 5513297596603566891}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &597193031572932600 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4956929448318094547, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
-  m_PrefabInstance: {fileID: 5513297596603566891}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &794868297393836377 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5153484071274486386, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
-  m_PrefabInstance: {fileID: 5513297596603566891}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &965240381923116597 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4748504810665397534, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
-  m_PrefabInstance: {fileID: 5513297596603566891}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &980484946061559129 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4690581651490344562, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
@@ -452,11 +432,6 @@ MonoBehaviour:
   penalizeGroundContact: 1
   groundContactPenalty: -1
   touchingGround: 0
---- !u!4 &1272930373240729484 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6713021626654631079, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
-  m_PrefabInstance: {fileID: 5513297596603566891}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1536793982464389742 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6471922288218175813, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
@@ -514,7 +489,7 @@ MonoBehaviour:
   m_UseChildSensors: 1
   m_UseChildActuators: 1
   m_ObservableAttributeHandling: 0
---- !u!114 &8327758520247034249
+--- !u!114 &7119732609181192399
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -523,47 +498,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 2009917657428649567}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf3e6dcd3657b4e79a88a9892f31c90a, type: 3}
+  m_Script: {fileID: 11500000, guid: 56847c90bec014ea996f57f239716d1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 5000
-  maxWalkingSpeed: 10
-  target: {fileID: 0}
-  root: {fileID: 6532581284305767527}
-  head: {fileID: 965240381923116597}
-  handL: {fileID: 2599147333832173498}
-  handR: {fileID: 5382389167544377163}
-  bodypartTransforms:
-  - {fileID: 6532581284305767527}
-  - {fileID: 486362464627722174}
-  - {fileID: 7775384471180641441}
-  - {fileID: 597193031572932600}
-  - {fileID: 3726497638693605184}
-  - {fileID: 965240381923116597}
-  - {fileID: 5727408531912755123}
-  - {fileID: 3240060443490897676}
-  - {fileID: 8033773774828762935}
-  - {fileID: 2599147333832173498}
-  - {fileID: 1272930373240729484}
-  - {fileID: 4713066082927158824}
-  - {fileID: 8770487418317125534}
-  - {fileID: 5382389167544377163}
-  - {fileID: 8259286020309003040}
-  - {fileID: 4582713623118599625}
-  - {fileID: 8744184046063936122}
-  - {fileID: 3103860215558426141}
-  - {fileID: 6440077354094831190}
-  - {fileID: 9119409670968887736}
-  - {fileID: 794868297393836377}
-  - {fileID: 5495695202830200435}
+  MaxStep: 0
+  root: {fileID: 0}
   bpConfig:
     maxJointSpring: 40000
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  RotationRandAngle: 180
+  enableDebug: 0
+  head: {fileID: 0}
+  targetController: {fileID: 0}
+  randomizeWalkingSpeed: 0
+  maxWalkingSpeed: 0
+  reachedTargets: 0
 --- !u!114 &4286734058835880203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -600,11 +554,6 @@ MonoBehaviour:
   penalizeGroundContact: 0
   groundContactPenalty: -1
   touchingGround: 0
---- !u!4 &2599147333832173498 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7534852368264490129, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
-  m_PrefabInstance: {fileID: 5513297596603566891}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2714915249220289756 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7579131548990115831, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
@@ -627,21 +576,6 @@ MonoBehaviour:
   penalizeGroundContact: 1
   groundContactPenalty: -1
   touchingGround: 0
---- !u!4 &3103860215558426141 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7462476264297841974, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
-  m_PrefabInstance: {fileID: 5513297596603566891}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &3240060443490897676 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6950227655656719399, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
-  m_PrefabInstance: {fileID: 5513297596603566891}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &3726497638693605184 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9165959043678209131, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
-  m_PrefabInstance: {fileID: 5513297596603566891}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3879014624701474391 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8743226080203271548, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
@@ -730,26 +664,6 @@ MonoBehaviour:
   penalizeGroundContact: 0
   groundContactPenalty: -1
   touchingGround: 0
---- !u!4 &4582713623118599625 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8294006769550745314, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
-  m_PrefabInstance: {fileID: 5513297596603566891}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &4713066082927158824 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1002902307270208771, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
-  m_PrefabInstance: {fileID: 5513297596603566891}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &5382389167544377163 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 446204471634465888, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
-  m_PrefabInstance: {fileID: 5513297596603566891}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &5495695202830200435 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 56166762450855256, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
-  m_PrefabInstance: {fileID: 5513297596603566891}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5570756685424556826 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 129592033832529969, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
@@ -772,11 +686,6 @@ MonoBehaviour:
   penalizeGroundContact: 1
   groundContactPenalty: -1
   touchingGround: 0
---- !u!4 &5727408531912755123 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 286257040117042328, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
-  m_PrefabInstance: {fileID: 5513297596603566891}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6012787782856260376 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2302074251385417779, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
@@ -821,16 +730,6 @@ MonoBehaviour:
   penalizeGroundContact: 1
   groundContactPenalty: -1
   touchingGround: 0
---- !u!4 &6440077354094831190 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1575392147040775549, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
-  m_PrefabInstance: {fileID: 5513297596603566891}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &6532581284305767527 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1597457239226648396, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
-  m_PrefabInstance: {fileID: 5513297596603566891}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6598532125017525063 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1662277918803247212, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
@@ -963,11 +862,6 @@ MonoBehaviour:
   penalizeGroundContact: 1
   groundContactPenalty: -1
   touchingGround: 0
---- !u!4 &7775384471180641441 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2838565253495492490, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
-  m_PrefabInstance: {fileID: 5513297596603566891}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7860836357830465948 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2419673183707189943, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
@@ -990,16 +884,6 @@ MonoBehaviour:
   penalizeGroundContact: 0
   groundContactPenalty: -1
   touchingGround: 0
---- !u!4 &8033773774828762935 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2593677951553141788, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
-  m_PrefabInstance: {fileID: 5513297596603566891}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &8259286020309003040 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4475955792600375307, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
-  m_PrefabInstance: {fileID: 5513297596603566891}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8523847470597778448 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4236164215549044539, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
@@ -1044,11 +928,6 @@ MonoBehaviour:
   penalizeGroundContact: 1
   groundContactPenalty: -1
   touchingGround: 0
---- !u!4 &8744184046063936122 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3880625116892457297, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
-  m_PrefabInstance: {fileID: 5513297596603566891}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8752538747417316292 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3887848283258011887, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
@@ -1071,13 +950,3 @@ MonoBehaviour:
   penalizeGroundContact: 0
   groundContactPenalty: -1
   touchingGround: 0
---- !u!4 &8770487418317125534 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3833738810361986229, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
-  m_PrefabInstance: {fileID: 5513297596603566891}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &9119409670968887736 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3606693029375558291, guid: a222f36dac74c4137a1b7f899ddf4ada, type: 3}
-  m_PrefabInstance: {fileID: 5513297596603566891}
-  m_PrefabAsset: {fileID: 0}

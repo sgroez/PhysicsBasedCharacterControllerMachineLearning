@@ -30,11 +30,12 @@
 <tr><td>69_WalkerDemo</td><td>walker demo von unity unverändert (mit ausnahme des statsRecorders für details über die rewards)</td><td>lernt match velocity reward auch nur bis 0.4</td></tr>
 <tr><td>71_Milestone1_Side</td><td>milestone 1 plus look at target reward mit head.right anstatt head.forward (um seitwärtslaufen zu testen), zusätlich walking speed fix auf 1.7</td><td>hat funktioniert, aber seitwärtslaufen ist nicht sehr stabil (läuft meist nicht mehr als 1-2 schritte bevor er fällt)</td></tr>
 <tr><td>72_Milestone1_Backward</td><td>milestone 1 plus look at target reward mit -head.forward anstatt head.forward (um rückwärts laufen zu testen), zusätlich walking speed fix auf 1.7</td><td></td></tr>
-<tr><td>73_Milestone3</td><td>mixamo character trainiert mit num layers  auf 4 und fester walkingSpeed von 2</td><td>notizen</td></tr>
+<tr><td>73_Milestone3</td><td>mixamo character trainiert mit num layers  auf 4 und fester walkingSpeed von 2</td><td></td></tr>
 <tr><td>74_Milestone3</td><td>mixamo character trainiert mit hidden units auf 512 anstatt 256 und fester walkingSpeed von 2</td><td>lernt schlechter braucht evtl mehr samples (größerer buffer time horizon etc)</td></tr>
 <tr><td>75_Milestone1</td><td>milestone 1 mit neuen Kennzahlen zur Überwachung des Trainings (Distanz zurückgelegt in Richtung dem Ziel, Ziele Erreich in Episode)</td><td></td></tr>
 <tr><td>77_Milestone4</td><td>imitations lernen mit reference bodypart observations und num layers auf 4</td><td></td></tr>
-<tr><td>78_Milestone4</td><td>imitations lernen mit reference bodypart observations und num layers auf 4 und fester velocity von 1,72 (gemessen von animation)</td><td>notizen</td></tr>
+<tr><td>78_Milestone4</td><td>imitations lernen mit reference bodypart observations und num layers auf 4 und fester velocity von 1,72 (gemessen von animation)</td><td></td></tr>
 <tr><td>79_Milestone4</td><td>imitations lernen. rotationen werden automatisch von reference animation übernommen und nn fügt dann joint strength und rotation offset hinzu um bewegung physikalisch möglich zu machen (unter unity und joint Restriktionen) und Körper zu auszubalancieren</td><td></td></tr>
+<tr><td>81_Milestone3</td><td>Mixamo Charakter auf gleiche Anzahl und limits wie Walker Demo begrenzt mit default hyperparams und WalkerAgent1</td><td></td></tr>
 <tr><td>Name</td><td>beschreibung</td><td>notizen</td></tr>
 </table>

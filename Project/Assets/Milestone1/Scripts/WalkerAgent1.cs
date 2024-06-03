@@ -22,7 +22,7 @@ public class WalkerAgent1 : WalkerAgentBase
     [Space(10)]
     public bool randomizeWalkingSpeed = false;
     public float maxWalkingSpeed;
-    protected float walkingSpeed;
+    protected float walkingSpeed = 0.1f;
 
     /*
     * Environment stats
