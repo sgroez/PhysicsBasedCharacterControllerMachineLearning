@@ -1,0 +1,14 @@
+- Vergleich von Grafik Apis (OpenGl / DirectX / Vulkan)
+- Voxel Render Engine
+- Game Engine Vergleich
+- Remote Board Game (Phone / AR) 
+	- jeder Spieler hat seine spezifischen Figuren und Teile
+	- Image recognition dann visueller / audio guide um Spielplan manuell zu synchronisieren
+- Music production game
+- Online performing stage
+- VR / AR Piano learning game
+- Machine Learning Creature Behaviour
+	- What makes game worlds feel alive / world and creature simulation (rain world)
+	- Modellierung Animal Behaviour Ökosystem mit z.B. Behaviour trees (Behaviour designer)
+- ==[[Machine Learning]] based [[Animation]] / [[Character control]]
+	(physics based?, reinforcemed learning, imitation learning, humanoid 2legs or quadruped locomotion) ->  Unity, ML Agents, PyTorch, Tensorflow, active ragdolls (party animals)==

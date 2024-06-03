@@ -1,0 +1,5 @@
+$S$: State Space (collection of all states)
+$P_0$: Starting State Distribution (probabilities for each starting state)
+$A$: Action Space (collection of all actions)
+$P$: Transition Function $P_a(s,s')=Pr(s_{t+1}=s' |s_t=s,a_t=a)$ (probabilitie that action a in state s at time t will lead to s' at time t+1)
+$R$: Reward Function $R_a(s,s')$ (reward that is received after transitioning from state s to s' with action a)
