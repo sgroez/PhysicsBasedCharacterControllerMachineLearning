@@ -15,7 +15,7 @@ public class BodypartConfig
 
 }
 
-public class Bodypart
+public class Bodypart : MonoBehaviour
 {
     [Header("Body Part Info")]
     [Space(10)]
@@ -48,6 +48,7 @@ public class Bodypart
         }
         startingPos = t.position;
         startingRot = t.rotation;
+        startingRotLocal = t.localRotation;
         this.config = config;
         rb.maxAngularVelocity = config.k_MaxAngularVelocity;
 
@@ -97,6 +98,24 @@ public class Bodypart
 
     public void SetJointTargetRotation(float x, float y, float z)
     {
+        Vector3 targetRotationEuler = CalculateJointTargetRotationEuler(x, y, z);
+        joint.targetRotation = Quaternion.Euler(targetRotationEuler);
+    }
+
+    public void SetJointStrength(float strength)
+    {
+        var rawVal = (strength + 1f) * 0.5f * config.maxJointForceLimit;
+        var jd = new JointDrive
+        {
+            positionSpring = config.maxJointSpring,
+            positionDamper = config.jointDampen,
+            maximumForce = rawVal
+        };
+        joint.slerpDrive = jd;
+    }
+
+    public Vector3 CalculateJointTargetRotationEuler(float x, float y, float z)
+    {
         x = (x + 1f) * 0.5f;
         y = (y + 1f) * 0.5f;
         z = (z + 1f) * 0.5f;
@@ -110,18 +129,6 @@ public class Bodypart
         var yRot = Mathf.Lerp(-angularYLimit, angularYLimit, y);
         var zRot = Mathf.Lerp(-angularZLimit, angularZLimit, z);
 
-        joint.targetRotation = Quaternion.Euler(xRot, yRot, zRot);
-    }
-
-    public void SetJointStrength(float strength)
-    {
-        var rawVal = (strength + 1f) * 0.5f * config.maxJointForceLimit;
-        var jd = new JointDrive
-        {
-            positionSpring = config.maxJointSpring,
-            positionDamper = config.jointDampen,
-            maximumForce = rawVal
-        };
-        joint.slerpDrive = jd;
+        return new Vector3(xRot, yRot, zRot);
     }
 }

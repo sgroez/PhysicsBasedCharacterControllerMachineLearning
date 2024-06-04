@@ -7,7 +7,7 @@ using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 using Random = UnityEngine.Random;
 
-public class WalkerAgent4 : WalkerAgent1
+public class WalkerAgent4 : WalkerAgentBase
 {
     [Header("Reference Controller To Match Reference Motion From")]
     [Space(10)]
@@ -20,27 +20,28 @@ public class WalkerAgent4 : WalkerAgent1
     public Transform footL;
     public Transform footR;
 
-    public override void UpdateEnvVariablesOnFixedUpdate()
+    private Vector3 previousPos;
+    private float distanceMovedInTargetDirection;
+
+    public override void UpdateEnvVariablesOnEpisode()
     {
-        base.UpdateEnvVariablesOnFixedUpdate();
+        //record then reset distance moved in target direction
+        statsRecorder.Add("Environment/DistanceMovedInTargetDirection", distanceMovedInTargetDirection);
+        distanceMovedInTargetDirection = 0f;
+        previousPos = root.position;
     }
 
-    public override void InitEnvParamCallbacks()
+    public override void UpdateEnvVariablesOnFixedUpdate()
     {
-        //remove walking speed env parameter callback
+        distanceMovedInTargetDirection += GetDistanceMovedInTargetDirection();
     }
 
     public override void RandomiseStartPositions()
     {
         //init reference animation at random point
         referenceController.ResetReference();
-        //reste bodypart position and then set it to the start pose from the reference character
-        int i = 0;
-        foreach (Bodypart bp in bodyParts)
-        {
-            StartCoroutine(DelayResetBodypart(bp, referenceController.referenceBodyparts[i].transform));
-            i++;
-        }
+        //reset bodypart position and then set it to the start pose from the reference character
+        StartCoroutine(ResetBodypartsOnNextFrame());
     }
 
     /*
@@ -49,31 +50,48 @@ public class WalkerAgent4 : WalkerAgent1
     */
     public override void CollectObservationGeneral(VectorSensor sensor)
     {
-        base.CollectObservationGeneral(sensor);
-        //add phase variable to observation
-        sensor.AddObservation(referenceController.GetCurrentPhase());
-        foreach (ReferenceBodypart rbp in referenceController.referenceBodyparts)
+        for (int i = 0; i < bodyParts.Count; i++)
         {
-            CollectReferenceBodypartObservation(sensor, rbp);
+            Bodypart bp = bodyParts[i];
+            ReferenceBodypart rbp = referenceController.referenceBodyparts[i];
+            CollectBodypartObservationRelativeToReference(sensor, bp, rbp);
         }
     }
 
-    private void CollectReferenceBodypartObservation(VectorSensor sensor, ReferenceBodypart rbp)
+    /* private void CollectReferenceBodypartObservation(VectorSensor sensor, ReferenceBodypart rbp)
     {
         //ground check
         sensor.AddObservation(rbp.groundContact.touchingGround); // Is this rbp touching the ground
 
-        //get velocities in the context of our orientation cube's space
-        //note: You can get these velocities in world space as well but it may not train as well.
-        sensor.AddObservation(walkingDirectionGoal.InverseTransformDirection(rbp.velocity));
-        sensor.AddObservation(walkingDirectionGoal.InverseTransformDirection(rbp.angularVelocity));
+        sensor.AddObservation(rbp.velocity);
+        sensor.AddObservation(rbp.angularVelocity);
 
-        //get position relative to hips in the context of our orientation cube's space
-        sensor.AddObservation(walkingDirectionGoal.InverseTransformDirection(rbp.transform.position - referenceController.referenceRoot.position));
+        //get position relative to hips
+        sensor.AddObservation(rbp.transform.position - referenceController.referenceRoot.position);
 
         if (rbp.transform != referenceController.referenceRoot)
         {
             sensor.AddObservation(rbp.transform.localRotation);
+        }
+    } */
+
+    private void CollectBodypartObservationRelativeToReference(VectorSensor sensor, Bodypart bp, ReferenceBodypart rbp)
+    {
+        //ground check
+        sensor.AddObservation(bp.groundContact.touchingGround); // Is this bp touching the ground
+
+        //get velocities relative to reference
+        sensor.AddObservation(bp.rb.velocity - rbp.velocity);
+        sensor.AddObservation(bp.rb.angularVelocity - rbp.angularVelocity);
+
+        //get position relative to reference
+        sensor.AddObservation(bp.rb.position - rbp.transform.position);
+
+        if (bp.rb.transform != root)
+        {
+            //get local rotation relative to reference
+            sensor.AddObservation(Quaternion.Inverse(rbp.transform.localRotation) * bp.rb.transform.localRotation);
+            sensor.AddObservation(bp.joint.slerpDrive.maximumForce / bp.config.maxJointForceLimit);
         }
     }
 
@@ -83,10 +101,6 @@ public class WalkerAgent4 : WalkerAgent1
     */
     public override float CalculateReward()
     {
-        //get goal reward (matchWalkingSpeed and LookAtTarget Reward)
-        float goalRewardWeight = 0.6f;
-        float goalReward = base.CalculateReward();
-
         //set imitation reward weights
         float poseRewardWeight = .65f;
         float angularVelocityRewardWeight = .1f;
@@ -106,17 +120,23 @@ public class WalkerAgent4 : WalkerAgent1
         if (float.IsNaN(centerOfMassReward)) throw new ArgumentException("NaN in centerOfMassReward.");
 
         float imitationReward = poseRewardWeight * poseReward + angularVelocityRewardWeight * angularVelocityReward + endEffectorRewardWeight * endEffectorReward + centerOfMassRewardWeight * centerOfMassReward;
-        float imitationRewardWeight = 0.4f;
 
-        //combine rewards
-        return imitationRewardWeight * imitationReward + goalRewardWeight * goalReward;
+        return imitationReward;
     }
 
-    IEnumerator DelayResetBodypart(Bodypart bp, Transform referenceBone)
+    IEnumerator ResetBodypartsOnNextFrame()
     {
-        yield return new WaitForSeconds(.001f); // Wait for .001 second
-        // Code to be executed after the delay
-        bp.Reset(referenceBone.position, referenceBone.rotation);
+        //wait for the next frame
+        yield return null;
+
+        // Code to be executed on next frame
+        int i = 0;
+        foreach (Bodypart bp in bodyParts)
+        {
+            Transform referenceBone = referenceController.referenceBodyparts[i].transform;
+            bp.Reset(referenceBone.position, referenceBone.rotation);
+            i++;
+        }
     }
 
     /*
@@ -210,5 +230,35 @@ public class WalkerAgent4 : WalkerAgent1
             centerOfMass /= totalMass; // Normalize by total mass
         }
         return centerOfMass;
+    }
+
+    public override void OnActionReceived(ActionBuffers actionBuffers)
+    {
+        int index = -1;
+        var continuousActions = actionBuffers.ContinuousActions;
+
+        for (int i = 0; i < bodyParts.Count; i++)
+        {
+            Bodypart bp = bodyParts[i];
+            ReferenceBodypart rbp = referenceController.referenceBodyparts[i];
+            if (bp.rb.transform == root) continue;
+            float jointStrength = bp.dof.sqrMagnitude > 0 ? continuousActions[++index] : 0;
+            ConfigurableJointExtensions.SetTargetRotationLocal(bp.joint, rbp.transform.localRotation, bp.startingRotLocal);
+            bp.SetJointStrength(jointStrength);
+        }
+    }
+
+    private float GetDistanceMovedInTargetDirection()
+    {
+        //calculate the displacement vector
+        Vector3 currentPos = root.position;
+        Vector3 displacement = currentPos - previousPos;
+
+        //project the displacement vector onto the goal direction vector
+        float movementInTargetDirection = displacement.z;
+
+        //update the previous position for the next frame
+        previousPos = currentPos;
+        return movementInTargetDirection;
     }
 }
