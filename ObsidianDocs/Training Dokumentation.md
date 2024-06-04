@@ -37,5 +37,6 @@
 <tr><td>78_Milestone4</td><td>imitations lernen mit reference bodypart observations und num layers auf 4 und fester velocity von 1,72 (gemessen von animation)</td><td></td></tr>
 <tr><td>79_Milestone4</td><td>imitations lernen. rotationen werden automatisch von reference animation übernommen und nn fügt dann joint strength und rotation offset hinzu um bewegung physikalisch möglich zu machen (unter unity und joint Restriktionen) und Körper zu auszubalancieren</td><td></td></tr>
 <tr><td>81_Milestone3</td><td>Mixamo Charakter auf gleiche Anzahl und limits wie Walker Demo begrenzt mit default hyperparams und WalkerAgent1</td><td></td></tr>
+<tr><td>82_Milestone3</td><td>Test fixed update auf 100hz und decision request auf 50hz, zusätzlich 50 anstatt 20 envs to test speedup</td><td></td></tr>
 <tr><td>Name</td><td>beschreibung</td><td>notizen</td></tr>
 </table>
