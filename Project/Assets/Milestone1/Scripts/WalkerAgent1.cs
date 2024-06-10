@@ -76,12 +76,6 @@ public class WalkerAgent1 : WalkerAgentBase
         distanceMovedInTargetDirection += GetDistanceMovedInTargetDirection();
     }
 
-    public override void RandomiseStartPositions()
-    {
-        base.RandomiseStartPositions();
-        targetController.MoveTargetToRandomPosition();
-    }
-
     public override void CollectObservationGeneral(VectorSensor sensor)
     {
         //velocity we want to match

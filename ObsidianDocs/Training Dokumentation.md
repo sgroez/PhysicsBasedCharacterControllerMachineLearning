@@ -38,5 +38,8 @@
 <tr><td>79_Milestone4</td><td>imitations lernen. rotationen werden automatisch von reference animation übernommen und nn fügt dann joint strength und rotation offset hinzu um bewegung physikalisch möglich zu machen (unter unity und joint Restriktionen) und Körper zu auszubalancieren</td><td></td></tr>
 <tr><td>81_Milestone3</td><td>Mixamo Charakter auf gleiche Anzahl und limits wie Walker Demo begrenzt mit default hyperparams und WalkerAgent1</td><td></td></tr>
 <tr><td>82_Milestone3</td><td>Test fixed update auf 100hz und decision request auf 50hz, zusätzlich 50 anstatt 20 envs to test speedup</td><td></td></tr>
+<tr><td>83_Milestone3</td><td>Target nur respawnen wenn es erreicht wurde und beim Plaform laden einmal</td><td></td></tr>
+<tr><td>84_Milestone1</td><td>Performance Vergleich mit Walker Demo (Ziel komplett identisch)</td><td>Werte in Tensorboard identisch aber in inferenz in Unity nicht vergleichbar (schlechter)</td></tr>
+<tr><td>85_Milestone1</td><td>Gleich wie 84 aber mit 10 envs anstatt 50</td><td></td></tr>
 <tr><td>Name</td><td>beschreibung</td><td>notizen</td></tr>
 </table>

@@ -2776,7 +2776,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: 4f617ee03403e418fa03a9137d5ce7a1, type: 3}
   m_InferenceDevice: 2
   m_BehaviorType: 0
   m_BehaviorName: Walker
@@ -2799,7 +2799,7 @@ MonoBehaviour:
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 0
+  MaxStep: 5000
   root: {fileID: 4498049067740231261}
   bpConfig:
     maxJointSpring: 40000
@@ -5350,8 +5350,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3

@@ -2354,7 +2354,7 @@ MonoBehaviour:
   respawnIfTouched: 1
   endEpisodeIfTouched: 0
   agent: {fileID: 0}
-  minSpawnRadius: 1
+  minSpawnRadius: 0
   maxSpawnRadius: 9
   spawnAngle: 360
 --- !u!1 &4481731782953840721
@@ -2414,7 +2414,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 8c4107333d77b4374967e7f2e47e0735, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 330274259b4d64d7880bea6ab9975194, type: 3}
   m_InferenceDevice: 2
   m_BehaviorType: 0
   m_BehaviorName: Walker
@@ -2448,8 +2448,8 @@ MonoBehaviour:
   enableDebug: 0
   head: {fileID: 2228040516193968534}
   targetController: {fileID: 5592770691773718694}
-  randomizeWalkingSpeed: 0
-  maxWalkingSpeed: 5
+  randomizeWalkingSpeed: 1
+  maxWalkingSpeed: 10
   reachedTargets: 0
 --- !u!114 &615908649116080045
 MonoBehaviour:

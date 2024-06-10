@@ -24,6 +24,7 @@ public class TargetControllerBase : MonoBehaviour
     void OnEnable()
     {
         startingPos = transform.position;
+        MoveTargetToRandomPosition();
     }
 
     private void OnCollisionEnter(Collision col)

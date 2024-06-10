@@ -338,8 +338,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79ce1b9110a5740859b1bbe6792dbe7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnRadius: 5
-  spawnAngle: 180
+  algorithm: 1
+  minSpawnRadius: 1
+  maxSpawnRadius: 9
+  spawnAngle: 360
 --- !u!4 &1003599250
 Transform:
   m_ObjectHideFlags: 0
@@ -348,7 +350,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1003599248}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.533949, y: 9.262153, z: -5.368797}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
