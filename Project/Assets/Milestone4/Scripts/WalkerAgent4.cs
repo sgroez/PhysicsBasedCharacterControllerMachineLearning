@@ -9,12 +9,10 @@ using Random = UnityEngine.Random;
 
 public class WalkerAgent4 : WalkerAgentBase
 {
-    [Header("Reference Controller To Match Reference Motion From")]
-    [Space(10)]
+    /* [Header("Reference Controller To Match Reference Motion From")]
     public ReferenceController referenceController;
 
     [Header("End Effectors")]
-    [Space(10)]
     public Transform handL;
     public Transform handR;
     public Transform footL;
@@ -42,26 +40,26 @@ public class WalkerAgent4 : WalkerAgentBase
         referenceController.ResetReference();
         //reset bodypart position and then set it to the start pose from the reference character
         StartCoroutine(ResetBodypartsOnNextFrame());
-    }
+    } */
 
     /*
     * implemement observations (state) like defined in paper
     * https://xbpeng.github.io/projects/DeepMimic/2018_TOG_DeepMimic.pdf
     */
-    public override void CollectObservationGeneral(VectorSensor sensor)
-    {
-        for (int i = 0; i < bodyParts.Count; i++)
-        {
-            Bodypart bp = bodyParts[i];
-            ReferenceBodypart rbp = referenceController.referenceBodyparts[i];
-            CollectBodypartObservationRelativeToReference(sensor, bp, rbp);
-        }
-    }
+    /*  public override void CollectObservationGeneral(VectorSensor sensor)
+     {
+         for (int i = 0; i < bodyparts.Count; i++)
+         {
+             Bodypart bp = bodyparts[i];
+             ReferenceBodypart rbp = referenceController.referenceBodyparts[i];
+             CollectBodypartObservationRelativeToReference(sensor, bp, rbp);
+         }
+     } */
 
     /* private void CollectReferenceBodypartObservation(VectorSensor sensor, ReferenceBodypart rbp)
     {
         //ground check
-        sensor.AddObservation(rbp.groundContact.touchingGround); // Is this rbp touching the ground
+        sensor.AddObservation(rbp.touchingGround); // Is this rbp touching the ground
 
         sensor.AddObservation(rbp.velocity);
         sensor.AddObservation(rbp.angularVelocity);
@@ -75,10 +73,10 @@ public class WalkerAgent4 : WalkerAgentBase
         }
     } */
 
-    private void CollectBodypartObservationRelativeToReference(VectorSensor sensor, Bodypart bp, ReferenceBodypart rbp)
+    /* private void CollectBodypartObservationRelativeToReference(VectorSensor sensor, Bodypart bp, ReferenceBodypart rbp)
     {
         //ground check
-        sensor.AddObservation(bp.groundContact.touchingGround); // Is this bp touching the ground
+        sensor.AddObservation(bp.touchingGround); // Is this bp touching the ground
 
         //get velocities relative to reference
         sensor.AddObservation(bp.rb.velocity - rbp.velocity);
@@ -91,15 +89,15 @@ public class WalkerAgent4 : WalkerAgentBase
         {
             //get local rotation relative to reference
             sensor.AddObservation(Quaternion.Inverse(rbp.transform.localRotation) * bp.rb.transform.localRotation);
-            sensor.AddObservation(bp.joint.slerpDrive.maximumForce / bp.config.maxJointForceLimit);
+            sensor.AddObservation(bp.joint.slerpDrive.maximumForce / bp.physicsConfig.maxJointForceLimit);
         }
-    }
+    } */
 
     /*
     * combine rewards like defined in paper
     * https://xbpeng.github.io/projects/DeepMimic/2018_TOG_DeepMimic.pdf
     */
-    public override float CalculateReward()
+    /* public override float CalculateReward()
     {
         //set imitation reward weights
         float poseRewardWeight = .65f;
@@ -131,24 +129,24 @@ public class WalkerAgent4 : WalkerAgentBase
 
         // Code to be executed on next frame
         int i = 0;
-        foreach (Bodypart bp in bodyParts)
+        foreach (Bodypart bp in bodyparts)
         {
             Transform referenceBone = referenceController.referenceBodyparts[i].transform;
             bp.Reset(referenceBone.position, referenceBone.rotation);
             i++;
         }
-    }
+    } */
 
     /*
     * implemement rewards like defined in paper
     * https://xbpeng.github.io/projects/DeepMimic/2018_TOG_DeepMimic.pdf
     */
-    private float CalculatePoseReward()
+    /* private float CalculatePoseReward()
     {
         int i = 0;
         float sum = 0f;
         //sum over all bodyparts
-        foreach (Bodypart bp in bodyParts)
+        foreach (Bodypart bp in bodyparts)
         {
             //Quaternion difference
             Quaternion difference = referenceController.referenceBodyparts[i].transform.localRotation * Quaternion.Inverse(bp.rb.transform.localRotation);
@@ -167,7 +165,7 @@ public class WalkerAgent4 : WalkerAgentBase
         int i = 0;
         float sum = 0f;
         //sum over all bodyparts
-        foreach (Bodypart bp in bodyParts)
+        foreach (Bodypart bp in bodyparts)
         {
             ReferenceBodypart referenceBodypart = referenceController.referenceBodyparts[i];
             Vector3 difference = referenceBodypart.angularVelocity - bp.rb.angularVelocity;
@@ -187,7 +185,7 @@ public class WalkerAgent4 : WalkerAgentBase
         float sum = 0f;
         Transform[] endEffectors = { handL, handR, footL, footR };
         //sum over all bodyparts
-        foreach (Bodypart bp in bodyParts)
+        foreach (Bodypart bp in bodyparts)
         {
             bool isEndEffector = Array.IndexOf(endEffectors, bp.rb.transform) != -1;
             if (isEndEffector)
@@ -220,7 +218,7 @@ public class WalkerAgent4 : WalkerAgentBase
     {
         Vector3 centerOfMass = Vector3.zero;
         float totalMass = 0f;
-        foreach (Bodypart bp in bodyParts)
+        foreach (Bodypart bp in bodyparts)
         {
             centerOfMass += bp.rb.worldCenterOfMass * bp.rb.mass;
             totalMass += bp.rb.mass;
@@ -237,9 +235,9 @@ public class WalkerAgent4 : WalkerAgentBase
         int index = -1;
         var continuousActions = actionBuffers.ContinuousActions;
 
-        for (int i = 0; i < bodyParts.Count; i++)
+        for (int i = 0; i < bodyparts.Count; i++)
         {
-            Bodypart bp = bodyParts[i];
+            Bodypart bp = bodyparts[i];
             ReferenceBodypart rbp = referenceController.referenceBodyparts[i];
             if (bp.rb.transform == root) continue;
             float jointStrength = bp.dof.sqrMagnitude > 0 ? continuousActions[++index] : 0;
@@ -260,5 +258,5 @@ public class WalkerAgent4 : WalkerAgentBase
         //update the previous position for the next frame
         previousPos = currentPos;
         return movementInTargetDirection;
-    }
+    } */
 }

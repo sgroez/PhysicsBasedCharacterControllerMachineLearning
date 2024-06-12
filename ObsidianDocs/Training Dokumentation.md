@@ -40,6 +40,9 @@
 <tr><td>82_Milestone3</td><td>Test fixed update auf 100hz und decision request auf 50hz, zusätzlich 50 anstatt 20 envs to test speedup</td><td></td></tr>
 <tr><td>83_Milestone3</td><td>Target nur respawnen wenn es erreicht wurde und beim Plaform laden einmal</td><td></td></tr>
 <tr><td>84_Milestone1</td><td>Performance Vergleich mit Walker Demo (Ziel komplett identisch)</td><td>Werte in Tensorboard identisch aber in inferenz in Unity nicht vergleichbar (schlechter)</td></tr>
-<tr><td>85_Milestone1</td><td>Gleich wie 84 aber mit 10 envs anstatt 50</td><td></td></tr>
+<tr><td>85_Milestone1</td><td>Gleich wie 84 aber mit 10 envs anstatt 50</td><td>Performanz nach Tensorboard graphen identisch aber Inferenz in Unity nicht vergleichbar (schlechter)</td></tr>
+<tr><td>86_Milestone1</td><td>Rewrite mit Modulen für Erweiterbarkeit und bis auf kleine Anpassungen identisch zu Walker demo code (test training und inferenz ob identisch oder immer noch Abweichungen)</td><td>zufällig sehr guter run?</td></tr>
+<tr><td>87_Milestone1</td><td>Gleich wie 86 aber mit use compatibility true</td><td>Auch nicht besser in Inferenz (Reihenfolge ist nicht das Problem)</td></tr>
+<tr><td>88_WalkerSimple</td><td>Walker Demo Scripts mit automatischer Konfiguration der Körperteile über GetComponentsInChildren und Anpassung des Actions codes um allgemeiner einsetzbar zu sein (für verschiedene Körperstrukturen). <b>Training / Inferenz Performance Test und Vergleich mit Walker Demo</b></td><td>Inferenz funktioniert wie erwartet (gut).</td></tr>
 <tr><td>Name</td><td>beschreibung</td><td>notizen</td></tr>
 </table>

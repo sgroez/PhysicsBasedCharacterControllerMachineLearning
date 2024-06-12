@@ -14,9 +14,9 @@ enum Direction
 }
 
 
-public class WalkerAgent2_1 : WalkerAgent1
+public class WalkerAgent2_1 : Agent
 {
-    private Direction lookDirection = Direction.Forward;
+    /* private Direction lookDirection = Direction.Forward;
     public VectorSensorComponent goalSensor;
 
     public override void InitEnvParamCallbacks()
@@ -56,5 +56,5 @@ public class WalkerAgent2_1 : WalkerAgent1
         lookDirectionVector.y = 0;
         //using look direction instead of walking direction
         return (Vector3.Dot(lookDirectionVector, headForward) + 1) * .5F;
-    }
+    } */
 }

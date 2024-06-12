@@ -6,10 +6,9 @@ using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 
-public class WalkerAgent2 : WalkerAgent1
+public class WalkerAgent2 : Agent
 {
-    [Header("Target To Look At")]
-    [Space(10)]
+    /* [Header("Target To Look At")]
     public TargetControllerBase lookAtTargetController;
     private Transform lookDirectionGoal;
 
@@ -73,5 +72,5 @@ public class WalkerAgent2 : WalkerAgent1
         float lookAtTargetReward = (Vector3.Dot(lookDirectionGoal.forward, headForward) + 1) * .5F;
         statsRecorder.Add("Environment/LookAtTargetReward", lookAtTargetReward);
         return lookAtTargetReward;
-    }
+    } */
 }

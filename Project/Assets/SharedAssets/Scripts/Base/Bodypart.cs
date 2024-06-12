@@ -2,98 +2,93 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.MLAgents;
-
+using UnityEngine.Events;
 
 [System.Serializable]
-public class BodypartConfig
+public class PhysicsConfig
 {
     public float maxJointSpring = 40000f;
     public float jointDampen = 5000f;
     public float maxJointForceLimit = 20000f;
     public float k_MaxAngularVelocity = 50f;
-
 }
 
+[RequireComponent(typeof(Rigidbody))]
 public class Bodypart : MonoBehaviour
 {
-    [Header("Body Part Info")]
-    [Space(10)]
-    public ConfigurableJoint joint;
-    public Rigidbody rb;
+    [Header("Bodypart Config")]
+    public PhysicsConfig physicsConfig;
+    public bool triggerTochingGroundEvent;
+
+    [Header("Bodypart Info")]
+    public float currentStrength;
+    public bool isTouchingGround = false;
+    public UnityEvent onTouchingGround;
+
+    /*
+    * hidden script variables and references
+    */
+    [HideInInspector] public Rigidbody rb;
+    [HideInInspector] public ConfigurableJoint joint;
+
     [HideInInspector] public Vector3 startingPos;
     [HideInInspector] public Quaternion startingRot;
     [HideInInspector] public Quaternion startingRotLocal;
 
-    [HideInInspector] public BodypartConfig config;
-    [HideInInspector] public Vector3 dof = new Vector3(0f, 0f, 0f);
+    [HideInInspector] public Vector3 dof; //degrees of freedom
 
-    [Header("Ground & Target Contact")]
-    [Space(10)]
-    public GroundContact groundContact;
-
-    public Bodypart(Transform t, BodypartConfig config, Agent agent)
+    void Awake()
     {
-        if (t.TryGetComponent(out Rigidbody foundRb))
-        {
-            rb = foundRb;
-        }
-        else
-        {
-            throw new Exception("Rigidbody missing on object: " + t.name);
-        }
-        if (t.TryGetComponent(out ConfigurableJoint foundJoint))
+        //setup component references
+        rb = GetComponent<Rigidbody>();
+        if (TryGetComponent(out ConfigurableJoint foundJoint))
         {
             joint = foundJoint;
         }
-        startingPos = t.position;
-        startingRot = t.rotation;
-        startingRotLocal = t.localRotation;
-        this.config = config;
-        rb.maxAngularVelocity = config.k_MaxAngularVelocity;
+
+        //save starting position and rotations
+        startingPos = transform.position;
+        startingRot = transform.rotation;
+        startingRotLocal = transform.localRotation;
+
+        //setup rigidbody
+        rb.maxAngularVelocity = physicsConfig.k_MaxAngularVelocity;
+
+        //setup base degrees of freedom
+        dof = new Vector3(0f, 0f, 0f);
 
         if (joint)
         {
+            //setup joint
             var jd = new JointDrive
             {
-                positionSpring = config.maxJointSpring,
-                positionDamper = config.jointDampen,
-                maximumForce = config.maxJointForceLimit
+                positionSpring = physicsConfig.maxJointSpring,
+                positionDamper = physicsConfig.jointDampen,
+                maximumForce = physicsConfig.maxJointForceLimit
             };
             joint.slerpDrive = jd;
-            //calculate degrees of freedom
-            if (joint.angularXMotion != ConfigurableJointMotion.Locked)
-            {
-                dof.x = 1;
-            }
-            if (joint.angularYMotion != ConfigurableJointMotion.Locked)
-            {
-                dof.y = 1;
-            }
-            if (joint.angularZMotion != ConfigurableJointMotion.Locked)
-            {
-                dof.z = 1;
-            }
-        }
 
-        if (t.TryGetComponent(out GroundContact foundGroundContact))
-        {
-            groundContact = foundGroundContact;
-            groundContact.agent = agent;
+            //calculate degrees of freedom
+            dof.x = joint.angularXMotion != ConfigurableJointMotion.Locked ? 1 : 0;
+            dof.y = joint.angularYMotion != ConfigurableJointMotion.Locked ? 1 : 0;
+            dof.z = joint.angularZMotion != ConfigurableJointMotion.Locked ? 1 : 0;
         }
+        //setup events
+        onTouchingGround = new UnityEvent();
     }
 
-    //Reset bodypart pos, rot, velocities and contact variables
+    public void Reset()
+    {
+        Reset(startingPos, startingRot);
+    }
+
     public void Reset(Vector3 resetPos, Quaternion resetRot)
     {
         rb.transform.position = resetPos;
         rb.transform.rotation = resetRot;
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
-        if (groundContact)
-        {
-            groundContact.touchingGround = false;
-        }
+        isTouchingGround = false;
     }
 
     public void SetJointTargetRotation(float x, float y, float z)
@@ -104,14 +99,15 @@ public class Bodypart : MonoBehaviour
 
     public void SetJointStrength(float strength)
     {
-        var rawVal = (strength + 1f) * 0.5f * config.maxJointForceLimit;
+        var rawVal = (strength + 1f) * 0.5f * physicsConfig.maxJointForceLimit;
         var jd = new JointDrive
         {
-            positionSpring = config.maxJointSpring,
-            positionDamper = config.jointDampen,
+            positionSpring = physicsConfig.maxJointSpring,
+            positionDamper = physicsConfig.jointDampen,
             maximumForce = rawVal
         };
         joint.slerpDrive = jd;
+        currentStrength = jd.maximumForce;
     }
 
     public Vector3 CalculateJointTargetRotationEuler(float x, float y, float z)
@@ -130,5 +126,25 @@ public class Bodypart : MonoBehaviour
         var zRot = Mathf.Lerp(-angularZLimit, angularZLimit, z);
 
         return new Vector3(xRot, yRot, zRot);
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.transform.CompareTag("ground"))
+        {
+            isTouchingGround = true;
+            if (triggerTochingGroundEvent)
+            {
+                onTouchingGround.Invoke();
+            }
+        }
+    }
+
+    void OnCollisionExit(Collision col)
+    {
+        if (col.transform.CompareTag("ground"))
+        {
+            isTouchingGround = false;
+        }
     }
 }

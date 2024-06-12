@@ -1,11 +1,21 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 using Random = UnityEngine.Random;
 
-public class WalkerAgent : Agent
+/**********************************************************************************************
+* CHANGELOG
+* Changed bodypart configuration to find bodypart transforms using GetComponentsInChildren<Rigidbody>
+* Shortened Action Code using Loop over bodyparts (also makes it more diverse <- usable for more komplex body structures)
+* Removed direction indicator
+* Removed unused variable m_WorldDirToWalk
+* Added automated orientationCube creation
+**********************************************************************************************/
+
+public class WalkerAgentSimple : Agent
 {
     [Header("Walk Speed")]
     [Range(0.1f, 10)]
@@ -26,44 +36,65 @@ public class WalkerAgent : Agent
     //If false, the goal velocity will be walkingSpeed
     public bool randomizeWalkSpeedEachEpisode;
 
-    //The direction an agent will walk during training.
-    private Vector3 m_WorldDirToWalk = Vector3.right;
-
     [Header("Target To Walk Towards")] public Transform target; //Target the agent will walk towards during training.
 
-    [Header("Body Parts")] public Transform hips;
-    public Transform chest;
-    public Transform spine;
-    public Transform head;
-    public Transform thighL;
-    public Transform shinL;
-    public Transform footL;
-    public Transform thighR;
-    public Transform shinR;
-    public Transform footR;
-    public Transform armL;
-    public Transform forearmL;
-    public Transform handL;
-    public Transform armR;
-    public Transform forearmR;
-    public Transform handR;
+    public Dictionary<string, Transform> bodypartTransformsMap = new Dictionary<string, Transform>();
+    [HideInInspector] public Transform hips;
+    [HideInInspector] public Transform chest;
+    [HideInInspector] public Transform spine;
+    [HideInInspector] public Transform head;
+    [HideInInspector] public Transform thighL;
+    [HideInInspector] public Transform shinL;
+    [HideInInspector] public Transform footL;
+    [HideInInspector] public Transform thighR;
+    [HideInInspector] public Transform shinR;
+    [HideInInspector] public Transform footR;
+    [HideInInspector] public Transform armL;
+    [HideInInspector] public Transform forearmL;
+    [HideInInspector] public Transform handL;
+    [HideInInspector] public Transform armR;
+    [HideInInspector] public Transform forearmR;
+    [HideInInspector] public Transform handR;
 
     //This will be used as a stabilized model space reference point for observations
     //Because ragdolls can move erratically during training, using a stabilized reference transform improves learning
     OrientationCubeController m_OrientationCube;
 
-    //The indicator graphic gameobject that points towards the target
-    DirectionIndicator m_DirectionIndicator;
     JointDriveController m_JdController;
     public EnvironmentParameters m_ResetParams;
     public StatsRecorder statsRecorder;
 
     public override void Initialize()
     {
-        m_OrientationCube = GetComponentInChildren<OrientationCubeController>();
-        m_DirectionIndicator = GetComponentInChildren<DirectionIndicator>();
+        //init orientation object
+        GameObject orientationObject = new GameObject("OrientationObject");
+        orientationObject.transform.parent = transform;
+        m_OrientationCube = orientationObject.AddComponent<OrientationCubeController>();
 
-        //Setup each body part
+        //change to auto setup each body part
+        foreach (Rigidbody rb in GetComponentsInChildren<Rigidbody>())
+        {
+            bodypartTransformsMap.Add(rb.transform.name, rb.transform);
+        }
+
+        //map bodyparts to variables
+        hips = bodypartTransformsMap["hips"];
+        chest = bodypartTransformsMap["chest"];
+        spine = bodypartTransformsMap["spine"];
+        head = bodypartTransformsMap["head"];
+        thighL = bodypartTransformsMap["thighL"];
+        shinL = bodypartTransformsMap["shinL"];
+        footL = bodypartTransformsMap["footL"];
+        thighR = bodypartTransformsMap["thighR"];
+        shinR = bodypartTransformsMap["shinR"];
+        footR = bodypartTransformsMap["footR"];
+        armL = bodypartTransformsMap["upper_arm_L"];
+        forearmL = bodypartTransformsMap["lower_arm_L"];
+        handL = bodypartTransformsMap["hand_L"];
+        armR = bodypartTransformsMap["upper_arm_R"];
+        forearmR = bodypartTransformsMap["lower_arm_R"];
+        handR = bodypartTransformsMap["hand_R"];
+
         m_JdController = GetComponent<JointDriveController>();
         m_JdController.SetupBodyPart(hips);
         m_JdController.SetupBodyPart(chest);
@@ -164,51 +195,26 @@ public class WalkerAgent : Agent
 
     public override void OnActionReceived(ActionBuffers actionBuffers)
     {
-        var bpDict = m_JdController.bodyPartsDict;
-        var i = -1;
-
         var continuousActions = actionBuffers.ContinuousActions;
-        bpDict[chest].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], continuousActions[++i]);
-        bpDict[spine].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], continuousActions[++i]);
+        int i = -1;
 
-        bpDict[thighL].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
-        bpDict[thighR].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
-        bpDict[shinL].SetJointTargetRotation(continuousActions[++i], 0, 0);
-        bpDict[shinR].SetJointTargetRotation(continuousActions[++i], 0, 0);
-        bpDict[footR].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], continuousActions[++i]);
-        bpDict[footL].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], continuousActions[++i]);
-
-        bpDict[armL].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
-        bpDict[armR].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
-        bpDict[forearmL].SetJointTargetRotation(continuousActions[++i], 0, 0);
-        bpDict[forearmR].SetJointTargetRotation(continuousActions[++i], 0, 0);
-        bpDict[head].SetJointTargetRotation(continuousActions[++i], continuousActions[++i], 0);
-
-        //update joint strength settings
-        bpDict[chest].SetJointStrength(continuousActions[++i]);
-        bpDict[spine].SetJointStrength(continuousActions[++i]);
-        bpDict[head].SetJointStrength(continuousActions[++i]);
-        bpDict[thighL].SetJointStrength(continuousActions[++i]);
-        bpDict[shinL].SetJointStrength(continuousActions[++i]);
-        bpDict[footL].SetJointStrength(continuousActions[++i]);
-        bpDict[thighR].SetJointStrength(continuousActions[++i]);
-        bpDict[shinR].SetJointStrength(continuousActions[++i]);
-        bpDict[footR].SetJointStrength(continuousActions[++i]);
-        bpDict[armL].SetJointStrength(continuousActions[++i]);
-        bpDict[forearmL].SetJointStrength(continuousActions[++i]);
-        bpDict[armR].SetJointStrength(continuousActions[++i]);
-        bpDict[forearmR].SetJointStrength(continuousActions[++i]);
+        foreach (KeyValuePair<Transform, BodyPart> kvp in m_JdController.bodyPartsDict)
+        {
+            if (kvp.Key == hips || kvp.Key == handL || kvp.Key == handR) continue;
+            BodyPart bp = kvp.Value;
+            float targetRotX = bp.joint.angularXMotion != ConfigurableJointMotion.Locked ? continuousActions[++i] : 0;
+            float targetRotY = bp.joint.angularYMotion != ConfigurableJointMotion.Locked ? continuousActions[++i] : 0;
+            float targetRotZ = bp.joint.angularZMotion != ConfigurableJointMotion.Locked ? continuousActions[++i] : 0;
+            float jointStrength = continuousActions[++i];
+            bp.SetJointTargetRotation(targetRotX, targetRotY, targetRotZ);
+            bp.SetJointStrength(jointStrength);
+        }
     }
 
-    //Update OrientationCube and DirectionIndicator
+    //Update OrientationCube
     void UpdateOrientationObjects()
     {
-        m_WorldDirToWalk = target.position - hips.position;
         m_OrientationCube.UpdateOrientation(hips, target);
-        if (m_DirectionIndicator)
-        {
-            m_DirectionIndicator.MatchOrientation(m_OrientationCube.transform);
-        }
     }
 
     void FixedUpdate()
@@ -284,13 +290,5 @@ public class WalkerAgent : Agent
         //This reward will approach 1 if it matches perfectly and approach zero as it deviates
         float matchingVelocityReward = Mathf.Pow(1 - Mathf.Pow(velDeltaMagnitude / MTargetWalkingSpeed, 2), 2);
         return matchingVelocityReward;
-    }
-
-    /// <summary>
-    /// Agent touched the target
-    /// </summary>
-    public void TouchedTarget()
-    {
-        AddReward(1f);
     }
 }

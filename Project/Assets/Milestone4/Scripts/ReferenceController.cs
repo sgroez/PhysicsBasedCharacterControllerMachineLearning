@@ -5,13 +5,11 @@ using UnityEngine;
 public class ReferenceController : MonoBehaviour
 {
     [Header("Animator Of Reference Character")]
-    [Space(10)]
     public string animationName;
     public Transform referenceRoot;
     private Animator animator;
 
     [Header("Min And Max to sample phase start from")]
-    [Space(10)]
     public float phaseStartMin;
     public float phaseStartMax;
 
