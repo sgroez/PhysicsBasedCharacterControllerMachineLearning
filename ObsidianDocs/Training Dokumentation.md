@@ -44,5 +44,20 @@
 <tr><td>86_Milestone1</td><td>Rewrite mit Modulen für Erweiterbarkeit und bis auf kleine Anpassungen identisch zu Walker demo code (test training und inferenz ob identisch oder immer noch Abweichungen)</td><td>zufällig sehr guter run?</td></tr>
 <tr><td>87_Milestone1</td><td>Gleich wie 86 aber mit use compatibility true</td><td>Auch nicht besser in Inferenz (Reihenfolge ist nicht das Problem)</td></tr>
 <tr><td>88_WalkerSimple</td><td>Walker Demo Scripts mit automatischer Konfiguration der Körperteile über GetComponentsInChildren und Anpassung des Actions codes um allgemeiner einsetzbar zu sein (für verschiedene Körperstrukturen). <b>Training / Inferenz Performance Test und Vergleich mit Walker Demo</b></td><td>Inferenz funktioniert wie erwartet (gut).</td></tr>
+<tr><td>89_WalkerSimple</td><td>88_WalkerSimple mit weiteren Codeänderungen.
+* Removed direction indicator
+* Removed unused variable m_WorldDirToWalk
+* Added automated orientationCube creation
+* Changed from using JointDriveController to using BodypartSimple
+* Changed OnActionReceived to ignore all bodyparts with dof (0,0,0)
+*  Removed unused targetContact reference
+* Removed jointDriveControllerReference
+* Added physics config to BodypartSimple
+* Changed BodypartSimple class to extend MonoBehaviour
+* Moved SetupBodypart into BodypartSimple Awake function
+* Removed JointDriveController
+* Removed unnecessary Bodypart reference from Reset function
+* Added degrees of freedom variable
+* Merged Ground Contact into BodypartSimple</td><td>Inferenz funktioniert wie erwartet (gut).</td></tr>
 <tr><td>Name</td><td>beschreibung</td><td>notizen</td></tr>
 </table>

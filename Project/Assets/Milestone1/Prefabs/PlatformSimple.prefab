@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5307160671976008790}
   - component: {fileID: 6480064507158913985}
+  - component: {fileID: 3097018656634388006}
   - component: {fileID: 5680780369910478307}
   - component: {fileID: 4708586122646412358}
-  - component: {fileID: 6252408656347465711}
   m_Layer: 0
   m_Name: hand_R
   m_TagString: agent
@@ -63,6 +63,52 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
+--- !u!114 &3097018656634388006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 104626719879411284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  agent: {fileID: 0}
+  penalizeGroundContact: 1
+  touchingGround: 0
+  currentEularJointRotation: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  currentXNormalizedRot: 0
+  currentYNormalizedRot: 0
+  currentZNormalizedRot: 0
+  currentJointForce: {x: 0, y: 0, z: 0}
+  currentJointForceSqrMag: 0
+  currentJointTorque: {x: 0, y: 0, z: 0}
+  currentJointTorqueSqrMag: 0
+  jointForceCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  jointTorqueCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  dof: {x: 0, y: 0, z: 0}
 --- !u!135 &5680780369910478307
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -186,23 +232,6 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &6252408656347465711
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 104626719879411284}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
-  penalizeGroundContact: 1
-  groundContactPenalty: -1
-  touchingGround: 0
 --- !u!1 &446389718229937860
 GameObject:
   m_ObjectHideFlags: 0
@@ -296,9 +325,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2465075845497289024}
   - component: {fileID: 2416269376758253929}
+  - component: {fileID: 7705624283152954924}
   - component: {fileID: 4100191610316246705}
   - component: {fileID: 7100350134160581340}
-  - component: {fileID: 2237052077092781755}
   m_Layer: 0
   m_Name: lower_arm_R
   m_TagString: agent
@@ -350,6 +379,52 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
+--- !u!114 &7705624283152954924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260138197453293371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  agent: {fileID: 0}
+  penalizeGroundContact: 1
+  touchingGround: 0
+  currentEularJointRotation: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  currentXNormalizedRot: 0
+  currentYNormalizedRot: 0
+  currentZNormalizedRot: 0
+  currentJointForce: {x: 0, y: 0, z: 0}
+  currentJointForceSqrMag: 0
+  currentJointTorque: {x: 0, y: 0, z: 0}
+  currentJointTorqueSqrMag: 0
+  jointForceCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  jointTorqueCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  dof: {x: 0, y: 0, z: 0}
 --- !u!136 &4100191610316246705
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -475,23 +550,6 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &2237052077092781755
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1260138197453293371}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
-  penalizeGroundContact: 1
-  groundContactPenalty: -1
-  touchingGround: 0
 --- !u!1 &1284918845209338258
 GameObject:
   m_ObjectHideFlags: 0
@@ -585,9 +643,9 @@ GameObject:
   m_Component:
   - component: {fileID: 950570730396007574}
   - component: {fileID: 8506488045733431632}
+  - component: {fileID: 3917574814989898215}
   - component: {fileID: 2362690624512519243}
   - component: {fileID: 6455712608446970443}
-  - component: {fileID: 4808117105842827133}
   m_Layer: 0
   m_Name: footL
   m_TagString: agent
@@ -638,6 +696,52 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
+--- !u!114 &3917574814989898215
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294171216255874239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  agent: {fileID: 0}
+  penalizeGroundContact: 0
+  touchingGround: 0
+  currentEularJointRotation: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  currentXNormalizedRot: 0
+  currentYNormalizedRot: 0
+  currentZNormalizedRot: 0
+  currentJointForce: {x: 0, y: 0, z: 0}
+  currentJointForceSqrMag: 0
+  currentJointTorque: {x: 0, y: 0, z: 0}
+  currentJointTorqueSqrMag: 0
+  jointForceCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  jointTorqueCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  dof: {x: 0, y: 0, z: 0}
 --- !u!65 &2362690624512519243
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -761,23 +865,6 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &4808117105842827133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1294171216255874239}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 0
-  penalizeGroundContact: 0
-  groundContactPenalty: 0
-  touchingGround: 0
 --- !u!1 &1518432563952924902
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,9 +1041,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6541973516253981587}
   - component: {fileID: 7220722315663036364}
+  - component: {fileID: 6683459655997647667}
   - component: {fileID: 8126153858753906459}
   - component: {fileID: 5285613937520317590}
-  - component: {fileID: 2367713819094753494}
   m_Layer: 0
   m_Name: shinR
   m_TagString: agent
@@ -1008,6 +1095,52 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
+--- !u!114 &6683459655997647667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2158765414481785264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  agent: {fileID: 0}
+  penalizeGroundContact: 0
+  touchingGround: 0
+  currentEularJointRotation: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  currentXNormalizedRot: 0
+  currentYNormalizedRot: 0
+  currentZNormalizedRot: 0
+  currentJointForce: {x: 0, y: 0, z: 0}
+  currentJointForceSqrMag: 0
+  currentJointTorque: {x: 0, y: 0, z: 0}
+  currentJointTorqueSqrMag: 0
+  jointForceCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  jointTorqueCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  dof: {x: 0, y: 0, z: 0}
 --- !u!136 &8126153858753906459
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1133,23 +1266,6 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &2367713819094753494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2158765414481785264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 0
-  penalizeGroundContact: 0
-  groundContactPenalty: -1
-  touchingGround: 0
 --- !u!1 &2338123749042345229
 GameObject:
   m_ObjectHideFlags: 0
@@ -1348,9 +1464,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3312687633610667331}
   - component: {fileID: 8517874992287967959}
+  - component: {fileID: 4289299752696170931}
   - component: {fileID: 7129973948774716212}
   - component: {fileID: 1399012195702022554}
-  - component: {fileID: 7300677555853993722}
   m_Layer: 0
   m_Name: spine
   m_TagString: agent
@@ -1402,6 +1518,52 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
+--- !u!114 &4289299752696170931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3002114544539749552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  agent: {fileID: 0}
+  penalizeGroundContact: 1
+  touchingGround: 0
+  currentEularJointRotation: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  currentXNormalizedRot: 0
+  currentYNormalizedRot: 0
+  currentZNormalizedRot: 0
+  currentJointForce: {x: 0, y: 0, z: 0}
+  currentJointForceSqrMag: 0
+  currentJointTorque: {x: 0, y: 0, z: 0}
+  currentJointTorqueSqrMag: 0
+  jointForceCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  jointTorqueCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  dof: {x: 0, y: 0, z: 0}
 --- !u!136 &7129973948774716212
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1527,23 +1689,6 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &7300677555853993722
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3002114544539749552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
-  penalizeGroundContact: 1
-  groundContactPenalty: -1
-  touchingGround: 0
 --- !u!1 &3087409323060617145
 GameObject:
   m_ObjectHideFlags: 0
@@ -1637,9 +1782,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6945709999937834749}
   - component: {fileID: 5848686439948904387}
+  - component: {fileID: 7954986028606249025}
   - component: {fileID: 5946698024551508941}
   - component: {fileID: 7875615893399596194}
-  - component: {fileID: 1072663299128069138}
   m_Layer: 0
   m_Name: shinL
   m_TagString: agent
@@ -1691,6 +1836,52 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
+--- !u!114 &7954986028606249025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3812055780304813663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  agent: {fileID: 0}
+  penalizeGroundContact: 0
+  touchingGround: 0
+  currentEularJointRotation: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  currentXNormalizedRot: 0
+  currentYNormalizedRot: 0
+  currentZNormalizedRot: 0
+  currentJointForce: {x: 0, y: 0, z: 0}
+  currentJointForceSqrMag: 0
+  currentJointTorque: {x: 0, y: 0, z: 0}
+  currentJointTorqueSqrMag: 0
+  jointForceCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  jointTorqueCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  dof: {x: 0, y: 0, z: 0}
 --- !u!136 &5946698024551508941
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1816,23 +2007,6 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &1072663299128069138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3812055780304813663}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 0
-  penalizeGroundContact: 0
-  groundContactPenalty: -1
-  touchingGround: 0
 --- !u!1 &4538492172546517488
 GameObject:
   m_ObjectHideFlags: 0
@@ -1926,9 +2100,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8453811425891827605}
   - component: {fileID: 253887118263272775}
+  - component: {fileID: 8977238851818117039}
   - component: {fileID: 9179518885864694330}
   - component: {fileID: 3156472489022829980}
-  - component: {fileID: 5237674186278182270}
   m_Layer: 0
   m_Name: thighR
   m_TagString: agent
@@ -1980,6 +2154,52 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
+--- !u!114 &8977238851818117039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4603826750922057628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  agent: {fileID: 0}
+  penalizeGroundContact: 1
+  touchingGround: 0
+  currentEularJointRotation: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  currentXNormalizedRot: 0
+  currentYNormalizedRot: 0
+  currentZNormalizedRot: 0
+  currentJointForce: {x: 0, y: 0, z: 0}
+  currentJointForceSqrMag: 0
+  currentJointTorque: {x: 0, y: 0, z: 0}
+  currentJointTorqueSqrMag: 0
+  jointForceCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  jointTorqueCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  dof: {x: 0, y: 0, z: 0}
 --- !u!136 &9179518885864694330
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2105,23 +2325,6 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &5237674186278182270
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4603826750922057628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
-  penalizeGroundContact: 1
-  groundContactPenalty: -1
-  touchingGround: 0
 --- !u!1 &4604043080074882558
 GameObject:
   m_ObjectHideFlags: 0
@@ -2738,9 +2941,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7313142569822789619}
   - component: {fileID: 8218657644046715218}
+  - component: {fileID: 133100913719265848}
   - component: {fileID: 327690219614505727}
   - component: {fileID: 2450813642731636262}
-  - component: {fileID: 4369460815874112844}
   m_Layer: 0
   m_Name: chest
   m_TagString: agent
@@ -2794,6 +2997,52 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
+--- !u!114 &133100913719265848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5374163455623418465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  agent: {fileID: 0}
+  penalizeGroundContact: 1
+  touchingGround: 0
+  currentEularJointRotation: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  currentXNormalizedRot: 0
+  currentYNormalizedRot: 0
+  currentZNormalizedRot: 0
+  currentJointForce: {x: 0, y: 0, z: 0}
+  currentJointForceSqrMag: 0
+  currentJointTorque: {x: 0, y: 0, z: 0}
+  currentJointTorqueSqrMag: 0
+  jointForceCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  jointTorqueCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  dof: {x: 0, y: 0, z: 0}
 --- !u!136 &327690219614505727
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2919,23 +3168,6 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &4369460815874112844
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5374163455623418465}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
-  penalizeGroundContact: 1
-  groundContactPenalty: -1
-  touchingGround: 0
 --- !u!1 &5559238636529319932
 GameObject:
   m_ObjectHideFlags: 0
@@ -2946,9 +3178,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2073089962805645551}
   - component: {fileID: 3557253513331514411}
+  - component: {fileID: 7506219474166499591}
   - component: {fileID: 6896381868008775285}
   - component: {fileID: 6898686451376697889}
-  - component: {fileID: 7282592407232149149}
   m_Layer: 0
   m_Name: upper_arm_R
   m_TagString: agent
@@ -3000,6 +3232,52 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
+--- !u!114 &7506219474166499591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5559238636529319932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  agent: {fileID: 0}
+  penalizeGroundContact: 1
+  touchingGround: 0
+  currentEularJointRotation: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  currentXNormalizedRot: 0
+  currentYNormalizedRot: 0
+  currentZNormalizedRot: 0
+  currentJointForce: {x: 0, y: 0, z: 0}
+  currentJointForceSqrMag: 0
+  currentJointTorque: {x: 0, y: 0, z: 0}
+  currentJointTorqueSqrMag: 0
+  jointForceCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  jointTorqueCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  dof: {x: 0, y: 0, z: 0}
 --- !u!136 &6896381868008775285
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3125,23 +3403,6 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &7282592407232149149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5559238636529319932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
-  penalizeGroundContact: 1
-  groundContactPenalty: -1
-  touchingGround: 0
 --- !u!1 &5676038519257560764
 GameObject:
   m_ObjectHideFlags: 0
@@ -3257,9 +3518,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3794765242051477683}
   - component: {fileID: 3389748357662112136}
+  - component: {fileID: 3353665998685408094}
   - component: {fileID: 2857140504064864902}
   - component: {fileID: 4900158951803796912}
-  - component: {fileID: 4223421041050394420}
   m_Layer: 0
   m_Name: thighL
   m_TagString: agent
@@ -3311,6 +3572,52 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
+--- !u!114 &3353665998685408094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5944932683700177806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  agent: {fileID: 0}
+  penalizeGroundContact: 1
+  touchingGround: 0
+  currentEularJointRotation: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  currentXNormalizedRot: 0
+  currentYNormalizedRot: 0
+  currentZNormalizedRot: 0
+  currentJointForce: {x: 0, y: 0, z: 0}
+  currentJointForceSqrMag: 0
+  currentJointTorque: {x: 0, y: 0, z: 0}
+  currentJointTorqueSqrMag: 0
+  jointForceCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  jointTorqueCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  dof: {x: 0, y: 0, z: 0}
 --- !u!136 &2857140504064864902
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3436,23 +3743,6 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &4223421041050394420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5944932683700177806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
-  penalizeGroundContact: 1
-  groundContactPenalty: -1
-  touchingGround: 0
 --- !u!1 &5989570168732833473
 GameObject:
   m_ObjectHideFlags: 0
@@ -3464,7 +3754,6 @@ GameObject:
   - component: {fileID: 1550066226789326418}
   - component: {fileID: 6958462793693021391}
   - component: {fileID: 8661549713745291390}
-  - component: {fileID: 7593397970010349171}
   - component: {fileID: 4949537093396364951}
   m_Layer: 0
   m_Name: WalkerRagdoll
@@ -3511,7 +3800,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 884e6f05b2a8d40b087deaa3686c4ba6, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 820c9708bf53d4922899810ce51cc8a0, type: 3}
   m_InferenceDevice: 2
   m_BehaviorType: 0
   m_BehaviorName: Walker
@@ -3538,38 +3827,9 @@ MonoBehaviour:
   m_TargetWalkingSpeed: 10
   randomizeWalkSpeedEachEpisode: 1
   target: {fileID: 4232689948433085026}
-  hips: {fileID: 3614163371068779725}
-  chest: {fileID: 7313142569822789619}
-  spine: {fileID: 3312687633610667331}
+  bodyparts: []
+  root: {fileID: 3614163371068779725}
   head: {fileID: 7155909403469715205}
-  thighL: {fileID: 0}
-  shinL: {fileID: 0}
-  footL: {fileID: 0}
-  thighR: {fileID: 0}
-  shinR: {fileID: 0}
-  footR: {fileID: 0}
-  armL: {fileID: 0}
-  forearmL: {fileID: 0}
-  handL: {fileID: 0}
-  armR: {fileID: 0}
-  forearmR: {fileID: 0}
-  handR: {fileID: 0}
---- !u!114 &7593397970010349171
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5989570168732833473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b29724baddfa457da6eeab446fa49ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxJointSpring: 40000
-  jointDampen: 5000
-  maxJointForceLimit: 20000
-  bodyPartsList: []
 --- !u!114 &4949537093396364951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3594,9 +3854,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5692552671964278464}
   - component: {fileID: 1287656719880152263}
+  - component: {fileID: 835161861999771251}
   - component: {fileID: 6833162379978256859}
   - component: {fileID: 4227780205446725023}
-  - component: {fileID: 8195416704768890522}
   m_Layer: 0
   m_Name: lower_arm_L
   m_TagString: agent
@@ -3648,6 +3908,52 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
+--- !u!114 &835161861999771251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6082678852294315437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  agent: {fileID: 0}
+  penalizeGroundContact: 1
+  touchingGround: 0
+  currentEularJointRotation: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  currentXNormalizedRot: 0
+  currentYNormalizedRot: 0
+  currentZNormalizedRot: 0
+  currentJointForce: {x: 0, y: 0, z: 0}
+  currentJointForceSqrMag: 0
+  currentJointTorque: {x: 0, y: 0, z: 0}
+  currentJointTorqueSqrMag: 0
+  jointForceCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  jointTorqueCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  dof: {x: 0, y: 0, z: 0}
 --- !u!136 &6833162379978256859
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3773,23 +4079,6 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &8195416704768890522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6082678852294315437}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
-  penalizeGroundContact: 1
-  groundContactPenalty: -1
-  touchingGround: 0
 --- !u!1 &6341573143080056203
 GameObject:
   m_ObjectHideFlags: 0
@@ -3835,9 +4124,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4884190202144515837}
   - component: {fileID: 2302986861385287916}
+  - component: {fileID: 6510227851007562871}
   - component: {fileID: 6908068911707929353}
   - component: {fileID: 6186478065868260485}
-  - component: {fileID: 1933466450822643999}
   m_Layer: 0
   m_Name: footR
   m_TagString: agent
@@ -3888,6 +4177,52 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
+--- !u!114 &6510227851007562871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6789389173012606758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  agent: {fileID: 0}
+  penalizeGroundContact: 0
+  touchingGround: 0
+  currentEularJointRotation: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  currentXNormalizedRot: 0
+  currentYNormalizedRot: 0
+  currentZNormalizedRot: 0
+  currentJointForce: {x: 0, y: 0, z: 0}
+  currentJointForceSqrMag: 0
+  currentJointTorque: {x: 0, y: 0, z: 0}
+  currentJointTorqueSqrMag: 0
+  jointForceCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  jointTorqueCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  dof: {x: 0, y: 0, z: 0}
 --- !u!65 &6908068911707929353
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4011,23 +4346,6 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &1933466450822643999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6789389173012606758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 0
-  penalizeGroundContact: 0
-  groundContactPenalty: 0
-  touchingGround: 0
 --- !u!1 &6941229590983270771
 GameObject:
   m_ObjectHideFlags: 0
@@ -4178,9 +4496,9 @@ GameObject:
   m_Component:
   - component: {fileID: 9184478881255108126}
   - component: {fileID: 4988011617922195352}
+  - component: {fileID: 1688240135360285623}
   - component: {fileID: 39213676175469537}
   - component: {fileID: 2531711468897743999}
-  - component: {fileID: 3854189618841663596}
   m_Layer: 0
   m_Name: hand_L
   m_TagString: agent
@@ -4231,6 +4549,52 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
+--- !u!114 &1688240135360285623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7079830399796799584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  agent: {fileID: 0}
+  penalizeGroundContact: 1
+  touchingGround: 0
+  currentEularJointRotation: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  currentXNormalizedRot: 0
+  currentYNormalizedRot: 0
+  currentZNormalizedRot: 0
+  currentJointForce: {x: 0, y: 0, z: 0}
+  currentJointForceSqrMag: 0
+  currentJointTorque: {x: 0, y: 0, z: 0}
+  currentJointTorqueSqrMag: 0
+  jointForceCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  jointTorqueCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  dof: {x: 0, y: 0, z: 0}
 --- !u!135 &39213676175469537
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4354,23 +4718,6 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &3854189618841663596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7079830399796799584}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
-  penalizeGroundContact: 1
-  groundContactPenalty: -1
-  touchingGround: 0
 --- !u!1 &7131718955664584074
 GameObject:
   m_ObjectHideFlags: 0
@@ -4464,8 +4811,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3614163371068779725}
   - component: {fileID: 8294333871089015545}
+  - component: {fileID: 5277883565797089328}
   - component: {fileID: 300576401756538576}
-  - component: {fileID: 514211727769855866}
   m_Layer: 0
   m_Name: hips
   m_TagString: agent
@@ -4519,6 +4866,52 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
+--- !u!114 &5277883565797089328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7348384279246230530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  agent: {fileID: 0}
+  penalizeGroundContact: 1
+  touchingGround: 0
+  currentEularJointRotation: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  currentXNormalizedRot: 0
+  currentYNormalizedRot: 0
+  currentZNormalizedRot: 0
+  currentJointForce: {x: 0, y: 0, z: 0}
+  currentJointForceSqrMag: 0
+  currentJointTorque: {x: 0, y: 0, z: 0}
+  currentJointTorqueSqrMag: 0
+  jointForceCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  jointTorqueCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  dof: {x: 0, y: 0, z: 0}
 --- !u!136 &300576401756538576
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4542,23 +4935,6 @@ CapsuleCollider:
   m_Height: 0.42
   m_Direction: 0
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &514211727769855866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7348384279246230530}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
-  penalizeGroundContact: 1
-  groundContactPenalty: -1
-  touchingGround: 0
 --- !u!1 &7445112038661317859
 GameObject:
   m_ObjectHideFlags: 0
@@ -5342,9 +5718,9 @@ GameObject:
   m_Component:
   - component: {fileID: 184047216375501558}
   - component: {fileID: 4554587230017727921}
+  - component: {fileID: 2057367487469805815}
   - component: {fileID: 6004493211396378583}
   - component: {fileID: 685302409064435211}
-  - component: {fileID: 623226738045813587}
   m_Layer: 0
   m_Name: upper_arm_L
   m_TagString: agent
@@ -5396,6 +5772,52 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
+--- !u!114 &2057367487469805815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8673377005785924786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  agent: {fileID: 0}
+  penalizeGroundContact: 1
+  touchingGround: 0
+  currentEularJointRotation: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  currentXNormalizedRot: 0
+  currentYNormalizedRot: 0
+  currentZNormalizedRot: 0
+  currentJointForce: {x: 0, y: 0, z: 0}
+  currentJointForceSqrMag: 0
+  currentJointTorque: {x: 0, y: 0, z: 0}
+  currentJointTorqueSqrMag: 0
+  jointForceCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  jointTorqueCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  dof: {x: 0, y: 0, z: 0}
 --- !u!136 &6004493211396378583
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5521,23 +5943,6 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &623226738045813587
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8673377005785924786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
-  penalizeGroundContact: 1
-  groundContactPenalty: -1
-  touchingGround: 0
 --- !u!1 &8929225744695909809
 GameObject:
   m_ObjectHideFlags: 0
@@ -5548,9 +5953,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7155909403469715205}
   - component: {fileID: 4809853223156087960}
+  - component: {fileID: 7473563026539826541}
   - component: {fileID: 4694789175574781554}
   - component: {fileID: 3610939344466678269}
-  - component: {fileID: 3192925793290765466}
   m_Layer: 0
   m_Name: head
   m_TagString: agent
@@ -5601,6 +6006,52 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
+--- !u!114 &7473563026539826541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8929225744695909809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  agent: {fileID: 0}
+  penalizeGroundContact: 1
+  touchingGround: 0
+  currentEularJointRotation: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  currentXNormalizedRot: 0
+  currentYNormalizedRot: 0
+  currentZNormalizedRot: 0
+  currentJointForce: {x: 0, y: 0, z: 0}
+  currentJointForceSqrMag: 0
+  currentJointTorque: {x: 0, y: 0, z: 0}
+  currentJointTorqueSqrMag: 0
+  jointForceCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  jointTorqueCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  dof: {x: 0, y: 0, z: 0}
 --- !u!135 &4694789175574781554
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5724,20 +6175,3 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &3192925793290765466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8929225744695909809}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
-  penalizeGroundContact: 1
-  groundContactPenalty: -1
-  touchingGround: 0
