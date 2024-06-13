@@ -15,6 +15,7 @@ using Random = UnityEngine.Random;
 * Added automated orientationCube creation
 * Changed from using JointDriveController to using BodypartSimple
 * Changed OnActionReceived to ignore all bodyparts with dof (0,0,0)
+* Added Event Listener for Bodypart touching ground
 **********************************************************************************************/
 
 public class WalkerAgentSimple : Agent
@@ -74,8 +75,8 @@ public class WalkerAgentSimple : Agent
         //change to auto setup each body part
         foreach (BodypartSimple bps in root.GetComponentsInChildren<BodypartSimple>())
         {
-            //add agent reference to bodypart ground contact script
-            bps.agent = this;
+            bps.Initialize();
+            bps.onTouchingGround.AddListener(OnTouchingGround);
             bodyparts.Add(bps);
         }
 
@@ -289,5 +290,11 @@ public class WalkerAgentSimple : Agent
             lastReachedTargetTime = Time.time;
             reachedTargets++;
         }
+    }
+
+    private void OnTouchingGround()
+    {
+        SetReward(-1f);
+        EndEpisode();
     }
 }

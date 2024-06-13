@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Unity.MLAgents;
+using UnityEngine.Events;
 
 /**********************************************************************************************
 * CHANGELOG
@@ -15,6 +14,7 @@ using Unity.MLAgents;
 * Added degrees of freedom variable
 * Merged Ground Contact into BodypartSimple
 * Removed unused debug variables
+* Added Event for touching ground
 **********************************************************************************************/
 public class BodypartSimple : MonoBehaviour
 {
@@ -26,8 +26,8 @@ public class BodypartSimple : MonoBehaviour
     [HideInInspector] public Quaternion startingRot;
 
     [Header("Ground Contact")]
-    [HideInInspector] public Agent agent;
-    public bool penalizeGroundContact;
+    public bool triggerTouchingGroundEvent;
+    public UnityEvent onTouchingGround;
     public bool touchingGround;
 
     [HideInInspector] public float currentStrength;
@@ -63,6 +63,12 @@ public class BodypartSimple : MonoBehaviour
             dof.y = joint.angularYMotion != ConfigurableJointMotion.Locked ? 1 : 0;
             dof.z = joint.angularZMotion != ConfigurableJointMotion.Locked ? 1 : 0;
         }
+    }
+
+    public void Initialize()
+    {
+        //setup events
+        onTouchingGround = new UnityEvent();
     }
 
     /// <summary>
@@ -111,11 +117,6 @@ public class BodypartSimple : MonoBehaviour
         if (col.transform.CompareTag("ground"))
         {
             touchingGround = true;
-            if (penalizeGroundContact)
-            {
-                agent.SetReward(-1f);
-                agent.EndEpisode();
-            }
         }
     }
 
@@ -124,6 +125,14 @@ public class BodypartSimple : MonoBehaviour
         if (other.transform.CompareTag("ground"))
         {
             touchingGround = false;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (touchingGround && triggerTouchingGroundEvent)
+        {
+            onTouchingGround.Invoke();
         }
     }
 }

@@ -84,8 +84,10 @@ MonoBehaviour:
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  agent: {fileID: 0}
-  penalizeGroundContact: 1
+  triggerTouchingGroundEvent: 1
+  onTouchingGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
@@ -380,8 +382,10 @@ MonoBehaviour:
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  agent: {fileID: 0}
-  penalizeGroundContact: 1
+  triggerTouchingGroundEvent: 1
+  onTouchingGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
@@ -677,8 +681,10 @@ MonoBehaviour:
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  agent: {fileID: 0}
-  penalizeGroundContact: 0
+  triggerTouchingGroundEvent: 0
+  onTouchingGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
@@ -1056,8 +1062,10 @@ MonoBehaviour:
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  agent: {fileID: 0}
-  penalizeGroundContact: 0
+  triggerTouchingGroundEvent: 0
+  onTouchingGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
@@ -1459,8 +1467,10 @@ MonoBehaviour:
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  agent: {fileID: 0}
-  penalizeGroundContact: 1
+  triggerTouchingGroundEvent: 1
+  onTouchingGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
@@ -1757,8 +1767,10 @@ MonoBehaviour:
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  agent: {fileID: 0}
-  penalizeGroundContact: 0
+  triggerTouchingGroundEvent: 0
+  onTouchingGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
@@ -2055,8 +2067,10 @@ MonoBehaviour:
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  agent: {fileID: 0}
-  penalizeGroundContact: 1
+  triggerTouchingGroundEvent: 1
+  onTouchingGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
@@ -2878,8 +2892,10 @@ MonoBehaviour:
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  agent: {fileID: 0}
-  penalizeGroundContact: 1
+  triggerTouchingGroundEvent: 1
+  onTouchingGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
@@ -3093,8 +3109,10 @@ MonoBehaviour:
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  agent: {fileID: 0}
-  penalizeGroundContact: 1
+  triggerTouchingGroundEvent: 1
+  onTouchingGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
@@ -3413,8 +3431,10 @@ MonoBehaviour:
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  agent: {fileID: 0}
-  penalizeGroundContact: 1
+  triggerTouchingGroundEvent: 1
+  onTouchingGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
@@ -3730,8 +3750,10 @@ MonoBehaviour:
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  agent: {fileID: 0}
-  penalizeGroundContact: 1
+  triggerTouchingGroundEvent: 1
+  onTouchingGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
@@ -3979,8 +4001,10 @@ MonoBehaviour:
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  agent: {fileID: 0}
-  penalizeGroundContact: 0
+  triggerTouchingGroundEvent: 0
+  onTouchingGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
@@ -4331,8 +4355,10 @@ MonoBehaviour:
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  agent: {fileID: 0}
-  penalizeGroundContact: 1
+  triggerTouchingGroundEvent: 1
+  onTouchingGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
@@ -4628,8 +4654,10 @@ MonoBehaviour:
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  agent: {fileID: 0}
-  penalizeGroundContact: 1
+  triggerTouchingGroundEvent: 1
+  onTouchingGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
@@ -5514,8 +5542,10 @@ MonoBehaviour:
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  agent: {fileID: 0}
-  penalizeGroundContact: 1
+  triggerTouchingGroundEvent: 1
+  onTouchingGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
@@ -5728,8 +5758,10 @@ MonoBehaviour:
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  agent: {fileID: 0}
-  penalizeGroundContact: 1
+  triggerTouchingGroundEvent: 1
+  onTouchingGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
