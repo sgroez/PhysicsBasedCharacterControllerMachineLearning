@@ -46,11 +46,22 @@ public class WalkerAgentSimple : Agent
     public Transform head;
     public List<BodypartSimple> bodyparts = new List<BodypartSimple>();
 
+    [Header("Debug Log Stats")]
+    public bool logStats = false;
+
     //This will be used as a stabilized model space reference point for observations
     //Because ragdolls can move erratically during training, using a stabilized reference transform improves learning
     OrientationCubeController m_OrientationCube;
     public EnvironmentParameters m_ResetParams;
     public StatsRecorder statsRecorder;
+
+    /*
+    * Environment stats
+    */
+    private Vector3 previousPos;
+    private float distanceMovedInTargetDirection;
+    private int reachedTargets;
+    private float lastReachedTargetTime = 0f;
 
     public override void Initialize()
     {
@@ -58,6 +69,7 @@ public class WalkerAgentSimple : Agent
         GameObject orientationObject = new GameObject("OrientationObject");
         orientationObject.transform.parent = transform;
         m_OrientationCube = orientationObject.AddComponent<OrientationCubeController>();
+        target.GetComponent<TargetController>().onCollisionEnterEvent.AddListener(ReachedTarget);
 
         //change to auto setup each body part
         foreach (BodypartSimple bps in root.GetComponentsInChildren<BodypartSimple>())
@@ -90,6 +102,18 @@ public class WalkerAgentSimple : Agent
         //Set our goal walking speed
         MTargetWalkingSpeed =
             randomizeWalkSpeedEachEpisode ? Random.Range(0.1f, m_maxWalkingSpeed) : MTargetWalkingSpeed;
+
+        //record walking speed stats
+        statsRecorder.Add("Environment/WalkingSpeed", MTargetWalkingSpeed);
+        //record then reset distance moved in target direction
+        statsRecorder.Add("Environment/DistanceMovedInTargetDirection", distanceMovedInTargetDirection);
+        if (logStats) Debug.Log($"distance moved: {distanceMovedInTargetDirection}");
+        distanceMovedInTargetDirection = 0f;
+        previousPos = root.position;
+        //record then reset targets reached
+        statsRecorder.Add("Environment/ReachedTargets", reachedTargets);
+        if (logStats) Debug.Log($"reached targets: {reachedTargets}");
+        reachedTargets = 0;
     }
 
     /// <summary>
@@ -174,6 +198,7 @@ public class WalkerAgentSimple : Agent
     void FixedUpdate()
     {
         UpdateOrientationObjects();
+        distanceMovedInTargetDirection += GetDistanceMovedInTargetDirection();
 
         var cubeForward = m_OrientationCube.transform.forward;
 
@@ -241,5 +266,28 @@ public class WalkerAgentSimple : Agent
         //This reward will approach 1 if it matches perfectly and approach zero as it deviates
         float matchingVelocityReward = Mathf.Pow(1 - Mathf.Pow(velDeltaMagnitude / MTargetWalkingSpeed, 2), 2);
         return matchingVelocityReward;
+    }
+
+    private float GetDistanceMovedInTargetDirection()
+    {
+        //calculate the displacement vector
+        Vector3 currentPos = root.position;
+        Vector3 displacement = currentPos - previousPos;
+
+        //project the displacement vector onto the goal direction vector
+        float movementInTargetDirection = Vector3.Dot(displacement, m_OrientationCube.transform.forward);
+
+        //update the previous position for the next frame
+        previousPos = currentPos;
+        return movementInTargetDirection;
+    }
+
+    private void ReachedTarget(Collision collision)
+    {
+        if (lastReachedTargetTime + 0.1f <= Time.time)
+        {
+            lastReachedTargetTime = Time.time;
+            reachedTargets++;
+        }
     }
 }

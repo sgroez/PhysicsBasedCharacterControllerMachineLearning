@@ -3630,6 +3630,7 @@ MonoBehaviour:
   root: {fileID: 3614163371068779725}
   head: {fileID: 7155909403469715205}
   bodyparts: []
+  logStats: 0
 --- !u!114 &4949537093396364951
 MonoBehaviour:
   m_ObjectHideFlags: 0
