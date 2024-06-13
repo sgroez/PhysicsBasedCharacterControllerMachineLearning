@@ -14,6 +14,7 @@ using Unity.MLAgents;
 * Removed unnecessary Bodypart reference from Reset function
 * Added degrees of freedom variable
 * Merged Ground Contact into BodypartSimple
+* Removed unused debug variables
 **********************************************************************************************/
 public class BodypartSimple : MonoBehaviour
 {
@@ -29,22 +30,7 @@ public class BodypartSimple : MonoBehaviour
     public bool penalizeGroundContact;
     public bool touchingGround;
 
-    [Header("Current Joint Settings")]
-    public Vector3 currentEularJointRotation;
-
     [HideInInspector] public float currentStrength;
-    public float currentXNormalizedRot;
-    public float currentYNormalizedRot;
-    public float currentZNormalizedRot;
-
-    [Header("Other Debug Info")]
-    public Vector3 currentJointForce;
-    public float currentJointForceSqrMag;
-    public Vector3 currentJointTorque;
-    public float currentJointTorqueSqrMag;
-    public AnimationCurve jointForceCurve = new AnimationCurve();
-    public AnimationCurve jointTorqueCurve = new AnimationCurve();
-
     [HideInInspector] public Vector3 dof; //degrees of freedom
 
     void Awake()
@@ -104,13 +90,7 @@ public class BodypartSimple : MonoBehaviour
         var yRot = Mathf.Lerp(-joint.angularYLimit.limit, joint.angularYLimit.limit, y);
         var zRot = Mathf.Lerp(-joint.angularZLimit.limit, joint.angularZLimit.limit, z);
 
-        currentXNormalizedRot =
-            Mathf.InverseLerp(joint.lowAngularXLimit.limit, joint.highAngularXLimit.limit, xRot);
-        currentYNormalizedRot = Mathf.InverseLerp(-joint.angularYLimit.limit, joint.angularYLimit.limit, yRot);
-        currentZNormalizedRot = Mathf.InverseLerp(-joint.angularZLimit.limit, joint.angularZLimit.limit, zRot);
-
         joint.targetRotation = Quaternion.Euler(xRot, yRot, zRot);
-        currentEularJointRotation = new Vector3(xRot, yRot, zRot);
     }
 
     public void SetJointStrength(float strength)

@@ -38,10 +38,13 @@ public class WalkerAgentSimple : Agent
     //If false, the goal velocity will be walkingSpeed
     public bool randomizeWalkSpeedEachEpisode;
 
-    [Header("Target To Walk Towards")] public Transform target; //Target the agent will walk towards during training.
-    public List<BodypartSimple> bodyparts = new List<BodypartSimple>();
+    [Header("Target To Walk Towards")]
+    public Transform target;
+
+    [Header("Bodyparts")]
     public Transform root;
     public Transform head;
+    public List<BodypartSimple> bodyparts = new List<BodypartSimple>();
 
     //This will be used as a stabilized model space reference point for observations
     //Because ragdolls can move erratically during training, using a stabilized reference transform improves learning

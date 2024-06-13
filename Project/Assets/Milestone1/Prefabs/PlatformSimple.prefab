@@ -87,27 +87,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   penalizeGroundContact: 1
   touchingGround: 0
-  currentEularJointRotation: {x: 0, y: 0, z: 0}
   currentStrength: 0
-  currentXNormalizedRot: 0
-  currentYNormalizedRot: 0
-  currentZNormalizedRot: 0
-  currentJointForce: {x: 0, y: 0, z: 0}
-  currentJointForceSqrMag: 0
-  currentJointTorque: {x: 0, y: 0, z: 0}
-  currentJointTorqueSqrMag: 0
-  jointForceCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  jointTorqueCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   dof: {x: 0, y: 0, z: 0}
 --- !u!135 &5680780369910478307
 SphereCollider:
@@ -403,27 +383,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   penalizeGroundContact: 1
   touchingGround: 0
-  currentEularJointRotation: {x: 0, y: 0, z: 0}
   currentStrength: 0
-  currentXNormalizedRot: 0
-  currentYNormalizedRot: 0
-  currentZNormalizedRot: 0
-  currentJointForce: {x: 0, y: 0, z: 0}
-  currentJointForceSqrMag: 0
-  currentJointTorque: {x: 0, y: 0, z: 0}
-  currentJointTorqueSqrMag: 0
-  jointForceCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  jointTorqueCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   dof: {x: 0, y: 0, z: 0}
 --- !u!136 &4100191610316246705
 CapsuleCollider:
@@ -720,27 +680,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   penalizeGroundContact: 0
   touchingGround: 0
-  currentEularJointRotation: {x: 0, y: 0, z: 0}
   currentStrength: 0
-  currentXNormalizedRot: 0
-  currentYNormalizedRot: 0
-  currentZNormalizedRot: 0
-  currentJointForce: {x: 0, y: 0, z: 0}
-  currentJointForceSqrMag: 0
-  currentJointTorque: {x: 0, y: 0, z: 0}
-  currentJointTorqueSqrMag: 0
-  jointForceCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  jointTorqueCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   dof: {x: 0, y: 0, z: 0}
 --- !u!65 &2362690624512519243
 BoxCollider:
@@ -1119,27 +1059,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   penalizeGroundContact: 0
   touchingGround: 0
-  currentEularJointRotation: {x: 0, y: 0, z: 0}
   currentStrength: 0
-  currentXNormalizedRot: 0
-  currentYNormalizedRot: 0
-  currentZNormalizedRot: 0
-  currentJointForce: {x: 0, y: 0, z: 0}
-  currentJointForceSqrMag: 0
-  currentJointTorque: {x: 0, y: 0, z: 0}
-  currentJointTorqueSqrMag: 0
-  jointForceCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  jointTorqueCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   dof: {x: 0, y: 0, z: 0}
 --- !u!136 &8126153858753906459
 CapsuleCollider:
@@ -1542,27 +1462,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   penalizeGroundContact: 1
   touchingGround: 0
-  currentEularJointRotation: {x: 0, y: 0, z: 0}
   currentStrength: 0
-  currentXNormalizedRot: 0
-  currentYNormalizedRot: 0
-  currentZNormalizedRot: 0
-  currentJointForce: {x: 0, y: 0, z: 0}
-  currentJointForceSqrMag: 0
-  currentJointTorque: {x: 0, y: 0, z: 0}
-  currentJointTorqueSqrMag: 0
-  jointForceCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  jointTorqueCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   dof: {x: 0, y: 0, z: 0}
 --- !u!136 &7129973948774716212
 CapsuleCollider:
@@ -1860,27 +1760,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   penalizeGroundContact: 0
   touchingGround: 0
-  currentEularJointRotation: {x: 0, y: 0, z: 0}
   currentStrength: 0
-  currentXNormalizedRot: 0
-  currentYNormalizedRot: 0
-  currentZNormalizedRot: 0
-  currentJointForce: {x: 0, y: 0, z: 0}
-  currentJointForceSqrMag: 0
-  currentJointTorque: {x: 0, y: 0, z: 0}
-  currentJointTorqueSqrMag: 0
-  jointForceCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  jointTorqueCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   dof: {x: 0, y: 0, z: 0}
 --- !u!136 &5946698024551508941
 CapsuleCollider:
@@ -2178,27 +2058,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   penalizeGroundContact: 1
   touchingGround: 0
-  currentEularJointRotation: {x: 0, y: 0, z: 0}
   currentStrength: 0
-  currentXNormalizedRot: 0
-  currentYNormalizedRot: 0
-  currentZNormalizedRot: 0
-  currentJointForce: {x: 0, y: 0, z: 0}
-  currentJointForceSqrMag: 0
-  currentJointTorque: {x: 0, y: 0, z: 0}
-  currentJointTorqueSqrMag: 0
-  jointForceCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  jointTorqueCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   dof: {x: 0, y: 0, z: 0}
 --- !u!136 &9179518885864694330
 CapsuleCollider:
@@ -3021,27 +2881,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   penalizeGroundContact: 1
   touchingGround: 0
-  currentEularJointRotation: {x: 0, y: 0, z: 0}
   currentStrength: 0
-  currentXNormalizedRot: 0
-  currentYNormalizedRot: 0
-  currentZNormalizedRot: 0
-  currentJointForce: {x: 0, y: 0, z: 0}
-  currentJointForceSqrMag: 0
-  currentJointTorque: {x: 0, y: 0, z: 0}
-  currentJointTorqueSqrMag: 0
-  jointForceCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  jointTorqueCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   dof: {x: 0, y: 0, z: 0}
 --- !u!136 &327690219614505727
 CapsuleCollider:
@@ -3256,27 +3096,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   penalizeGroundContact: 1
   touchingGround: 0
-  currentEularJointRotation: {x: 0, y: 0, z: 0}
   currentStrength: 0
-  currentXNormalizedRot: 0
-  currentYNormalizedRot: 0
-  currentZNormalizedRot: 0
-  currentJointForce: {x: 0, y: 0, z: 0}
-  currentJointForceSqrMag: 0
-  currentJointTorque: {x: 0, y: 0, z: 0}
-  currentJointTorqueSqrMag: 0
-  jointForceCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  jointTorqueCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   dof: {x: 0, y: 0, z: 0}
 --- !u!136 &6896381868008775285
 CapsuleCollider:
@@ -3596,27 +3416,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   penalizeGroundContact: 1
   touchingGround: 0
-  currentEularJointRotation: {x: 0, y: 0, z: 0}
   currentStrength: 0
-  currentXNormalizedRot: 0
-  currentYNormalizedRot: 0
-  currentZNormalizedRot: 0
-  currentJointForce: {x: 0, y: 0, z: 0}
-  currentJointForceSqrMag: 0
-  currentJointTorque: {x: 0, y: 0, z: 0}
-  currentJointTorqueSqrMag: 0
-  jointForceCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  jointTorqueCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   dof: {x: 0, y: 0, z: 0}
 --- !u!136 &2857140504064864902
 CapsuleCollider:
@@ -3800,7 +3600,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 820c9708bf53d4922899810ce51cc8a0, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: f17f9e1f00ad042a682eb74e79cb0019, type: 3}
   m_InferenceDevice: 2
   m_BehaviorType: 0
   m_BehaviorName: Walker
@@ -3827,9 +3627,9 @@ MonoBehaviour:
   m_TargetWalkingSpeed: 10
   randomizeWalkSpeedEachEpisode: 1
   target: {fileID: 4232689948433085026}
-  bodyparts: []
   root: {fileID: 3614163371068779725}
   head: {fileID: 7155909403469715205}
+  bodyparts: []
 --- !u!114 &4949537093396364951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3932,27 +3732,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   penalizeGroundContact: 1
   touchingGround: 0
-  currentEularJointRotation: {x: 0, y: 0, z: 0}
   currentStrength: 0
-  currentXNormalizedRot: 0
-  currentYNormalizedRot: 0
-  currentZNormalizedRot: 0
-  currentJointForce: {x: 0, y: 0, z: 0}
-  currentJointForceSqrMag: 0
-  currentJointTorque: {x: 0, y: 0, z: 0}
-  currentJointTorqueSqrMag: 0
-  jointForceCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  jointTorqueCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   dof: {x: 0, y: 0, z: 0}
 --- !u!136 &6833162379978256859
 CapsuleCollider:
@@ -4201,27 +3981,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   penalizeGroundContact: 0
   touchingGround: 0
-  currentEularJointRotation: {x: 0, y: 0, z: 0}
   currentStrength: 0
-  currentXNormalizedRot: 0
-  currentYNormalizedRot: 0
-  currentZNormalizedRot: 0
-  currentJointForce: {x: 0, y: 0, z: 0}
-  currentJointForceSqrMag: 0
-  currentJointTorque: {x: 0, y: 0, z: 0}
-  currentJointTorqueSqrMag: 0
-  jointForceCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  jointTorqueCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   dof: {x: 0, y: 0, z: 0}
 --- !u!65 &6908068911707929353
 BoxCollider:
@@ -4573,27 +4333,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   penalizeGroundContact: 1
   touchingGround: 0
-  currentEularJointRotation: {x: 0, y: 0, z: 0}
   currentStrength: 0
-  currentXNormalizedRot: 0
-  currentYNormalizedRot: 0
-  currentZNormalizedRot: 0
-  currentJointForce: {x: 0, y: 0, z: 0}
-  currentJointForceSqrMag: 0
-  currentJointTorque: {x: 0, y: 0, z: 0}
-  currentJointTorqueSqrMag: 0
-  jointForceCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  jointTorqueCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   dof: {x: 0, y: 0, z: 0}
 --- !u!135 &39213676175469537
 SphereCollider:
@@ -4890,27 +4630,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   penalizeGroundContact: 1
   touchingGround: 0
-  currentEularJointRotation: {x: 0, y: 0, z: 0}
   currentStrength: 0
-  currentXNormalizedRot: 0
-  currentYNormalizedRot: 0
-  currentZNormalizedRot: 0
-  currentJointForce: {x: 0, y: 0, z: 0}
-  currentJointForceSqrMag: 0
-  currentJointTorque: {x: 0, y: 0, z: 0}
-  currentJointTorqueSqrMag: 0
-  jointForceCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  jointTorqueCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   dof: {x: 0, y: 0, z: 0}
 --- !u!136 &300576401756538576
 CapsuleCollider:
@@ -5796,27 +5516,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   penalizeGroundContact: 1
   touchingGround: 0
-  currentEularJointRotation: {x: 0, y: 0, z: 0}
   currentStrength: 0
-  currentXNormalizedRot: 0
-  currentYNormalizedRot: 0
-  currentZNormalizedRot: 0
-  currentJointForce: {x: 0, y: 0, z: 0}
-  currentJointForceSqrMag: 0
-  currentJointTorque: {x: 0, y: 0, z: 0}
-  currentJointTorqueSqrMag: 0
-  jointForceCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  jointTorqueCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   dof: {x: 0, y: 0, z: 0}
 --- !u!136 &6004493211396378583
 CapsuleCollider:
@@ -6030,27 +5730,7 @@ MonoBehaviour:
   agent: {fileID: 0}
   penalizeGroundContact: 1
   touchingGround: 0
-  currentEularJointRotation: {x: 0, y: 0, z: 0}
   currentStrength: 0
-  currentXNormalizedRot: 0
-  currentYNormalizedRot: 0
-  currentZNormalizedRot: 0
-  currentJointForce: {x: 0, y: 0, z: 0}
-  currentJointForceSqrMag: 0
-  currentJointTorque: {x: 0, y: 0, z: 0}
-  currentJointTorqueSqrMag: 0
-  jointForceCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  jointTorqueCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   dof: {x: 0, y: 0, z: 0}
 --- !u!135 &4694789175574781554
 SphereCollider:

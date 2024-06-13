@@ -59,5 +59,9 @@
 * Removed unnecessary Bodypart reference from Reset function
 * Added degrees of freedom variable
 * Merged Ground Contact into BodypartSimple</td><td>Inferenz funktioniert wie erwartet (gut).</td></tr>
+<tr><td>90_WalkerSimple</td><td>89_WalkerSImple mit weiteren Codeänderungen
+* Removed unused debug variables
+* Moved base Walker code to WalkerAgentSimpleBase
+* Moved Walker Move to target function to Module</td><td>Inferenz funktioniert wie erwartet (gut).</td></tr>
 <tr><td>Name</td><td>beschreibung</td><td>notizen</td></tr>
 </table>
