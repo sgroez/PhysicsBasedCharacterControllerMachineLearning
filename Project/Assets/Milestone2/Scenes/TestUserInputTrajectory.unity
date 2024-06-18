@@ -336,8 +336,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 890963e341b5b40f68ae1283d76085ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  strength: 5
-  resolution: 3
+  resolution: 5
+  moveDirection: {x: 1, y: 0, z: 0}
+  velocity: {x: 0, y: 0, z: 1}
+  lookAtDirection: {x: 0.5, y: 0, z: 0.5}
 --- !u!54 &1503135456
 Rigidbody:
   m_ObjectHideFlags: 0
