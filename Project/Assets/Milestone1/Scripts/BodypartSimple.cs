@@ -15,7 +15,10 @@ using UnityEngine.Events;
 * Merged Ground Contact into BodypartSimple
 * Removed unused debug variables
 * Added Event for touching ground
+* Added Require Component Rigidbody
 **********************************************************************************************/
+
+[RequireComponent(typeof(Rigidbody))]
 public class BodypartSimple : MonoBehaviour
 {
     [Header("Body Part Info")]

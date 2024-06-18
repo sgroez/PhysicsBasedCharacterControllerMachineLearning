@@ -16,6 +16,7 @@ using Random = UnityEngine.Random;
 * Changed from using JointDriveController to using BodypartSimple
 * Changed OnActionReceived to ignore all bodyparts with dof (0,0,0)
 * Added Event Listener for Bodypart touching ground
+* Added Check for duplicate touching ground triggers to avoid multiple episode end calls
 **********************************************************************************************/
 
 public class WalkerAgentSimple : Agent
@@ -41,10 +42,12 @@ public class WalkerAgentSimple : Agent
 
     [Header("Target To Walk Towards")]
     public Transform target;
+    public bool endEpisodeOnTargetReached = false;
 
     [Header("Bodyparts")]
     public Transform root;
     public Transform head;
+    public bool randomizeRotationOnEpsiode = true;
     public List<BodypartSimple> bodyparts = new List<BodypartSimple>();
 
     [Header("Debug Log Stats")]
@@ -96,7 +99,10 @@ public class WalkerAgentSimple : Agent
         }
 
         //Random start rotation to help generalize
-        root.rotation = Quaternion.Euler(0, Random.Range(0.0f, 360.0f), 0);
+        if (randomizeRotationOnEpsiode)
+        {
+            root.rotation = Quaternion.Euler(0, Random.Range(0.0f, 360.0f), 0);
+        }
 
         UpdateOrientationObjects();
 
@@ -289,11 +295,14 @@ public class WalkerAgentSimple : Agent
         {
             lastReachedTargetTime = Time.time;
             reachedTargets++;
+            if (endEpisodeOnTargetReached) EndEpisode();
         }
     }
 
     private void OnTouchingGround()
     {
+        //check that the episode did not start in the last step to remove duplicate calls
+        if (Academy.Instance.StepCount < 1) return;
         SetReward(-1f);
         EndEpisode();
     }
