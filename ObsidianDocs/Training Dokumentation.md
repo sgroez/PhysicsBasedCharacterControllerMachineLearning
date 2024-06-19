@@ -66,6 +66,7 @@
 <tr><td>91_WalkerSimpleLong</td><td>Test mit langer Laufbahn und nur gerade aus laufen. Versuch ob schneller besser lernt und als nächsten Schritt ob gelerntes dann zu schnellerem / besserem lernen für weitere Laufmuster mit sich bringt</td><td>lernt schnell und guten Reward aber fällt oft in Inferenz</td></tr>
 <tr><td>92_WalkerSimpleLong</td><td>91_WalkerSimpleLong mit extra ordering der bodyparts Liste um gleiche Reihenfolge zu gewährleisten und mit nur 10mil steps</td><td></td></tr>
 <tr><td>93_WalkerSimpleLong</td><td>Gleiches Environment (gleicher build wie 92) aber mit 30mil steps um training zu vergleichen. Test von step count auf epsilon und damit training Stabilität</td><td>ist das ppo training unterschiedlich je nach bodypart Reihenfolge in Observation und Action? Oder gibt es noch Reihenfolge abhängigen code im Agent / Bodypart script?</td></tr>
-<tr><td>94_WalkerSimpleLong</td><td>Gleiche wie 92 und 93 aber ohne bodypart Sortierung (standart Reihenfolge von GetComponentsInChildren) und wieder mit 10 mil max steps um kürzere trainings dauer zu testen</td><td></td></tr>
+<tr><td>94_WalkerSimpleLong</td><td>Gleiche wie 92 und 93 aber ohne bodypart Sortierung (standart Reihenfolge von GetComponentsInChildren) und wieder mit 10 mil max steps um kürzere trainings dauer zu testen</td><td>lernt in 10 mil steps gut, aber inferenz nur bei einem von 20 envs gut</td></tr>
+<tr><td>95_Milestone2</td><td>WalkerSimpleLong nach Milestone2 verschoben und fixedTimeStep auf 60hz umgestellt und decision period von 5 auf 1 timestep verkürzt</td><td></td></tr>
 <tr><td>Name</td><td>beschreibung</td><td>notizen</td></tr>
 </table>
