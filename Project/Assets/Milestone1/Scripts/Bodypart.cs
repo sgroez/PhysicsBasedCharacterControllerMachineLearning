@@ -6,20 +6,29 @@ using UnityEngine.Events;
 * CHANGELOG
 * Removed unused targetContact reference
 * Removed jointDriveControllerReference
-* Added physics config to BodypartSimple
-* Changed BodypartSimple class to extend MonoBehaviour
-* Moved SetupBodypart into BodypartSimple Awake function
+* Added physics config to Bodypart
+* Changed Bodypart class to extend MonoBehaviour
+* Moved SetupBodypart into Bodypart Awake function
 * Removed JointDriveController
 * Removed unnecessary Bodypart reference from Reset function
 * Added degrees of freedom variable
-* Merged Ground Contact into BodypartSimple
+* Merged Ground Contact into Bodypart
 * Removed unused debug variables
 * Added Event for touching ground
 * Added Require Component Rigidbody
 **********************************************************************************************/
 
+[System.Serializable]
+public class PhysicsConfig
+{
+    public float maxJointSpring = 40000f;
+    public float jointDampen = 5000f;
+    public float maxJointForceLimit = 20000f;
+    public float k_MaxAngularVelocity = 50f;
+}
+
 [RequireComponent(typeof(Rigidbody))]
-public class BodypartSimple : MonoBehaviour
+public class Bodypart : MonoBehaviour
 {
     [Header("Body Part Info")]
     public PhysicsConfig physicsConfig;

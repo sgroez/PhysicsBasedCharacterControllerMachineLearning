@@ -48,25 +48,29 @@
 * Removed direction indicator
 * Removed unused variable m_WorldDirToWalk
 * Added automated orientationCube creation
-* Changed from using JointDriveController to using BodypartSimple
+* Changed from using JointDriveController to using Bodypart
 * Changed OnActionReceived to ignore all bodyparts with dof (0,0,0)
 *  Removed unused targetContact reference
 * Removed jointDriveControllerReference
-* Added physics config to BodypartSimple
-* Changed BodypartSimple class to extend MonoBehaviour
-* Moved SetupBodypart into BodypartSimple Awake function
+* Added physics config to Bodypart
+* Changed Bodypart class to extend MonoBehaviour
+* Moved SetupBodypart into Bodypart Awake function
 * Removed JointDriveController
 * Removed unnecessary Bodypart reference from Reset function
 * Added degrees of freedom variable
-* Merged Ground Contact into BodypartSimple</td><td>Inferenz funktioniert wie erwartet (gut).</td></tr>
+* Merged Ground Contact into Bodypart</td><td>Inferenz funktioniert wie erwartet (gut).</td></tr>
 <tr><td>90_WalkerSimple</td><td>89_WalkerSImple mit weiteren Codeänderungen
 * Removed unused debug variables
-* Moved base Walker code to WalkerAgentSimpleBase
+* Moved base Walker code to WalkerAgent1Base
 * Moved Walker Move to target function to Module</td><td>Inferenz funktioniert wie erwartet (gut).</td></tr>
 <tr><td>91_WalkerSimpleLong</td><td>Test mit langer Laufbahn und nur gerade aus laufen. Versuch ob schneller besser lernt und als nächsten Schritt ob gelerntes dann zu schnellerem / besserem lernen für weitere Laufmuster mit sich bringt</td><td>lernt schnell und guten Reward aber fällt oft in Inferenz</td></tr>
 <tr><td>92_WalkerSimpleLong</td><td>91_WalkerSimpleLong mit extra ordering der bodyparts Liste um gleiche Reihenfolge zu gewährleisten und mit nur 10mil steps</td><td></td></tr>
 <tr><td>93_WalkerSimpleLong</td><td>Gleiches Environment (gleicher build wie 92) aber mit 30mil steps um training zu vergleichen. Test von step count auf epsilon und damit training Stabilität</td><td>ist das ppo training unterschiedlich je nach bodypart Reihenfolge in Observation und Action? Oder gibt es noch Reihenfolge abhängigen code im Agent / Bodypart script?</td></tr>
 <tr><td>94_WalkerSimpleLong</td><td>Gleiche wie 92 und 93 aber ohne bodypart Sortierung (standart Reihenfolge von GetComponentsInChildren) und wieder mit 10 mil max steps um kürzere trainings dauer zu testen</td><td>lernt in 10 mil steps gut, aber inferenz nur bei einem von 20 envs gut</td></tr>
-<tr><td>95_Milestone2</td><td>WalkerSimpleLong nach Milestone2 verschoben und fixedTimeStep auf 60hz umgestellt und decision period von 5 auf 1 timestep verkürzt</td><td></td></tr>
+<tr><td>95_Milestone2</td><td>WalkerSimpleLong nach Milestone2 verschoben und fixedTimeStep auf 60hz umgestellt und decision period von 5 auf 1 timestep verkürzt</td><td>läuft nicht so stabil (weit) aber sieht natürlicher aus?</td></tr>
+<tr><td>96_Milestone2</td><td>DistributedStrengthReward hinzugefügt (nähert sich 1 wenn alle Gelenkte wenig Kraft benutzen und nähert sich 0 wenn min 1 Gelenk große Kraft aufwendet)</td><td>training mit 3 Rewards multipliziert (Gesamt Reward nur hoch wenn alle 3 Teilrewards hoch sind) ist zu schwer / komplex</td></tr>
+<tr><td>97_Milestone2</td><td>Gleich wie 96 aber Rewards mit weights zusammen addiert anstatt multipliziert</td><td>endet in lokalem maximum (maximiert nur look at target reward) und optimiert bis zur maximalen episode length</td></tr>
+<tr><td>98_Milestone2</td><td>Gleich wie 97 aber mit sac als training algorithmus</td><td>lernt nicht zu laufen (nutzt LookAtReward aus)</td></tr>
+<tr><td>99_Milestone2</td><td>Gleich wie 97 mit neuen Reward weights um LookAtReward zu reduzieren</td><td>lernt DistributedStrength und LookAtTarget Reward (vermutlich vorherigen Versuche zu früh abgebrochen)</td></tr>
 <tr><td>Name</td><td>beschreibung</td><td>notizen</td></tr>
 </table>

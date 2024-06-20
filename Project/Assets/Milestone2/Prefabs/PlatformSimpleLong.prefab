@@ -173,6 +173,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   touchingGround: 0
+  currentStrengthNormalized: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
 --- !u!136 &1971322647115636594
@@ -800,6 +801,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   touchingGround: 0
+  currentStrengthNormalized: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
 --- !u!65 &7218892932697083819
@@ -1015,6 +1017,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   touchingGround: 0
+  currentStrengthNormalized: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
 --- !u!136 &7634653782286436331
@@ -1231,6 +1234,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   touchingGround: 0
+  currentStrengthNormalized: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
 --- !u!135 &9114619007052308384
@@ -1950,6 +1954,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   touchingGround: 0
+  currentStrengthNormalized: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
 --- !u!135 &5289355479897147028
@@ -2165,6 +2170,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   touchingGround: 0
+  currentStrengthNormalized: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
 --- !u!136 &2080961342815412625
@@ -2382,6 +2388,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   touchingGround: 0
+  currentStrengthNormalized: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
 --- !u!136 &2602878299535020028
@@ -2822,6 +2829,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   touchingGround: 0
+  currentStrengthNormalized: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
 --- !u!136 &1055983740293644956
@@ -3121,6 +3129,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   touchingGround: 0
+  currentStrengthNormalized: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
 --- !u!135 &6180972335635719489
@@ -3337,6 +3346,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   touchingGround: 0
+  currentStrengthNormalized: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
 --- !u!136 &2528395835821673103
@@ -3620,6 +3630,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   touchingGround: 0
+  currentStrengthNormalized: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
 --- !u!136 &129918366846674253
@@ -4169,6 +4180,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   touchingGround: 0
+  currentStrengthNormalized: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
 --- !u!136 &6255681879944998609
@@ -4468,6 +4480,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   touchingGround: 0
+  currentStrengthNormalized: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
 --- !u!65 &6005821094805372065
@@ -4683,6 +4696,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   touchingGround: 0
+  currentStrengthNormalized: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
 --- !u!136 &148131980350428988
@@ -5171,6 +5185,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   touchingGround: 0
+  currentStrengthNormalized: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
 --- !u!136 &3639826994139692191
@@ -5355,7 +5370,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: fd95f9f6c68234663a7c508b8b9afaff, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 2
   m_BehaviorType: 0
   m_BehaviorName: Walker
@@ -5658,6 +5673,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   touchingGround: 0
+  currentStrengthNormalized: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
 --- !u!136 &2072831641822043568

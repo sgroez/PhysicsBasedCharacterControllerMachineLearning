@@ -7,7 +7,7 @@ using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 using Random = UnityEngine.Random;
 
-public class WalkerAgent4 : WalkerAgentBase
+public class WalkerAgent4 : MonoBehaviour
 {
     /* [Header("Reference Controller To Match Reference Motion From")]
     public ReferenceController referenceController;

@@ -13,13 +13,13 @@ using Random = UnityEngine.Random;
 * Removed direction indicator
 * Removed unused variable m_WorldDirToWalk
 * Added automated orientationCube creation
-* Changed from using JointDriveController to using BodypartSimple
+* Changed from using JointDriveController to using Bodypart
 * Changed OnActionReceived to ignore all bodyparts with dof (0,0,0)
 * Added Event Listener for Bodypart touching ground
 * Added Check for duplicate touching ground triggers to avoid multiple episode end calls
 **********************************************************************************************/
 
-public class WalkerAgentSimple : Agent
+public class WalkerAgent1 : Agent
 {
     [Header("Walk Speed")]
     [Range(0.1f, 10)]
@@ -48,7 +48,7 @@ public class WalkerAgentSimple : Agent
     public Transform root;
     public Transform head;
     public bool randomizeRotationOnEpsiode = true;
-    public List<BodypartSimple> bodyparts = new List<BodypartSimple>();
+    public List<Bodypart> bodyparts = new List<Bodypart>();
 
     [Header("Debug Log Stats")]
     public bool logStats = false;
@@ -76,7 +76,7 @@ public class WalkerAgentSimple : Agent
         target.GetComponent<TargetController>().onCollisionEnterEvent.AddListener(ReachedTarget);
 
         //change to auto setup each body part
-        foreach (BodypartSimple bps in root.GetComponentsInChildren<BodypartSimple>())
+        foreach (Bodypart bps in root.GetComponentsInChildren<Bodypart>())
         {
             bps.Initialize();
             bps.onTouchingGround.AddListener(OnTouchingGround);
@@ -93,7 +93,7 @@ public class WalkerAgentSimple : Agent
     public override void OnEpisodeBegin()
     {
         //Reset all of the body parts
-        foreach (BodypartSimple bps in bodyparts)
+        foreach (Bodypart bps in bodyparts)
         {
             bps.Reset();
         }
@@ -126,7 +126,7 @@ public class WalkerAgentSimple : Agent
     /// <summary>
     /// Add relevant information on each body part to observations.
     /// </summary>
-    public void CollectObservationBodyPart(BodypartSimple bps, VectorSensor sensor)
+    public void CollectObservationBodyPart(Bodypart bps, VectorSensor sensor)
     {
         //GROUND CHECK
         sensor.AddObservation(bps.touchingGround); // Is this bps touching the ground
@@ -173,7 +173,7 @@ public class WalkerAgentSimple : Agent
         //Position of target position relative to cube
         sensor.AddObservation(m_OrientationCube.transform.InverseTransformPoint(target.transform.position));
 
-        foreach (BodypartSimple bps in bodyparts)
+        foreach (Bodypart bps in bodyparts)
         {
             CollectObservationBodyPart(bps, sensor);
         }
@@ -184,7 +184,7 @@ public class WalkerAgentSimple : Agent
         var continuousActions = actionBuffers.ContinuousActions;
         int i = -1;
 
-        foreach (BodypartSimple bps in bodyparts)
+        foreach (Bodypart bps in bodyparts)
         {
             if (bps.dof.sqrMagnitude <= 0) continue;
             float targetRotX = bps.joint.angularXMotion != ConfigurableJointMotion.Locked ? continuousActions[++i] : 0;
@@ -254,7 +254,7 @@ public class WalkerAgentSimple : Agent
     {
         Vector3 velSum = Vector3.zero;
 
-        foreach (BodypartSimple bps in bodyparts)
+        foreach (Bodypart bps in bodyparts)
         {
             velSum += bps.rb.velocity;
         }
