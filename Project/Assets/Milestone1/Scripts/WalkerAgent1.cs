@@ -25,7 +25,7 @@ public class WalkerAgent1 : Agent
     [Range(0.1f, 10)]
     [SerializeField]
     //The walking speed to try and achieve
-    private float m_TargetWalkingSpeed = 10;
+    protected float m_TargetWalkingSpeed = 10;
 
     public float MTargetWalkingSpeed // property
     {
@@ -33,7 +33,7 @@ public class WalkerAgent1 : Agent
         set { m_TargetWalkingSpeed = Mathf.Clamp(value, .1f, m_maxWalkingSpeed); }
     }
 
-    const float m_maxWalkingSpeed = 10; //The max walking speed
+    protected const float m_maxWalkingSpeed = 10; //The max walking speed
 
     //Should the agent sample a new goal velocity each episode?
     //If true, walkSpeed will be randomly set between zero and m_maxWalkingSpeed in OnEpisodeBegin()
@@ -55,17 +55,17 @@ public class WalkerAgent1 : Agent
 
     //This will be used as a stabilized model space reference point for observations
     //Because ragdolls can move erratically during training, using a stabilized reference transform improves learning
-    OrientationCubeController m_OrientationCube;
+    protected OrientationCubeController m_OrientationCube;
     public EnvironmentParameters m_ResetParams;
     public StatsRecorder statsRecorder;
 
     /*
     * Environment stats
     */
-    private Vector3 previousPos;
-    private float distanceMovedInTargetDirection;
-    private int reachedTargets;
-    private float lastReachedTargetTime = 0f;
+    protected Vector3 previousPos;
+    protected float distanceMovedInTargetDirection;
+    protected int reachedTargets;
+    protected float lastReachedTargetTime = 0f;
 
     public override void Initialize()
     {
@@ -197,12 +197,12 @@ public class WalkerAgent1 : Agent
     }
 
     //Update OrientationCube
-    void UpdateOrientationObjects()
+    protected virtual void UpdateOrientationObjects()
     {
         m_OrientationCube.UpdateOrientation(root, target);
     }
 
-    void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         UpdateOrientationObjects();
         distanceMovedInTargetDirection += GetDistanceMovedInTargetDirection();
@@ -275,7 +275,7 @@ public class WalkerAgent1 : Agent
         return matchingVelocityReward;
     }
 
-    private float GetDistanceMovedInTargetDirection()
+    protected float GetDistanceMovedInTargetDirection()
     {
         //calculate the displacement vector
         Vector3 currentPos = root.position;
@@ -289,7 +289,7 @@ public class WalkerAgent1 : Agent
         return movementInTargetDirection;
     }
 
-    private void ReachedTarget(Collision collision)
+    protected void ReachedTarget(Collision collision)
     {
         if (lastReachedTargetTime + 0.1f <= Time.time)
         {
@@ -299,7 +299,7 @@ public class WalkerAgent1 : Agent
         }
     }
 
-    private void OnTouchingGround()
+    protected void OnTouchingGround()
     {
         //check that the episode did not start in the last step to remove duplicate calls
         if (Academy.Instance.StepCount < 1) return;

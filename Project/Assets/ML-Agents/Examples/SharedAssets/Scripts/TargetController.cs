@@ -44,7 +44,9 @@ public class TargetController : MonoBehaviour
     public CollisionEvent onCollisionStayEvent = new CollisionEvent();
     public CollisionEvent onCollisionExitEvent = new CollisionEvent();
 
-    // Start is called before the first frame update
+    [System.Serializable] public class MovedEvent : UnityEvent<Vector3> { }
+    public MovedEvent onMovedEvent = new MovedEvent();
+
     void OnEnable()
     {
         m_startingPos = transform.position;
@@ -74,6 +76,7 @@ public class TargetController : MonoBehaviour
         var newTargetPos = m_startingPos + (Random.insideUnitSphere * spawnRadius);
         newTargetPos.y = m_startingPos.y;
         transform.position = newTargetPos;
+        onMovedEvent.Invoke(newTargetPos);
     }
 
     private void OnCollisionEnter(Collision col)

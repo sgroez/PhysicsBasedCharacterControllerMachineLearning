@@ -72,5 +72,8 @@
 <tr><td>97_Milestone2</td><td>Gleich wie 96 aber Rewards mit weights zusammen addiert anstatt multipliziert</td><td>endet in lokalem maximum (maximiert nur look at target reward) und optimiert bis zur maximalen episode length</td></tr>
 <tr><td>98_Milestone2</td><td>Gleich wie 97 aber mit sac als training algorithmus</td><td>lernt nicht zu laufen (nutzt LookAtReward aus)</td></tr>
 <tr><td>99_Milestone2</td><td>Gleich wie 97 mit neuen Reward weights um LookAtReward zu reduzieren</td><td>lernt DistributedStrength und LookAtTarget Reward (vermutlich vorherigen Versuche zu früh abgebrochen)</td></tr>
+<tr><td>100_Milestone2</td><td>Look At Target mit Winkelabweichung von agent zu target implementiert und Winkel wird über curriculum learning langsam vergößert</td><td>env parameter callback funktioniert nicht (hat Winkel bei neuer lesson nicht angepasst)</td></tr>
+<tr><td>103_Milestone2</td><td>Gleich wie 100 aber mit parameter setzen beim start einer neuen Episode</td><td>ignoriert look at target, läuft zum ziel schauen gerade aus. Evtl Ziel für LookAtTarget implementieren das erst position gewechselt wird wenn &gt; 10sek auf LookAtTarget geschaut</td></tr>
+<tr><td>104_Milestone2</td><td>Gleich wie 103 aber ohne curriculum learning. Look At Target min max angle ist fest auf 90 gestellt</td><td>notizen</td></tr>
 <tr><td>Name</td><td>beschreibung</td><td>notizen</td></tr>
 </table>
