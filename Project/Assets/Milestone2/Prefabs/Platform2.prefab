@@ -3459,8 +3459,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetController: {fileID: 8190468509212930411}
   agent: {fileID: 1422333312399032324}
-  minAngle: -90
-  maxAngle: 90
+  minAngle: -180
+  maxAngle: 180
 --- !u!1 &5944932683700177806
 GameObject:
   m_ObjectHideFlags: 0
@@ -3735,7 +3735,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 8a951278eab214c38afde0b506423e44, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 8d7128dad1a5c4db5bb41f08005bb67e, type: 3}
   m_InferenceDevice: 2
   m_BehaviorType: 0
   m_BehaviorName: Walker

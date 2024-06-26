@@ -26,4 +26,4 @@ behaviors:
     summary_freq: 30000
 environment_parameters:
   environment_count: 20.0
-  lookAngleLimit: 90.0
+  lookAngleLimit: 180.0

@@ -74,6 +74,10 @@
 <tr><td>99_Milestone2</td><td>Gleich wie 97 mit neuen Reward weights um LookAtReward zu reduzieren</td><td>lernt DistributedStrength und LookAtTarget Reward (vermutlich vorherigen Versuche zu früh abgebrochen)</td></tr>
 <tr><td>100_Milestone2</td><td>Look At Target mit Winkelabweichung von agent zu target implementiert und Winkel wird über curriculum learning langsam vergößert</td><td>env parameter callback funktioniert nicht (hat Winkel bei neuer lesson nicht angepasst)</td></tr>
 <tr><td>103_Milestone2</td><td>Gleich wie 100 aber mit parameter setzen beim start einer neuen Episode</td><td>ignoriert look at target, läuft zum ziel schauen gerade aus. Evtl Ziel für LookAtTarget implementieren das erst position gewechselt wird wenn &gt; 10sek auf LookAtTarget geschaut</td></tr>
-<tr><td>104_Milestone2</td><td>Gleich wie 103 aber ohne curriculum learning. Look At Target min max angle ist fest auf 90 gestellt</td><td>notizen</td></tr>
+<tr><td>104_Milestone2</td><td>Gleich wie 103 aber ohne curriculum learning. Look At Target min max angle ist fest auf 90 gestellt</td><td>passt look Richtung leicht an</td></tr>
+<tr><td>105_Milestone2</td><td>gleich wie 104 mit min max angle fest auf 180</td><td></td></tr>
+<tr><td>106_Milestone3</td><td>Foot Collider Fehler behoben und Nutzung von neuem Walker Agent mit Bodypart components</td><td>funktioniert ziemlich gut aber springt anstatt zu laufen (behält ein bein vorne und eins hinten und galopiert)</td></tr>
+<tr><td>108_Milestone3</td><td>Negativer Reward hinzugefügt wenn Agent nicht alle 2s das vordere Bein wechselt um galopieren zu verhindern</td><td>hat nicht funktioniert galopiert immer noch</td></tr>
+<tr><td>109_Milestone3</td><td>Interval in dem Bein gewechselt werden soll auf 1.2s reduziert und Negativer Reward linearer anstatt quadratischer anstieg</td><td></td></tr>
 <tr><td>Name</td><td>beschreibung</td><td>notizen</td></tr>
 </table>
