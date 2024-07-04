@@ -44,6 +44,7 @@ public class Bodypart : MonoBehaviour
 
     [HideInInspector] public float currentStrength;
     [HideInInspector] public Vector3 dof; //degrees of freedom
+    [HideInInspector] public float power;
 
     void Awake()
     {
@@ -146,5 +147,17 @@ public class Bodypart : MonoBehaviour
         {
             onTouchingGround.Invoke();
         }
+        if (joint)
+        {
+            power = CalculatePower();
+        }
+    }
+
+    float CalculatePower()
+    {
+        Vector3 currentTorque = joint.currentTorque;
+        Vector3 angularVel = rb.angularVelocity;
+
+        return Mathf.Abs(Vector3.Dot(currentTorque, angularVel));
     }
 }

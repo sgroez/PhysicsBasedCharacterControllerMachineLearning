@@ -13,10 +13,12 @@
 - check phase variable after animator.play
 - check out deep mimic multiple clip reward structure
 - deep mimic rewards use negative multiplication with exp function to get values from 0 to 1
-  (high value * -2 = high negative value with exp lower values get closer to 0, low value * -2 = low negative value with exp higher values <= 0 values get closer to 1)
+  (high value _ -2 = high negative value with exp lower values get closer to 0, low value _ -2 = low negative value with exp higher values <= 0 values get closer to 1)
 - deep mimic velocity reward uses finite difference to calculate velocity of kinematic reference (using earlier and or later position to calculate rate of change)
 - check side channels in mlagents to create more graphs
 - stats recorder hilft Fehler / Probleme zu entdecken während training auf server ohne grafik
 - Walker Agent lernt matchingVelocityReward nur sehr wenig (vergleichen mit unveränderter Walker demo)
 - research mixture of experts
 - test different reward dropoffs using xbpeng reward scaling
+- trägheit in unity physics
+- leistung (kraft aufwand) in episode

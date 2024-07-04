@@ -78,6 +78,7 @@
 <tr><td>105_Milestone2</td><td>gleich wie 104 mit min max angle fest auf 180</td><td></td></tr>
 <tr><td>106_Milestone3</td><td>Foot Collider Fehler behoben und Nutzung von neuem Walker Agent mit Bodypart components</td><td>funktioniert ziemlich gut aber springt anstatt zu laufen (behält ein bein vorne und eins hinten und galopiert)</td></tr>
 <tr><td>108_Milestone3</td><td>Negativer Reward hinzugefügt wenn Agent nicht alle 2s das vordere Bein wechselt um galopieren zu verhindern</td><td>hat nicht funktioniert galopiert immer noch</td></tr>
-<tr><td>109_Milestone3</td><td>Interval in dem Bein gewechselt werden soll auf 1.2s reduziert und Negativer Reward linearer anstatt quadratischer anstieg</td><td></td></tr>
+<tr><td>109_Milestone3</td><td>Interval in dem Bein gewechselt werden soll auf 1.2s reduziert und Negativer Reward linearer anstatt quadratischer anstieg</td><td>Funktioniert (galopiert nicht mehr) aber lernt nicht so einen guten Reward wie ohne bein wechsel reward</td></tr>
+<tr><td>110_Milestone3</td><td>Wie 109 mit zusätzlichem Power Save Reward</td><td></td></tr>
 <tr><td>Name</td><td>beschreibung</td><td>notizen</td></tr>
 </table>

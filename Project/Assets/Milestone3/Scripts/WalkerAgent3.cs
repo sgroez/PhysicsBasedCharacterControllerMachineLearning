@@ -36,7 +36,24 @@ public class WalkerAgent3 : WalkerAgent1
         float footSwitchReward = -Mathf.Clamp((switchDeltaTime / 4) - 0.3f, 0f, 1f);
         if (logStats && footSwitchReward < 0) Debug.Log($"foot switch reward: {footSwitchReward}, switched: {switchDeltaTime} seconds ago");
         statsRecorder.Add("Reward/FootSwitchReward", footSwitchReward);
-        AddReward(footSwitchReward);
+
+        float totalPower = GetTotalPower();
+        float powerSaveReward = -Mathf.Clamp(totalPower / 3000 - 0.05f, 0f, 1f);
+        if (logStats) Debug.Log($"power save reward: {powerSaveReward}, total: {totalPower}");
+        statsRecorder.Add("Reward/PowerSaveReward", powerSaveReward);
+
+        AddReward(Mathf.Min(footSwitchReward, powerSaveReward));
+
         base.FixedUpdate();
+    }
+
+    float GetTotalPower()
+    {
+        float totalPower = 0f;
+        foreach (Bodypart bp in bodyparts)
+        {
+            totalPower += bp.power;
+        }
+        return totalPower;
     }
 }
