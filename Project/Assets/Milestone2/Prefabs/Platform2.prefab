@@ -91,6 +91,7 @@ MonoBehaviour:
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  power: 0
 --- !u!135 &5680780369910478307
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -389,6 +390,7 @@ MonoBehaviour:
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  power: 0
 --- !u!136 &4100191610316246705
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -688,6 +690,7 @@ MonoBehaviour:
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  power: 0
 --- !u!65 &2362690624512519243
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1069,6 +1072,7 @@ MonoBehaviour:
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  power: 0
 --- !u!136 &8126153858753906459
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1474,6 +1478,7 @@ MonoBehaviour:
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  power: 0
 --- !u!136 &7129973948774716212
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1774,6 +1779,7 @@ MonoBehaviour:
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  power: 0
 --- !u!136 &5946698024551508941
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2074,6 +2080,7 @@ MonoBehaviour:
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  power: 0
 --- !u!136 &9179518885864694330
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2914,6 +2921,7 @@ MonoBehaviour:
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  power: 0
 --- !u!136 &327690219614505727
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3131,6 +3139,7 @@ MonoBehaviour:
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  power: 0
 --- !u!136 &6896381868008775285
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3553,6 +3562,7 @@ MonoBehaviour:
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  power: 0
 --- !u!136 &2857140504064864902
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3735,7 +3745,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 8d7128dad1a5c4db5bb41f08005bb67e, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 2
   m_BehaviorType: 0
   m_BehaviorName: Walker
@@ -3769,21 +3779,7 @@ MonoBehaviour:
   bodyparts: []
   logStats: 0
   lookTargetController: {fileID: 8964186769453650538}
-  onResetEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8964186769453650538}
-        m_TargetAssemblyTypeName: LookTargetController, Assembly-CSharp
-        m_MethodName: UpdateAgentPosition
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  avgLookReward: 0
 --- !u!114 &4949537093396364951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3890,6 +3886,7 @@ MonoBehaviour:
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  power: 0
 --- !u!136 &6833162379978256859
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -4142,6 +4139,7 @@ MonoBehaviour:
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  power: 0
 --- !u!65 &6908068911707929353
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4496,6 +4494,7 @@ MonoBehaviour:
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  power: 0
 --- !u!135 &39213676175469537
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4795,6 +4794,7 @@ MonoBehaviour:
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  power: 0
 --- !u!136 &300576401756538576
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5683,6 +5683,7 @@ MonoBehaviour:
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  power: 0
 --- !u!136 &6004493211396378583
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5899,6 +5900,7 @@ MonoBehaviour:
   touchingGround: 0
   currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  power: 0
 --- !u!135 &4694789175574781554
 SphereCollider:
   m_ObjectHideFlags: 0

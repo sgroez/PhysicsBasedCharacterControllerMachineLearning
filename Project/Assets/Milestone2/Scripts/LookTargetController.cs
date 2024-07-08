@@ -11,32 +11,29 @@ public class LookTargetController : MonoBehaviour
     [Header("Angle To Spawn Look Target At")]
     public float minAngle;
     public float maxAngle;
+    private float randomAngle = 0f;
 
     private Vector3 targetPosition;
-    private Vector3 agentPosition;
 
     public void UpdateTargetPosition(Vector3 newTargetPosition)
     {
         targetPosition = newTargetPosition;
+        if (agent.avgLookReward > 0.15)
+        {
+            randomAngle = Random.Range(minAngle, maxAngle);
+        }
         SetLookTarget();
     }
 
-    public void UpdateAgentPosition(Vector3 newAgentPosition)
+    void FixedUpdate()
     {
-        agentPosition = newAgentPosition;
         SetLookTarget();
     }
 
     private void SetLookTarget()
     {
-        float randomAngle = Random.Range(minAngle, maxAngle);
-
-        float radius = (agentPosition - targetPosition).magnitude;
-        if (radius == 0)
-        {
-            transform.position = agentPosition;
-            return;
-        }
+        float radius = 5f;
+        Vector3 agentPosition = agent.root.position;
 
         float initialAngleRad = Mathf.Atan2(targetPosition.z - agentPosition.z, targetPosition.x - agentPosition.x);
         float angleRad = randomAngle * Mathf.Deg2Rad;

@@ -9,10 +9,9 @@ public class WalkerAgent2 : WalkerAgent1
 {
     [Header("Target To Look Towards")]
     public LookTargetController lookTargetController;
+    [HideInInspector] public float avgLookReward = 0f;
+    float lookRewardCount = 0f;
     OrientationCubeController lookOrientationCube;
-
-    [System.Serializable] public class ResetEvent : UnityEvent<Vector3> { }
-    public ResetEvent onResetEvent = new ResetEvent();
 
     public override void Initialize()
     {
@@ -32,7 +31,8 @@ public class WalkerAgent2 : WalkerAgent1
         float angleLimit = Academy.Instance.EnvironmentParameters.GetWithDefault("lookAngleLimit", lookTargetController.maxAngle);
         lookTargetController.minAngle = -angleLimit;
         lookTargetController.maxAngle = angleLimit;
-        onResetEvent.Invoke(root.position);
+        avgLookReward = 0f;
+        lookRewardCount = 0f;
     }
 
     // added look at target position
@@ -105,6 +105,7 @@ public class WalkerAgent2 : WalkerAgent1
         var lookCubeForward = lookOrientationCube.transform.forward;
         // var lookAtTargetReward = (Vector3.Dot(cubeForward, head.forward) + 1) * .5F;
         var lookAtTargetReward = (Vector3.Dot(lookCubeForward, headForward) + 1) * .5F;
+        lookAtTargetReward = Mathf.Exp(lookAtTargetReward * 5 - 5);
         statsRecorder.Add("Reward/LookAtTargetReward", lookAtTargetReward);
 
         //Check for NaNs
@@ -117,6 +118,22 @@ public class WalkerAgent2 : WalkerAgent1
             );
         }
 
-        AddReward(matchSpeedReward * lookAtTargetReward);
+        float headTilt = head.forward.y;
+        float headTiltRewardUnclipped = 0f;
+        if (headTilt > 0)
+        {
+            headTiltRewardUnclipped = headTilt / 0.2f - 1f;
+        }
+        else if (headTilt < 0)
+        {
+            headTiltRewardUnclipped = -headTilt / 0.2f - 1f;
+        }
+        float headTiltReward = -Mathf.Clamp(headTiltRewardUnclipped, 0, 1);
+        statsRecorder.Add("Reward/HeadTiltReward", headTiltReward);
+
+        lookRewardCount++;
+        avgLookReward = avgLookReward + ((lookAtTargetReward - avgLookReward) / lookRewardCount);
+
+        AddReward(matchSpeedReward * lookAtTargetReward + headTiltReward);
     }
 }
