@@ -80,17 +80,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 1
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!135 &5680780369910478307
 SphereCollider:
@@ -379,17 +382,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 1
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!136 &4100191610316246705
 CapsuleCollider:
@@ -679,17 +685,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 0
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 0
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!65 &2362690624512519243
 BoxCollider:
@@ -1061,17 +1070,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 0
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 0
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!136 &8126153858753906459
 CapsuleCollider:
@@ -1467,17 +1479,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 1
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!136 &7129973948774716212
 CapsuleCollider:
@@ -1768,17 +1783,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 0
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 0
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!136 &5946698024551508941
 CapsuleCollider:
@@ -2069,17 +2087,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 1
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!136 &9179518885864694330
 CapsuleCollider:
@@ -2407,7 +2428,7 @@ GameObject:
   - component: {fileID: 4894788610031538074}
   - component: {fileID: 115240980746765081}
   - component: {fileID: 5612447412925882134}
-  - component: {fileID: 3206492658924234840}
+  - component: {fileID: 7104005798579919716}
   m_Layer: 0
   m_Name: DynamicTarget
   m_TagString: target
@@ -2528,7 +2549,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
---- !u!114 &3206492658924234840
+--- !u!114 &7104005798579919716
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2537,49 +2558,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4758813799965007606}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c12044ab869f44cbda4e6d5cdcfe5453, type: 3}
+  m_Script: {fileID: 11500000, guid: d3e5f1d185c5f49c487374cb0f8358ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tagToDetect: agent
   spawnRadius: 9
-  respawnIfTouched: 1
-  respawnIfFallsOffPlatform: 1
-  fallDistance: 5
-  onTriggerEnterEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  onTriggerStayEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  onTriggerExitEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  onCollisionEnterEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  onCollisionStayEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  onCollisionExitEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  onMovedEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8964186769453650538}
-        m_TargetAssemblyTypeName: LookTargetController, Assembly-CSharp
-        m_MethodName: UpdateTargetPosition
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  agent: {fileID: 1422333312399032324}
-  neededAvgLookReward: 0.6
 --- !u!1 &5245438864095042845
 GameObject:
   m_ObjectHideFlags: 0
@@ -2912,17 +2894,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 1
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!136 &327690219614505727
 CapsuleCollider:
@@ -3130,17 +3115,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 1
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!136 &6896381868008775285
 CapsuleCollider:
@@ -3552,17 +3540,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 1
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!136 &2857140504064864902
 CapsuleCollider:
@@ -3770,10 +3761,13 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 5000
-  m_TargetWalkingSpeed: 10
+  minWalkingSpeed: 0.1
+  maxWalkingSpeed: 10
   randomizeWalkSpeedEachEpisode: 1
   target: {fileID: 4232689948433085026}
-  endEpisodeOnTargetReached: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   root: {fileID: 3614163371068779725}
   head: {fileID: 7155909403469715205}
   randomizeRotationOnEpsiode: 1
@@ -3876,17 +3870,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 1
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!136 &6833162379978256859
 CapsuleCollider:
@@ -4129,17 +4126,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 0
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 0
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!65 &6908068911707929353
 BoxCollider:
@@ -4484,17 +4484,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 1
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!135 &39213676175469537
 SphereCollider:
@@ -4784,17 +4787,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 1
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!136 &300576401756538576
 CapsuleCollider:
@@ -5673,17 +5679,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 1
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!136 &6004493211396378583
 CapsuleCollider:
@@ -5890,17 +5899,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 1
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!135 &4694789175574781554
 SphereCollider:

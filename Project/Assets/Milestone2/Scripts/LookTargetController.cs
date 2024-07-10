@@ -18,20 +18,17 @@ public class LookTargetController : MonoBehaviour
     public void UpdateTargetPosition(Vector3 newTargetPosition)
     {
         targetPosition = newTargetPosition;
-        if (!isFirstAngle)
-        {
-            randomAngle = Random.Range(minAngle, maxAngle);
-        }
-        else
-        {
-            isFirstAngle = false;
-        }
         SetLookTarget();
     }
 
     void FixedUpdate()
     {
         SetLookTarget();
+    }
+
+    public void SetRandomLookAngle()
+    {
+        randomAngle = Random.Range(minAngle, maxAngle);
     }
 
     private void SetLookTarget()

@@ -2,22 +2,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-/**********************************************************************************************
-* CHANGELOG
-* Removed unused targetContact reference
-* Removed jointDriveControllerReference
-* Added physics config to Bodypart
-* Changed Bodypart class to extend MonoBehaviour
-* Moved SetupBodypart into Bodypart Awake function
-* Removed JointDriveController
-* Removed unnecessary Bodypart reference from Reset function
-* Added degrees of freedom variable
-* Merged Ground Contact into Bodypart
-* Removed unused debug variables
-* Added Event for touching ground
-* Added Require Component Rigidbody
-**********************************************************************************************/
-
 [System.Serializable]
 public class PhysicsConfig
 {
@@ -27,35 +11,51 @@ public class PhysicsConfig
     public float k_MaxAngularVelocity = 50f;
 }
 
+/*
+* Bodypart
+* implementes functions to controll the joints and holds information about bodypart
+*/
 [RequireComponent(typeof(Rigidbody))]
 public class Bodypart : MonoBehaviour
 {
-    [Header("Body Part Info")]
+    [Header("Body Part Config")]
     public PhysicsConfig physicsConfig;
-    public Rigidbody rb;
-    public ConfigurableJoint joint;
+    public bool triggerTouchingGroundEvent;
+
+    [Header("Ground Contact")]
+    public UnityEvent onTouchedGround;
+    public bool touchingGround;
+
+    [Header("Target Contact")]
+    public UnityEvent onTouchedTarget;
+
+    //component references
+    [HideInInspector] public Rigidbody rb;
+    [HideInInspector] public ConfigurableJoint joint;
+
+    //starting pos and rot
     [HideInInspector] public Vector3 startingPos;
     [HideInInspector] public Quaternion startingRot;
 
-    [Header("Ground Contact")]
-    public bool triggerTouchingGroundEvent;
-    public UnityEvent onTouchingGround;
-    public bool touchingGround;
-
-    [HideInInspector] public float currentStrength;
+    //bodypart information
     [HideInInspector] public Vector3 dof; //degrees of freedom
+    [HideInInspector] public float currentStrength;
     [HideInInspector] public float power;
 
     void Awake()
     {
+        //get component references
         rb = GetComponent<Rigidbody>();
         if (TryGetComponent(out ConfigurableJoint foundJoint))
         {
             joint = foundJoint;
         }
+
+        //save starting pos and rot
         startingPos = transform.position;
         startingRot = transform.rotation;
 
+        //setup rigidbody max angular velocity
         rb.maxAngularVelocity = physicsConfig.k_MaxAngularVelocity;
 
         //setup base degrees of freedom
@@ -63,6 +63,7 @@ public class Bodypart : MonoBehaviour
 
         if (joint)
         {
+            //set joint settings from physics config
             JointDrive jd = new JointDrive
             {
                 positionSpring = physicsConfig.maxJointSpring,
@@ -81,7 +82,8 @@ public class Bodypart : MonoBehaviour
     public void Initialize()
     {
         //setup events
-        onTouchingGround = new UnityEvent();
+        onTouchedGround = new UnityEvent();
+        onTouchedTarget = new UnityEvent();
     }
 
     /// <summary>
@@ -130,6 +132,14 @@ public class Bodypart : MonoBehaviour
         if (col.transform.CompareTag("ground"))
         {
             touchingGround = true;
+            if (triggerTouchingGroundEvent)
+            {
+                onTouchedGround.Invoke();
+            }
+        }
+        if (col.transform.CompareTag("target"))
+        {
+            onTouchedTarget.Invoke();
         }
     }
 
@@ -143,21 +153,13 @@ public class Bodypart : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (touchingGround && triggerTouchingGroundEvent)
-        {
-            onTouchingGround.Invoke();
-        }
+        //calculate joint power
         if (joint)
         {
-            power = CalculatePower();
+            Vector3 currentTorque = joint.currentTorque;
+            Vector3 angularVel = rb.angularVelocity;
+
+            power = Mathf.Abs(Vector3.Dot(currentTorque, angularVel));
         }
-    }
-
-    float CalculatePower()
-    {
-        Vector3 currentTorque = joint.currentTorque;
-        Vector3 angularVel = rb.angularVelocity;
-
-        return Mathf.Abs(Vector3.Dot(currentTorque, angularVel));
     }
 }

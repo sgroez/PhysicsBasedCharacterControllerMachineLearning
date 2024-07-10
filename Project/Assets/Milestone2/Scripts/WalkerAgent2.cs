@@ -11,14 +11,16 @@ public class WalkerAgent2 : WalkerAgent1
     public Transform lookTarget;
     [HideInInspector] public float avgLookReward = 0f;
     float lookRewardCount = 0f;
-    OrientationCubeController lookOrientationCube;
+    OrientationCubeController1 lookOrientationCube;
 
     public override void Initialize()
     {
         //init orientation object
         GameObject lookOrientationObject = new GameObject("LookOrientationObject");
         lookOrientationObject.transform.parent = transform;
-        lookOrientationCube = lookOrientationObject.AddComponent<OrientationCubeController>();
+        lookOrientationCube = lookOrientationObject.AddComponent<OrientationCubeController1>();
+        lookOrientationCube.root = root;
+        lookOrientationCube.target = lookTarget;
         base.Initialize();
     }
 
@@ -37,54 +39,47 @@ public class WalkerAgent2 : WalkerAgent1
     // added look at target position
     public override void CollectObservations(VectorSensor sensor)
     {
-        var cubeForward = m_OrientationCube.transform.forward;
+        var cubeForward = walkOrientationCube.transform.forward;
 
         //velocity we want to match
-        var velGoal = cubeForward * MTargetWalkingSpeed;
+        var velGoal = cubeForward * targetWalkingSpeed;
         //ragdoll's avg vel
         var avgVel = GetAvgVelocity();
 
         //current ragdoll velocity. normalized
         sensor.AddObservation(Vector3.Distance(velGoal, avgVel));
         //avg body vel relative to cube
-        sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(avgVel));
+        sensor.AddObservation(walkOrientationCube.transform.InverseTransformDirection(avgVel));
         //vel goal relative to cube
-        sensor.AddObservation(m_OrientationCube.transform.InverseTransformDirection(velGoal));
+        sensor.AddObservation(walkOrientationCube.transform.InverseTransformDirection(velGoal));
 
         //rotation deltas
         sensor.AddObservation(Quaternion.FromToRotation(root.forward, cubeForward));
         sensor.AddObservation(Quaternion.FromToRotation(head.forward, cubeForward));
 
         //Position of target position relative to cube
-        sensor.AddObservation(m_OrientationCube.transform.InverseTransformPoint(target.transform.position));
+        sensor.AddObservation(walkOrientationCube.transform.InverseTransformPoint(target.transform.position));
 
         //Position of look target position relative to cube
-        sensor.AddObservation(m_OrientationCube.transform.InverseTransformPoint(lookTarget.transform.position));
+        sensor.AddObservation(walkOrientationCube.transform.InverseTransformPoint(lookTarget.transform.position));
 
-        foreach (Bodypart bps in bodyparts)
+        foreach (Bodypart bp in bodyparts)
         {
-            CollectObservationBodyPart(bps, sensor);
+            CollectObservationBodyPart(bp, sensor);
         }
-    }
-
-    protected override void UpdateOrientationObjects()
-    {
-        base.UpdateOrientationObjects();
-        lookOrientationCube.UpdateOrientation(root, lookTarget.transform);
     }
 
     public override void FixedUpdate()
     {
-        UpdateOrientationObjects();
         distanceMovedInTargetDirection += GetDistanceMovedInTargetDirection();
 
-        var cubeForward = m_OrientationCube.transform.forward;
+        var cubeForward = walkOrientationCube.transform.forward;
 
         // Set reward for this step according to mixture of the following elements.
         // a. Match target speed
         //This reward will approach 1 if it matches perfectly and approach zero as it deviates
-        var matchSpeedReward = GetMatchingVelocityReward(cubeForward * MTargetWalkingSpeed, GetAvgVelocity());
-        statsRecorder.Add("Reward/MatchingVelocityReward", matchSpeedReward);
+        var matchSpeedReward = GetMatchingVelocityReward(cubeForward * targetWalkingSpeed, GetAvgVelocity());
+        RecordStat("Reward/MatchingVelocityReward", matchSpeedReward);
 
         //Check for NaNs
         if (float.IsNaN(matchSpeedReward))
@@ -93,7 +88,7 @@ public class WalkerAgent2 : WalkerAgent1
                 "NaN in moveTowardsTargetReward.\n" +
                 $" cubeForward: {cubeForward}\n" +
                 $" root.velocity: {bodyparts[0].rb.velocity}\n" +
-                $" maximumWalkingSpeed: {m_maxWalkingSpeed}"
+                $" maximumWalkingSpeed: {maxWalkingSpeed}"
             );
         }
 
@@ -105,7 +100,7 @@ public class WalkerAgent2 : WalkerAgent1
         // var lookAtTargetReward = (Vector3.Dot(cubeForward, head.forward) + 1) * .5F;
         var lookAtTargetReward = (Vector3.Dot(lookCubeForward, headForward) + 1) * .5F;
         lookAtTargetReward = Mathf.Exp(lookAtTargetReward * 5 - 5);
-        statsRecorder.Add("Reward/LookAtTargetReward", lookAtTargetReward);
+        RecordStat("Reward/LookAtTargetReward", lookAtTargetReward);
 
         //Check for NaNs
         if (float.IsNaN(lookAtTargetReward))
@@ -128,7 +123,7 @@ public class WalkerAgent2 : WalkerAgent1
             headTiltRewardUnclipped = -headTilt / 0.2f - 1f;
         }
         float headTiltReward = -Mathf.Clamp(headTiltRewardUnclipped, 0, 1);
-        statsRecorder.Add("Reward/HeadTiltReward", headTiltReward);
+        RecordStat("Reward/HeadTiltReward", headTiltReward);
 
         lookRewardCount++;
         avgLookReward = avgLookReward + ((lookAtTargetReward - avgLookReward) / lookRewardCount);

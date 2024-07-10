@@ -84,5 +84,6 @@
 <tr><td>113_Milestone2</td><td>LookTarget position jedes fixed update gesetzt um winkel gleich bleiben zu machen und LookTarget winkel erst ändern wenn looktarget reward in episode duchschnittlich größer als 0.7 war</td><td>läuft nur noch seitwärts. Evtl extremeren dropoff um zu verhindern das eine Lösung für alle Blickrichtungen gesucht wird (aktuell Mittlewert von 0.4). Zusätzlich testen Blickrichtung alle x Schritte zu ändern um zu startes Overfitting an eine Blickrichtung zu vermeiden</td></tr>
 <tr><td>114_Milestone2</td><td>Wie 113 aber mit exp ansteigendem reward für look at target anstatt linear. Zudem Zielwert für LookAtTargetReward verringert um overfitting auf eine Blickrichtung zu vermeiden</td><td>schaut relativ zuverlässig zum lookAtTarget und läuft zum target aber ziemlich instabil und galopiert in sehr kleinen Schritten</td></tr>
 <tr><td>115_Milestone2</td><td>Wie 114 aber Targets werden nur neu gesetzt wenn beim erreichen des Targets der avgLookAtTargetReward über 0.6 liegt um erst fortzufahren wenn Szenario gemeistert ist</td><td></td></tr>
+<tr><td>116_Milestone1</td><td>Code umstrukturiert Bodypart als nerven / Muskeln, agent als gehirn und target controller rein zum setzen der position des targets und test mit 100 envs</td><td></td></tr>
 <tr><td>Name</td><td>beschreibung</td><td>notizen</td></tr>
 </table>
