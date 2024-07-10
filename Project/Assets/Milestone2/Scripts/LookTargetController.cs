@@ -4,23 +4,27 @@ using Unity.MLAgents;
 
 public class LookTargetController : MonoBehaviour
 {
-    [Header("Reference Components to calculate position")]
-    public TargetController targetController;
+    [Header("Reference Component to calculate position")]
     public WalkerAgent2 agent;
 
     [Header("Angle To Spawn Look Target At")]
     public float minAngle;
     public float maxAngle;
     private float randomAngle = 0f;
+    private bool isFirstAngle = true;
 
     private Vector3 targetPosition;
 
     public void UpdateTargetPosition(Vector3 newTargetPosition)
     {
         targetPosition = newTargetPosition;
-        if (agent.avgLookReward > 0.15)
+        if (!isFirstAngle)
         {
             randomAngle = Random.Range(minAngle, maxAngle);
+        }
+        else
+        {
+            isFirstAngle = false;
         }
         SetLookTarget();
     }

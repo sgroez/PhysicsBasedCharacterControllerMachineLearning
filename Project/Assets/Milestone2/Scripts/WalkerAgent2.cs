@@ -8,7 +8,7 @@ using Unity.MLAgents.Sensors;
 public class WalkerAgent2 : WalkerAgent1
 {
     [Header("Target To Look Towards")]
-    public LookTargetController lookTargetController;
+    public Transform lookTarget;
     [HideInInspector] public float avgLookReward = 0f;
     float lookRewardCount = 0f;
     OrientationCubeController lookOrientationCube;
@@ -20,17 +20,16 @@ public class WalkerAgent2 : WalkerAgent1
         lookOrientationObject.transform.parent = transform;
         lookOrientationCube = lookOrientationObject.AddComponent<OrientationCubeController>();
         base.Initialize();
-        float angleLimit = Academy.Instance.EnvironmentParameters.GetWithDefault("lookAngleLimit", lookTargetController.maxAngle);
-        lookTargetController.minAngle = -angleLimit;
-        lookTargetController.maxAngle = angleLimit;
     }
 
     public override void OnEpisodeBegin()
     {
         base.OnEpisodeBegin();
-        float angleLimit = Academy.Instance.EnvironmentParameters.GetWithDefault("lookAngleLimit", lookTargetController.maxAngle);
-        lookTargetController.minAngle = -angleLimit;
-        lookTargetController.maxAngle = angleLimit;
+        ResetAvgLookReward();
+    }
+
+    public void ResetAvgLookReward()
+    {
         avgLookReward = 0f;
         lookRewardCount = 0f;
     }
@@ -60,7 +59,7 @@ public class WalkerAgent2 : WalkerAgent1
         sensor.AddObservation(m_OrientationCube.transform.InverseTransformPoint(target.transform.position));
 
         //Position of look target position relative to cube
-        sensor.AddObservation(m_OrientationCube.transform.InverseTransformPoint(lookTargetController.transform.position));
+        sensor.AddObservation(m_OrientationCube.transform.InverseTransformPoint(lookTarget.transform.position));
 
         foreach (Bodypart bps in bodyparts)
         {
@@ -71,7 +70,7 @@ public class WalkerAgent2 : WalkerAgent1
     protected override void UpdateOrientationObjects()
     {
         base.UpdateOrientationObjects();
-        lookOrientationCube.UpdateOrientation(root, lookTargetController.transform);
+        lookOrientationCube.UpdateOrientation(root, lookTarget.transform);
     }
 
     public override void FixedUpdate()

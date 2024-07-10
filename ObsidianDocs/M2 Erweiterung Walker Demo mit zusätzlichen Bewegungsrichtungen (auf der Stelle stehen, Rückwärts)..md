@@ -1,5 +1,18 @@
 # Anforderungen
+Bewegt sich mit targetWalkingSpeed in Richtung Target
+Schaut in Richtung von lookAtTarget
+Bewegt sich stabil (fällt kaum)
 
+# Reward
+positiver Reward für walkingSpeed ähnlich zu targetWalkingSpeed in Richtung Target
+positiver Reward für geringe Abweichung von Blickrichtung zu lookAtTarget - Neigungsabweichung von horizontaler Blickrichtung
+negativer Reward für fallen
+
+# Targets
+Target wechselt Position wenn erreicht
+LookAtTarget wechselt Position wenn Avg lookAtTargetReward > Value bei Episodenende oder Target Position erreicht?
+Oder
+LookAtTarget unterschiedlicher Winkel bei allen Training Environments um gleichzeitig unterschiedliche Blickwinkel zu erlernen?
 
 # Versuche
 ## Versuch 1

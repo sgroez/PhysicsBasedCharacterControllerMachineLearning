@@ -79,7 +79,7 @@ public class TargetController : MonoBehaviour
         onMovedEvent.Invoke(newTargetPos);
     }
 
-    private void OnCollisionEnter(Collision col)
+    protected virtual void OnCollisionEnter(Collision col)
     {
         if (col.transform.CompareTag(tagToDetect))
         {
