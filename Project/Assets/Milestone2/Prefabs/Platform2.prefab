@@ -3371,10 +3371,11 @@ GameObject:
   - component: {fileID: 7137853988729422823}
   - component: {fileID: 922654505875888074}
   - component: {fileID: 7835565561045380759}
+  - component: {fileID: 7749364159405491566}
   - component: {fileID: 8964186769453650538}
   m_Layer: 0
   m_Name: LookTarget
-  m_TagString: target
+  m_TagString: lookTarget
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3444,6 +3445,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7749364159405491566
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5726464855207943703}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &8964186769453650538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3456,9 +3478,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e0a8b5fc9e6549f2a35501d26f94aaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 1422333312399032324}
+  root: {fileID: 3614163371068779725}
+  head: {fileID: 7155909403469715205}
+  target: {fileID: 4232689948433085026}
   minAngle: -180
   maxAngle: 180
+  testMode: 0
 --- !u!1 &5944932683700177806
 GameObject:
   m_ObjectHideFlags: 0
@@ -3737,7 +3762,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: e3c5a2945305f4709b1ada03d1ab07d1, type: 3}
   m_InferenceDevice: 2
   m_BehaviorType: 0
   m_BehaviorName: Walker
@@ -3767,14 +3792,42 @@ MonoBehaviour:
   target: {fileID: 4232689948433085026}
   onTouchedTarget:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7104005798579919716}
+        m_TargetAssemblyTypeName: TargetController1, Assembly-CSharp
+        m_MethodName: MoveTargetToRandomPosition
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   root: {fileID: 3614163371068779725}
   head: {fileID: 7155909403469715205}
   randomizeRotationOnEpsiode: 1
   bodyparts: []
   logStats: 0
   lookTarget: {fileID: 7137853988729422823}
-  avgLookReward: 0
+  durationLookAtTarget: 0.5
+  lookAtTargetMargin: 2
+  onLookedAtTarget:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8964186769453650538}
+        m_TargetAssemblyTypeName: LookTargetController, Assembly-CSharp
+        m_MethodName: SetRandomLookAngle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4949537093396364951
 MonoBehaviour:
   m_ObjectHideFlags: 0

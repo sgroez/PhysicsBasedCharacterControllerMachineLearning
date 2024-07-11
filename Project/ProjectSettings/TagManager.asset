@@ -8,6 +8,7 @@ TagManager:
   - ground
   - agent
   - referenceBone
+  - lookTarget
   layers:
   - Default
   - TransparentFX

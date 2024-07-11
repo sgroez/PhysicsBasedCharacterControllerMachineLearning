@@ -4,14 +4,18 @@ using UnityEngine;
 using UnityEngine.Events;
 using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
+using Unity.MLAgents.Actuators;
 
 public class WalkerAgent2 : WalkerAgent1
 {
     [Header("Target To Look Towards")]
     public Transform lookTarget;
-    [HideInInspector] public float avgLookReward = 0f;
-    float lookRewardCount = 0f;
+    public float durationLookAtTarget = 2f;
+    public float lookAtTargetMargin = 1f;
+    public UnityEvent onLookedAtTarget = new UnityEvent();
     OrientationCubeController1 lookOrientationCube;
+    bool isLookingAtTarget = false;
+    float startetLookingAtTarget = 0f;
 
     public override void Initialize()
     {
@@ -22,18 +26,6 @@ public class WalkerAgent2 : WalkerAgent1
         lookOrientationCube.root = root;
         lookOrientationCube.target = lookTarget;
         base.Initialize();
-    }
-
-    public override void OnEpisodeBegin()
-    {
-        base.OnEpisodeBegin();
-        ResetAvgLookReward();
-    }
-
-    public void ResetAvgLookReward()
-    {
-        avgLookReward = 0f;
-        lookRewardCount = 0f;
     }
 
     // added look at target position
@@ -71,8 +63,6 @@ public class WalkerAgent2 : WalkerAgent1
 
     public override void FixedUpdate()
     {
-        distanceMovedInTargetDirection += GetDistanceMovedInTargetDirection();
-
         var cubeForward = walkOrientationCube.transform.forward;
 
         // Set reward for this step according to mixture of the following elements.
@@ -112,6 +102,7 @@ public class WalkerAgent2 : WalkerAgent1
             );
         }
 
+        //add head tilt reward to keep head level
         float headTilt = head.forward.y;
         float headTiltRewardUnclipped = 0f;
         if (headTilt > 0)
@@ -125,9 +116,49 @@ public class WalkerAgent2 : WalkerAgent1
         float headTiltReward = -Mathf.Clamp(headTiltRewardUnclipped, 0, 1);
         RecordStat("Reward/HeadTiltReward", headTiltReward);
 
-        lookRewardCount++;
-        avgLookReward = avgLookReward + ((lookAtTargetReward - avgLookReward) / lookRewardCount);
-
         AddReward(matchSpeedReward * lookAtTargetReward + headTiltReward);
+
+        //add new value to moved distance in target direction
+        distanceMovedInTargetDirection += GetDistanceMovedInTargetDirection();
+
+        //check if agent was looking at target for duration
+        CheckLookAtTarget();
+    }
+
+    void CheckLookAtTarget()
+    {
+        RaycastHit hit;
+        if (Physics.SphereCast(head.position, lookAtTargetMargin, head.forward, out hit, 9f) && hit.collider.gameObject.CompareTag("lookTarget"))
+        {
+            if (isLookingAtTarget)
+            {
+                if (startetLookingAtTarget + durationLookAtTarget <= Time.fixedTime)
+                {
+                    onLookedAtTarget.Invoke();
+                    isLookingAtTarget = false;
+                }
+            }
+            else
+            {
+                startetLookingAtTarget = Time.fixedTime;
+                isLookingAtTarget = true;
+            }
+        }
+        else
+        {
+            isLookingAtTarget = false;
+        }
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Vector3 targetPosition = head.position + head.forward * 9f;
+        if (isLookingAtTarget)
+        {
+            targetPosition = lookTarget.position;
+        }
+        Gizmos.DrawLine(head.position, targetPosition);
+        Gizmos.DrawWireSphere(targetPosition, lookAtTargetMargin);
     }
 }
