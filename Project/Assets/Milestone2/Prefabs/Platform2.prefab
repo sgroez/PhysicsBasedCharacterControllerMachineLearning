@@ -3762,7 +3762,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: e3c5a2945305f4709b1ada03d1ab07d1, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 2
   m_BehaviorType: 0
   m_BehaviorName: Walker
@@ -3811,8 +3811,8 @@ MonoBehaviour:
   bodyparts: []
   logStats: 0
   lookTarget: {fileID: 7137853988729422823}
-  durationLookAtTarget: 0.5
-  lookAtTargetMargin: 2
+  durationLookAtTarget: 3
+  lookAtTargetMargin: 1
   onLookedAtTarget:
     m_PersistentCalls:
       m_Calls:
