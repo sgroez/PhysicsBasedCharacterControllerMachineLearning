@@ -27,7 +27,7 @@
 \usepackage{enumitem}
 
 % ============= BibLatex =============
-\usepackage[backend=bibtex,style=ieee]{biblatex}
+\usepackage[backend=bibtex,style=numeric]{biblatex}
 %Literaturverzeichnis
 \addbibresource{Literatur.bib}
 
@@ -81,9 +81,14 @@
 %Inhaltsverzeichnis
 \tableofcontents
 
+%Abbildungsverzeichnis
+\listoffigures
+
+\cleardoubleoddpage
+
 \input{01_einleitung}
-\input{02_mlagents}
-\input{03_rl}
+\input{02_rl}
+\input{03_mlagents}
 \input{04_versuche}
 \input{05_fazit}
 
