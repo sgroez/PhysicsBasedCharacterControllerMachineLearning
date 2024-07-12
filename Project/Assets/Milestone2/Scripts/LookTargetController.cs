@@ -38,6 +38,7 @@ public class LookTargetController : MonoBehaviour
     public void SetRandomLookAngle()
     {
         randomAngle = Random.Range(minAngle, maxAngle);
+        Academy.Instance.StatsRecorder.Add("Environment/LookAngle", randomAngle);
     }
 
     private void SetLookTarget()

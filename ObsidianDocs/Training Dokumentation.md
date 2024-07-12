@@ -85,5 +85,7 @@
 <tr><td>114_Milestone2</td><td>Wie 113 aber mit exp ansteigendem reward für look at target anstatt linear. Zudem Zielwert für LookAtTargetReward verringert um overfitting auf eine Blickrichtung zu vermeiden</td><td>schaut relativ zuverlässig zum lookAtTarget und läuft zum target aber ziemlich instabil und galopiert in sehr kleinen Schritten</td></tr>
 <tr><td>115_Milestone2</td><td>Wie 114 aber Targets werden nur neu gesetzt wenn beim erreichen des Targets der avgLookAtTargetReward über 0.6 liegt um erst fortzufahren wenn Szenario gemeistert ist</td><td></td></tr>
 <tr><td>116_Milestone1</td><td>Code umstrukturiert Bodypart als nerven / Muskeln, agent als gehirn und target controller rein zum setzen der position des targets und test mit 100 envs</td><td></td></tr>
+<tr><td>117_Milestone2</td><td>Look Target wird neugesetzt wenn Agent min 3 sek auf target schaut am Stück (implementiert mit SphereCast)</td><td>funktioniert aber relativ instabil vmtl. zu kurzes training (da training reward und episoden länge immer noch steigend waren am ende des trainings)</td></tr>
+<tr><td>118_Milestone2</td><td>gleich wie 117 aber mit 2sek look at time und doppelter trainings dauer (120mil steps)</td><td></td></tr>
 <tr><td>Name</td><td>beschreibung</td><td>notizen</td></tr>
 </table>

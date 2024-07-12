@@ -3811,7 +3811,7 @@ MonoBehaviour:
   bodyparts: []
   logStats: 0
   lookTarget: {fileID: 7137853988729422823}
-  durationLookAtTarget: 3
+  durationLookAtTarget: 2
   lookAtTargetMargin: 1
   onLookedAtTarget:
     m_PersistentCalls:
