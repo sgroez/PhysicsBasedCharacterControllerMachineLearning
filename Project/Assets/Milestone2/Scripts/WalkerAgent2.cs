@@ -17,6 +17,8 @@ public class WalkerAgent2 : WalkerAgent1
     bool isLookingAtTarget = false;
     float startetLookingAtTarget = 0f;
 
+    int reachedLookTargets = 0;
+
     public override void Initialize()
     {
         //init orientation object
@@ -26,6 +28,15 @@ public class WalkerAgent2 : WalkerAgent1
         lookOrientationCube.root = root;
         lookOrientationCube.target = lookTarget;
         base.Initialize();
+    }
+
+    public override void OnEpisodeBegin()
+    {
+        base.OnEpisodeBegin();
+
+        //record then reset look targets reached
+        RecordStat("Environment/ReachedLookTargets", reachedLookTargets);
+        reachedLookTargets = 0;
     }
 
     // added look at target position
@@ -136,6 +147,7 @@ public class WalkerAgent2 : WalkerAgent1
                 {
                     onLookedAtTarget.Invoke();
                     isLookingAtTarget = false;
+                    reachedLookTargets++;
                 }
             }
             else
