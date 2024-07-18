@@ -1,14 +1,6 @@
 {\chapter{Verstärkendes Lernen}}
 \label{sec:rl}
-Die meist verbreitetsten und daher auch am bekanntesten Ansätzen im maschinellen Lernen sind das Überwachte Lernen (Supervised Learning) und das Unüberwachte Lernen (Unsupervised Learning). Bei diesen Ansätzen lernt der Algorithmus anhand eines vorliegenden Datensatzes Muster, um diese auf unbekannte Fälle zu übertragen und somit Vorhersagen zu treffen oder Daten zu Gruppieren.
-
-Visualisierung oder Bsp??
-
-Verstärkendes Lernen (Reinforcement Learning) ist ein weiterer Ansatz des maschinellen Lernens bei dem ein Verhalten innerhalb einer festen Umgebung optimiert wird. 
-
-Visualisierung oder Bsp??
-
-Vergleich
+Der Begriff 'Verstärkendes Lernen' beschreibt eine Art von Problemstellung und die dafür geeigneten Problemlösungsmethoden im Bereich des Maschinellen Lernens. Die grundlegenden Bestandteile einer Trainingsumgebung sind der Agent und die Umgebung, in der der Agent seine Aktionen ausführt. Der Ansatz ist in vielerlei Hinsicht vergleichbar mit dem Lernvorgang von Menschen. Ein Baby lernt das Krabbeln ohne direkte Anweisungen, nur durch die Wahrnehmung der Umgebung, das Verhalten der Umgebung in Relation zu seinen Bewegungen und die mit den Bewegungen einhergehenden Belohnungen. Auf dieselbe Art lernt der Agent beim Verstärkenden Lernen von jedem Zustand die Aktion auszuführen, um die Belohnung zu maximieren. Im Fall des Babys sind die Belohnungen Faktoren wie Schmerz, Hunger, Müdigkeit oder gestillte Neugier. Der Agent hingegen erhält eine numerische Belohnung.\cite{sutton2018reinforcement}
 
 \begin{figure}[htb]
   \centering  
@@ -16,3 +8,5 @@ Vergleich
   \caption{Verstärkendes Lernen Ablauf \protect\cite{unity_mlagents_rl_cycle}}
   \label{fig:rl_cycle}
 \end{figure}
+
+Die Abbildung 2.1 zeigt die Verbindungen zwischen dem Agent und der Umgebung. Der Agent erhält als Input einen Zustand oder meist einen Teilzustand der Umgebung und reagiert darauf mit einer Aktion. Dieser Zyklus kann je nach Problem in unterschiedlichen Intervallen durchlaufen werden. Bei kontinuierlichen Kontrollproblemen werden Aktionen meist in regelmäßigen Intervallen abgefragt. Bei rundenbasierten Spielen kann dieser Vorgang jedoch auch nur einmal pro Runde stattfinden.

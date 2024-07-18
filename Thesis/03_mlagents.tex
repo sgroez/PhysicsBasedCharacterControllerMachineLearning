@@ -1,6 +1,29 @@
 {\chapter{Ml-Agents}}
 \label{sec:mlagents}
-Kurzbeschreibung
-Aufbau
+Das Unity ML-Agents Toolkit ist ein Open-Source-Projekt, in dem maschinelle Lernalgorithmen und Funktionen für die Verwendung mit der Spieleumgebung Unity implementiert und kontinuierlich weiterentwickelt werden. Die Implementierung ist in zwei Bereiche unterteilt. Für die Unity-Integration ist das Paket com.unity.ml-agents aus dem Unity Asset Store zuständig. Das eigentliche Training mit den maschinellen Lernalgorithmen findet jedoch in einer separaten Python-Umgebung statt. Für die Kommunikation zwischen den beiden Bereichen verwendet das ML-Agents Toolkit eine C\# Kommunikator-Klasse, die über gRPC-Netzwerkkommunikation mit dem Python-Prozess kommuniziert. Der Python-Prozess kommuniziert über die Python Low-Level-API, die die Kommunikation übernimmt und die Befehle an den Trainer weiterleitet.\cite{unity_mlagents_toolkit_overview}
+
+\begin{figure}[htb]
+  \centering  
+  \includegraphics[scale=0.4]{img/learning_environment_basic.png}
+  \caption{Unity ML-Agents Lernumgebung \protect\cite{unity_mlagents_learning_environment_basic}}
+  \label{fig:learning_environment_basic}
+\end{figure}
+
+Das Unity-Paket enthält zwei Komponenten: Agenten und deren Verhalten. Die Agent-Komponente bildet die Grundlage für alle Implementierungen. Sie bietet abstrakte Funktionen für die Initialisierung, den Start einer Episode, das Erfassen des Zustands der Umgebung sowie das Ausführen von Aktionen. Durch die Implementierung dieser Funktionen können unterschiedlichste Agenten entwickelt und trainiert werden. Jeder Agent ist mit einem Verhalten verknüpft, das für jede Beobachtung des Agenten eine Aktion auswählt, die der Agent ausführt. Es gibt drei Arten, wie die Verhaltensweisen agieren können. Im Lernmodus werden die Beobachtungen des Agenten für das Training und die Auswahl einer Aktion anhand des aktuellen Modells verwendet. Der Inferenzmodus nutzt hingegen ein bereits trainiertes Modell und wertet dieses aus. Der letzte Modus eines Verhaltens ist der Heuristikmodus, bei dem festgelegte Regeln im Code entscheiden, welche Aktion ausgeführt wird, ohne die Verwendung eines trainierten Modells.\cite{unity_mlagents_toolkit_overview}
+
+\begin{figure}[htb]
+  \centering  
+  \includegraphics[scale=0.3]{img/learning_environment_example.png}
+  \caption{Unity ML-Agents Lernumgebung Beispiel \protect\cite{unity_mlagents_learning_environment_example}}
+  \label{fig:learning_environment_example}
+\end{figure}
+
+\begin{figure}[htb]
+  \centering  
+  \includegraphics[scale=0.5]{img/verhalten_komponente.png}
+  \caption{Unity ML-Agents Verhalten Komponente}
+  \label{fig:verhalten_komponente}
+\end{figure}
+
 Details zu Komponenten
 Implementierungsschnittstellen

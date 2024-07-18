@@ -88,5 +88,6 @@
 <tr><td>117_Milestone2</td><td>Look Target wird neugesetzt wenn Agent min 3 sek auf target schaut am Stück (implementiert mit SphereCast)</td><td>funktioniert aber relativ instabil vmtl. zu kurzes training (da training reward und episoden länge immer noch steigend waren am ende des trainings)</td></tr>
 <tr><td>118_Milestone2</td><td>gleich wie 117 aber mit 2sek look at time und doppelter trainings dauer (120mil steps)</td><td>abgebrochen für 119</td></tr>
 <tr><td>119_Milestone2</td><td>gleich wie 118 aber mit reached look goal Statisik in tensorboard</td><td></td></tr>
+<tr><td>120_Milestone2</td><td>gleich wie 119 aber mit 4 hidden layers</td><td></td></tr>
 <tr><td>Name</td><td>beschreibung</td><td>notizen</td></tr>
 </table>
