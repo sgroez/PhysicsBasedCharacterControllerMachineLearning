@@ -3,19 +3,19 @@
 Das Unity ML-Agents Toolkit ist ein Open-Source-Projekt, in dem maschinelle Lernalgorithmen und Funktionen für die Verwendung mit der Spieleumgebung Unity implementiert und kontinuierlich weiterentwickelt werden. 
 
 \subsection{Aufbau}
-Die Implementierung ist in zwei Bereiche unterteilt. Für die Unity-Integration ist das Paket com.unity.ml-agents aus dem Unity Asset Store zuständig. Das eigentliche Training mit den maschinellen Lernalgorithmen findet jedoch in einer separaten Python-Umgebung statt. Für die Kommunikation zwischen den beiden Bereichen verwendet das ML-Agents Toolkit eine gRPC-Netzwerkkommunikation, worüber Zustand der Simulationsumgebung in Unity, ausgewählte Aktionen des neuronalen Netzes in Python und weitere Werte für die Auswertung des Trainings ausgetauscht werden.\cite{juliani2020}
+Die Implementierung ist in zwei Teile unterteilt. Für die Unity-Integration ist das Paket com.unity.ml-agents aus dem Unity Asset Store zuständig. Das eigentliche Training mit den maschinellen Lernalgorithmen findet jedoch in einer separaten Python-Umgebung statt. Für die Kommunikation zwischen den beiden Bereichen verwendet das ML-Agents Toolkit eine gRPC-Netzwerkkommunikation, worüber Zustand der Simulationsumgebung in Unity, ausgewählte Aktionen des neuronalen Netzes in Python und weitere Werte für die Auswertung des Trainings ausgetauscht werden.\cite{juliani2020}
 
 \begin{figure}[H]
   \centering  
   \begin{tikzpicture}[node distance=2cm]
-    \node(umgebung) [draw] {Umgebung};
-    \node (agent1) [rounded, draw=green, fill=green!30, below of=umgebung, xshift=0.75cm, yshift=0.8cm] {Agent 1};
+    \node(umgebung) {Umgebung};
+    \node (agent1) [rounded, draw=green, fill=green!30, below of=umgebung, xshift=1cm, yshift=1.1cm] {Agent 1};
     \node (agent2) [rounded, right of=agent1, xshift=2cm, draw=green, fill=green!30] {Agent 2};
     \node (agent3) [rounded, right of=agent2, xshift=2cm, draw=green, fill=green!30] {Agent 3};
     \node (akademie) [rounded, below of=agent2 , draw=yellow, fill=yellow!30] {Akademie};
 
     \begin{pgfonlayer}{bg}
-      \node(umgebung_bg) [draw, fill=black!20, inner sep=10pt, fit=(agent1) (agent2) (agent3) (akademie)] {};
+      \node(umgebung_bg) [draw, fill=black!20, inner sep=20pt, fit=(agent1) (agent2) (agent3) (akademie)] {};
     \end{pgfonlayer}
 
     \node (python_api) [rounded, below of=akademie, draw=orange, fill=orange!30] {Python API};
@@ -33,39 +33,42 @@ Die Implementierung ist in zwei Bereiche unterteilt. Für die Unity-Integration 
   \label{fig:mlagents_aufbau}
 \end{figure}
 
+Die Umgebung in Abbildung \ref{fig:mlagents_aufbau} stellt den Aufbau der Unity Umgebung mit den ML-Agnents Komponenten dar. Das Unity-Paket enthält drei Grundlegenden Komponenten, die Akademie, Agenten und Sensoren. Um eine Szene für das verstärkende Lernen einzurichten benötigt die Szene mindestens einen Agenten. Objekte in der Unity Szene werden, mit dem hinzufügen einer Agenten Komponente als Agent für das Verstärkende Lernen konfiguriert. Jeder Agent braucht zusätzlich noch ein Verhalten, welches auf ein bereits trainiertes Modell oder auf eine Trainingskonfiguration verweist.
 
-Das Unity-Paket enthält drei Grundlegenden Komponenten, die Akademie, Agenten und Sensoren.
-Das Unity-Paket enthält zwei Komponenten: Agenten und deren Verhalten. Die Agent-Komponente bildet die Grundlage für alle Implementierungen. Sie bietet abstrakte Funktionen für die Initialisierung, den Start einer Episode, das Erfassen des Zustands der Umgebung sowie das Ausführen von Aktionen. Durch die Implementierung dieser Funktionen können unterschiedlichste Agenten entwickelt und trainiert werden. Jeder Agent ist mit einem Verhalten verknüpft, das für jede Beobachtung des Agenten eine Aktion auswählt, die der Agent ausführt. Es gibt drei Arten, wie die Verhaltensweisen agieren können. Im Lernmodus werden die Beobachtungen des Agenten für das Training und die Auswahl einer Aktion anhand des aktuellen Modells verwendet. Der Inferenzmodus nutzt hingegen ein bereits trainiertes Modell und wertet dieses aus. Der letzte Modus eines Verhaltens ist der Heuristikmodus, bei dem festgelegte Regeln im Code entscheiden, welche Aktion ausgeführt wird, ohne die Verwendung eines trainierten Modells.\cite{juliani2020}
+Die Agent-Komponente bildet die Grundlage für alle Implementierungen. Sie bietet abstrakte Funktionen für die Initialisierung, den Start einer Episode, das Erfassen des Zustands der Umgebung sowie das Ausführen von Aktionen. Durch die Implementierung dieser Funktionen können unterschiedlichste Agenten entwickelt und trainiert werden. Die Beobachtungen des Agenten können auf zwei Arten erstellt werden, für Beobachtungen basierend auf Raycasts sowie Kamerabildern existieren seperate Komponenten. Zahlenwerte sowie Vektoren und Quaternionen können jedoch auch direkt über eine Funktion im Agenten der Beobachtung angehängt werden.
+
+Die Akademie ist eine einfach Instanz welche beim starten der Unity Umgebung einmalig erstellt und von allen Agenten referenziert wird. Zuständig ist die Akademie für das steuern des Trainingsablaufs sowie das Aufbauen der Kommunikationspipeline zwischen der Unity- und Pythonumgebung.\cite{juliani2020}
+
+Beim Starten der Python-Trainingsumgebung mit dem Befehl mlagents-learn wird zu Beginn eine Instanz der Python-API erstellt. Die Python-API ist eine Schnittstelle für die Interaktion mit Unity ML-Agents-Umgebungen. Über die Python-API kann der Python-Trainer auf Beobachtungen zugreifen, Aktionen ausführen und anhand der Belohnungssignale die Gewichtung der neuronalen Netze anpassen, um das Verhalten des Agenten zu optimieren. Nachdem die Konfigurationsparameter von der Unity-Instanz an die Python-Umgebung übertragen wurden, wird basierend darauf ein Python-Trainer erstellt. Der Python-Trainer initialisiert dann die neuronalen Netze und berechnet deren Gewichtungen mithilfe der Lernalgorithmen.
 
 \subsection{Komponenten}
-In diesem Kapitel werde Ich die Grundlegenden Komponenten des Unity ML-Agents Packets, welche in der Arbeit verwendet wurden erklären. Darurch sollten Codeausschnitte und Komponentenabbildungen in folgenden Kapiteln deutlich zu verstehen sein.
+In diesem Kapitel werden die Grundlegenden Komponenten des Unity ML-Agents Packets, welche in der Arbeit verwendet wurden erklärt. Darurch sollten Codeausschnitte und Komponentenabbildungen in folgenden Kapiteln deutlich zu verstehen sein.
 
-\subsubsection{Verhalten}
+\begin{figure}[H]
+  \centering
+  \includegraphics[scale=0.5]{img/agent_komponente}
+  \caption{Unity ML-Agents Agenten Komponente}
+  \label{fig:agent_komponente}
+\end{figure}
+
+Abbildung \ref{fig:agent_komponente} zeigt die Basiskomponente des Agenten. Die Agenten Komponente stellt alle grundlegenden Funktionen des verstärkenden Lernens bereit und implementiert die Verbindung zur Akademie und dem Verhalten des Agenten. Ohne das überschreiben der Funktionen ist die Agentenklasse jedoch ohne Funktion. Die genauen Methoden zur Implementierung eigener Agentenklassen werden näher in Kapitel \ref{subsec:programmierschnittstellen} behandelt. Das einzige Feld zur Konfiguration ist Max Step, welches die maximale Anzahl der Schritte innerhalb einer Episode festlegt.
+
 \begin{figure}[H]
   \centering  
   \includegraphics[scale=0.5]{img/verhalten_komponente.png}
-  \caption{Unity ML-Agents Verhalten Komponente}
+  \caption{Unity ML-Agents Verhalten Parameter Komponente}
   \label{fig:verhalten_komponente}
 \end{figure}
 
-\begin{table}[H]
-\centering
-{\rowcolors{2}{lightgray}{gray!50!lightgray!50}
-\begin{tabular}{ |p{4cm}|p{8cm}| }
-\hline
-Konfigurationsfeld& Beschreibung \\
-\hline
-Behaviour Name & Name des Verhaltens / wird in Trainer Konfiguration referenziert \\
-Space Size & Anzahl an Beobachtungen / Inputknoten für NN \\
-Continuous Actions & Anzahl an Aktionen / Outputknoten von NN \\
-Model & Referenz auf bereits trainiertes Modell zur Verwendung in Inferenz \\
-Behaviour Type & Lernmodus Default = Lernen, Heuristic, Inferenz \\
-\hline
-\end{tabular}}
-\caption{Test}
-\end{table}
+In Abbildung \ref{fig:entscheidung_anfragen_komponente} ist die Verhaltens Parameter Komponente zusehen. Das Verhalten legt die Ein- und Ausgangsgröße des Modells fest und weist dem Agenten ein Verhalten zu.
+\begin{itemize}
+  \item Behaviour Name: Name des Verhaltens / wird in Trainer Konfiguration referenziert
+  \item Space Size: Anzahl an Beobachtungen / Inputknoten für NN
+  \item Continuous Actions: Anzahl an Aktionen / Outputknoten von NN
+  \item Model: Referenz auf bereits trainiertes Modell zur Verwendung in Inferenz
+  \item Behaviour Type: Lernmodus Default = Lernen, Heuristic, Inferenz
+\end{itemize}
 
-\subsubsection{Entscheidung}
 \begin{figure}[H]
   \centering  
   \includegraphics[scale=0.5]{img/entscheidung_anfragen_komponente.png}
@@ -73,29 +76,12 @@ Behaviour Type & Lernmodus Default = Lernen, Heuristic, Inferenz \\
   \label{fig:entscheidung_anfragen_komponente}
 \end{figure}
 
-\begin{center}
-{\rowcolors{2}{lightgray}{gray!50!lightgray!50}
-\begin{tabular}{ |p{4cm}|p{8cm}| }
-\hline
-Konfigurationsfeld& Beschreibung \\
-\hline
-Decision Period & Anzahl an Akademie-Schritten (standard ein Schritt pro Physikupdate) bis zur nächsten Entscheidung \\
-Take Actions Between Decisions &  Kontrollkasten ob Agent Aktionen zwischen Entscheidungen ausführen soll \\
-\hline
-\end{tabular}}
-\end{center}
-
+Die Komponente in Abbildung \ref{fig:entscheidung_anfragen_komponente} fragt in regelmäßigen Abständen Entscheidungen an. Das bedeutet es wird eine Beobachtung erstellt, die Beobachtung als Eingangswert für das neuronale Netz genutzt und dann eine Aktion vom neuronalen Netz ausgewählt. Während dem training wird diese Beobachtung zusammen mit der darauf ausgeführten Aktion und der resultierenden Belohnung im Trainingsspeicher abgelegt. Die "Decision Period" gibt an in welchem Interval der Agent eine Entscheidung treffen soll. Das "Kontrollkästchen Take Actions Between Decisions" gibt an ob der Agent die ausgewählte Aktion wiederholen soll bis die nächste Aktion ausgewählt wurde.
 
 \subsection{Programmierschnittstellen}
-\begin{lstlisting}[caption={Academy Instanzvariablen},captionpos=b]
-envParams = Academy.Instance.EnvironmentParameters;
-statsRecorder = Academy.Instance.StatsRecorder;
-\end{lstlisting}
-Die Akademie stellt mit dem Attribut EnvironmentParameters die Umgebungsparameter aus Trainer Konfiguration oder aktueller Lektion bereit
+\label{subsec:programmierschnittstellen}
 
-Mit dem StatsRecorder lassen sich Daten aggregieren um diese nach oder während dem Training über die Tensorboard Visualisierung auszuwerten
-
-\begin{lstlisting}[caption={Agent Funktionen},captionpos=b]
+\begin{lstlisting}[caption={Agent Funktionen},captionpos=b,label={lst:agent_funktionen}]
 public override void CollectObservations(VectorSensor sensor)
 {
     sensor.AddObservation(floatObservation);
@@ -104,7 +90,8 @@ public override void CollectObservations(VectorSensor sensor)
 public override void OnActionReceived(ActionBuffers actionBuffers)
 {
     var continuousActions = actionBuffers.ContinuousActions;
-    float action = continuousActions[0]
+    movement.x += continuousActions[0]
+    movement.y += continuousActions[1]
 }
 
 public virtual void FixedUpdate()
@@ -113,14 +100,13 @@ public virtual void FixedUpdate()
 }
 \end{lstlisting}
 
-In der CollectObservations Methoden wird festgelegt welche Daten dem Agent für das Training bereit stehen, dieser Schritt wird für jede angefragte Entscheidung ausgeführt und das Ergebnis an das NN Modell oder den Python Trainer übergeben.
+In der CollectObservations Methoden wird festgelegt welche Daten dem Agent für das Training bereit stehen siehe Listing \ref{lst:agent_funktionen} Zeile 1-3. CollectObservations wird für jede angefragte Entscheidung ausgeführt und das Ergebnis an das NN Modell oder den Python Trainer übergeben.
 
-Wenn eine Entscheidung angefragt wurde und das NN Modell ein Ergebnis liefert wird dieses hier von numerischen Werten in Aktionen umgewandelt.
+Wenn eine Entscheidung angefragt wurde und das NN Modell ein Ergebnis liefert wird dieses hier von numerischen Werten in Aktionen umgewandelt. In Listing \ref{lst:agent_funktionen} Zeile 6-11 wird gezeigt wie die Aktion in x und y Bewegung umgesetzt wird.
 
-Im folgenden Beispielcode wird ein Reward in jedem FixedUpdate vergeben über die AddReward Methode die auch Teil der Agenten-Komponente ist. Der Reward kann aber an jeder Stelle im Code vergeben werden, der Code dient hier nur als ein Beispiel.
+Im Beispielcode in Listing \ref{lst:agent_funktionen} Zeile 13-16 wird ein Reward in jedem FixedUpdate vergeben über die AddReward Methode die auch Teil der Agenten-Komponente ist. Der Reward kann aber an jeder Stelle im Code vergeben werden, der Code dient hier nur als ein Beispiel.
 
-Die Trainings Konfigurationdatei enthält mehrere Teile. Der hyperparameter Teil enthält die Hyperparameter des Maschinellen Lernalgorithmuses, danach folgt der network\_settings Teil welcher die Konfiguration des Neuronalennetzes festlegt. Anschließend folgen noch Konfigurationen für die Belohnungssignale im Bereich reward\_signals und Einstellungen für die Speicherung der Daten sowie der länge des Trainings. Ganz am Ende der Konfigurationsdatei befinden sich noch Umgebungsparameter welche erweitert und während dem Training ausgelesen werden können.
-\begin{lstlisting}[caption={Trainer Konfigurationsdatei},captionpos=b]
+\begin{lstlisting}[caption={Trainer Konfigurationsdatei},captionpos=b,label={lst:trainer_konfiguration}]
 {
 behaviors:
   Walker:
@@ -152,3 +138,6 @@ environment_parameters:
   environment_count: 100.0
 }
 \end{lstlisting}
+
+Die Trainings Konfigurationsdatei (siehe Listing \ref{lst:trainer_konfiguration}) enthält mehrere Teile. Der Hyperparameter Teil enthält die Hyperparameter des Maschinellen Lernalgorithmuses (Zeile 5-13), danach folgt der network\_settings Teil welcher die Konfiguration des Neuronalennetzes festlegt (Zeile 14-18). Anschließend folgen noch Konfigurationen für die Belohnungssignale im Bereich reward\_signals (Zeile 19-22) und Einstellungen für die Speicherung der Daten sowie der länge des Trainings (Zeile 23-27). Ganz am Ende der Konfigurationsdatei (Zeile 28-29) befinden sich noch Umgebungsparameter welche erweitert und während dem Training ausgelesen werden können.
+
