@@ -5,28 +5,34 @@ Das Unity ML-Agents Toolkit ist ein Open-Source-Projekt, in dem maschinelle Lern
 \subsection{Aufbau}
 Die Implementierung ist in zwei Bereiche unterteilt. Für die Unity-Integration ist das Paket com.unity.ml-agents aus dem Unity Asset Store zuständig. Das eigentliche Training mit den maschinellen Lernalgorithmen findet jedoch in einer separaten Python-Umgebung statt. Für die Kommunikation zwischen den beiden Bereichen verwendet das ML-Agents Toolkit eine gRPC-Netzwerkkommunikation, worüber Zustand der Simulationsumgebung in Unity, ausgewählte Aktionen des neuronalen Netzes in Python und weitere Werte für die Auswertung des Trainings ausgetauscht werden.\cite{juliani2020}
 
-\begin{tikzpicture}[node distance=2cm]
-\node(umgebung) [draw] {Umgebung};
-\node (agent1) [rounded, draw=green, fill=green!30, below of=umgebung, xshift=0.75cm, yshift=0.8cm] {Agent 1};
-\node (agent2) [rounded, right of=agent1, xshift=2cm, draw=green, fill=green!30] {Agent 2};
-\node (agent3) [rounded, right of=agent2, xshift=2cm, draw=green, fill=green!30] {Agent 3};
-\node (akademie) [rounded, below of=agent2 , draw=yellow, fill=yellow!30] {Akademie};
+\begin{figure}[H]
+  \centering  
+  \begin{tikzpicture}[node distance=2cm]
+    \node(umgebung) [draw] {Umgebung};
+    \node (agent1) [rounded, draw=green, fill=green!30, below of=umgebung, xshift=0.75cm, yshift=0.8cm] {Agent 1};
+    \node (agent2) [rounded, right of=agent1, xshift=2cm, draw=green, fill=green!30] {Agent 2};
+    \node (agent3) [rounded, right of=agent2, xshift=2cm, draw=green, fill=green!30] {Agent 3};
+    \node (akademie) [rounded, below of=agent2 , draw=yellow, fill=yellow!30] {Akademie};
 
-\begin{pgfonlayer}{bg}
-\node(umgebung_bg) [draw, fill=black!20, inner sep=10pt, fit=(agent1) (agent2) (agent3) (akademie)] {};
-\end{pgfonlayer}
+    \begin{pgfonlayer}{bg}
+      \node(umgebung_bg) [draw, fill=black!20, inner sep=10pt, fit=(agent1) (agent2) (agent3) (akademie)] {};
+    \end{pgfonlayer}
 
-\node (python_api) [rounded, below of=akademie, draw=orange, fill=orange!30] {Python API};
-\node (python_trainer) [rounded, right of=python_api, xshift=2cm, draw=red, fill=red!30] {Python Trainer};
+    \node (python_api) [rounded, below of=akademie, draw=orange, fill=orange!30] {Python API};
+    \node (python_trainer) [rounded, right of=python_api, xshift=2cm, draw=red, fill=red!30] {Python Trainer};
 
 
-\draw [latex-latex, line width=0.3mm] (agent1)  |- node {} (akademie);
-\draw [latex-latex, line width=0.3mm] (agent2) -- (akademie);
-\draw [latex-latex, line width=0.3mm] (agent3) |- node {} (akademie);
+    \draw [latex-latex, line width=0.3mm] (agent1)  |- node {} (akademie);
+    \draw [latex-latex, line width=0.3mm] (agent2) -- (akademie);
+    \draw [latex-latex, line width=0.3mm] (agent3) |- node {} (akademie);
 
-\draw [latex-latex, line width=0.3mm] (akademie) -- (python_api);
-\draw [latex-latex, line width=0.3mm] (python_api) -- (python_trainer);
-\end{tikzpicture}
+    \draw [latex-latex, line width=0.3mm] (akademie) -- (python_api);
+    \draw [latex-latex, line width=0.3mm] (python_api) -- (python_trainer);
+  \end{tikzpicture}
+  \caption{Unity ML-Agents Aufbau}
+  \label{fig:mlagents_aufbau}
+\end{figure}
+
 
 Das Unity-Paket enthält drei Grundlegenden Komponenten, die Akademie, Agenten und Sensoren.
 Das Unity-Paket enthält zwei Komponenten: Agenten und deren Verhalten. Die Agent-Komponente bildet die Grundlage für alle Implementierungen. Sie bietet abstrakte Funktionen für die Initialisierung, den Start einer Episode, das Erfassen des Zustands der Umgebung sowie das Ausführen von Aktionen. Durch die Implementierung dieser Funktionen können unterschiedlichste Agenten entwickelt und trainiert werden. Jeder Agent ist mit einem Verhalten verknüpft, das für jede Beobachtung des Agenten eine Aktion auswählt, die der Agent ausführt. Es gibt drei Arten, wie die Verhaltensweisen agieren können. Im Lernmodus werden die Beobachtungen des Agenten für das Training und die Auswahl einer Aktion anhand des aktuellen Modells verwendet. Der Inferenzmodus nutzt hingegen ein bereits trainiertes Modell und wertet dieses aus. Der letzte Modus eines Verhaltens ist der Heuristikmodus, bei dem festgelegte Regeln im Code entscheiden, welche Aktion ausgeführt wird, ohne die Verwendung eines trainierten Modells.\cite{juliani2020}
