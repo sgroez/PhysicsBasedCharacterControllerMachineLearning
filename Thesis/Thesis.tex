@@ -55,6 +55,11 @@ literate=%
   {ö}{{\"o}}1
   {ä}{{\"a}}1
   }
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows, fit}
+\pgfdeclarelayer{bg}
+\pgfsetlayers{bg,main}
+\tikzstyle{rounded} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black]
   
 \definecolor{bluekeywords}{rgb}{0,0,1}
 \definecolor{greencomments}{rgb}{0,0.5,0}
@@ -114,14 +119,19 @@ literate=%
 %Abbildungsverzeichnis
 \listoffigures
 
+%Tabellenverzeichnis
+\listoftables
+
+%Codesnippet-verzeichnis
+\lstlistoflistings
+
 % pagestyle für gesamtes Dokument aktivieren
 \pagestyle{fancy}
 
 \input{01_einleitung}
-\input{02_rl}
-\input{03_ppo}
-\input{04_mlagents}
-\input{05_analyse}
+\input{02_grundlagen}
+\input{04_analyse}
+
 \input{06_fazit}
 
 \appendix
