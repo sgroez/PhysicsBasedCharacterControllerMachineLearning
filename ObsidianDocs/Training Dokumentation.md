@@ -94,5 +94,6 @@
 <tr><td>123_Milestone2</td><td>gleich wie 122 aber mit beta = 0.0075 als mittelwert zwischen 0.005 und 0.01</td><td></td></tr>
 <tr><td>124_Milestone2Standing</td><td>Versuch einfaches auf der Stelle stehen trainieren</td><td>abgebrochen</td></tr>
 <tr><td>125_Milestone2Standing</td><td>Versuch einfaches auf der Stelle stehen mit Target auf Startpunkt und Geschwindigkeit von 0.0001</td><td>abgebrochen</td></tr>
+<tr><td>126</td><td>Versuch auf der Stelle stehen mit neuer MatchingVelocityReward Funktion</td><td>funktioniert, vermutlich in kombi mit Leistungsminimierung noch besser</td></tr>
 <tr><td>Name</td><td>beschreibung</td><td>notizen</td></tr>
 </table>
