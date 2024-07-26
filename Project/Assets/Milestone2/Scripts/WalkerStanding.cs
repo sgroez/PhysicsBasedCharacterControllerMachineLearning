@@ -17,7 +17,7 @@ public class WalkerStanding : WalkerAgent1
     {
         Vector3 avgVelocity = GetAvgVelocity();
         float standingReward = Mathf.Exp(-100 * Mathf.Pow(avgVelocity.magnitude, 2));
-        RecordStat("standingReward", standingReward);
+        RecordStat("Reward/StandingReward", standingReward);
 
         AddReward(standingReward);
     }
