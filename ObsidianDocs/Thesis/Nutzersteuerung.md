@@ -1,0 +1,1 @@
+input smoothing um schnelle positionswechsel zu vermeiden

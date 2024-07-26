@@ -1,0 +1,33 @@
+\chapter{FormatTest}
+\section{Variante 1}
+\begin{lstlisting}
+public void CollectObservationBodyPart(BodyPart bp, VectorSensor sensor)
+    {
+        sensor.AddObservation(Bodenkontakt);
+
+        sensor.AddObservation(Geschwindigkeit);
+        sensor.AddObservation(Rotationsgeschwindigkeit);
+
+        sensor.AddObservation(Position - Hüftposition);
+
+        if (nicht Hüfte oder Hände)
+        {
+            sensor.AddObservation(Lokale Rotation);
+            sensor.AddObservation(Gelenkkraft);
+        }
+    }
+\end{lstlisting}
+
+\section{Variante 2}
+$Q_{Hüfte}=Quaternion(\vec{Hüftrichtung} - \vec{Zielrichtung})$\\
+$Q_{Blick}=Quaternion(\vec{Blickrichtung} - \vec{Zielrichtung})$
+
+$S=\{
+\\|\vec{Zielgeschwindigkeit} - \vec{Durchschnittsgeschwindigkeit}|,
+\\\vec{Durchschnittsgeschwindigkeit},
+\\\vec{Zielgeschwindigkeit},
+\\Q_{Hüfte},
+\\Q_{Blick},
+\\\vec{Zielposition},
+\\K_1,K_2,...,K_n
+\\\}$
