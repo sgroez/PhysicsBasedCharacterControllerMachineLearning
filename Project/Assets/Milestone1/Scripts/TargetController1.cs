@@ -7,13 +7,17 @@ public class TargetController1 : MonoBehaviour
 {
     [Header("Target Config")]
     public float spawnRadius; //The radius in which a target can be randomly spawned.
+    public bool setRandomStartPos = true;
 
     private Vector3 m_startingPos; //the starting position of the target
 
     void OnEnable()
     {
         m_startingPos = transform.position;
-        MoveTargetToRandomPosition();
+        if (setRandomStartPos)
+        {
+            MoveTargetToRandomPosition();
+        }
     }
 
     /// <summary>

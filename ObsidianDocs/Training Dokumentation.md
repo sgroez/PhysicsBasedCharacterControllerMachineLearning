@@ -92,5 +92,6 @@
 <tr><td>121_Milestone2</td><td>gleich wie 120 aber für 1 milliarde steps als langzeittest</td><td>Endet bei 50mil steps in lokalem maximum, ändert sich nicht mehr</td></tr>
 <tr><td>122_Milestone2</td><td>gleich wie 121 aber mit beta = 0.01 um mehr zufällige Aktionen auszuprobieren (Entropy Regularization)</td><td>0.01 ist zu hoch entropy (randomness) steigt im Verlauf des trainings</td></tr>
 <tr><td>123_Milestone2</td><td>gleich wie 122 aber mit beta = 0.0075 als mittelwert zwischen 0.005 und 0.01</td><td></td></tr>
+<tr><td>124_Milestone2Standing</td><td>Versuch einfaches auf der Stelle stehen trainieren</td><td></td></tr>
 <tr><td>Name</td><td>beschreibung</td><td>notizen</td></tr>
 </table>

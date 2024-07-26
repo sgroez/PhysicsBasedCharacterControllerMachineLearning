@@ -11,14 +11,6 @@ public class WalkerStanding : WalkerAgent1
     public override void Initialize()
     {
         base.Initialize();
-        targetWalkingSpeed = 0f;
-    }
-    public override void FixedUpdate()
-    {
-        Vector3 avgVelocity = GetAvgVelocity();
-        float standingReward = Mathf.Exp(-100 * Mathf.Pow(avgVelocity.magnitude, 2));
-        RecordStat("Reward/StandingReward", standingReward);
-
-        AddReward(standingReward);
+        targetWalkingSpeed = 0.0001f;
     }
 }
