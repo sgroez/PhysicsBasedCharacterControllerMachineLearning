@@ -240,11 +240,12 @@ public class WalkerAgent1 : Agent
     public float GetMatchingVelocityReward(Vector3 velocityGoal, Vector3 actualVelocity)
     {
         //distance between our actual velocity and goal velocity
-        var velDeltaMagnitude = Mathf.Max(Vector3.Distance(actualVelocity, velocityGoal), 0);
+        float upperLimit = Mathf.Max(0.1f, targetWalkingSpeed);
+        var velDeltaMagnitude = Mathf.Clamp(Vector3.Distance(actualVelocity, velocityGoal), 0, upperLimit);
 
         //return the value on a declining sigmoid shaped curve that decays from 1 to 0
         //This reward will approach 1 if it matches perfectly and approach zero as it deviates
-        float matchingVelocityReward = Mathf.Exp(5 * -Mathf.Pow(velDeltaMagnitude, 2));
+        float matchingVelocityReward = Mathf.Pow(1 - Mathf.Pow(velDeltaMagnitude / upperLimit, 2), 2);
         return matchingVelocityReward;
     }
 
