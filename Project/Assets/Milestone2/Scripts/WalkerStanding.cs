@@ -11,6 +11,6 @@ public class WalkerStanding : WalkerAgent1
     public override void Initialize()
     {
         base.Initialize();
-        targetWalkingSpeed = 0.0001f;
+        targetWalkingSpeed = 0f;
     }
 }
