@@ -96,5 +96,6 @@
 <tr><td>125_Milestone2Standing</td><td>Versuch einfaches auf der Stelle stehen mit Target auf Startpunkt und Geschwindigkeit von 0.0001</td><td>abgebrochen</td></tr>
 <tr><td>126_Milestone2Standing</td><td>Versuch auf der Stelle stehen mit neuer MatchingVelocityReward Funktion</td><td>funktioniert, vermutlich in kombi mit Leistungsminimierung noch besser</td></tr>
 <tr><td>127_Milestone1</td><td>Milestone 1 Walker Umgebung mit neuer MatchingVelocityReward Funktion</td><td>lernt sehr langsam, walker demo belohnungsfunktion verändert sensitivität je nach laufgeschwindigkeit</td></tr>
+<tr><td>128_Milestone2Standing</td><td>Nutzt wieder original MatchingVelocityReward Funktion aber mit einem Limit auf dem Teiler sodass 0 Geschwindigkeit akzeptiert wird</td><td>notizen</td></tr>
 <tr><td>Name</td><td>beschreibung</td><td>notizen</td></tr>
 </table>
