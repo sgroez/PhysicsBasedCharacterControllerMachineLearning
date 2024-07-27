@@ -3231,6 +3231,7 @@ GameObject:
   - component: {fileID: 1430798481314769567}
   - component: {fileID: 5165359689779301619}
   - component: {fileID: 9220681077886511860}
+  - component: {fileID: 967064052950688979}
   - component: {fileID: 4467408288545091275}
   m_Layer: 0
   m_Name: DynamicTarget
@@ -3304,6 +3305,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &967064052950688979
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5747754715014611639}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4467408288545091275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4316,7 +4338,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 3a5204708eb13417f8a2344fb7933930, type: 3}
+  m_Model: {fileID: 0}
   m_InferenceDevice: 2
   m_BehaviorType: 0
   m_BehaviorName: Walker
@@ -4364,7 +4386,7 @@ MonoBehaviour:
   randomizeRotationOnEpsiode: 1
   bodyparts: []
   logStats: 0
-  direction: 0
+  direction: 3
 --- !u!114 &8629843051495367687
 MonoBehaviour:
   m_ObjectHideFlags: 0

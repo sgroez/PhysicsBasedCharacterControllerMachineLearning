@@ -43,6 +43,7 @@ public class WalkerMultidirection : WalkerAgent1
         // b. Rotation alignment with target direction.
         //This reward will approach 1 if it faces the target direction perfectly and approach zero as it deviates
         var headForward = head.forward;
+        headForward.y = 0;
         Vector3 lookDirection = cubeForward;
         switch (direction)
         {
@@ -56,7 +57,6 @@ public class WalkerMultidirection : WalkerAgent1
                 lookDirection = -walkOrientationCube.transform.forward;
                 break;
         }
-        headForward.y = 0;
         var lookAtTargetReward = (Vector3.Dot(lookDirection, headForward) + 1) * .5F;
         RecordStat("Reward/LookAtTargetReward", lookAtTargetReward);
 
@@ -73,9 +73,10 @@ public class WalkerMultidirection : WalkerAgent1
         AddReward(matchSpeedReward * lookAtTargetReward);
     }
 
-    /* void OnDrawGizmos()
+    void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
+        if (!walkOrientationCube) return;
         Vector3 lookDirection = walkOrientationCube.transform.forward;
         switch (direction)
         {
@@ -90,5 +91,5 @@ public class WalkerMultidirection : WalkerAgent1
                 break;
         }
         Gizmos.DrawRay(head.position, lookDirection);
-    } */
+    }
 }
