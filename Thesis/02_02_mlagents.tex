@@ -1,9 +1,9 @@
 {\section{Ml-Agents}}
 \label{sec:mlagents}
-Das Unity ML-Agents Toolkit ist ein Open-Source-Projekt, in dem maschinelle Lernalgorithmen und Funktionen für die Verwendung mit der Spieleumgebung Unity implementiert und kontinuierlich weiterentwickelt werden. 
+Das Unity ML-Agents Toolkit ist ein Open-Source-Projekt, welches maschinelle Lernalgorithmen und Funktionen für die Verwendung mit der Spieleumgebung Unity implementiert. Es beinhaltet Komponenten um eine Unityumgebung als Umgebung für verstärkendes Lernen zu konfigurieren.\cite{juliani2020}
 
 \subsection{Aufbau}
-Die Implementierung ist in zwei Teile unterteilt. Für die Unity-Integration ist das Paket com.unity.ml-agents aus dem Unity Asset Store zuständig. Das eigentliche Training mit den maschinellen Lernalgorithmen findet jedoch in einer separaten Python-Umgebung statt. Für die Kommunikation zwischen den beiden Bereichen verwendet das ML-Agents Toolkit eine gRPC-Netzwerkkommunikation, worüber Zustand der Simulationsumgebung in Unity, ausgewählte Aktionen des neuronalen Netzes in Python und weitere Werte für die Auswertung des Trainings ausgetauscht werden.\cite{juliani2020}
+Die Implementierung ist in zwei Teile unterteilt. Für die Unity-Integration ist das Paket com.unity.ml-agents aus dem Unity Asset Store zuständig. Das eigentliche Training mit den maschinellen Lernalgorithmen findet jedoch in einer separaten Python-Umgebung statt. Für die Kommunikation zwischen den beiden Bereichen verwendet das ML-Agents Toolkit eine gRPC-Netzwerkkommunikation. Während des Trainings tauschen die Umgebungen den Zustand der Simulationsumgebung, die ausgewählten Aktionen des neuronalen Netzes und weitere für die Auswertung des Trainings relevante Daten aus.\cite{juliani2020}
 
 \begin{figure}[H]
   \centering  
@@ -33,11 +33,11 @@ Die Implementierung ist in zwei Teile unterteilt. Für die Unity-Integration ist
   \label{fig:mlagents_aufbau}
 \end{figure}
 
-Die Umgebung in Abbildung \ref{fig:mlagents_aufbau} stellt den Aufbau der Unity Umgebung mit den ML-Agnents Komponenten dar. Das Unity-Paket enthält drei Grundlegenden Komponenten, die Akademie, Agenten und Sensoren. Um eine Szene für das verstärkende Lernen einzurichten benötigt die Szene mindestens einen Agenten. Objekte in der Unity Szene werden, mit dem hinzufügen einer Agenten Komponente als Agent für das Verstärkende Lernen konfiguriert. Jeder Agent braucht zusätzlich noch ein Verhalten, welches auf ein bereits trainiertes Modell oder auf eine Trainingskonfiguration verweist.
+Die Umgebung in Abbildung \ref{fig:mlagents_aufbau} stellt den Zusammenhang der ML-Agents Komponenten dar. Das Unity-Paket enthält zwei Grundlegenden Komponenten, die Akademie und Agenten. Um eine Szene für das verstärkende Lernen einzurichten benötigt die Szene mindestens einen Agenten. Objekte in der Unity Szene werden, mit dem hinzufügen einer Agenten Komponente als Agent für das Verstärkende Lernen konfiguriert.
 
 Die Agent-Komponente bildet die Grundlage für alle Implementierungen. Sie bietet abstrakte Funktionen für die Initialisierung, den Start einer Episode, das Erfassen des Zustands der Umgebung sowie das Ausführen von Aktionen. Durch die Implementierung dieser Funktionen können unterschiedlichste Agenten entwickelt und trainiert werden. Die Beobachtungen des Agenten können auf zwei Arten erstellt werden, für Beobachtungen basierend auf Raycasts sowie Kamerabildern existieren seperate Komponenten. Zahlenwerte sowie Vektoren und Quaternionen können jedoch auch direkt über eine Funktion im Agenten der Beobachtung angehängt werden.
 
-Die Akademie ist eine einfach Instanz welche beim starten der Unity Umgebung einmalig erstellt und von allen Agenten referenziert wird. Zuständig ist die Akademie für das steuern des Trainingsablaufs sowie das Aufbauen der Kommunikationspipeline zwischen der Unity- und Pythonumgebung.\cite{juliani2020}
+Die Akademie ist eine Einzelinstanz welche beim starten der Unity Umgebung einmalig erstellt und von allen Agenten referenziert wird. Zuständig ist die Akademie für das steuern des Trainingsablaufs sowie das Aufbauen der Kommunikationspipeline zwischen der Unity- und Pythonumgebung.
 
 Beim Starten der Python-Trainingsumgebung mit dem Befehl mlagents-learn wird zu Beginn eine Instanz der Python-API erstellt. Die Python-API ist eine Schnittstelle für die Interaktion mit Unity ML-Agents-Umgebungen. Über die Python-API kann der Python-Trainer auf Beobachtungen zugreifen, Aktionen ausführen und anhand der Belohnungssignale die Gewichtung der neuronalen Netze anpassen, um das Verhalten des Agenten zu optimieren. Nachdem die Konfigurationsparameter von der Unity-Instanz an die Python-Umgebung übertragen wurden, wird basierend darauf ein Python-Trainer erstellt. Der Python-Trainer initialisiert dann die neuronalen Netze und berechnet deren Gewichtungen mithilfe der Lernalgorithmen.
 
@@ -60,7 +60,8 @@ Abbildung \ref{fig:agent_komponente} zeigt die Basiskomponente des Agenten. Die 
   \label{fig:verhalten_komponente}
 \end{figure}
 
-In Abbildung \ref{fig:entscheidung_anfragen_komponente} ist die Verhaltens Parameter Komponente zusehen. Das Verhalten legt die Ein- und Ausgangsgröße des Modells fest und weist dem Agenten ein Verhalten zu.
+In Abbildung \ref{fig:entscheidung_anfragen_komponente} ist die Verhaltens Parameter Komponente zusehen. Das Verhalten legt die Ein- und Ausgangsgröße des Modells fest. Für das Training muss ein gleichnamiges Verhalten in der Konfigurationsdatei definiert sein. Um ein bereits trainiertes Verhalten zu verwenden muss im Modell Feld die Modelldatei referenziert werden.
+
 \begin{itemize}
   \item Behaviour Name: Name des Verhaltens / wird in Trainer Konfiguration referenziert
   \item Space Size: Anzahl an Beobachtungen / Inputknoten für NN
@@ -76,10 +77,11 @@ In Abbildung \ref{fig:entscheidung_anfragen_komponente} ist die Verhaltens Param
   \label{fig:entscheidung_anfragen_komponente}
 \end{figure}
 
-Die Komponente in Abbildung \ref{fig:entscheidung_anfragen_komponente} fragt in regelmäßigen Abständen Entscheidungen an. Das bedeutet es wird eine Beobachtung erstellt, die Beobachtung als Eingangswert für das neuronale Netz genutzt und dann eine Aktion vom neuronalen Netz ausgewählt. Während dem training wird diese Beobachtung zusammen mit der darauf ausgeführten Aktion und der resultierenden Belohnung im Trainingsspeicher abgelegt. Die "Decision Period" gibt an in welchem Interval der Agent eine Entscheidung treffen soll. Das "Kontrollkästchen Take Actions Between Decisions" gibt an ob der Agent die ausgewählte Aktion wiederholen soll bis die nächste Aktion ausgewählt wurde.
+Die Komponente in Abbildung \ref{fig:entscheidung_anfragen_komponente} fragt in regelmäßigen Abständen Entscheidungen an. Das bedeutet es wird eine Beobachtung erstellt. Darauf wird die Beobachtung als Eingangswert für das neuronale Netz genutzt und dann eine Aktion vom neuronalen Netz ausgewählt. Während dem training wird diese Beobachtung zusammen mit der darauf ausgeführten Aktion und der resultierenden Belohnung im Trainingsspeicher abgelegt. Die "Decision Period" gibt an in welchem Interval der Agent eine Entscheidung treffen soll. Das "Kontrollkästchen Take Actions Between Decisions" gibt an ob der Agent die ausgewählte Aktion wiederholen soll bis die nächste Aktion ausgewählt wurde.
 
 \subsection{Programmierschnittstellen}
 \label{subsec:programmierschnittstellen}
+Die Agenten Komponente enthält einige Funktionen die für das Training eines Agenten implementiert werden müssen. In den folgenden Absätzen werden die Funktionen anhand Beispielen näher erklärt.
 
 \begin{lstlisting}[caption={Agent Funktionen},captionpos=b,label={lst:agent_funktionen}]
 public override void CollectObservations(VectorSensor sensor)

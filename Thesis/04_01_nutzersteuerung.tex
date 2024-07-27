@@ -11,7 +11,7 @@ void FixedUpdate()
     transform.position = root.position + root.forward * inputVert + root.right * inputHor;
 }
 \end{lstlisting}
-Die Funktion in Listing \ref{lst:nutzersteuerung_1} liest den Input über das Unity InputSystem. Das Ziel wird relativ zur Hüfte gesetzt. Dieser Ansatz funktioniert grundsätzlich, hat aber noch ein grundlegendes Probleme und einige Einschränkungen. Das Problem ist dass die Zielposition in Abhängigkeit der Hüftrotation berechnet wird. Das hat zur folge das Schwankungen des Walkers Einfluss auf die Laufrichtung haben.
+Die Funktion in Listing \ref{lst:nutzersteuerung_1} liest den Input über das Unity InputSystem. Das Ziel wird relativ zur Hüfte gesetzt. Dieser Ansatz funktioniert grundsätzlich, hat aber noch ein Problem und einige Einschränkungen. Das Problem ist dass die Zielposition in Abhängigkeit der Hüftrotation berechnet wird. Das hat zur folge das Schwankungen des Walkers Einfluss auf die Laufrichtung haben.
 
 \begin{lstlisting}[caption={Nutzersteuerung berechnung mit Weltachsen},captionpos=b,label={lst:nutzersteuerung_2}]
 //Setzen der Zielposition
@@ -49,5 +49,3 @@ void FixedUpdate()
     transform.position = root.position + directionForward * inputVert + directionRight * inputHor;
 }
 \end{lstlisting}
-
-Mit dieser Implementierung lässt sich der Walker intuitiv steuern. Das trainierte Modell der Walker Demo beherrscht jedoch nur die Fortbewegung in Blickrichtung. Durch diese Einschränkung lässt sich von der Steuerung mit WASD nur die W Komponente nutzen. Die Vorwärtsbewegung in Kombination mit der Maussteuerung der Blickrichtung ermöglicht es sich nahezu überall hinzubewegen. Eine weitere große Einschränkung ist, das der Walker nicht darauf trainiert ist stehen zu bleiben. Das resultiert darin das der Walker fällt sobald der Nutzer keinen Tastaturinput gibt.
