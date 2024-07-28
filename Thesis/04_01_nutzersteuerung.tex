@@ -1,5 +1,10 @@
 \section{Nutzersteuerung}
 Um von einem Charaktercontroller sprechen zu können muss der Agent über Nutzerinput gesteuert werden können. Mit diesem Gedanke wurde die ersten Anpassungen der Walker Demo implementiert um das Ziel zur Laufzeit über Tastatureingabe zu bewegen.
+
+\subsection{Versuch 1}
+\label{subsec:versuch_1}
+Das Ziel soll zur Laufzeit durch Tastatureingabe des Nutzers gesteuert werden könne.
+Um das zu umzusetzen wird die Tastatureingabe eingelesen und darauf basierend das Ziel relativ zur Hüfte des Walkers gesetzt. Über das forward und right Attribut multipliziert mit dem Input wird die Position relativ zur Hüfte berechnet (siehe Listing \ref{lst:nutzersteuerung_1}).
 \begin{lstlisting}[caption={Nutzersteuerung erster Prototyp},captionpos=b,label={lst:nutzersteuerung_1}]
 void FixedUpdate()
 {
@@ -11,16 +16,20 @@ void FixedUpdate()
     transform.position = root.position + root.forward * inputVert + root.right * inputHor;
 }
 \end{lstlisting}
-Die Funktion in Listing \ref{lst:nutzersteuerung_1} liest den Input über das Unity InputSystem. Das Ziel wird relativ zur Hüfte gesetzt. Dieser Ansatz funktioniert grundsätzlich, hat aber noch ein Problem und einige Einschränkungen. Das Problem ist dass die Zielposition in Abhängigkeit der Hüftrotation berechnet wird. Das hat zur folge das Schwankungen des Walkers Einfluss auf die Laufrichtung haben.
+Diese implementierung ermöglicht grundsätzlich das der Läufer über die Tastatureingabe gesteuert werden kann, hat aber noch einige Probleme. Das positionieren des Ziels relativ zur Hüfte hat als Konsequenz das jede Bewegung der Hüfte Einfluss auf die Laufrichtung hat, wodurch sich der Läufer nicht stabil steuern lässt. 
 
+\subsection{Versuch 2}
+Um die Probleme aus \ref{subsec:versuch_1} zu beheben wird in folgendem Versuch das Ziel relativ zu den Weltachsen gesetzt. In Unity gibt die Vector3 Klasse mit den Feldern forward den Vektor (0,0,1) und mit right den Vektor (1,0,0) in Weltkoordinaten an.
 \begin{lstlisting}[caption={Nutzersteuerung berechnung mit Weltachsen},captionpos=b,label={lst:nutzersteuerung_2}]
 //Setzen der Zielposition
 transform.position = root.position + Vector3.forward * inputVert + Vector3.right * inputHor;
 \end{lstlisting}
 Durch die Nutzung der Weltachsen anstatt der Hüftrotationsachsen (siehe Listing \ref{lst:nutzersteuerung_2}) kann das Problem behoben werden. Es tritt dadurch jedoch ein weiteres Problem auf. Bei Verwendung der Weltachsen ist die Steuerung des Walkers aus Spielersicht nicht mehr intuitiv, da der Input je nach Rotation des Walkers einen anderen Einfluss hat.
 
-Die Lösung für das Problem ist das einführen einer separaten Rotationskomponente für die Blickrichtung. Zu beginn wird die Blickrichtung mit der Vorwärtskomonente der Hüftrotation gleichgesetzt. Ausgehend von der Startrichtung wird dann über horizontalen Mausinput die Richtung angepasst (siehe Listing \ref{lst:nutzersteuerung_3}).
-
+\subsection{Versuch 3}
+Die Lösung ist eine Kombination aus den Ideen der ersten beiden Versuche. Die Laufrichtung soll weiterhin relativ zum Läufer bestimmen werden gleichermaßen aber von der wechselhaften Bewegung des Läufers entkoppeln sein.
+Das hinzufügen einer separaten Rotationskomponente für die Bestimmung der Blickrichtung erfüllt hier die Kriterien. \\
+Zu beginn wird die Blickrichtung mit der Vorwärtskomonente der Hüftrotation gleichgesetzt. Ausgehend von der Startrichtung wird dann über horizontalen Mausinput die Richtung angepasst (siehe Listing \ref{lst:nutzersteuerung_3}).
 \begin{lstlisting}[caption={Erweiterung der Nutzersteuerung mit separater Blickrichtung},captionpos=b,label={lst:nutzersteuerung_3}]
 void Start()
 {
@@ -49,3 +58,4 @@ void FixedUpdate()
     transform.position = root.position + directionForward * inputVert + directionRight * inputHor;
 }
 \end{lstlisting}
+Das Ergebnis ermöglicht die Steuerung des Läufers als Spielecharakter, mit einer gewohnten Steuerung aus schon bestehenden Spieletiteln und ist kompatibel mit einer Drittenperson Ansicht als auch mit der Erstenperson Ansicht.
