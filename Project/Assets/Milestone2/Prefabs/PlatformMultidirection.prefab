@@ -4386,7 +4386,7 @@ MonoBehaviour:
   randomizeRotationOnEpsiode: 1
   bodyparts: []
   logStats: 0
-  direction: 1
+  direction: 2
 --- !u!114 &8629843051495367687
 MonoBehaviour:
   m_ObjectHideFlags: 0
