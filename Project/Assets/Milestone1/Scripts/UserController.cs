@@ -1,10 +1,12 @@
 using UnityEngine;
 
-public class UserControlledTarget : MonoBehaviour
+public class UserController : MonoBehaviour
 {
     public Transform root;
     public Transform cam;
     public float camOffset;
+    public Transform target;
+
     Vector3 rotationAxis = Vector3.up;
     Vector3 startForward;
     Vector3 startRight;
@@ -34,7 +36,7 @@ public class UserControlledTarget : MonoBehaviour
         Vector3 directionRight = rotation * startRight;
 
         //Setzen der Zielposition
-        transform.position = root.position + directionForward * inputVert + directionRight * inputHor;
+        target.position = root.position + directionForward * inputVert + directionRight * inputHor;
 
         //Setzen der Kamera Position
         cam.position = root.position + directionForward * camOffset;

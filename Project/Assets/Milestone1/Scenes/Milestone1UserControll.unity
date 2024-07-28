@@ -370,21 +370,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0088f5b42c6ab4da382e05d24b548f96, type: 3}
---- !u!114 &1796843341
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4758813801661184447}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9be5f9fb9148146e382eba317ea1d8f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  root: {fileID: 3614163369643330436}
-  cam: {fileID: 165151939}
-  camOffset: -7
 --- !u!1001 &1941508368
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3129,7 +3114,6 @@ GameObject:
   - component: {fileID: 4232689950226765099}
   - component: {fileID: 2871695698277317634}
   - component: {fileID: 115240981198218320}
-  - component: {fileID: 1796843341}
   m_Layer: 0
   m_Name: DynamicTarget
   m_TagString: target
@@ -3967,6 +3951,7 @@ GameObject:
   - component: {fileID: 6958462795218281350}
   - component: {fileID: 8661549712319778615}
   - component: {fileID: 8575479381212932188}
+  - component: {fileID: 8661549712319778616}
   m_Layer: 0
   m_Name: WalkerRagdoll
   m_TagString: Untagged
@@ -4214,7 +4199,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1064585666094113483}
   m_Layer: 0
-  m_Name: Platform1
+  m_Name: PlatformUserControll
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5994,6 +5979,22 @@ MonoBehaviour:
   randomizeRotationOnEpsiode: 1
   bodyparts: []
   logStats: 0
+--- !u!114 &8661549712319778616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5989570170258026888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9be5f9fb9148146e382eba317ea1d8f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  root: {fileID: 3614163369643330436}
+  cam: {fileID: 165151939}
+  camOffset: -7
+  target: {fileID: 4232689950226765099}
 --- !u!1 &8673377004091925499
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ using UnityEngine.Events;
 using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
+using Unity.Barracuda;
 
 public enum Direction
 {
@@ -17,6 +18,7 @@ public enum Direction
 public class WalkerMultidirection : WalkerAgent1
 {
     public Direction direction = Direction.Forward;
+
     public override void FixedUpdate()
     {
         distanceMovedInTargetDirection += GetDistanceMovedInTargetDirection();
