@@ -33,6 +33,12 @@ public class WalkerMultidirection : WalkerAgent1
         direction = directions[Random.Range(0, directions.Length)];
     }
 
+    public override void CollectObservations(VectorSensor sensor)
+    {
+        base.CollectObservations(sensor);
+        sensor.AddObservation((float)direction);
+    }
+
     public override void FixedUpdate()
     {
         distanceMovedInTargetDirection += GetDistanceMovedInTargetDirection();
