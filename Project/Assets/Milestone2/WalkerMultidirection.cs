@@ -5,6 +5,7 @@ using UnityEngine.Events;
 using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
+using Random = UnityEngine.Random;
 
 public enum Direction
 {
@@ -17,6 +18,20 @@ public enum Direction
 public class WalkerMultidirection : WalkerAgent1
 {
     public Direction direction = Direction.Forward;
+    Direction[] directions;
+
+    public override void Initialize()
+    {
+        base.Initialize();
+        directions = (Direction[])Enum.GetValues(typeof(Direction));
+        SetRandomWalkDirection();
+        onTouchedTarget.AddListener(SetRandomWalkDirection);
+    }
+
+    public void SetRandomWalkDirection()
+    {
+        direction = directions[Random.Range(0, directions.Length)];
+    }
 
     public override void FixedUpdate()
     {

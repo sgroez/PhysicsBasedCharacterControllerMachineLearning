@@ -4364,7 +4364,8 @@ MonoBehaviour:
   MaxStep: 5000
   minWalkingSpeed: 0.1
   maxWalkingSpeed: 10
-  randomizeWalkSpeedEachEpisode: 1
+  randomizeWalkSpeedEachEpisode: 0
+  targetWalkingSpeed: 5
   target: {fileID: 1430798481314769567}
   onTouchedTarget:
     m_PersistentCalls:
