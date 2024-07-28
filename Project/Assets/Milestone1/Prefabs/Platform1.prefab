@@ -3639,7 +3639,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 5022602860645237092, guid: 3a5204708eb13417f8a2344fb7933930, type: 3}
   m_InferenceDevice: 2
   m_BehaviorType: 0
   m_BehaviorName: Walker
@@ -3666,6 +3666,7 @@ MonoBehaviour:
   minWalkingSpeed: 0.1
   maxWalkingSpeed: 10
   randomizeWalkSpeedEachEpisode: 1
+  targetWalkingSpeed: 0.1
   target: {fileID: 4232689948433085026}
   onTouchedTarget:
     m_PersistentCalls:
@@ -3955,7 +3956,7 @@ Transform:
   - {fileID: 4232689948433085026}
   - {fileID: 1550066226789326418}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6789389173012606758
 GameObject:

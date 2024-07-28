@@ -7,10 +7,10 @@ public class UserController : MonoBehaviour
     public float camOffset;
     public Transform target;
 
-    Vector3 rotationAxis = Vector3.up;
-    Vector3 startForward;
-    Vector3 startRight;
-    float rotAngle = 0;
+    protected Vector3 rotationAxis = Vector3.up;
+    protected Vector3 startForward;
+    protected Vector3 startRight;
+    protected float rotAngle = 0;
 
     void Start()
     {
@@ -18,7 +18,7 @@ public class UserController : MonoBehaviour
         startForward = root.forward;
         startRight = root.right;
     }
-    void FixedUpdate()
+    public virtual void FixedUpdate()
     {
         //Einlesen Tastatur Input
         float inputHor = Input.GetAxis("Horizontal");

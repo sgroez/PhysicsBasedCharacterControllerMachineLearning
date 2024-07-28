@@ -17,7 +17,7 @@ public class WalkerAgent1 : Agent
     public float minWalkingSpeed = 0.1f;
     public float maxWalkingSpeed = 10f;
     public bool randomizeWalkSpeedEachEpisode;
-    protected float targetWalkingSpeed = 0.1f;
+    public float targetWalkingSpeed = 0.1f;
 
 
     [Header("Target To Walk Towards")]

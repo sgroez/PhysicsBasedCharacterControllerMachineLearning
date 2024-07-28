@@ -5,7 +5,6 @@ using UnityEngine.Events;
 using Unity.MLAgents;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Actuators;
-using Unity.Barracuda;
 
 public enum Direction
 {
