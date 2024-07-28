@@ -1,30 +1,57 @@
-%Dokumentklasse
-\documentclass[a4paper,12pt,parskip=full]{scrreprt}
-\usepackage[left= 2.5cm,right = 2cm, bottom = 4 cm]{geometry}
-%\usepackage[onehalfspacing]{setspace}
-% ============= Packages =============
-
-% Dokumentinformationen
-\usepackage[
-	pdftitle={Physik basierter Charaktercontroller mit Unity Machine Learning},
-	pdfsubject={},
-	pdfauthor={Simon Grözinger},
-	pdfkeywords={},	
-	%Links nicht einrahmen
-	hidelinks
-]{hyperref}
-
-
-% Standard Packages
+%
+%  Thesis Vorlage für die Hochschule Heilbronn
+%
+%  Created by Prof. Dr. Detlef Stern on 2010-08-14.
+%  Updated by Valentin Weber on 2020-10-05.
+%  Copyright (c) 2020 . All rights reserved.
+%
+\documentclass[12pt,toc=bib,toc=listof]{scrreprt}
+\usepackage[ngerman]{babel} 
 \usepackage[utf8]{inputenc}
-\usepackage[ngerman]{babel}
 \usepackage[T1]{fontenc}
-\usepackage{graphicx, subfig}
-\graphicspath{{img/}}
-\usepackage{fancyhdr}
 \usepackage{lmodern}
-\usepackage{color}
-\usepackage{enumitem}
+\usepackage{setspace}
+\usepackage{geometry}
+
+\usepackage{hyperref}
+\hypersetup{
+  ,colorlinks=true
+  ,linkcolor=blue
+  ,citecolor=blue
+  ,filecolor=blue
+  ,urlcolor=blue
+  }
+
+% Fachbezogene Werte (müssen aktualisiert werden)
+\newcommand{\hhnsubject}{Bachelor Thesis}
+\newcommand{\hhnsubjectnum}{SPO NUMMER}
+\newcommand{\hhnlecturer}{Prof. Dr. Tim Reichert}
+
+% Vom Studierenden zu aendernde Werte
+\newcommand{\reprttopic}{Physik basierter Charaktercontroller mit Unity Machine Learning}
+\newcommand{\reprtstudentname}{Simon Grözinger}
+\newcommand{\reprtstudentid}{205047}
+\urldef{\reprtstudentmail}\url{sgroezin@stud.hs-heilbronn.de}
+
+\usepackage{ifpdf}
+\ifpdf
+\usepackage[pdftex]{graphicx}
+\else
+\usepackage{graphicx}
+\fi
+
+\usepackage[headsepline]{scrlayer-scrpage}
+\pagestyle{scrheadings}
+\clearscrheadfoot
+\ihead{\hhnsubject: \reprttopic}
+\ohead{\pagemark}
+\renewcommand*{\chapterpagestyle}{scrheadings}
+\renewcommand*{\chapterheadstartvskip}{}
+
+% ============= BibLatex =============
+\usepackage[backend=bibtex,style=numeric]{biblatex}
+%Literaturverzeichnis
+\addbibresource{Literatur.bib}
 
 % Extra Packages
 \usepackage{float}
@@ -67,54 +94,32 @@ literate=%
 \definecolor{xmlcomments}{rgb}{0.5,0.5,0.5}
 \definecolor{types}{rgb}{0.17,0.57,0.68}
 
-% ============= BibLatex =============
-\usepackage[backend=bibtex,style=numeric]{biblatex}
-%Literaturverzeichnis
-\addbibresource{Literatur.bib}
 
-% ============= Remove new Page =============
-\usepackage{etoolbox}
-\makeatletter
-\patchcmd{\chapter}{\if@openright\cleardoublepage\else\clearpage\fi}{}{}{}
-\makeatother
-
-% zusätzliche Schriftzeichen der American Mathematical Society
-\usepackage{amsfonts}
-\usepackage{amsmath}
-
-%nicht einrücken nach Absatz
-%\setlength{\parindent}{0pt}
-
-
-% ============= Kopf- und Fußzeile =============
-\pagestyle{fancy}
-%
-\lhead{}
-\chead{}
-\rhead{\slshape \leftmark}
-%%
-\lfoot{}
-\cfoot{\thepage}
-\rfoot{}
-%%
-\renewcommand{\headrulewidth}{0.4pt}
-\renewcommand{\footrulewidth}{0pt}
-
-% ============= Package Einstellungen & Sonstiges ============= 
-%Besondere Trennungen
-\hyphenation{De-zi-mal-tren-nung}
-
-
-% ============= Dokumentbeginn =============
+% Deckblatt Definitionen (begin)
+\titlehead{\flushright\includegraphics[scale=0.1]{./img/hhn.png}}
+\subject{{\hhnsubject{} (\hhnsubjectnum{})}}
+\title{\reprttopic}
+\author{\reprtstudentname\footnote{\reprtstudentid, \reprtstudentmail}}
+%% Datum nie auf einen festen Wert setzen
+\publishers{Eingereicht bei \hhnlecturer}
+% Deckblatt Definitionen (end)
 
 \begin{document}
-%Seiten ohne Kopf- und Fußzeile sowie Seitenzahl
-\pagestyle{empty}
+\pagenumbering{Roman} 
+\selectlanguage{ngerman}
+\maketitle
+\newgeometry{left=30mm, top=25mm, right=15mm, bottom=25mm}
 
-\input{titel}
-
-%Inhaltsverzeichnis
 \tableofcontents
+
+\addchap{Abkürzungsverzeichnis} % (fold)
+\label{sec:abkuerzungsverzeichnis}
+
+\begin{description}
+  \item[ABK:] ABKÜRZUNG 
+\end{description}
+
+% chapter abkuerzungsverzeichnis (end)
 
 %Abbildungsverzeichnis
 \listoffigures
@@ -125,11 +130,13 @@ literate=%
 %Codesnippet-verzeichnis
 \lstlistoflistings
 
-% pagestyle für gesamtes Dokument aktivieren
-\pagestyle{fancy}
+\newpage
+\pagenumbering{arabic}
 
 \input{01_einleitung}
+
 \input{02_grundlagen}
+
 \input{03_analyse}
 
 \input{04_charaktercontroller}
@@ -137,7 +144,6 @@ literate=%
 \input{06_fazit}
 
 \appendix
-\chapter{Anhang 1}
 
 %Literaturverzeichnis
 \printbibliography[title=Literaturverzeichnis]
