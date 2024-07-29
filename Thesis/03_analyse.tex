@@ -3,8 +3,7 @@
 Zusätzlich zu den maschinellen Lernkomponenten stellt Unity auch Demonstrationsumgebungen bereit, in denen verschiedene Lösungen für gängige Verstärkungslernprobleme implementiert sind. In der Walker-Demo wird ein physisch simulierter Charakter darauf trainiert, zu einem Zielwürfel zu laufen. Diese Demo-Umgebung implementiert bereits einige Grundlagen für die Steuerung eines physisch simulierten Charakters. Aus diesem Grund wird in dieser Arbeit die Walker-Demo als Basis für die Entwicklung genutzt. In diesem Kapitel wird daher die Walker-Demo analysiert, um in den folgenden Kapiteln darauf aufzubauen.
 
 \section{Szenenaufbau}
-Die Szene besteht aus einem quadratischen Spielfeld mit Boden und Wänden die der Charakter nicht verlassen kann (siehe Abbildung \ref{fig:walker_aufbau}). Der Läufer startet jede Trainingsepisode in der Mitte des Spielfelds. Das Ziel wird zu beginn zufällig platziert. Bei jedem erreichen des Ziels wird die Zielposition erneut zufällig bestimmt.
-
+Die Szene besteht aus einem quadratischen Spielfeld mit Boden und Wänden die der Charakter nicht verlassen kann (siehe Abbildung \ref{fig:walker_aufbau}). Des Weiteren beinhaltet die Umgebung noch den Läufer und das Ziel zu welchem der Läufer lernt zu laufen.
 \begin{figure}[H]
   \centering  
   \includegraphics[scale=0.35]{img/walker_aufbau.png}
@@ -12,25 +11,34 @@ Die Szene besteht aus einem quadratischen Spielfeld mit Boden und Wänden die de
   \label{fig:walker_aufbau}
 \end{figure}
 
-\section{Physikkomponenten und -konfiguration}
-Der Körper besteht aus 11 Kapseln, drei Kugeln und 2 Quadern, jeder dieser Formen hat eine Festkörper und eine Kollisions Physikkomponente. Zwischen den Körperteilen werden die Gelenke als Kugelgelenke simuliert. Die genaue Physikkonfiguration der Körperteile werden veranschaulicht in Tabelle \ref{table:walker_körperteile}
+\section{Läufer}
+Der Körper des Läufers besteht aus 11 Kapseln, drei Kugeln und 2 Quadern, jeder dieser Formen hat eine Festkörper und eine Kollisions Physikkomponente. Zwischen den Körperteilen werden die Gelenke als Kugelgelenke simuliert. Die genaue Physikkonfiguration der Körperteile werden veranschaulicht in Tabelle \ref{table:walker_körperteile}
 
 \begin{table}[H]
   \centering
-  {\rowcolors{2}{lightgray}{gray!50!lightgray!50}
+  {\rowcolors{1}{gray!10}{white}
   \begin{tabular}{ |p{3cm}|p{3cm}|p{2cm}|p{4cm}|p{2cm}| }
   \hline
-  Körperteil& Verbundenes Körperteil & Gewicht & Winkellimits & Form \\
+  \textbf{Körpertei}l& \textbf{Verbundenes Körperteil} & \textbf{Gewicht} & \textbf{Winkellimits} & \textbf{Form} \\
   \hline
   Hüfte & - & 15kg & - & Kapsel \\
+  \hline
   Wirbelsäule & Hüfte & 10kg & x(-20,20) y(-20,20) z(-15,15) & Kapsel \\
+  \hline
   Oberkörper & Wirbelsäule & 8kg & x(-20,20) y(-20,20) z(-15,15) & Kapsel \\
+  \hline
   Kopf & Oberkörper & 6kg & x(-30,10) y(-20,20) & Kugel \\
+  \hline
   Oberarm LR & Oberkörper & je 4kg & x(-60,120) y(-100,100) & Kapsel \\
+  \hline
   Unterarm LR & Oberarm & je 3kg & x(0,160) & Kapsel \\
+  \hline
   Hand LR & Unterarm & je 2kg & - & Kugel \\
+  \hline
   Oberschenkel LR & Hüfte & je 14kg& x(-90,60) y(-40,40) & Kapsel \\
+  \hline
   Unterschenkel LR & Oberschenkel & je 7kg &  x(0,120) & Kapsel \\
+  \hline
   Fuß LR & Unterschenkel & je 5kg & x(-20,20 y(-20,20) z(-20,20) & Quader \\
   \hline
   \end{tabular}}
@@ -38,8 +46,22 @@ Der Körper besteht aus 11 Kapseln, drei Kugeln und 2 Quadern, jeder dieser Form
   \label{table:walker_körperteile}
 \end{table}
 
-\section{Agent implementierung}
-In diesem Kapitel wird die Agenten Implementierung näher Analysiert.
+Gesteuert wird der Läufer über die Gelenk Motor Steuerung (Joint Drive Controller). Das Walker Agent Skript registriert die Körperteile bei der Initialisierung in der Gelenk Motor Steuerung. Anschließend können über die Gelenk Motor Steuerung die Zielrotationen sowie die Maximale Kraft des Gelenks festgelegt werden, und somit der Läufer gesteuert werden. Die Gelenk Motor Einstellungen (Joint Drive Settings) siehe Abbildung \ref{fig:agent_konfiguration} \hl{bestimmen die Stärke mit welcher die Gelenke in die Zielstellung bewegt werden.}
+\begin{itemize}
+  \item Max Joint Spring: Bestimmt den Drehmoment mit welchem das Gelenk in die Zielposition rotiert wird.
+  \item Joint Dampen: Verringert den Drehmoment proportional zur Differenz zwischen aktueller Geschwindigkeit und der Zielgeschwindigkeit. Verringert Schwingungen.
+  \item Max Joint Force Limit: Gibt die maximale Kraft des Gelenks an (verhindert zu schnelle Bewegung bei großer Abweichung).
+\end{itemize}
+\begin{figure}[H]
+  \centering  
+  \includegraphics[scale=0.5]{img/gelenk_motor_steuerung.png}
+  \caption{Gelenk Motor Steuerung}
+  \label{fig:gelenk_motor_steuerung}
+\end{figure}
+
+
+\section{Agent}
+Das Walker Agent Skript, definiert den Läufer als Agent für das maschinelle Lernen. Abbildung \ref{fig:agent_konfiguration} zeigt die Agentenkomponente im Inspektor. Um die Komponente zu nutzen müssen hier die Körperteile des Walkers referenziert werden. Zusätzlich kann eine Zielgeschwindigkeit festgelegt werden und ob die Geschwindigkeit variieren soll während dem Training. Als letztes muss auch das Zielobjekt referenziert werden.
 \begin{figure}[H]
   \centering  
   \includegraphics[scale=0.5]{img/agent_konfiguration.png}
@@ -47,37 +69,97 @@ In diesem Kapitel wird die Agenten Implementierung näher Analysiert.
   \label{fig:agent_konfiguration}
 \end{figure}
 
-Abbildung \ref{fig:agent_konfiguration} zeigt die Agentenkomponente im Inspektor. Um die Komponente zu nutzen müssen hier die Körperteile des Walkers referenziert werden. Zusätzlich kann eine Zielgeschwindigkeit festgelegt werden und ob die Geschwindigkeit variieren soll während dem Training. Als letztes muss auch das Zielobjekt referenziert werden.
+Die Beobachtung des Agenten wird in Tabelle \ref{table:walker_beobachtung} dargestellt.\\
+\begin{table}[H]
+  \centering
+  {\rowcolors{1}{gray!10}{white}
+  \begin{tabular}{ |p{1cm}|p{9cm}|}
+  \hline
+  \textbf{ID} & \textbf{Beobachtung}  \\
+  \hline
+  \rowids & Abweichung Durchschnittsgeschwindigkeit von Zielgeschwindigkeit \\
+  \hline
+  \rowids & Durchschnittsgeschwindigkeit \\
+  \hline
+  \rowids & Zielgeschwindigkeit \\
+  \hline
+  \rowids & Abweichung Hüftrotation von Zielrotation \\
+  \hline
+  \rowids & Abweichung Kopfrotation von Zielrotation \\
+  \hline
+  \rowids & Zielposition \\
+  \hline
+  \rowids & Körperteil Beobachtungen \\
+  \hline
+  \end{tabular}}
+  \caption{Walker Agent Beobachtung}
+  \label{table:walker_beobachtung}
+\end{table}
+\rowidsclear
 
-$Q_{Hüfte}=Quaternion(\vec{Hüftrichtung} - \vec{Zielrichtung})$\\
-$Q_{Blick}=Quaternion(\vec{Blickrichtung} - \vec{Zielrichtung})$
+Für jedes Körperteil wird die folgende Beobachtung dem Zustand angefügt.\\
+\begin{table}[H]
+  \centering
+  {\rowcolors{1}{gray!10}{white}
+  \begin{tabular}{ |p{1cm}|p{9cm}|}
+  \hline
+  \textbf{ID} & \textbf{Beobachtung}  \\
+  \hline
+  \rowids & Bodenkontakt \\
+  \hline
+  \rowids & Geschwindigkeit \\
+  \hline
+  \rowids & Rotationsgeschwindigkeit \\
+  \hline
+  \rowids & Position relativ zur Hüfte \\
+  \hline
+  \rowids & LokaleRotaiton \\
+  \hline
+  \rowids & Gelenkstärke \\
+  \hline
+  \end{tabular}}
+  \caption{Walker Agent Körperteil Beobachtung}
+  \label{table:walker_beobachtung_körperteil}
+\end{table}
+\rowidsclear
 
-$S=\{
-\\|\vec{Zielgeschwindigkeit} - \vec{Durchschnittsgeschwindigkeit}|,
-\\\vec{Durchschnittsgeschwindigkeit},
-\\\vec{Zielgeschwindigkeit},
-\\Q_{Hüfte},
-\\Q_{Blick},
-\\\vec{Zielposition},
-\\K_1,K_2,...,K_n
-\\\}$
+Das Format einer Aktion wird in Tabelle \ref{table:walker_aktion} aufgezeigt.\\
+\begin{table}[H]
+  \centering
+  {\rowcolors{1}{gray!10}{white}
+  \begin{tabular}{ |p{1cm}|p{9cm}|}
+  \hline
+  \textbf{ID} & \textbf{Beobachtung}  \\
+  \hline
+  \rowids & Rotationswinkel X\\
+  \hline
+  \rowids & Rotationswinkel Y\\
+  \hline
+  \rowids & Rotationswinkel Z\\
+  \hline
+  \rowids & Gelenkstärke \\
+  \hline
+  \end{tabular}}
+  \caption{Walker Agent Aktion}
+  \label{table:walker_aktion}
+\end{table}
+\rowidsclear
 
-$K=\{
-\\Bodenkontakt,
-\\\vec{Geschwindigkeit},
-\\\vec{Rotationsgeschwindigkeit},
-\\\vec{Position} - \vec{Hüftposition}.
-\\Quaternion(Lokale Rotation),
-\\Gelenkstärke
-\\\}$
-
-$A=\{
-\\Rotationswinkel_1, Rotationswinkel_2,...,Rotationswinkel_n,
-\\Gelenkstärke_1, Gelenkstärke_2,...,Gelenkstärke_n
-\\\}$
-
+Die Belohnungsfunktion enthält zwei Komponenten. Zum einen wird die Differenz der Bewegung in Zielrichtung zwischen momentaner Bewegung und Zielbewegung durch die Funktion $R_V$ bewertet. Zum Anderen wird die Abweichung zwischen momentaner Blickrichtung und der Zielrichtung in $R_L$ berechnet. Die Belohnung ergibt sich am ende durch die Multiplikation beider Teilterme. Die Verwendung der Multiplikation hat zur Folge das die Belohnung gleichermaßen von beiden Teiltermen abhängig ist und es somit notwendig ist, beide Teile gleichzeitig zu optimieren.\\
+\begin{figure}[H]
+  \centering  
+  \includegraphics[scale=0.5]{img/match_velocity_original_vel1.png}
+  \caption{Walker Demo Match Velocity Belohnungsfunktion}
+  \label{fig:match_velocity_original_vel1}
+\end{figure}
 $V_\delta=Clip(|\vec{Geschwindigkeit} - \vec{Zielgeschwindigkeit}|, 0, |\vec{Zielgeschwindigkeit}|)$ \\
 $R_V=(1 - (V_\delta / |\vec{Zielgeschwindigkeit}|)^2)^2$ \\
+\begin{figure}[H]
+  \centering  
+  \includegraphics[scale=0.5]{img/look_at_target_original.png}
+  \caption{Walker Demo Look At Target Belohnungsfunktion}
+  \label{fig:look_at_target_original}
+\end{figure}
 $R_L=(\vec{Zielrichtung} \cdot \vec{Blickrichtung})+ 1) \cdot 0.5$ \\
 $R=R_V \cdot R_L$
 

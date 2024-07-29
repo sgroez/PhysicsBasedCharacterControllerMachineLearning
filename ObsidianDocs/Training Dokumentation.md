@@ -102,5 +102,6 @@
 <tr><td>131_Milestone2Right</td><td>gleich zu 130 aber mit Blickrichtung rechts</td><td>funktioniert</td></tr>
 <tr><td>132_Milestone2Left</td><td>gleich zu 131 aber mit Blickrichtung links</td><td>Ergebnis (Belohnung) halb so gut wie 131_Milestone2Right ???</td></tr>
 <tr><td>133_Milestone2Multidirection</td><td>Wählt am start für jede Umgebung zufällige Blickrichtung und wechselt Blickrichtung bei jedem erreichten Ziel zu neuer zufälligen Blickrichtung</td><td>Blickrichtung fehlt in Beobachtung für Training</td></tr>
+<tr><td>134_Milestone2Multidirection</td><td>Gleich wie 133 aber Blickrichtung zu Beobachtung hinzugefügt</td><td></td></tr>
 <tr><td>Name</td><td>beschreibung</td><td>notizen</td></tr>
 </table>

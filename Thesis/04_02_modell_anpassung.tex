@@ -3,7 +3,7 @@ Das trainierte Modell der Walker Demo beherrscht jedoch nur die Fortbewegung in 
 
 \subsection{Versuch 4}
 Im ersten Schritt wird getestet wie der Walker angepasst werden kann um die fehlenden Bewegungsabläufe in separaten Modellen zu erlernen.
-Für das stehenbleiben wird die Zielgeschwindigkeit auf 0 gesetzt während das Ziel auf der Startposition befindet. Die Belohnungsfunktion der Demo hat dabei das Problem das durch die Zielgeschwindigkeit geteilt wird.\\
+Für das stehenbleiben wird die Zielgeschwindigkeit auf 0 gesetzt während das Ziel auf der Startposition befindet. Die Belohnungsfunktion der Demo, wird ab jetzt Demo Belohnungsfunktion genannt. Die Demo Belohnungsfunktion hat das Problem das durch die Zielgeschwindigkeit geteilt wird, was bei einer Zielgeschwindigkeit von 0 zu Mathematischen Fehlern führt.\\
 \begin{figure}[H]
   \centering  
   \includegraphics[scale=0.5]{img/match_velocity_original_vel1.png}
@@ -38,7 +38,15 @@ Die Abbildung \ref{fig:training_exp_belohnung} zeigt mit der grünen Linie die L
   \label{fig:match_velocity_original_vergleich}
 \end{figure}
 
-Mit dieser Erkenntnis wurde eine neue Anpassung untersucht. In der folgenden Anpassung blieb die Belohnungsfunktion weitestgehend Unverändert. Lediglich das obere Limit ab welchem die Funktion eine Belohnung von 0 annimmt, wurde auf ein minimum von 0.1 beschränkt. Somit konnte sicher gestellt werden das im Bereich der normalen Fortbewegung keine Veränderung auftritt. Bei allen Zielgeschwindigkeiten unter 0.1 wurde somit 0.1 als maximale Abweichung genutzt.\\
+\subsection{Versuch 5}
+Mit dieser Erkenntnis wurde eine neue Anpassung untersucht. In der folgenden Anpassung blieb die Belohnungsfunktion weitestgehend Unverändert. Lediglich das obere Limit ab welchem die Funktion eine Belohnung von 0 annimmt, wurde auf ein minimum von 0.1 beschränkt. Somit konnte sicher gestellt werden das im Bereich der normalen Fortbewegung keine Veränderung auftritt. Bei allen Zielgeschwindigkeiten unter 0.1 wird fortan jedoch 0.1 als maximale Abweichung genutzt, bevor die Belohnung 0 erreicht.\\
+
+\begin{figure}[H]
+  \centering  
+  \includegraphics[scale=0.5]{img/match_velocity_vergleich_clip.png}
+  \caption{Vergleich Original gegen Belohnungsfunktion mit 0.1 Limit}
+  \label{fig:match_velocity_vergleich_clip}
+\end{figure}
 $V_\delta=Clip(|\vec{Geschwindigkeit} - \vec{Zielgeschwindigkeit}|, 0, |\vec{Zielgeschwindigkeit}|)$ \\
 $V_\delta=Clip(|\vec{Geschwindigkeit} - \vec{Zielgeschwindigkeit}|, 0, max(0.1, |\vec{Zielgeschwindigkeit}|))$ \\
 

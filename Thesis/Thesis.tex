@@ -87,6 +87,7 @@ literate=%
 \pgfdeclarelayer{bg}
 \pgfsetlayers{bg,main}
 \tikzstyle{rounded} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black]
+\usepackage{soul}
   
 \definecolor{bluekeywords}{rgb}{0,0,1}
 \definecolor{greencomments}{rgb}{0,0.5,0}
@@ -94,6 +95,10 @@ literate=%
 \definecolor{xmlcomments}{rgb}{0.5,0.5,0.5}
 \definecolor{types}{rgb}{0.17,0.57,0.68}
 
+%table id counter
+\newcounter{rowids}
+\newcommand\rowids{\stepcounter{rowids}\arabic{rowids}}
+\newcommand\rowidsclear{\setcounter{rowids}{0}}
 
 % Deckblatt Definitionen (begin)
 \titlehead{\flushright\includegraphics[scale=0.1]{./img/hhn.png}}
