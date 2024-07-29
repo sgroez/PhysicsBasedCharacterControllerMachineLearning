@@ -25,7 +25,12 @@ public class WalkerMultidirection : WalkerAgent1
         base.Initialize();
         directions = (Direction[])Enum.GetValues(typeof(Direction));
         SetRandomWalkDirection();
-        onTouchedTarget.AddListener(SetRandomWalkDirection);
+    }
+
+    public override void OnEpisodeBegin()
+    {
+        base.OnEpisodeBegin();
+        SetRandomWalkDirection();
     }
 
     public void SetRandomWalkDirection()
