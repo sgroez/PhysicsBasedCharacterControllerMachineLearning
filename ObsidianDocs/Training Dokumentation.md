@@ -104,5 +104,6 @@
 <tr><td>133_Milestone2Multidirection</td><td>Wählt am start für jede Umgebung zufällige Blickrichtung und wechselt Blickrichtung bei jedem erreichten Ziel zu neuer zufälligen Blickrichtung</td><td>Blickrichtung fehlt in Beobachtung für Training</td></tr>
 <tr><td>134_Milestone2Multidirection</td><td>Gleich wie 133 aber Blickrichtung zu Beobachtung hinzugefügt</td><td>Sobald die erreichten Ziele mehr wurden (öfter neue Blickrichtung) ist LookAtTargetReward und MatchingVelocityReward eingebrochen und ab da nur noch stagniert</td></tr>
 <tr><td>135_Milestone2Multidirection</td><td>Gleich wie 134 aber setzt neue Blickrichtung bei Episode Begin anstatt wenn Ziel erreicht</td><td>Trainingswerte gut aber funktioniert nicht gut mit Nutzerinput (bewegt sich generell instabil und fällt bei Blickrichtung links und Rechts sehr schnell)</td></tr>
+<tr><td>136_Milestone2Multidirection</td><td>Ziel nur in Laufrichtung gesetzt und Blickrichtung relativ dazu. Ziel und Blickrichtung werden jede Episode und bei erreichtem Ziel neu gesetzt</td><td></td></tr>
 <tr><td>Name</td><td>beschreibung</td><td>notizen</td></tr>
 </table>
