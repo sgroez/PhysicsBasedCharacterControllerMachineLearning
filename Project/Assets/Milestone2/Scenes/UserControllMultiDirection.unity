@@ -389,7 +389,7 @@ PrefabInstance:
     - target: {fileID: 3607236743596056477, guid: e4dbacf992e054a12922c6f8491a8e08, type: 3}
       propertyPath: environmentPrefab
       value: 
-      objectReference: {fileID: 6341573143080056203, guid: c4e457bb7f758435eaecec34a59a2d30, type: 3}
+      objectReference: {fileID: 7252572818353723294, guid: e532a114cb80741c4a5ce1f9c4cac504, type: 3}
     - target: {fileID: 9084170212152164896, guid: e4dbacf992e054a12922c6f8491a8e08, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -3949,7 +3949,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1550066226099796251}
   - component: {fileID: 6958462795218281350}
-  - component: {fileID: 8661549712319778615}
+  - component: {fileID: 8661549712319778617}
   - component: {fileID: 8575479381212932188}
   - component: {fileID: 8661549712319778616}
   m_Layer: 0
@@ -4815,7 +4815,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 243
+    VectorObservationSize: 244
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 39
@@ -4824,7 +4824,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 3a5204708eb13417f8a2344fb7933930, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 99a129c3b84c0474a906449f53b37de6, type: 3}
   m_InferenceDevice: 2
   m_BehaviorType: 0
   m_BehaviorName: Walker
@@ -5939,47 +5939,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &8661549712319778615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5989570170258026888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60f95b2f335134f73a95b6bf62dca234, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentParameters:
-    maxStep: 0
-  hasUpgradedFromAgentParameters: 1
-  MaxStep: 5000
-  minWalkingSpeed: 0.1
-  maxWalkingSpeed: 10
-  randomizeWalkSpeedEachEpisode: 0
-  targetWalkingSpeed: 0.1
-  target: {fileID: 4232689950226765099}
-  onTouchedTarget:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TargetController1, Assembly-CSharp
-        m_MethodName: MoveTargetToRandomPosition
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  root: {fileID: 3614163369643330436}
-  head: {fileID: 7155909403049799756}
-  randomizeRotationOnEpsiode: 0
-  bodyparts: []
-  logStats: 0
 --- !u!114 &8661549712319778616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5996,12 +5955,38 @@ MonoBehaviour:
   cam: {fileID: 165151939}
   camOffset: -7
   target: {fileID: 4232689950226765099}
-  agent: {fileID: 8661549712319778615}
-  modelStanding: {fileID: 5022602860645237092, guid: 8f58a57e9f86b4b12bb9b614d8b32e0f, type: 3}
-  modelForward: {fileID: 5022602860645237092, guid: 3a5204708eb13417f8a2344fb7933930, type: 3}
-  modelRight: {fileID: 5022602860645237092, guid: 199fb9b3a087d4f8f8fb52e3fe7eadf2, type: 3}
-  modelLeft: {fileID: 5022602860645237092, guid: dd89e4b3544774c1f8772591d95506a1, type: 3}
-  modelBackward: {fileID: 5022602860645237092, guid: 797b73ac2323745d39fcc3c38901eea4, type: 3}
+  agent: {fileID: 8661549712319778617}
+--- !u!114 &8661549712319778617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5989570170258026888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8528262b922b4ebdb49ec027c1a0e81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 5000
+  minWalkingSpeed: 0.1
+  maxWalkingSpeed: 10
+  randomizeWalkSpeedEachEpisode: 0
+  targetWalkingSpeed: 5
+  target: {fileID: 4232689950226765099}
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  root: {fileID: 3614163369643330436}
+  head: {fileID: 7155909403049799756}
+  randomizeRotationOnEpsiode: 0
+  bodyparts: []
+  logStats: 0
+  direction: 0
+  randomizeLookDirection: 0
 --- !u!1 &8673377004091925499
 GameObject:
   m_ObjectHideFlags: 0

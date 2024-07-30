@@ -17,25 +17,73 @@ public enum Direction
 
 public class WalkerMultidirection : WalkerAgent1
 {
+    [Header("Look Direction")]
     public Direction direction = Direction.Forward;
+    public bool randomizeLookDirection = true;
     Direction[] directions;
+
+    [Header("Target Placement")]
+    public float distance = 1f;
+    public float envSize = 9;
+    private Bounds bounds;
 
     public override void Initialize()
     {
         base.Initialize();
+        bounds = new Bounds(root.position, new Vector3(envSize, 2, envSize));
         directions = (Direction[])Enum.GetValues(typeof(Direction));
-        SetRandomWalkDirection();
+        if (randomizeLookDirection)
+        {
+            onTouchedTarget.AddListener(SetRandomWalkDirection);
+        }
     }
 
     public override void OnEpisodeBegin()
     {
         base.OnEpisodeBegin();
-        SetRandomWalkDirection();
+        if (randomizeLookDirection)
+        {
+            SetRandomWalkDirection();
+        }
     }
 
     public void SetRandomWalkDirection()
     {
-        direction = directions[Random.Range(0, directions.Length)];
+        Direction newDirection = Direction.Forward;
+        bool foundPossibleDirection = false;
+        while (!foundPossibleDirection)
+        {
+            newDirection = directions[Random.Range(0, directions.Length)];
+            foundPossibleDirection = SetTargetInDirection(newDirection);
+        }
+
+        direction = newDirection;
+    }
+
+    public bool SetTargetInDirection(Direction newDirection)
+    {
+        Vector3 walkDirection = head.forward;
+        switch (newDirection)
+        {
+            case Direction.Right:
+                walkDirection = head.right;
+                break;
+            case Direction.Left:
+                walkDirection = -head.right;
+                break;
+            case Direction.Backward:
+                walkDirection = -head.forward;
+                break;
+        }
+        float x = walkDirection.x * distance;
+        float z = walkDirection.z * distance;
+        Vector3 newPos = root.position + new Vector3(x, 0f, z);
+        if (bounds.Contains(newPos))
+        {
+            target.position = newPos;
+            return true;
+        }
+        return false;
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -75,10 +123,10 @@ public class WalkerMultidirection : WalkerAgent1
         switch (direction)
         {
             case Direction.Right:
-                lookDirection = walkOrientationCube.transform.right;
+                lookDirection = -walkOrientationCube.transform.right;
                 break;
             case Direction.Left:
-                lookDirection = -walkOrientationCube.transform.right;
+                lookDirection = walkOrientationCube.transform.right;
                 break;
             case Direction.Backward:
                 lookDirection = -walkOrientationCube.transform.forward;
@@ -108,15 +156,16 @@ public class WalkerMultidirection : WalkerAgent1
         switch (direction)
         {
             case Direction.Right:
-                lookDirection = walkOrientationCube.transform.right;
+                lookDirection = -walkOrientationCube.transform.right;
                 break;
             case Direction.Left:
-                lookDirection = -walkOrientationCube.transform.right;
+                lookDirection = walkOrientationCube.transform.right;
                 break;
             case Direction.Backward:
                 lookDirection = -walkOrientationCube.transform.forward;
                 break;
         }
         Gizmos.DrawRay(head.position, lookDirection);
+        Gizmos.DrawWireCube(bounds.center, bounds.size);
     }
 }

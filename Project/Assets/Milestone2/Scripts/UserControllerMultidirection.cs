@@ -3,12 +3,7 @@ using Unity.Barracuda;
 
 public class UserControllerMultiDirection : UserController
 {
-    public WalkerAgent1 agent;
-    public NNModel modelStanding;
-    public NNModel modelForward;
-    public NNModel modelRight;
-    public NNModel modelLeft;
-    public NNModel modelBackward;
+    public WalkerMultidirection agent;
 
     public override void FixedUpdate()
     {
@@ -26,29 +21,29 @@ public class UserControllerMultiDirection : UserController
         {
             if (inputVert > 0)
             {
-                agent.SetModel("Walker", modelForward);
+                agent.direction = Direction.Forward;
             }
             else
             {
-                agent.SetModel("Walker", modelBackward);
+                agent.direction = Direction.Backward;
             }
         }
         else if (inputHor != 0)
         {
             if (inputHor > 0)
             {
-                agent.SetModel("Walker", modelLeft);
+                agent.direction = Direction.Left;
             }
             else
             {
-                agent.SetModel("Walker", modelRight);
+                agent.direction = Direction.Right;
             }
         }
-        else
+        /* else
         {
             agent.targetWalkingSpeed = 0f;
             agent.SetModel("Walker", modelStanding);
-        }
+        } */
 
         //Berechnung der Rotation
         Quaternion rotation = Quaternion.AngleAxis(rotAngle, rotationAxis);

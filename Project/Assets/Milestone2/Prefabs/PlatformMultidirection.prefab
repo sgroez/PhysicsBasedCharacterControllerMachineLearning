@@ -3232,7 +3232,6 @@ GameObject:
   - component: {fileID: 5165359689779301619}
   - component: {fileID: 9220681077886511860}
   - component: {fileID: 967064052950688979}
-  - component: {fileID: 4467408288545091275}
   m_Layer: 0
   m_Name: DynamicTarget
   m_TagString: target
@@ -3326,20 +3325,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4467408288545091275
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5747754715014611639}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3e5f1d185c5f49c487374cb0f8358ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnRadius: 9
-  setRandomStartPos: 1
 --- !u!1 &5879167175456804881
 GameObject:
   m_ObjectHideFlags: 0
@@ -4369,25 +4354,16 @@ MonoBehaviour:
   target: {fileID: 1430798481314769567}
   onTouchedTarget:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4467408288545091275}
-        m_TargetAssemblyTypeName: TargetController1, Assembly-CSharp
-        m_MethodName: MoveTargetToRandomPosition
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   root: {fileID: 6409427328266312821}
   head: {fileID: 6544176701363156654}
   randomizeRotationOnEpsiode: 1
   bodyparts: []
   logStats: 0
   direction: 2
+  randomizeLookDirection: 1
+  distance: 3
+  envSize: 20
 --- !u!114 &8629843051495367687
 MonoBehaviour:
   m_ObjectHideFlags: 0
