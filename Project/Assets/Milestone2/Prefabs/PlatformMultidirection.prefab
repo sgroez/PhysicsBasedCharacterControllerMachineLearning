@@ -4362,6 +4362,8 @@ MonoBehaviour:
   logStats: 0
   direction: 2
   randomizeLookDirection: 1
+  minDistance: 0
+  maxDistance: 9
   distance: 3
   envSize: 20
 --- !u!114 &8629843051495367687

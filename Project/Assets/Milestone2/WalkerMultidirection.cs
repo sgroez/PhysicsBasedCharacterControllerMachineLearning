@@ -23,24 +23,33 @@ public class WalkerMultidirection : WalkerAgent1
     Direction[] directions;
 
     [Header("Target Placement")]
-    public float distance = 1f;
+    public float minDistance = 0f;
+    public float maxDistance = 9f;
+    public float distance;
     public float envSize = 9;
-    private Bounds bounds;
+    Bounds bounds;
 
     public override void Initialize()
     {
         base.Initialize();
         bounds = new Bounds(root.position, new Vector3(envSize, 2, envSize));
         directions = (Direction[])Enum.GetValues(typeof(Direction));
-        if (randomizeLookDirection)
-        {
-            onTouchedTarget.AddListener(SetRandomWalkDirection);
-        }
+        SetNewDistance();
+        onTouchedTarget.AddListener(ReachedGoal);
     }
 
     public override void OnEpisodeBegin()
     {
         base.OnEpisodeBegin();
+        if (randomizeLookDirection)
+        {
+            SetRandomWalkDirection();
+        }
+    }
+
+    public void ReachedGoal()
+    {
+        SetNewDistance();
         if (randomizeLookDirection)
         {
             SetRandomWalkDirection();
@@ -58,6 +67,11 @@ public class WalkerMultidirection : WalkerAgent1
         }
 
         direction = newDirection;
+    }
+
+    public void SetNewDistance()
+    {
+        distance = Random.Range(minDistance, maxDistance);
     }
 
     public bool SetTargetInDirection(Direction newDirection)

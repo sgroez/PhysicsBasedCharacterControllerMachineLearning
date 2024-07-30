@@ -1,0 +1,51 @@
+\subsection{Training}
+Beim Starten der Python-Trainingsumgebung mit dem Befehl mlagents-learn wird zu Beginn eine Instanz der Python-API erstellt. Die Python-API ist eine Schnittstelle für die Interaktion mit Unity ML-Agents-Umgebungen. Sobald die Konfigurationsparameter von der Unity-Instanz an die Python-Umgebung übertragen wurden, wird basierend darauf ein Python-Trainer erstellt. Über die Python-API kann der Python-Trainer auf Beobachtungen zugreifen, Aktionen ausführen und anhand der Belohnungssignale die Gewichtung der neuronalen Netze anpassen, um das Verhalten des Agenten zu optimieren.
+
+\begin{figure}[H]
+  \centering  
+  \begin{tikzpicture}[node distance=2cm]
+  
+    \node(llapi) [rounded, draw=red, fill=red!30] {Low Level API};
+    \node(trainer) [rounded, draw=red, fill=red!30, below of =llapi] {Trainer};
+    
+    \draw [latex-latex, line width=0.3mm] (llapi)  -- (trainer);
+        
+  \end{tikzpicture}
+  \caption{Unity ML-Agents Aufbau Python Umgebung}
+  \label{fig:mlagents_aufbau_python}
+\end{figure}
+
+Die Trainings Konfigurationsdatei (siehe Listing \ref{lst:trainer_konfiguration}) enthält mehrere Teile. Der Hyperparameter Teil enthält die Hyperparameter des Maschinellen Lernalgorithmuses (Zeile 5-13), danach folgt der network\_settings Teil welcher die Konfiguration des Neuronalennetzes festlegt (Zeile 14-18). Anschließend folgen noch Konfigurationen für die Belohnungssignale im Bereich reward\_signals (Zeile 19-22) und Einstellungen für die Speicherung der Daten sowie der länge des Trainings (Zeile 23-27). Ganz am Ende der Konfigurationsdatei (Zeile 28-29) befinden sich noch Umgebungsparameter welche erweitert und während dem Training ausgelesen werden können.
+
+\begin{lstlisting}[caption={Trainer Konfigurationsdatei},captionpos=b,label={lst:trainer_konfiguration}]
+{
+behaviors:
+  Walker:
+    trainer_type: ppo
+    hyperparameters:
+      batch_size: 2048
+      buffer_size: 20480
+      learning_rate: 0.0003
+      beta: 0.005
+      epsilon: 0.2
+      lambd: 0.95
+      num_epoch: 3
+      learning_rate_schedule: linear
+    network_settings:
+      normalize: true
+      hidden_units: 256
+      num_layers: 3
+      vis_encode_type: simple
+    reward_signals:
+      extrinsic:
+        gamma: 0.995
+        strength: 1.0
+    keep_checkpoints: 5
+    checkpoint_interval: 5000000
+    max_steps: 30000000
+    time_horizon: 1000
+    summary_freq: 30000
+environment_parameters:
+  environment_count: 100.0
+}
+\end{lstlisting}
