@@ -3,34 +3,59 @@
 Das Unity ML-Agents Toolkit ist ein Open-Source-Projekt, welches maschinelle Lernalgorithmen und Funktionen für die Verwendung mit der Spieleumgebung Unity implementiert. Es beinhaltet Komponenten um eine Unityumgebung als Umgebung für verstärkendes Lernen zu konfigurieren.\cite{juliani2020}
 
 \subsection{Aufbau}
-Die Implementierung ist in zwei Teile unterteilt. Für die Unity-Integration ist das Paket com.unity.ml-agents aus dem Unity Asset Store zuständig. Das eigentliche Training mit den maschinellen Lernalgorithmen findet jedoch in einer separaten Python-Umgebung statt. Für die Kommunikation zwischen den beiden Bereichen verwendet das ML-Agents Toolkit eine gRPC-Netzwerkkommunikation. Während des Trainings tauschen die Umgebungen den Zustand der Simulationsumgebung, die ausgewählten Aktionen des neuronalen Netzes und weitere für die Auswertung des Trainings relevante Daten aus.\cite{juliani2020}
+Das Toolkit ist in zwei Teile unterteilt (siehe Abbildung \ref{fig:mlagents_aufbau}). Für die Unity-Integration ist das Paket com.unity.ml-agents aus dem Unity Asset Store zuständig. Das eigentliche Training mit den maschinellen Lernalgorithmen findet jedoch in einer separaten Python-Umgebung statt. Für die Kommunikation zwischen den beiden Bereichen verwendet das ML-Agents Toolkit eine gRPC-Netzwerkkommunikation.\cite{juliani2020}
 
 \begin{figure}[H]
   \centering  
   \begin{tikzpicture}[node distance=2cm]
-    \node(umgebung) {Umgebung};
-    \node (agent1) [rounded, draw=green, fill=green!30, below of=umgebung, xshift=1cm, yshift=1.1cm] {Agent 1};
-    \node (agent2) [rounded, right of=agent1, xshift=2cm, draw=green, fill=green!30] {Agent 2};
-    \node (agent3) [rounded, right of=agent2, xshift=2cm, draw=green, fill=green!30] {Agent 3};
-    \node (akademie) [rounded, below of=agent2 , draw=yellow, fill=yellow!30] {Akademie};
-
-    \begin{pgfonlayer}{bg}
-      \node(umgebung_bg) [draw, fill=black!20, inner sep=20pt, fit=(agent1) (agent2) (agent3) (akademie)] {};
-    \end{pgfonlayer}
-
-    \node (python_api) [rounded, below of=akademie, draw=orange, fill=orange!30] {Python API};
-    \node (python_trainer) [rounded, right of=python_api, xshift=2cm, draw=red, fill=red!30] {Python Trainer};
-
-
-    \draw [latex-latex, line width=0.3mm] (agent1)  |- node {} (akademie);
-    \draw [latex-latex, line width=0.3mm] (agent2) -- (akademie);
-    \draw [latex-latex, line width=0.3mm] (agent3) |- node {} (akademie);
-
-    \draw [latex-latex, line width=0.3mm] (akademie) -- (python_api);
-    \draw [latex-latex, line width=0.3mm] (python_api) -- (python_trainer);
+  \node [rounded, draw=green, fill=green!30] (unity) {Unity Umgebung};
+  \node [rounded, draw=red, fill=red!30, below of=unity] (python) {Python Umgebung};
+  
+  \draw [latex-latex, line width=0.3mm] (unity) -- (python);
   \end{tikzpicture}
   \caption{Unity ML-Agents Aufbau}
   \label{fig:mlagents_aufbau}
+\end{figure}
+
+\begin{figure}[H]
+  \centering  
+  \begin{tikzpicture}[node distance=2cm]
+    \node(unity) {Unity Umgebung};
+    \node (agent1) [rounded, draw=green, fill=green!30, below of=unity, yshift=1.1cm] {Agent 1};
+    \node (agent2) [rounded, right of=agent1, xshift=2cm, draw=green, fill=green!30] {Agent 2};
+    \node (agent3) [rounded, right of=agent2, xshift=2cm, draw=green, fill=green!30] {Agent 3};
+    
+    \node (verhalten1) [rounded, below of=agent1 , draw=yellow, fill=yellow!30] {Verhalten 1};
+    \node (verhalten2) [rounded, below of=agent2 , draw=yellow, fill=yellow!30] {Verhalten 2};
+    \node (verhalten3) [rounded, below of=agent3 , draw=yellow, fill=yellow!30] {Verhalten 3};
+
+    \node (akademie) [rounded, below of=verhalten2 , draw=blue, fill=blue!30] {Akademie};
+    \node (heuristik) [rounded, below of=verhalten3 , draw=orange, fill=orange!30] {Heuristik};
+    
+    \node (training) [decision, below of=akademie, draw=blue, fill=blue!40] {Training};
+    
+    \node (kommunikator) [rounded, below of=training, draw=purple, fill=purple!30, xshift=-2cm] {Kommunikator};
+    \node (sentis) [rounded, below of=training, draw=purple, fill=purple!30, xshift=2cm] {Sentis};
+    
+    \draw [latex-latex, line width=0.3mm] (agent1)  -- (verhalten1);
+    \draw [latex-latex, line width=0.3mm] (agent2)  -- (verhalten2);
+    \draw [latex-latex, line width=0.3mm] (agent3)  -- (verhalten3);
+
+    \draw [latex-latex, line width=0.3mm] (verhalten1)  |- node {} (akademie);
+    \draw [latex-latex, line width=0.3mm] (verhalten2) -- (akademie);
+    \draw [latex-latex, line width=0.3mm] (verhalten3) -- (heuristik);
+    
+    \draw [latex-latex, line width=0.3mm] (akademie) -- (training);
+    
+    \draw [latex-latex, line width=0.3mm] (training) -- (kommunikator) node[midway,left, xshift=-0.2cm, yshift=0.2cm] {Ja};
+    \draw [latex-latex, line width=0.3mm] (training) -- (sentis) node[midway,right, xshift=0.2cm, yshift=0.2cm] {Nein};
+    
+    \begin{pgfonlayer}{bg}
+      \node(umgebung_bg) [draw, fill=black!20, inner sep=20pt, fit=(agent1) (agent2) (agent3) (akademie) (kommunikator) (sentis)] {};
+    \end{pgfonlayer}
+  \end{tikzpicture}
+  \caption{Unity ML-Agents Aufbau 2}
+  \label{fig:mlagents_aufbau2}
 \end{figure}
 
 Die Umgebung in Abbildung \ref{fig:mlagents_aufbau} stellt den Zusammenhang der ML-Agents Komponenten dar. Das Unity-Paket enthält zwei Grundlegenden Komponenten, die Akademie und Agenten. Um eine Szene für das verstärkende Lernen einzurichten benötigt die Szene mindestens einen Agenten. Objekte in der Unity Szene werden, mit dem hinzufügen einer Agenten Komponente als Agent für das Verstärkende Lernen konfiguriert.

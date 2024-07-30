@@ -73,23 +73,23 @@ Die Beobachtung des Agenten wird in Tabelle \ref{table:walker_beobachtung} darge
 \begin{table}[H]
   \centering
   {\rowcolors{1}{gray!10}{white}
-  \begin{tabular}{ |p{1cm}|p{9cm}|}
+  \begin{tabular}{ |p{1cm}|p{9cm}|p{5cm}|}
   \hline
-  \textbf{ID} & \textbf{Beobachtung}  \\
+  \textbf{ID} & \textbf{Beobachtung} & \textbf{Anmerkung}  \\
   \hline
-  \rowids & Abweichung Durchschnittsgeschwindigkeit von Zielgeschwindigkeit \\
+  \rowids & Abweichung Durchschnittsgeschwindigkeit von Zielgeschwindigkeit &  \\
   \hline
-  \rowids & Durchschnittsgeschwindigkeit \\
+  \rowids & Durchschnittsgeschwindigkeit &  \\
   \hline
-  \rowids & Zielgeschwindigkeit \\
+  \rowids & Zielgeschwindigkeit & \\
   \hline
-  \rowids & Abweichung Hüftrotation von Zielrotation \\
+  \rowids & Abweichung Hüftrotation von Zielrotation & \\
   \hline
-  \rowids & Abweichung Kopfrotation von Zielrotation \\
+  \rowids & Abweichung Kopfrotation von Zielrotation & \\
   \hline
-  \rowids & Zielposition \\
+  \rowids & Zielposition & \\
   \hline
-  \rowids & Körperteil Beobachtungen \\
+  \rowids & Körperteil Beobachtungen & Beobachtung aus Tabelle \ref{table:walker_beobachtung_körperteil} für jedes Körperteil \\
   \hline
   \end{tabular}}
   \caption{Walker Agent Beobachtung}
@@ -101,21 +101,21 @@ Für jedes Körperteil wird die folgende Beobachtung dem Zustand angefügt.\\
 \begin{table}[H]
   \centering
   {\rowcolors{1}{gray!10}{white}
-  \begin{tabular}{ |p{1cm}|p{9cm}|}
+  \begin{tabular}{ |p{1cm}|p{9cm}|p{5cm}|}
   \hline
-  \textbf{ID} & \textbf{Beobachtung}  \\
+  \textbf{ID} & \textbf{Beobachtung} & \textbf{Anmerkung}  \\
   \hline
-  \rowids & Bodenkontakt \\
+  \rowids & Bodenkontakt & \\
   \hline
-  \rowids & Geschwindigkeit \\
+  \rowids & Geschwindigkeit & \\
   \hline
-  \rowids & Rotationsgeschwindigkeit \\
+  \rowids & Rotationsgeschwindigkeit & \\
   \hline
-  \rowids & Position relativ zur Hüfte \\
+  \rowids & Position relativ zur Hüfte & \\
   \hline
-  \rowids & LokaleRotaiton \\
+  \rowids & LokaleRotation & Fehlt für Hüfte und Hände \\
   \hline
-  \rowids & Gelenkstärke \\
+  \rowids & Gelenkstärke & Fehlt für Hüfte und Hände \\
   \hline
   \end{tabular}}
   \caption{Walker Agent Körperteil Beobachtung}
@@ -123,21 +123,21 @@ Für jedes Körperteil wird die folgende Beobachtung dem Zustand angefügt.\\
 \end{table}
 \rowidsclear
 
-Das Format einer Aktion wird in Tabelle \ref{table:walker_aktion} aufgezeigt.\\
+Das Format einer Aktion besteht aus den in Tabelle \ref{table:walker_aktion} aufgeführten Feldern für jedes Körperteil des Läufers, ausgenommen der Hüfte und Hände.\\
 \begin{table}[H]
   \centering
   {\rowcolors{1}{gray!10}{white}
-  \begin{tabular}{ |p{1cm}|p{9cm}|}
+  \begin{tabular}{ |p{1cm}|p{9cm}|p{5cm}|}
   \hline
-  \textbf{ID} & \textbf{Beobachtung}  \\
+  \textbf{ID} & \textbf{Beobachtung} & \textbf{Anmerkung}  \\
   \hline
-  \rowids & Rotationswinkel X\\
+  \rowids & Rotationswinkel X & Nur wenn Körperteil X Rotation beweglich ist\\
   \hline
-  \rowids & Rotationswinkel Y\\
+  \rowids & Rotationswinkel Y & Nur wenn Körperteil Y Rotation beweglich ist\\
   \hline
-  \rowids & Rotationswinkel Z\\
+  \rowids & Rotationswinkel Z & Nur wenn Körperteil Z Rotation beweglich ist\\
   \hline
-  \rowids & Gelenkstärke \\
+  \rowids & Gelenkstärke & \\
   \hline
   \end{tabular}}
   \caption{Walker Agent Aktion}
