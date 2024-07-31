@@ -4323,7 +4323,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: f6b2ac18c127647fa84a450185d55926, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 99a129c3b84c0474a906449f53b37de6, type: 3}
   m_InferenceDevice: 2
   m_BehaviorType: 0
   m_BehaviorName: Walker
@@ -4349,7 +4349,7 @@ MonoBehaviour:
   MaxStep: 5000
   minWalkingSpeed: 0.1
   maxWalkingSpeed: 10
-  randomizeWalkSpeedEachEpisode: 1
+  randomizeWalkSpeedEachEpisode: 0
   targetWalkingSpeed: 5
   target: {fileID: 1430798481314769567}
   onTouchedTarget:

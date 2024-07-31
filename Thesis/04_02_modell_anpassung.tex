@@ -14,16 +14,30 @@ Versuch 4 behandelt die Bewegung auf der Stelle stehen. Für das stehenbleiben w
 Die neue Belohnungsfunktion ist inspiriert von den Belohnungsfunktionen des Papers "DeepMimic: Example-Guided Deep Reinforcement Learning of Physics-Based Character Skills".\cite{peng2018deepmimic}
 Die Belohnungsfunktion aus Abbildung \ref{fig:match_velocity_exp} wird daher ab hier DeepMimic Belohnungsfunktion genannt.
 
-Der Walker konnte mit der DeepMimic Belohnungsfunktion lernen auf der Stelle zu stehen. Mit zufälliger Zielgeschwindigkeit zu einem Ziel zu laufen wie im Ursprünglichen Verhalten konnte damit jedoch nicht zufriedenstellend erlernt werden.
-
 \begin{figure}[H]
   \centering  
   \includegraphics[scale=0.5]{img/versuch4_training}
-  \caption{Vergleich von Training mit Demo Belohnungsfunktion gegen DeepMimic Belohnungsfunktion}
+  \caption{Versuch 4 Traininggraphen}
   \label{fig:versuch4_training}
 \end{figure}
 
-Die Abbildung \ref{fig:versuch4_training} zeigt mit der orangenen Linie die Leistung der DeepMimic Belohnungsfunktion und mit der pinken Linie die Leistung der Demo Belohnungsfunktion. Nachfolgender Vergleich der Belohnungsfunktionen zeigt das die Ursprüngliche Belohnungsfunktion durch das Teilen mit der Zielgeschwindigkeit die Sensitivität der Funktion je nach Zielgeschwindigkeit beeinflusst. Daraus folgt das bei steigender Zielgeschwindigkeit eine größere Abweichung der Geschwindigkeit geduldet wird (siehe Abbildung \ref{fig:match_velocity_demo_vergleich}). Diese Anpassung verbessert die Generalisierung zwischen den wechselnden Geschwindigkeiten um ein vielfaches.
+\begin{figure}[H]
+  \centering  
+  \includegraphics[scale=0.5]{img/versuch4_training_belohnung}
+  \caption{Versuch4 Training Belohnungsgraphen}
+  \label{fig:versuch4_training_belohnung}
+\end{figure}
+
+Der Walker konnte mit der DeepMimic Belohnungsfunktion lernen auf der Stelle zu stehen.  Abbildung \ref{fig:versuch4_training} zeigt wie die zurück gelegte Distanz um 0 herum pendelt, während die Episodenlänge die maximale Länge von 1000 erreicht hat. Die Belohnungen sind auch nahezu maximal ausgereizt siehe Abbildung \ref{fig:versuch4_training_belohnung}.
+
+\begin{figure}[H]
+  \centering  
+  \includegraphics[scale=0.5]{img/versuch4_laufen_vergleich.png}
+  \caption{Vergleich von Lauftraining mit Demo Belohnungsfunktion gegen DeepMimic Belohnungsfunktion}
+  \label{fig:versuch4_laufen_vergleich}
+\end{figure}
+
+Mit zufälliger Zielgeschwindigkeit zu einem Ziel zu laufen wie im Ursprünglichen Verhalten konnte damit jedoch nicht zufriedenstellend erlernt werden. Die Abbildung \ref{fig:versuch4_laufen_vergleich} zeigt mit der orangenen Linie die Leistung der DeepMimic Belohnungsfunktion und mit der pinken Linie die Leistung der Demo Belohnungsfunktion. Nachfolgender Vergleich der Belohnungsfunktionen zeigt das die Ursprüngliche Belohnungsfunktion durch das Teilen mit der Zielgeschwindigkeit die Sensitivität der Funktion je nach Zielgeschwindigkeit beeinflusst. Daraus folgt das bei steigender Zielgeschwindigkeit eine größere Abweichung der Geschwindigkeit geduldet wird (siehe Abbildung \ref{fig:match_velocity_demo_vergleich}). Diese Anpassung verbessert die Generalisierung zwischen den wechselnden Geschwindigkeiten um ein vielfaches.
 
 \begin{figure}[H]
   \centering  
@@ -108,3 +122,106 @@ Das gehen in Zielrichtung wurde durch die Änderungen nicht beeinflusst. Separat
 Abbildung \ref{fig:versuch6_training} zeigt die zurückgelegte Distanz und die Anzahl an erreichten Zielen in einer Trainingsepisode. Die Ergebnisse der 3 Laufrichtungen (rot = Rückwärts, gelb = rechts, blau = links) sind alle vergleichbar mit den Ergebnissen der Demo. Die Abweichung der Laufrichtung Links ist vermutlich der zufällligen Natur des Trainings anzurechnen.
 
 \subsection{Versuch 7}
+Die Charaktersteuerung benötigt je nach Tastatureingabe eine der vier Bewegungsrichtungen. Der Unity ML-Agents Agent enthält eine Funktion zum wechseln des verwendeten Modells. Mit dieser Funktion wird in folgender Implementierung zwischen den Modellen aus Versuch 6 gewechselt um alle Bewegungsrichtungen mit einer Steuerung abzudecken. Zu Erwarten ist das die Bewegung in die einzelnen Richtungen funktioniert, der Läufer aber beim Wechsel zwischen den Modellen das Gleichgewicht nicht halten kann.
+
+\begin{lstlisting}[caption={Laufrichtung Modell wechseln},captionpos=b,label={lst:laufrichtung_modell_wechsel}]
+public override void FixedUpdate() {
+    ...    
+    agent.targetWalkingSpeed = 5f;
+    if (inputVert != 0) //Tastatur Input Vor oder Zurück
+    {
+        // Vorwärts
+        if (inputVert > 0)
+        {
+            agent.SetModel("Walker", modelForward);
+        }
+        else // Zurück
+        {
+            agent.SetModel("Walker", modelBackward);
+        }
+    }
+    else if (inputHor != 0) // Links oder Rechts
+    {
+        if (inputHor > 0) // Rechts
+        {
+            agent.SetModel("Walker", modelRight);
+        }
+        else // Links
+        {
+            agent.SetModel("Walker", modelLeft);
+        }
+    }
+    else //kein Input -> Auf der Stelle stehen
+    {
+        agent.targetWalkingSpeed = 0f;
+        agent.SetModel("Walker", modelStanding);
+    }
+    ...
+}
+\end{lstlisting}
+
+Wie angenommen funktioniert das Bewegen in eine konstante Richtung gut. Beim Wechsel zu einem anderen Modell fällt der Läufer ohne Ausnahme.
+
+\subsection{Versuch 8}
+In Versuch 8 wird die Möglichkeit geprüft, alle Bewegungsrichtungen in einem Modell anzulernen. Dafür wird zum Start eine zufällige Bewegungsrichtung für jeden Läufer ausgewählt, mit dem Ziel das die Läufer direkt mit unterschiedliche Bewegungsrichtungen trainieren. Das gleichzeitige trainieren mit mehreren Läufern und unterschiedlichen Gehrichtungen soll das erlernen einer generell gültigen Strategie fördern. Die Gehrichtung wechselt beim erreichen eines Ziels, damit soll erreicht werden das der Läufer das aktuelle Ziel mit ausgewählter Bewegungsrichtung vollständig erlernt. Durch das öftere erreichen von Zielen im Verlauf des Trainings wird aber auch gleichzeitig jede beliebige Kombination angelernt. Als Ausgleich in der Komplexität wird die Zielgeschwindigkeit für das ganze Training festgesetzt.
+
+\begin{lstlisting}[caption={Laufrichtung zufällig zum Start und beim erreichen von Ziel},captionpos=b,label={lst:laufrichtung_wechsel_start_ziel}]
+public Direction direction = Direction.Forward;
+Direction[] directions;
+
+public override void Initialize()
+{
+    ...
+    directions = (Direction[])Enum.GetValues(typeof(Direction));
+    SetRandomWalkDirection();
+    onTouchedTarget.AddListener(SetRandomWalkDirection);
+}
+
+public void SetRandomWalkDirection()
+{
+    direction = directions[Random.Range(0, directions.Length)];
+}
+
+public override void CollectObservations(VectorSensor sensor)
+    {
+        ...
+        sensor.AddObservation((float)direction);
+    }
+\end{lstlisting}
+
+Codeausschnitt \ref{lst:laufrichtung_wechsel_start_ziel} erstellt beim Initialisieren des Agenten ein Array mit allen Werten, welche das Richtungs-Enum zulässt. Die Funktion SetRandomWalkDirection wählt eine zufällige Richtung aus und setzt diese für den Agenten. Die Funktion wird zu Beginn in Initialize aufgerufe. Zusätzlich wird die Methode mit einem Listener auf das onTouchedTarget des Agenten registriert. Die Methode wird somit bei jedem berühren eines Ziels ausgeführt. Das der Agent während dem Training sowie nach dem Training zwischen den Laufrichtungen entscheiden kann, bekommt er einen Zahlenwert repräsentativ für die Richtung in der Beobachtung angehängt.
+
+Der Läufer lernt unter diesen Bedingungen sehr langsam und das Training stagniert. Ab ca. 20 millionen Trainingsschritten fängt der Läufer an regelmäßig Ziele zu erreichen (siehe Abbildung \ref{fig:versuch8_training}). Durch das häufige erreichen von Zielen steigt aber auch die Anzahl der Ziel- und Laufrichtungswechsel. Aus diesem Grund brechen die Belohnungen ein und der Fortschritt stagniert (siehe Abbildung \ref{fig:versuch8_training_belohnung}).
+
+\begin{figure}[H]
+  \centering  
+  \includegraphics[scale=0.5]{img/versuch8_training.png}
+  \caption{Versuch 8 Traininggraphen}
+  \label{fig:versuch8_training}
+\end{figure}
+
+\begin{figure}[H]
+  \centering  
+  \includegraphics[scale=0.5]{img/versuch8_training_belohnung.png}
+  \caption{Versuch 8 Training Belohnungsgraphen}
+  \label{fig:versuch8_training_belohnung}
+\end{figure}
+
+\subsection{Versuch 9}
+Um den Richtungswechsel regelmäßiger zu gestalten, wird getestet wie das Training sich verhält wenn die Richtung beim Start jeder neuen Trainingsepisode zufällig gewählt wird.
+
+\begin{figure}[H]
+  \centering  
+  \includegraphics[scale=0.5]{img/versuch9_training.png}
+  \caption{Versuch 9 Traininggraphen}
+  \label{fig:versuch9_training}
+\end{figure}
+
+\begin{figure}[H]
+  \centering  
+  \includegraphics[scale=0.5]{img/versuch9_training_belohnung.png}
+  \caption{Versuch 9 Training Belohnungsgraphen}
+  \label{fig:versuch9_training_belohnung}
+\end{figure}
+
+Das gleichbleiben der Laufbewegung über die komplette Trainingsepisode hat zur folge dass das Training stabiler verläuft siehe Abbildung \ref{fig:versuch8_training}. Der Nachteil ist jedoch das der Läufer keine Bewegungswechsel lernt. Beim steuern des Läufers ist das wechseln zwischen den Laufrichtungen noch immer ein Problem. Dazu kommt das der in diesem training die Blickrichtungs Belohnung geringer ist als bei vorherigen Trainingseinheiten. Der Läufer lernt die seitwärts Bewegungen nicht richtig sondern nimmt einen Verlust in der Belohnung in kauf für die Steigerung der Episodenlänge.
