@@ -3,8 +3,8 @@ Um von einem Charaktercontroller sprechen zu können muss der Agent über Nutzer
 
 \subsection{Versuch 1}
 \label{subsec:versuch_1}
-Das Ziel soll zur Laufzeit durch Tastatureingabe des Nutzers gesteuert werden könne.
-Um das zu umzusetzen wird die Tastatureingabe eingelesen und darauf basierend das Ziel relativ zur Hüfte des Walkers gesetzt. Über das forward und right Attribut multipliziert mit dem Input wird die Position relativ zur Hüfte berechnet (siehe Listing \ref{lst:nutzersteuerung_1}).
+Das Ziel soll zur Laufzeit durch Tastatureingabe des Nutzers gesteuert werden können.
+Um das zu umzusetzen wird die Tastatureingabe eingelesen und darauf basierend das Ziel relativ zur Hüfte des Walkers gesetzt. Über die Vorwärtsrichtung und Rechte-Richtung multipliziert mit dem Input wird die Position relativ zur Hüfte berechnet (siehe Listing \ref{lst:nutzersteuerung_1}).
 \begin{lstlisting}[caption={Nutzersteuerung erster Prototyp},captionpos=b,label={lst:nutzersteuerung_1}]
 void FixedUpdate()
 {
@@ -29,7 +29,7 @@ Durch die Nutzung der Weltachsen anstatt der Hüftrotationsachsen (siehe Listing
 \subsection{Versuch 3}
 Die Lösung ist eine Kombination aus den Ideen der ersten beiden Versuche. Die Laufrichtung soll weiterhin relativ zum Läufer bestimmen werden gleichermaßen aber von der wechselhaften Bewegung des Läufers entkoppeln sein.
 Das hinzufügen einer separaten Rotationskomponente für die Bestimmung der Blickrichtung erfüllt hier die Kriterien. \\
-Zu beginn wird die Blickrichtung mit der Vorwärtskomonente der Hüftrotation gleichgesetzt. Ausgehend von der Startrichtung wird dann über horizontalen Mausinput die Richtung angepasst (siehe Listing \ref{lst:nutzersteuerung_3}).
+Zu beginn wird die Blickrichtung mit der Vorwärtskomponente der Hüftrotation gleichgesetzt. Ausgehend von der Startrichtung wird dann über horizontalen Mausinput die Richtung angepasst (siehe Listing \ref{lst:nutzersteuerung_3}).
 \begin{lstlisting}[caption={Erweiterung der Nutzersteuerung mit separater Blickrichtung},captionpos=b,label={lst:nutzersteuerung_3}]
 void Start()
 {

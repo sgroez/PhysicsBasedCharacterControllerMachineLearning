@@ -148,17 +148,17 @@ Das Format einer Aktion besteht aus den in Tabelle \ref{table:walker_aktion} auf
 Die Belohnungsfunktion enthält zwei Komponenten. Zum einen wird die Differenz der Bewegung in Zielrichtung zwischen momentaner Bewegung und Zielbewegung durch die Funktion $R_V$ bewertet. Zum Anderen wird die Abweichung zwischen momentaner Blickrichtung und der Zielrichtung in $R_L$ berechnet. Die Belohnung ergibt sich am ende durch die Multiplikation beider Teilterme. Die Verwendung der Multiplikation hat zur Folge das die Belohnung gleichermaßen von beiden Teiltermen abhängig ist und es somit notwendig ist, beide Teile gleichzeitig zu optimieren.\\
 \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.5]{img/match_velocity_original_vel1.png}
+  \includegraphics[scale=0.5]{img/match_velocity_demo_vel1.png}
   \caption{Walker Demo Match Velocity Belohnungsfunktion}
-  \label{fig:match_velocity_original_vel1}
+  \label{fig:match_velocity_demo_vel1}
 \end{figure}
 $V_\delta=Clip(|\vec{Geschwindigkeit} - \vec{Zielgeschwindigkeit}|, 0, |\vec{Zielgeschwindigkeit}|)$ \\
 $R_V=(1 - (V_\delta / |\vec{Zielgeschwindigkeit}|)^2)^2$ \\
 \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.5]{img/look_at_target_original.png}
+  \includegraphics[scale=0.5]{img/look_at_target_demo.png}
   \caption{Walker Demo Look At Target Belohnungsfunktion}
-  \label{fig:look_at_target_original}
+  \label{fig:look_at_target_demo}
 \end{figure}
 $R_L=(\vec{Zielrichtung} \cdot \vec{Blickrichtung})+ 1) \cdot 0.5$ \\
 $R=R_V \cdot R_L$

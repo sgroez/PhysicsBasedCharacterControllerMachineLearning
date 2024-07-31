@@ -1,68 +1,110 @@
 \section{Modell Anpassungen}
-Das trainierte Modell der Walker Demo beherrscht jedoch nur die Fortbewegung in Blickrichtung. Durch diese Einschränkung lässt sich von der Steuerung mit WASD nur die W Komponente nutzen. Eine weitere große Einschränkung ist, das der Läufer nicht darauf trainiert ist stehen zu bleiben. Das resultiert darin das der Läufer fällt sobald der Nutzer keinen Tastaturinput gibt. Dieses Kapitel beschäftigt sich mit den Einschränkungen der Walker-Demonstration im Bezug auf unterschiedliche Bewegungsrichtungen.
+Das trainierte Modell der Walker Demo beherrscht jedoch nur die Fortbewegung in Blickrichtung. Der Läufer ist auch nicht darauf trainiert stehen zu bleiben. Das resultiert darin das der Läufer fällt sobald der Nutzer keinen Tastaturinput gibt. Dieses Kapitel beschäftigt sich mit den Einschränkungen der Walker-Demonstration im Bezug auf unterschiedliche Bewegungsrichtungen.
+
+Im ersten Schritt wird getestet wie der Walker angepasst werden kann um die fehlenden Bewegungsabläufe in separaten Modellen zu erlernen.
 
 \subsection{Versuch 4}
-Im ersten Schritt wird getestet wie der Walker angepasst werden kann um die fehlenden Bewegungsabläufe in separaten Modellen zu erlernen.
-Für das stehenbleiben wird die Zielgeschwindigkeit auf 0 gesetzt während das Ziel auf der Startposition befindet. Die Belohnungsfunktion der Demo, wird ab jetzt Demo Belohnungsfunktion genannt. Die Demo Belohnungsfunktion hat das Problem das durch die Zielgeschwindigkeit geteilt wird, was bei einer Zielgeschwindigkeit von 0 zu Mathematischen Fehlern führt.\\
-\begin{figure}[H]
-  \centering  
-  \includegraphics[scale=0.5]{img/match_velocity_original_vel1.png}
-  \caption{Walker Demo Match Velocity Belohnungsfunktion}
-  \label{fig:match_velocity_original_vel1}
-\end{figure}
-Die Abbildung \ref{fig:match_velocity_original_vel1} zeigt die Original Belohnungsfunktion ($R_V=(1 - (V_\delta / |\vec{Zielgeschwindigkeit}|)^2)^2$) für die Zielgeschwindigkeit von 1. \\
-Um das zu vermeiden wurde das trainieren mit einer anderen Belohnungsfunktion getestet.
+Versuch 4 behandelt die Bewegung auf der Stelle stehen. Für das stehenbleiben wird die Zielgeschwindigkeit auf 0 gesetzt während das Ziel auf der Startposition befindet. Die Belohnungsfunktion der Demo, wird ab jetzt Demo Belohnungsfunktion genannt. Die Demo Belohnungsfunktion hat das Problem das durch die Zielgeschwindigkeit geteilt wird, was bei einer Zielgeschwindigkeit von 0 zu Mathematischen Fehlern führt. Um das zu vermeiden wurde das trainieren mit einer anderen Belohnungsfunktion getestet.
 \begin{figure}[H]
   \centering  
   \includegraphics[scale=0.5]{img/match_velocity_exp.png}
-  \caption{Neue Exponential Match Velocity Belohnungsfunktion}
+  \caption{DeepMimic Match Velocity Belohnungsfunktion}
   \label{fig:match_velocity_exp}
 \end{figure}
-Die Abbildung \ref{fig:match_velocity_exp} zeigt die neue Belohnungsfunktion ($R1_V=exp(5 \cdot (-V_\delta^2))$). Die neue Belohnungsfunktion ist inspiriert von den Belohnungsfunktionen des Papers "DeepMimic: Example-Guided Deep Reinforcement Learning of Physics-Based Character Skills".\cite{peng2018deepmimic}
+Die neue Belohnungsfunktion ist inspiriert von den Belohnungsfunktionen des Papers "DeepMimic: Example-Guided Deep Reinforcement Learning of Physics-Based Character Skills".\cite{peng2018deepmimic}
+Die Belohnungsfunktion aus Abbildung \ref{fig:match_velocity_exp} wird daher ab hier DeepMimic Belohnungsfunktion genannt.
 
-Der Walker konnte mit der neuen Belohnungsfunktion lernen auf der Stelle zu stehen. Mit zufälliger Zielgeschwindigkeit zu einem Ziel zu laufen wie im Ursprünglichen Verhalten konnte damit jedoch nicht zufriedenstellend erlernt werden.
+Der Walker konnte mit der DeepMimic Belohnungsfunktion lernen auf der Stelle zu stehen. Mit zufälliger Zielgeschwindigkeit zu einem Ziel zu laufen wie im Ursprünglichen Verhalten konnte damit jedoch nicht zufriedenstellend erlernt werden.
 
 \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.5]{img/training_exp_belohnung.png}
-  \caption{Vergleich vorwärts laufen Exp Belohnung gegen Walker Demo Belohnung}
-  \label{fig:training_exp_belohnung}
+  \includegraphics[scale=0.5]{img/versuch4_training}
+  \caption{Vergleich von Training mit Demo Belohnungsfunktion gegen DeepMimic Belohnungsfunktion}
+  \label{fig:versuch4_training}
 \end{figure}
 
-Die Abbildung \ref{fig:training_exp_belohnung} zeigt mit der grünen Linie die Leistung der neuen Belohnungsfunktion und mit der pinken Linie die Leistung der Walker Demo Belohnungsfunktion. Nachfolgender Vergleich der Belohnungsfunktionen zeigt das die Ursprüngliche Belohnungsfunktion durch das Teilen mit der Zielgeschwindigkeit die Sensitivität der Funktion je nach Zielgeschwindigkeit beeinflusst. Daraus folgt das bei steigender Zielgeschwindigkeit eine größere Abweichung der Geschwindigkeit geduldet wird. Diese Anpassung verbessert die Generalisierung zwischen den wechselnden Geschwindigkeiten um ein vielfaches.
+Die Abbildung \ref{fig:versuch4_training} zeigt mit der orangenen Linie die Leistung der DeepMimic Belohnungsfunktion und mit der pinken Linie die Leistung der Demo Belohnungsfunktion. Nachfolgender Vergleich der Belohnungsfunktionen zeigt das die Ursprüngliche Belohnungsfunktion durch das Teilen mit der Zielgeschwindigkeit die Sensitivität der Funktion je nach Zielgeschwindigkeit beeinflusst. Daraus folgt das bei steigender Zielgeschwindigkeit eine größere Abweichung der Geschwindigkeit geduldet wird (siehe Abbildung \ref{fig:match_velocity_demo_vergleich}). Diese Anpassung verbessert die Generalisierung zwischen den wechselnden Geschwindigkeiten um ein vielfaches.
 
 \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.5]{img/match_velocity_original_vergleich.png}
-  \caption{Vergleich der Walker Demo Belohnungsfunktion unter verschiedenen Zielgeschwindigkeiten}
-  \label{fig:match_velocity_original_vergleich}
+  \includegraphics[scale=0.5]{img/match_velocity_demo_vergleich.png}
+  \caption{Vergleich der Demo Belohnungsfunktion unter verschiedenen Zielgeschwindigkeiten}
+  \label{fig:match_velocity_demo_vergleich}
 \end{figure}
 
 \subsection{Versuch 5}
-Mit dieser Erkenntnis wurde eine neue Anpassung untersucht. In der folgenden Anpassung blieb die Belohnungsfunktion weitestgehend Unverändert. Lediglich das obere Limit ab welchem die Funktion eine Belohnung von 0 annimmt, wurde auf ein minimum von 0.1 beschränkt. Somit konnte sicher gestellt werden das im Bereich der normalen Fortbewegung keine Veränderung auftritt. Bei allen Zielgeschwindigkeiten unter 0.1 wird fortan jedoch 0.1 als maximale Abweichung genutzt, bevor die Belohnung 0 erreicht.\\
+Mit dieser Erkenntnis wurde eine neue Anpassung untersucht. In der folgenden Anpassung blieb die Belohnungsfunktion weitestgehend Unverändert. Lediglich das obere Limit ab welchem die Funktion eine Belohnung von 0 annimmt, wurde auf ein minimum von 0.1 beschränkt. Somit konnte sicher gestellt werden das im Bereich der normalen Fortbewegung keine Veränderung auftritt. Mit der Demo Belohnungsfunktion konnten nur Annäherungen an eine Zielgeschwindigkeit von 0 genutzt werden. Bei einer Annäherung von 0.000001 ist das Spektrum an akzeptablen Geschwindigkeiten bevor die Belohnung 0 ist nahezu unerreichbar (siehe Abbildung \ref{fig:match_velocity_vergleich_clip}). Mit dem Limit von 0.1 ist der Bereich der Belohnungsfunktion > 0 groß genug, sodass der Läufer durch ausprobieren Belohnungen über 0 erreichen kann. Somit kann der Läufer die Belohnung optimieren.\\
 
 \begin{figure}[H]
   \centering  
   \includegraphics[scale=0.5]{img/match_velocity_vergleich_clip.png}
-  \caption{Vergleich Original gegen Belohnungsfunktion mit 0.1 Limit}
+  \caption{Vergleich Demo gegen Belohnungsfunktion mit 0.1 Limit}
   \label{fig:match_velocity_vergleich_clip}
 \end{figure}
 $V_\delta=Clip(|\vec{Geschwindigkeit} - \vec{Zielgeschwindigkeit}|, 0, |\vec{Zielgeschwindigkeit}|)$ \\
 $V_\delta=Clip(|\vec{Geschwindigkeit} - \vec{Zielgeschwindigkeit}|, 0, max(0.1, |\vec{Zielgeschwindigkeit}|))$ \\
 
+Das auf einer Stelle stehen hat der Läufer damit in einem separaten Training auch erlernt. Abbildung \ref{fig:versuch5_training} zeigt das der Läufer die maximale Episoden Länge von 1000 erreicht hat ohne zu fallen. Die bewegte Distanz hat sich auch 0 angenähert.
 
+\begin{figure}[H]
+  \centering  
+  \includegraphics[scale=0.5]{img/versuch5_training.png}
+  \caption{Versuch 5 Traininggraphen}
+  \label{fig:versuch5_training}
+\end{figure}
 
-stehen bleiben:
-wenn Distance < slowDownDistance dann je nach Distanz die Geschwindigkeit verringern -> agent bleibt vor ziel stehen bzw. kreist um ziel
+Die Belohnungen wurden auch weitestgehend optimiert siehe Abbildung \ref{fig:versuch5_training_belohnung}.
 
-extra Laufrichtungen:
--getrennte Modelle und Modell live wechseln problem mit seitwärts laufen und vermutlich schlechter Übergang bei Wechsel
--ein Modell mit Laufrichtung als one hot encoding in Beobachtung mit Lektion für verschiedene Laufrichtung -> kann nicht von vorwärtslaufen auf andere Richtung generalisieren bzw. anpassen (vergisst vorheriges verhalten) schränkt Bewegung auf feste Bewegungsrichtungen ein (vorwärts, rechts, links, rückwärts)
--extra Ziel für Blickrichtung:
-  -Ziel zufällig gesetzt mit Winkel Begrenzung von agent zu ziel -> Winkel ändert sich bei Bewegung
-  -Blickziel setzen bei Episodenwechsel oder Ziel erreicht -> ändert sich zu häufig das Agent verhalten nicht lernt
-  -Blickziel und Laufziel nur neu setzen wenn Durchschnittliche Blickbelohnung > Grenzwert -> zu schwer bzw. dauert zu lange, Agent veralten schon zu sehr vertieft um es groß zu ändern
-  -Walker lernt auf Boden zu schauen da Blickrichtung nach unten näher an Blickrichtung Ziel ist wenn sich das Ziel hinter dem Walker befindet
-  -Extra Belohnung für aufrechte Blickrichtung
-  -Blickziel wird jedes Physikupdate neu gesetzt um Winkel gleich zu behalten
-  -Blickziel neu setzen wenn bestimmte Zeit auf Ziel geschaut (mit Spherecast) -> funktioniert nicht schlecht aber bei längerem training hört der Agent auf das Blickziel zu erreichen
+\begin{figure}[H]
+  \centering  
+  \includegraphics[scale=0.5]{img/versuch5_training_belohnung.png}
+  \caption{Versuch 5 Training Belohnungsgraphen}
+  \label{fig:versuch5_training_belohnung}
+\end{figure}
+
+\subsection{Versuch 6}
+Der folgende Versuch untersucht das Laufen in unterschiedliche Richtungen relativ zur Blickrichtung. Um das zu realisieren wurde dem Agent ein enum mit der Laufrichtung hinzugefügt. Die Blickrichtung Belohnungsfunktion wird relativ zur Zielrichtung berechnet. Bei Vorwärtsbewegung ist die Blickrichtung gerade aus. Bei Seitlicher Bewegung ist die Blickrichtung gespiegelt zur Laufrichtung. Läuft der Läufer seitlich rechts ist die Blickrichtung links zum ziel und anders herum. Beim rückwärts gehen ist die Blickrichtung entgegen der Zielrichtung. Die Implementierung ist in \ref{lst:laufrichtung} zu sehen.
+
+\begin{lstlisting}[caption={Laufrichtung Enum, Beobachtung und Belohnung},captionpos=b,label={lst:laufrichtung}]
+public enum Direction
+{
+    Forward,
+    Right,
+    Left,
+    Backward,
+}
+    
+public override void FixedUpdate()
+{
+    ...
+    var headForward = head.forward;
+    headForward.y = 0;
+    Vector3 lookDirection = cubeForward;
+    switch (direction)
+    {
+        case Direction.Right:
+            lookDirection = -walkOrientationCube.transform.right;
+            break;
+        case Direction.Left:
+            lookDirection = walkOrientationCube.transform.right;
+            break;
+        case Direction.Backward:
+            lookDirection = -walkOrientationCube.transform.forward;
+            break;
+    }
+    ...
+}
+\end{lstlisting}
+
+Das gehen in Zielrichtung wurde durch die Änderungen nicht beeinflusst. Separate Trainings zu den drei anderen Laufrichtungen waren erfolgreich.
+
+\begin{figure}[H]
+  \centering  
+  \includegraphics[scale=0.5]{img/versuch6_training.png}
+  \caption{Versuch 6 Traininggraphen}
+  \label{fig:versuch6_training}
+\end{figure}
+
+Abbildung \ref{fig:versuch6_training} zeigt die zurückgelegte Distanz und die Anzahl an erreichten Zielen in einer Trainingsepisode. Die Ergebnisse der 3 Laufrichtungen (rot = Rückwärts, gelb = rechts, blau = links) sind alle vergleichbar mit den Ergebnissen der Demo. Die Abweichung der Laufrichtung Links ist vermutlich der zufällligen Natur des Trainings anzurechnen.
+
+\subsection{Versuch 7}
