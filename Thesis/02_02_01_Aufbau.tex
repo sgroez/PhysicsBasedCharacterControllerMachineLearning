@@ -1,5 +1,5 @@
 \subsection{Aufbau}
-Das Toolkit ist in zwei Teile unterteilt (siehe Abbildung \ref{fig:mlagents_aufbau}). Für die Unity-Integration ist das Paket com.unity.ml-agents aus dem Unity Asset Store zuständig. Das eigentliche Training mit den maschinellen Lernalgorithmen findet jedoch in einer separaten Python-Umgebung statt. Für die Kommunikation zwischen den beiden Bereichen verwendet das ML-Agents Toolkit eine gRPC-Netzwerkkommunikation.\cite{juliani2020}
+Das Toolkit ist in zwei Teile unterteilt (siehe Abbildung \ref{fig:mlagents_aufbau}). Für die Unity-Integration ist das Paket com.unity.ml-agents aus dem Unity Asset Store zuständig. Das eigentliche Training mit den maschinellen Lernalgorithmen findet jedoch in einer separaten Python-Umgebung statt. Für die Kommunikation zwischen den beiden Bereichen verwendet das ML-Agents Toolkit eine \hl{gRPC-Netzwerkkommunikation}.\cite{juliani2020}
 
 \begin{figure}[H]
   \centering  
@@ -13,7 +13,7 @@ Das Toolkit ist in zwei Teile unterteilt (siehe Abbildung \ref{fig:mlagents_aufb
   \label{fig:mlagents_aufbau}
 \end{figure}
 
-Um eine Szene in Unity für das verstärkende Lernen zu nutzen muss die Szene mindestens ein Agent beinhalten. Jeder Agent referenziert ein Verhalten. Ein Verhalten kann eins von drei verschiedenen Modi verwenden. In Abbildung \ref{fig:mlagents_aufbau_unity} werden drei Agenten mit allen unterschiedlichen Verhalten Modi dargestellt.
+Um eine Szene in Unity für das verstärkende Lernen zu nutzen, muss die Szene mindestens einen Agenten beinhalten. Jeder Agent referenziert ein Verhalten. Ein Verhalten kann eins von drei verschiedenen Modi verwenden. In Abbildung \ref{fig:mlagents_aufbau_unity} werden drei Agenten mit den unterschiedlichen Verhaltens Modi dargestellt.
 
 \begin{figure}[H]
   \centering  
@@ -44,7 +44,7 @@ Um eine Szene in Unity für das verstärkende Lernen zu nutzen muss die Szene mi
   \label{fig:mlagents_aufbau_unity}
 \end{figure}
 
-Das lernende Verhalten nutzt den Kommunikator um Beobachtungen an die Python Umgebung zu übergeben. Als Antwort bekommt das Verhalten die Aktion entnommen der aktuellen Strategie. Im Inferenz Modus wird ein bereits trainiertes Modell mit dem Unity Sentis Packet ausgeführt. Der Heuristik Modus wird meist zum testen oder dem Aufzeichnen von Demonstrationen für das Imitationslernen verwendet. Die Heuristik verwendet fest codierte Anweisungen um beispielsweise die Aktionen über Tastatureingabe zu steuern.
+Das Verhalten bildet die Zuweisung von Beobachtung auf eine Aktion in der Unity Umgebung ab. Im Lernmodus nutzt es den Kommunikator, um in der Python Umgebung basierend auf der Beobachtung und der aktuellen Strategie eine Aktion auszuwählen. Im Inferenzmodus wird ein bereits trainiertes Modell mit dem Unity Sentis-Paket ausgeführt. Der Heuristikmodus wird meist zum Testen oder zum Aufzeichnen von Demonstrationen für das Imitationslernen verwendet. Die Heuristik verwendet fest kodierte Anweisungen, um beispielsweise die Aktionen über Tastatureingaben zu steuern.
 
 \begin{figure}[H]
   \centering  
@@ -61,7 +61,7 @@ Das lernende Verhalten nutzt den Kommunikator um Beobachtungen an die Python Umg
   \item Behaviour Type: Lernmodus Default = Lernen, Heuristic, Inferenz
 \end{itemize}
 
-Die Agent-Komponente bildet die Grundlage für alle Implementierungen. Sie bietet abstrakte Funktionen für die Initialisierung, den Start einer Episode, das Erfassen des Zustands der Umgebung sowie das Ausführen von Aktionen. Durch die Implementierung dieser Funktionen können unterschiedlichste Agenten entwickelt und trainiert werden. Die Beobachtungen des Agenten können auf zwei Arten erstellt werden. Beobachtungen basierend auf Raycasts sowie Kamerabildern werden mit seperate Komponenten erstellt. Beobachtungen aus Zahlenwerte sowie Vektoren und Quaternionen können jedoch auch direkt über die Observations Funktion im Agenten der Beobachtung angehängt werden.
+Die Agent-Komponente bildet die Grundlage für alle Implementierungen. Sie bietet abstrakte Funktionen für die Initialisierung, den Start einer Episode, das Erfassen des Zustands der Umgebung sowie das Ausführen von Aktionen. Durch die Implementierung dieser Funktionen können unterschiedlichste Agenten entwickelt und trainiert werden. Die Beobachtungen des Agenten können auf zwei Arten erstellt werden. Beobachtungen basierend auf Raycasts sowie Kamerabildern werden mit separaten Komponenten erstellt. Beobachtungen aus Zahlenwerten sowie Vektoren und Quaternionen können jedoch auch direkt über die Beobachtungs-Funktion im Agenten der Beobachtung angehängt werden.
 
 \begin{figure}[H]
   \centering
@@ -70,7 +70,7 @@ Die Agent-Komponente bildet die Grundlage für alle Implementierungen. Sie biete
   \label{fig:agent_komponente}
 \end{figure}
 
-Abbildung \ref{fig:agent_komponente} zeigt die Basiskomponente des Agenten. Die Agenten Komponente stellt alle grundlegenden Funktionen des verstärkenden Lernens bereit und implementiert die Verbindung zur Akademie und dem Verhalten des Agenten. Ohne das überschreiben der Funktionen ist die Agentenklasse jedoch ohne Funktion. Die genauen Methoden zur Implementierung eigener Agentenklassen werden im folgenden Abschnitt behandelt. Das einzige Feld zur Konfiguration ist Max Step, welches die maximale Anzahl der Schritte innerhalb einer Episode festlegt.
+Abbildung \ref{fig:agent_komponente} zeigt die Basiskomponente des Agenten. Ohne das Überschreiben der Funktionen ist die Agentenklasse jedoch ohne Funktion. Die genauen Methoden zur Implementierung eigener Agentenklassen werden im folgenden Abschnitt behandelt. Das einzige Feld zur Konfiguration ist "Max Step", welches die maximale Anzahl der Schritte innerhalb einer Episode festlegt.
 
 \begin{lstlisting}[caption={Agent Funktionen},captionpos=b,label={lst:agent_funktionen}]
 public override void CollectObservations(VectorSensor sensor)
@@ -91,11 +91,11 @@ public virtual void FixedUpdate()
 }
 \end{lstlisting}
 
-In der CollectObservations Methoden wird festgelegt welche Daten dem Agent für das Training bereit stehen siehe Listing \ref{lst:agent_funktionen} Zeile 1-3. CollectObservations wird für jede angefragte Entscheidung ausgeführt und das Ergebnis an das NN Modell oder den Python Trainer übergeben.
+In der CollectObservations-Methode wird festgelegt, welche Daten dem Agent für das Training bereitgestellt werden (siehe Listing \ref{lst:agent_funktionen} Zeile 1-3). CollectObservations wird für jede angefragte Entscheidung ausgeführt und das Ergebnis an das NN-Modell oder den Python Trainer übergeben.
 
-Wenn eine Entscheidung angefragt wurde und das NN Modell ein Ergebnis liefert wird dieses hier von numerischen Werten in Aktionen umgewandelt. In Listing \ref{lst:agent_funktionen} Zeile 6-11 wird gezeigt wie die Aktion in x und y Bewegung umgesetzt wird.
+Wenn eine Entscheidung angefragt wurde und das NN-Modell ein Ergebnis liefert, wird dieses hier von numerischen Werten in Aktionen umgewandelt. In Listing \ref{lst:agent_funktionen} Zeile 6-11 wird gezeigt, wie die Aktion in X- und Y-Bewegung umgesetzt wird.
 
-Im Beispielcode in Listing \ref{lst:agent_funktionen} Zeile 13-16 wird ein Reward in jedem FixedUpdate vergeben über die AddReward Methode die auch Teil der Agenten-Komponente ist. Der Reward kann aber an jeder Stelle im Code vergeben werden, der Code dient hier nur als ein Beispiel.
+Im Beispielcode in Listing \ref{lst:agent_funktionen} Zeile 13-16 wird eine Belohnung in jedem FixedUpdate vergeben, und zwar über die AddReward Methode, die auch Teil der Agentenkomponente ist. Die Belohnung kann aber an jeder Stelle im Code vergeben werden, der Code dient hier nur als ein Beispiel.
 
 \begin{figure}[H]
   \centering  
@@ -104,4 +104,4 @@ Im Beispielcode in Listing \ref{lst:agent_funktionen} Zeile 13-16 wird ein Rewar
   \label{fig:entscheidung_anfragen_komponente}
 \end{figure}
 
-Die Komponente in Abbildung \ref{fig:entscheidung_anfragen_komponente} fragt in regelmäßigen Abständen Entscheidungen an. Das bedeutet es wird eine Beobachtung erstellt. Darauf wird die Beobachtung als Eingangswert für das neuronale Netz genutzt und dann eine Aktion vom neuronalen Netz ausgewählt. Während dem training wird diese Beobachtung zusammen mit der darauf ausgeführten Aktion und der resultierenden Belohnung im Trainingsspeicher abgelegt. Die "Decision Period" gibt an in welchem Interval der Agent eine Entscheidung treffen soll. Das "Kontrollkästchen Take Actions Between Decisions" gibt an ob der Agent die ausgewählte Aktion wiederholen soll bis die nächste Aktion ausgewählt wurde.
+Die Komponente in Abbildung \ref{fig:entscheidung_anfragen_komponente} fragt in regelmäßigen Abständen Entscheidungen an. Das bedeutet, es wird eine Beobachtung erstellt und darauf basierend eine Aktion über das Verhalten ausgewählt. Die "Decision Period" gibt an, in welchem Intervall der Agent eine Entscheidung treffen soll. Das Kontrollkästchen "Take Actions Between Decisions" gibt an, ob der Agent die ausgewählte Aktion wiederholen soll, bis die nächste Aktion ausgewählt wurde.

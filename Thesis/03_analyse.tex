@@ -1,9 +1,12 @@
-{\chapter{Analyse}}
+\chapter{Analyse}
 \label{sec:analyse}
-Zusätzlich zu den maschinellen Lernkomponenten stellt Unity auch Demonstrationsumgebungen bereit, in denen verschiedene Lösungen für gängige Verstärkungslernprobleme implementiert sind. In der Walker-Demo wird ein physisch simulierter Charakter darauf trainiert, zu einem Zielwürfel zu laufen. Diese Demo-Umgebung implementiert bereits einige Grundlagen für die Steuerung eines physisch simulierten Charakters. Aus diesem Grund wird in dieser Arbeit die Walker-Demo als Basis für die Entwicklung genutzt. In diesem Kapitel wird daher die Walker-Demo analysiert, um in den folgenden Kapiteln darauf aufzubauen.
+Zusätzlich zu den maschinellen Lernkomponenten stellt Unity auch Demonstrationsumgebungen bereit, in denen verschiedene Lösungen für gängige Verstärkungslernprobleme implementiert sind. In der Walker-Demo wird ein physisch simulierter Charakter darauf trainiert, zu einem Zielwürfel zu laufen. Sie implementiert bereits einige grundlegende Steuerungsmechanismen, die erforderlich sind, um einen Charakter in einer dynamischen Umgebung zu bewegen und zu kontrollieren. Aus diesem Grund wird in dieser Arbeit die Walker-Demo als Basis für die Entwicklung genutzt. 
+
+In diesem Kapitel wird daher die Walker-Demo analysiert, um in den folgenden Kapiteln darauf aufzubauen. Es wird untersucht wie die Szene und der Charakter aufgebaut sind, welche Beobachtungen als Eingabe verwendet werden und wie Ausgabe des neuronalen Netz in der Umgebung ausgeführt werden. Anschließend wird der Ablauf und die verwendete Belohnungsfunktion analysiert.
 
 \section{Szenenaufbau}
-Die Szene besteht aus einem quadratischen Spielfeld mit Boden und Wänden die der Charakter nicht verlassen kann (siehe Abbildung \ref{fig:walker_aufbau}). Des Weiteren beinhaltet die Umgebung noch den Läufer und das Ziel zu welchem der Läufer lernt zu laufen.
+Die Szene besteht aus einem quadratischen Spielfeld mit einem Boden und Wänden, die der Charakter nicht verlassen kann (siehe Abbildung \ref{fig:walker_aufbau}). Diese Begrenzungen dienen dazu, die Bewegung des Charakters zu kontrollieren und sicherzustellen, dass die Lernumgebung konsistent bleibt. Die Umgebung umfasst weiterhin den Läufer und das Ziel, zu dem der Läufer lernt zu laufen.
+
 \begin{figure}[H]
   \centering  
   \includegraphics[scale=0.35]{img/walker_aufbau.png}
@@ -12,7 +15,9 @@ Die Szene besteht aus einem quadratischen Spielfeld mit Boden und Wänden die de
 \end{figure}
 
 \section{Läufer}
-Der Körper des Läufers besteht aus 11 Kapseln, drei Kugeln und 2 Quadern, jeder dieser Formen hat eine Festkörper und eine Kollisions Physikkomponente. Zwischen den Körperteilen werden die Gelenke als Kugelgelenke simuliert. Die genaue Physikkonfiguration der Körperteile werden veranschaulicht in Tabelle \ref{table:walker_körperteile}
+Der Körper des Läufers ist sorgfältig mit verschiedenen geometrischen Formen aufgebaut: 11 Kapseln, drei Kugeln und zwei Quadern. Jede dieser Formen verfügt über eine Festkörper- und eine Kollisions-Physikkomponente, die eine realistische Interaktion innerhalb der Szene ermöglichen. Die Gelenke zwischen den Körperteilen werden als Kugelgelenke simuliert, um eine flexible und natürliche Bewegung zu gewährleisten.
+
+Die genaue Physikkonfiguration der Körperteile wird in der Tabelle \ref{table:walker_körperteile} veranschaulicht. Diese Konfiguration spielt eine zentrale Rolle, da sie die Art und Weise bestimmt, wie der Läufer lernt, auf das Ziel zuzulaufen, und dabei die physischen Einschränkungen und Möglichkeiten berücksichtigt.
 
 \begin{table}[H]
   \centering
@@ -46,12 +51,8 @@ Der Körper des Läufers besteht aus 11 Kapseln, drei Kugeln und 2 Quadern, jede
   \label{table:walker_körperteile}
 \end{table}
 
-Gesteuert wird der Läufer über die Gelenk Motor Steuerung (Joint Drive Controller). Das Walker Agent Skript registriert die Körperteile bei der Initialisierung in der Gelenk Motor Steuerung. Anschließend können über die Gelenk Motor Steuerung die Zielrotationen sowie die Maximale Kraft des Gelenks festgelegt werden, und somit der Läufer gesteuert werden. Die Gelenk Motor Einstellungen (Joint Drive Settings) siehe Abbildung \ref{fig:agent_konfiguration} \hl{bestimmen die Stärke mit welcher die Gelenke in die Zielstellung bewegt werden.}
-\begin{itemize}
-  \item Max Joint Spring: Bestimmt den Drehmoment mit welchem das Gelenk in die Zielposition rotiert wird.
-  \item Joint Dampen: Verringert den Drehmoment proportional zur Differenz zwischen aktueller Geschwindigkeit und der Zielgeschwindigkeit. Verringert Schwingungen.
-  \item Max Joint Force Limit: Gibt die maximale Kraft des Gelenks an (verhindert zu schnelle Bewegung bei großer Abweichung).
-\end{itemize}
+Der Läufer wird über die Gelenk Motor Steuerung (Joint Drive Controller) gesteuert. Das Walker Agent Skript registriert die Körperteile bei der Initialisierung in der Gelenk Motor Steuerung, wodurch eine effektive Schnittstelle zur Kontrolle der Gelenke geschaffen wird. Anschließend können über die Gelenk Motor Steuerung die Zielrotationen sowie die Maximale Kraft des Gelenks festgelegt werden, und somit der Läufer gesteuert werden. Die Gelenk Motor Einstellungen (Joint Drive Settings) siehe Abbildung \ref{fig:agent_konfiguration} \hl{bestimmen die Stärke mit welcher die Gelenke in die Zielstellung bewegt werden.}
+
 \begin{figure}[H]
   \centering  
   \includegraphics[scale=0.5]{img/gelenk_motor_steuerung.png}
@@ -59,9 +60,16 @@ Gesteuert wird der Läufer über die Gelenk Motor Steuerung (Joint Drive Control
   \label{fig:gelenk_motor_steuerung}
 \end{figure}
 
+\begin{itemize}
+  \item Max Joint Spring: Bestimmt den Drehmoment mit welchem das Gelenk in die Zielposition rotiert wird.
+  \item Joint Dampen: Verringert den Drehmoment proportional zur Differenz zwischen aktueller Geschwindigkeit und der Zielgeschwindigkeit. Verringert Schwingungen.
+  \item Max Joint Force Limit: Gibt die maximale Kraft des Gelenks an (verhindert zu schnelle Bewegung bei großer Abweichung).
+\end{itemize}
+
 
 \section{Agent}
-Das Walker Agent Skript, definiert den Läufer als Agent für das maschinelle Lernen. Abbildung \ref{fig:agent_konfiguration} zeigt die Agentenkomponente im Inspektor. Um die Komponente zu nutzen müssen hier die Körperteile des Walkers referenziert werden. Zusätzlich kann eine Zielgeschwindigkeit festgelegt werden und ob die Geschwindigkeit variieren soll während dem Training. Als letztes muss auch das Zielobjekt referenziert werden.
+Das Walker Agent Skript, definiert den Läufer als Agent für das maschinelle Lernen. In Abbildung \ref{fig:agent_konfiguration} wird die Agentenkomponente im Inspektor gezeigt. Diese Komponente ist entscheidend für die Konfiguration der Lernumgebung des Läufers. Um die Komponente zu nutzen, müssen hier die Körperteile des Walkers referenziert werden. Diese Referenzierung ermöglicht es, spezifische Bewegungen und Interaktionen der einzelnen Körperteile zu steuern, was für das Training des Agenten entscheidend ist. Zusätzlich kann eine Zielgeschwindigkeit festgelegt werde und ob die Geschwindigkeit variieren soll während dem Training. Die Geschwindigkeit während dem Training zu variieren hilft dem Agent sein Verhalten besser an Umgebungsveränderungen anzupassen. Als letztes muss auch das Zielobjekt referenziert werden.
+
 \begin{figure}[H]
   \centering  
   \includegraphics[scale=0.5]{img/agent_konfiguration.png}
@@ -69,7 +77,8 @@ Das Walker Agent Skript, definiert den Läufer als Agent für das maschinelle Le
   \label{fig:agent_konfiguration}
 \end{figure}
 
-Die Beobachtung des Agenten wird in Tabelle \ref{table:walker_beobachtung} dargestellt.\\
+Die Beobachtung des Agenten wird in Tabelle \ref{table:walker_beobachtung} dargestellt. Für jedes Körperteil wird die Beobachtung aus Tabelle \ref{table:walker_beobachtung_körperteil} dem Zustand angefügt. Die Beobachtungen müssen den Zustand des Läufers und der Umgebung im Bezug auf das Trainingsziel genau darstellen. Nur so kann der Agent die Situation verstehen und das Ziel erreichen.
+
 \begin{table}[H]
   \centering
   {\rowcolors{1}{gray!10}{white}
@@ -97,7 +106,6 @@ Die Beobachtung des Agenten wird in Tabelle \ref{table:walker_beobachtung} darge
 \end{table}
 \rowidsclear
 
-Für jedes Körperteil wird die folgende Beobachtung dem Zustand angefügt.\\
 \begin{table}[H]
   \centering
   {\rowcolors{1}{gray!10}{white}
@@ -123,7 +131,12 @@ Für jedes Körperteil wird die folgende Beobachtung dem Zustand angefügt.\\
 \end{table}
 \rowidsclear
 
-Das Format einer Aktion besteht aus den in Tabelle \ref{table:walker_aktion} aufgeführten Feldern für jedes Körperteil des Läufers, ausgenommen der Hüfte und Hände.\\
+Das Format einer Aktion besteht aus den in Tabelle \ref{table:walker_aktion} aufgeführten Feldern für jedes Körperteil des Läufers, ausgenommen der Hüfte und Hände. Jedes Körperteil wird somit separat bewegt, um die Bewegungen zu optimieren und schlussendlich das Gleichgewicht zu halten und das Fortbewegen zu erlernen.
+
+Die Hüfte ist das zentrale Körperteil woran alle weiteren Körperteile mit Gelenken direkt oder indirekt anknüpfen. Aufgrund dieser zentralen Rolle wird die Hüftbeugung über das Gelenk des verbundenen Körpers gesteuert.
+
+Da die Hände kaum Relevanz für das laufen haben, sind in der Demo fest mit dem Unterarm verbunden und brauchen daher nicht gesteuert werden.
+
 \begin{table}[H]
   \centering
   {\rowcolors{1}{gray!10}{white}
@@ -145,21 +158,25 @@ Das Format einer Aktion besteht aus den in Tabelle \ref{table:walker_aktion} auf
 \end{table}
 \rowidsclear
 
-Die Belohnungsfunktion enthält zwei Komponenten. Zum einen wird die Differenz der Bewegung in Zielrichtung zwischen momentaner Bewegung und Zielbewegung durch die Funktion $R_V$ bewertet. Zum Anderen wird die Abweichung zwischen momentaner Blickrichtung und der Zielrichtung in $R_L$ berechnet. Die Belohnung ergibt sich am ende durch die Multiplikation beider Teilterme. Die Verwendung der Multiplikation hat zur Folge das die Belohnung gleichermaßen von beiden Teiltermen abhängig ist und es somit notwendig ist, beide Teile gleichzeitig zu optimieren.\\
+Die Belohnungsfunktion enthält zwei Komponenten. Zum einen wird die Differenz der Bewegung in Zielrichtung zwischen momentaner Bewegung und Zielbewegung durch die Funktion $R_V$ bewertet. Somit wird der Läufer dazu motiviert effizient auf das Ziel zuzusteuern, indem Geschwindigkeit und Richtung optimiert werden. Zum Anderen wird die Abweichung zwischen momentaner Blickrichtung und der Zielrichtung in $R_L$ berechnet. Diese Komponente stellt sicher das der Läufer sich vorwärts geradeaus auf das Ziel bewegt. Die Belohnung ergibt sich am ende durch die Multiplikation beider Teilterme. Die Verwendung der Multiplikation hat zur Folge das die Belohnung gleichermaßen von beiden Teiltermen abhängig ist und es somit notwendig ist, beide Teile gleichzeitig zu optimieren. Als Ergebnis lernt der Läufer gleichermaßen die Ausrichtung als auch die Bewegung in Zielrichtung.
+
 \begin{figure}[H]
   \centering  
   \includegraphics[scale=0.5]{img/match_velocity_demo_vel1.png}
   \caption{Walker Demo Match Velocity Belohnungsfunktion}
   \label{fig:match_velocity_demo_vel1}
 \end{figure}
+
 $V_\delta=Clip(|\vec{Geschwindigkeit} - \vec{Zielgeschwindigkeit}|, 0, |\vec{Zielgeschwindigkeit}|)$ \\
 $R_V=(1 - (V_\delta / |\vec{Zielgeschwindigkeit}|)^2)^2$ \\
+
 \begin{figure}[H]
   \centering  
   \includegraphics[scale=0.5]{img/look_at_target_demo.png}
   \caption{Walker Demo Look At Target Belohnungsfunktion}
   \label{fig:look_at_target_demo}
 \end{figure}
+
 $R_L=(\vec{Zielrichtung} \cdot \vec{Blickrichtung})+ 1) \cdot 0.5$ \\
 $R=R_V \cdot R_L$
 
