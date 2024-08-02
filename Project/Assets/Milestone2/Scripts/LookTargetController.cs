@@ -12,10 +12,7 @@ public class LookTargetController : MonoBehaviour
     [Header("Angle To Spawn Look Target At")]
     public float minAngle;
     public float maxAngle;
-    private float randomAngle = 0f;
-
-    public bool testMode = false;
-
+    float randomAngle = 0f;
     float radius = 5f;
 
     void OnEnable()
@@ -25,14 +22,7 @@ public class LookTargetController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (testMode)
-        {
-            transform.position = head.position + head.forward * 5;
-        }
-        else
-        {
-            SetLookTarget();
-        }
+        SetLookTarget();
     }
 
     public void SetRandomLookAngle()

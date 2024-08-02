@@ -2562,6 +2562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnRadius: 9
+  setRandomStartPos: 1
 --- !u!1 &5245438864095042845
 GameObject:
   m_ObjectHideFlags: 0
@@ -3483,7 +3484,6 @@ MonoBehaviour:
   target: {fileID: 4232689948433085026}
   minAngle: -180
   maxAngle: 180
-  testMode: 0
 --- !u!1 &5944932683700177806
 GameObject:
   m_ObjectHideFlags: 0
@@ -3789,6 +3789,7 @@ MonoBehaviour:
   minWalkingSpeed: 0.1
   maxWalkingSpeed: 10
   randomizeWalkSpeedEachEpisode: 1
+  targetWalkingSpeed: 0.1
   target: {fileID: 4232689948433085026}
   onTouchedTarget:
     m_PersistentCalls:
@@ -3805,17 +3806,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  root: {fileID: 3614163371068779725}
-  head: {fileID: 7155909403469715205}
-  randomizeRotationOnEpsiode: 1
-  bodyparts: []
-  logStats: 0
-  lookTarget: {fileID: 7137853988729422823}
-  durationLookAtTarget: 2
-  lookAtTargetMargin: 1
-  onLookedAtTarget:
-    m_PersistentCalls:
-      m_Calls:
       - m_Target: {fileID: 8964186769453650538}
         m_TargetAssemblyTypeName: LookTargetController, Assembly-CSharp
         m_MethodName: SetRandomLookAngle
@@ -3828,6 +3818,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  root: {fileID: 3614163371068779725}
+  head: {fileID: 7155909403469715205}
+  randomizeRotationOnEpsiode: 0
+  bodyparts: []
+  logStats: 0
+  lookTarget: {fileID: 7137853988729422823}
 --- !u!114 &4949537093396364951
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -107,5 +107,6 @@
 <tr><td>136_Milestone2Multidirection</td><td>Ziel nur in Laufrichtung gesetzt und Blickrichtung relativ dazu. Ziel und Blickrichtung werden jede Episode und bei erreichtem Ziel neu gesetzt</td><td>funktioniert nicht. Läufer hüpft und springt zum Ziel (vermutlich zu nah)</td></tr>
 <tr><td>137_Milestone2Multidirection</td><td>Gleich wie 136, nur die Distanz zum Ziel wird zufällig gewählt. Distanz wird neu gewählt wenn Ziel erreicht wurde.</td><td>funktioniert teilweise. Lernt jede Bewegung aber fällt nach einigen metern.</td></tr>
 <tr><td>138_Milestone2Multidirection</td><td>Gleich wie 137. Test ob zufällige Zielgeschwindigkeit Stabilität verbessert</td><td>Lernt Belohnung auszunutzen. Umkreist bei Seitwärtsbewegung das Ziel und wippt hin und her. Bewegung zum Ziel bringt gute Belohnung, Bewegung vom Ziel weg bringt maximal 0 Belohnung also keine Bestrafung</td></tr>
+<tr><td>139_Milestone2Multidirection</td><td>wie 137 aber mit zusätzlicher Energiespar Belohnung um Gehbewegung zu stabilisieren</td><td>hat nicht funktioniert (lernt noch langsamer)</td></tr>
 <tr><td>Name</td><td>beschreibung</td><td>notizen</td></tr>
 </table>
