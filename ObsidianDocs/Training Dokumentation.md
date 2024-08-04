@@ -108,5 +108,7 @@
 <tr><td>137_Milestone2Multidirection</td><td>Gleich wie 136, nur die Distanz zum Ziel wird zufällig gewählt. Distanz wird neu gewählt wenn Ziel erreicht wurde.</td><td>funktioniert teilweise. Lernt jede Bewegung aber fällt nach einigen metern.</td></tr>
 <tr><td>138_Milestone2Multidirection</td><td>Gleich wie 137. Test ob zufällige Zielgeschwindigkeit Stabilität verbessert</td><td>Lernt Belohnung auszunutzen. Umkreist bei Seitwärtsbewegung das Ziel und wippt hin und her. Bewegung zum Ziel bringt gute Belohnung, Bewegung vom Ziel weg bringt maximal 0 Belohnung also keine Bestrafung</td></tr>
 <tr><td>139_Milestone2Multidirection</td><td>wie 137 aber mit zusätzlicher Energiespar Belohnung um Gehbewegung zu stabilisieren</td><td>hat nicht funktioniert (lernt noch langsamer)</td></tr>
+<tr><td>140_Milestone2</td><td>Nutzt extra look at target welches relativ zu Läufer und Ziel in einem festen Winkel gesetzt wird. Der Winkel wird zu beginn und beim erreichen eines Ziels zufällig gesetzt. Zusätzlich wurde eine frühe Stopkondition hinzugefügt wenn die momentane Look At Belohnung zu gering ist.</td><td>Instabil, training bricht bei ca. 12mil Schritten ein und pendelt dann auf und ab</td></tr>
+<tr><td>141_Milestone2</td><td>Versuch Training zu stabilisieren mit neuen Hyperparametern</td><td>lernt nur in Zielrichtung zu springen</td></tr>
 <tr><td>Name</td><td>beschreibung</td><td>notizen</td></tr>
 </table>
