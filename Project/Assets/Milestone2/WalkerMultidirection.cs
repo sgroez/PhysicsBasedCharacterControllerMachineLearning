@@ -106,23 +106,6 @@ public class WalkerMultidirection : WalkerAgent1
         }
 
         AddReward(matchSpeedReward * lookAtTargetReward);
-
-        float totalPower = GetTotalPower();
-        float powerSaveReward = -Mathf.Clamp(totalPower / 3000 - 0.05f, 0f, 1f);
-        if (logStats) Debug.Log($"power save reward: {powerSaveReward}, total: {totalPower}");
-        statsRecorder.Add("Reward/PowerSaveReward", powerSaveReward);
-
-        AddReward(powerSaveReward);
-    }
-
-    float GetTotalPower()
-    {
-        float totalPower = 0f;
-        foreach (Bodypart bp in bodyparts)
-        {
-            totalPower += bp.power;
-        }
-        return totalPower;
     }
 
     void OnDrawGizmos()
