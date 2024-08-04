@@ -21,22 +21,22 @@ public class UserControllerMultiDirection : UserController
         {
             if (inputVert > 0)
             {
-                agent.direction = Direction.Forward;
+                agent.orientation = Orientation.Forward;
             }
             else
             {
-                agent.direction = Direction.Backward;
+                agent.orientation = Orientation.Backward;
             }
         }
         else if (inputHor != 0)
         {
             if (inputHor > 0)
             {
-                agent.direction = Direction.Left;
+                agent.orientation = Orientation.Left;
             }
             else
             {
-                agent.direction = Direction.Right;
+                agent.orientation = Orientation.Right;
             }
         }
         /* else
