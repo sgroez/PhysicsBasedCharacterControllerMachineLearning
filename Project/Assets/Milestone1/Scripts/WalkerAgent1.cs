@@ -77,7 +77,7 @@ public class WalkerAgent1 : Agent
         //Reset all of the body parts
         foreach (Bodypart bp in bodyparts)
         {
-            bp.Reset();
+            bp.ResetTransform();
         }
 
         //Random start rotation to help generalize
@@ -167,9 +167,9 @@ public class WalkerAgent1 : Agent
         foreach (Bodypart bp in bodyparts)
         {
             if (bp.dof.sqrMagnitude <= 0) continue;
-            float targetRotX = bp.joint.angularXMotion != ConfigurableJointMotion.Locked ? continuousActions[++i] : 0;
-            float targetRotY = bp.joint.angularYMotion != ConfigurableJointMotion.Locked ? continuousActions[++i] : 0;
-            float targetRotZ = bp.joint.angularZMotion != ConfigurableJointMotion.Locked ? continuousActions[++i] : 0;
+            float targetRotX = bp.dof.x == 1 ? continuousActions[++i] : 0;
+            float targetRotY = bp.dof.y == 1 ? continuousActions[++i] : 0;
+            float targetRotZ = bp.dof.z == 1 ? continuousActions[++i] : 0;
             float jointStrength = continuousActions[++i];
             bp.SetJointTargetRotation(targetRotX, targetRotY, targetRotZ);
             bp.SetJointStrength(jointStrength);

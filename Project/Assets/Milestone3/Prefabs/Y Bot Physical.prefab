@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 8837308409139257882}
   - component: {fileID: 1445623952406034483}
   - component: {fileID: 7766903175794508430}
+  - component: {fileID: 7499813511773275580}
   m_Layer: 0
   m_Name: mixamorig:LeftForeArm
   m_TagString: agent
@@ -136,8 +137,8 @@ ConfigurableJoint:
   m_YMotion: 0
   m_ZMotion: 0
   m_AngularXMotion: 1
-  m_AngularYMotion: 1
-  m_AngularZMotion: 1
+  m_AngularYMotion: 0
+  m_AngularZMotion: 0
   m_LinearLimitSpring:
     spring: 0
     damper: 0
@@ -219,6 +220,38 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &7499813511773275580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129592033832529969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &466303154818283292
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,6 +327,7 @@ GameObject:
   - component: {fileID: 4182024300216296664}
   - component: {fileID: 1775139613066389982}
   - component: {fileID: 2385332620809871765}
+  - component: {fileID: 8038029861901197079}
   m_Layer: 0
   m_Name: mixamorig:RightForeArm
   m_TagString: agent
@@ -386,8 +420,8 @@ ConfigurableJoint:
   m_YMotion: 0
   m_ZMotion: 0
   m_AngularXMotion: 1
-  m_AngularYMotion: 1
-  m_AngularZMotion: 1
+  m_AngularYMotion: 0
+  m_AngularZMotion: 0
   m_LinearLimitSpring:
     spring: 0
     damper: 0
@@ -469,6 +503,38 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &8038029861901197079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240123022473166110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &1358134083288094939
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,6 +600,7 @@ GameObject:
   - component: {fileID: 1321271401101841808}
   - component: {fileID: 4088592049349597406}
   - component: {fileID: 2845904297290012413}
+  - component: {fileID: 2681937024750234228}
   m_Layer: 0
   m_Name: mixamorig:Spine
   m_TagString: agent
@@ -709,6 +776,38 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &2681937024750234228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1364022401413866215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &1600264074802888864
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,6 +916,7 @@ GameObject:
   - component: {fileID: 5496320323347940978}
   - component: {fileID: 8356729641433415656}
   - component: {fileID: 6325868278116697453}
+  - component: {fileID: 6356334776262382674}
   m_Layer: 0
   m_Name: mixamorig:Neck
   m_TagString: agent
@@ -992,6 +1092,38 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &6356334776262382674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662277918803247212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &1711833871926603510
 GameObject:
   m_ObjectHideFlags: 0
@@ -1099,6 +1231,7 @@ GameObject:
   - component: {fileID: 7492291910127767484}
   - component: {fileID: 2053260181955657867}
   - component: {fileID: 6128756563334212015}
+  - component: {fileID: 4311093924788221128}
   m_Layer: 0
   m_Name: mixamorig:LeftUpLeg
   m_TagString: agent
@@ -1274,6 +1407,38 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &4311093924788221128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1963316785093517932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &2302074251385417779
 GameObject:
   m_ObjectHideFlags: 0
@@ -1286,6 +1451,7 @@ GameObject:
   - component: {fileID: 6666126247855072039}
   - component: {fileID: 6839913178078398020}
   - component: {fileID: 1375980502234762821}
+  - component: {fileID: 2118264594879346879}
   m_Layer: 0
   m_Name: mixamorig:Spine2
   m_TagString: agent
@@ -1463,6 +1629,38 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &2118264594879346879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2302074251385417779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &2345654689140685989
 GameObject:
   m_ObjectHideFlags: 0
@@ -1505,6 +1703,7 @@ GameObject:
   - component: {fileID: 5153484071274486386}
   - component: {fileID: 705718576727109559}
   - component: {fileID: 1585718667806484613}
+  - component: {fileID: 7832576501679208150}
   m_Layer: 0
   m_Name: mixamorig:RightFoot
   m_TagString: agent
@@ -1658,6 +1857,38 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &7832576501679208150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2419673183707189943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 0
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &2425243047177888561
 GameObject:
   m_ObjectHideFlags: 0
@@ -1902,6 +2133,7 @@ GameObject:
   - component: {fileID: 1597457239226648396}
   - component: {fileID: 6432466392922730014}
   - component: {fileID: 3539629286441613580}
+  - component: {fileID: 6688523145486126177}
   m_Layer: 0
   m_Name: mixamorig:Hips
   m_TagString: agent
@@ -1977,6 +2209,38 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
+--- !u!114 &6688523145486126177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2799737013218019891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &2911308367434213916
 GameObject:
   m_ObjectHideFlags: 0
@@ -2051,6 +2315,7 @@ GameObject:
   - component: {fileID: 3880625116892457297}
   - component: {fileID: 3916562166414722963}
   - component: {fileID: 928437016548602649}
+  - component: {fileID: 7516059756908867507}
   m_Layer: 0
   m_Name: mixamorig:LeftFoot
   m_TagString: agent
@@ -2204,6 +2469,38 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &7516059756908867507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2963440725925343520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 0
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &3085608483938116808
 GameObject:
   m_ObjectHideFlags: 0
@@ -2311,6 +2608,7 @@ GameObject:
   - component: {fileID: 2884163922323722910}
   - component: {fileID: 3675299518256177280}
   - component: {fileID: 4814721265951740045}
+  - component: {fileID: 5279840492002081399}
   m_Layer: 0
   m_Name: mixamorig:RightHand
   m_TagString: agent
@@ -2404,9 +2702,9 @@ ConfigurableJoint:
   m_XMotion: 0
   m_YMotion: 0
   m_ZMotion: 0
-  m_AngularXMotion: 1
-  m_AngularYMotion: 1
-  m_AngularZMotion: 1
+  m_AngularXMotion: 0
+  m_AngularYMotion: 0
+  m_AngularZMotion: 0
   m_LinearLimitSpring:
     spring: 0
     damper: 0
@@ -2488,6 +2786,38 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &5279840492002081399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3400331768236094137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &3666502776741163442
 GameObject:
   m_ObjectHideFlags: 0
@@ -2564,6 +2894,7 @@ GameObject:
   - component: {fileID: 770488239610907102}
   - component: {fileID: 7121762188095353326}
   - component: {fileID: 8289278678367270051}
+  - component: {fileID: 6836622767491997516}
   m_Layer: 0
   m_Name: mixamorig:LeftArm
   m_TagString: agent
@@ -2739,6 +3070,38 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &6836622767491997516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3808568451055082132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &3845848912082997116
 GameObject:
   m_ObjectHideFlags: 0
@@ -2783,6 +3146,7 @@ GameObject:
   - component: {fileID: 6556137472159043478}
   - component: {fileID: 5865499380960612296}
   - component: {fileID: 4783815632421421602}
+  - component: {fileID: 1371257708785284955}
   m_Layer: 0
   m_Name: mixamorig:LeftLeg
   m_TagString: agent
@@ -2875,8 +3239,8 @@ ConfigurableJoint:
   m_YMotion: 0
   m_ZMotion: 0
   m_AngularXMotion: 1
-  m_AngularYMotion: 1
-  m_AngularZMotion: 1
+  m_AngularYMotion: 0
+  m_AngularZMotion: 0
   m_LinearLimitSpring:
     spring: 0
     damper: 0
@@ -2958,6 +3322,38 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &1371257708785284955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3887848283258011887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 0
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &3923626486075679989
 GameObject:
   m_ObjectHideFlags: 0
@@ -3064,6 +3460,7 @@ GameObject:
   - component: {fileID: 7134165159732684034}
   - component: {fileID: 7744442361801451128}
   - component: {fileID: 6945587808163132152}
+  - component: {fileID: 1753507760257213169}
   m_Layer: 0
   m_Name: mixamorig:Spine1
   m_TagString: agent
@@ -3239,6 +3636,38 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &1753507760257213169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4236164215549044539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &4436617522290652782
 GameObject:
   m_ObjectHideFlags: 0
@@ -3481,6 +3910,7 @@ GameObject:
   - component: {fileID: 3851498938304259866}
   - component: {fileID: 1273394783605235360}
   - component: {fileID: 891481697006362739}
+  - component: {fileID: 4269846684836013404}
   m_Layer: 0
   m_Name: mixamorig:LeftShoulder
   m_TagString: agent
@@ -3572,9 +4002,9 @@ ConfigurableJoint:
   m_XMotion: 0
   m_YMotion: 0
   m_ZMotion: 0
-  m_AngularXMotion: 1
-  m_AngularYMotion: 1
-  m_AngularZMotion: 1
+  m_AngularXMotion: 0
+  m_AngularYMotion: 0
+  m_AngularZMotion: 0
   m_LinearLimitSpring:
     spring: 0
     damper: 0
@@ -3656,6 +4086,38 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &4269846684836013404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4690581651490344562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &4994860872793685189
 GameObject:
   m_ObjectHideFlags: 0
@@ -3732,6 +4194,7 @@ GameObject:
   - component: {fileID: 5204095507348039696}
   - component: {fileID: 7010774450538507818}
   - component: {fileID: 2688477466478909985}
+  - component: {fileID: 8309741742114885226}
   m_Layer: 0
   m_Name: mixamorig:RightShoulder
   m_TagString: agent
@@ -3823,9 +4286,9 @@ ConfigurableJoint:
   m_XMotion: 0
   m_YMotion: 0
   m_ZMotion: 0
-  m_AngularXMotion: 1
-  m_AngularYMotion: 1
-  m_AngularZMotion: 1
+  m_AngularXMotion: 0
+  m_AngularYMotion: 0
+  m_AngularZMotion: 0
   m_LinearLimitSpring:
     spring: 0
     damper: 0
@@ -3907,6 +4370,38 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &8309741742114885226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5312900088020727006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &5520539397105722252
 GameObject:
   m_ObjectHideFlags: 0
@@ -4074,8 +4569,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3078036717394550232}
-  - component: {fileID: 290858861121024959}
-  - component: {fileID: 4794612807928780727}
   m_Layer: 0
   m_Name: Y Bot Physical
   m_TagString: agent
@@ -4099,45 +4592,8 @@ Transform:
   - {fileID: 6554318779341633263}
   - {fileID: 1597457239226648396}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 3.168, y: 0, z: 0}
---- !u!95 &290858861121024959
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6298147197401951604}
-  m_Enabled: 0
-  m_Avatar: {fileID: 9000000, guid: 8f09df86c63f94cdeb9a57829771f6d9, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4794612807928780727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6298147197401951604}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 816371b93bf0343c7a8359abc2346026, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  testAxis: {x: 1, y: 0, z: 0}
-  speed: 0.5
-  root: {fileID: 3539629286441613580}
-  testJoints: []
 --- !u!1 &6387178788558411560
 GameObject:
   m_ObjectHideFlags: 0
@@ -4203,6 +4659,7 @@ GameObject:
   - component: {fileID: 8190187585738575452}
   - component: {fileID: 4200482821492286810}
   - component: {fileID: 2897950795940889402}
+  - component: {fileID: 6845367654751643074}
   m_Layer: 0
   m_Name: mixamorig:Head
   m_TagString: agent
@@ -4378,6 +4835,38 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &6845367654751643074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6471922288218175813}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &6710550250892103514
 GameObject:
   m_ObjectHideFlags: 0
@@ -4485,6 +4974,7 @@ GameObject:
   - component: {fileID: 8874193004361007493}
   - component: {fileID: 8325275917952929505}
   - component: {fileID: 1091275368767377603}
+  - component: {fileID: 5381512939577282723}
   m_Layer: 0
   m_Name: mixamorig:RightArm
   m_TagString: agent
@@ -4660,6 +5150,38 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &5381512939577282723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7579131548990115831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &7585620864569422309
 GameObject:
   m_ObjectHideFlags: 0
@@ -4768,6 +5290,7 @@ GameObject:
   - component: {fileID: 2311053120559325027}
   - component: {fileID: 8562808496771610563}
   - component: {fileID: 6959985529488769713}
+  - component: {fileID: 9026730754170223421}
   m_Layer: 0
   m_Name: mixamorig:RightLeg
   m_TagString: agent
@@ -4860,8 +5383,8 @@ ConfigurableJoint:
   m_YMotion: 0
   m_ZMotion: 0
   m_AngularXMotion: 1
-  m_AngularYMotion: 1
-  m_AngularZMotion: 1
+  m_AngularYMotion: 0
+  m_AngularZMotion: 0
   m_LinearLimitSpring:
     spring: 0
     damper: 0
@@ -4943,6 +5466,38 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &9026730754170223421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8064633205652038835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 0
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &8075464587470529725
 GameObject:
   m_ObjectHideFlags: 0
@@ -4987,6 +5542,7 @@ GameObject:
   - component: {fileID: 6845808468702486639}
   - component: {fileID: 7098266407715845067}
   - component: {fileID: 2642957163240619368}
+  - component: {fileID: 6916496963664945820}
   m_Layer: 0
   m_Name: mixamorig:LeftToeBase
   m_TagString: agent
@@ -5077,8 +5633,8 @@ ConfigurableJoint:
   m_YMotion: 0
   m_ZMotion: 0
   m_AngularXMotion: 1
-  m_AngularYMotion: 1
-  m_AngularZMotion: 1
+  m_AngularYMotion: 0
+  m_AngularZMotion: 0
   m_LinearLimitSpring:
     spring: 0
     damper: 0
@@ -5160,6 +5716,38 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &6916496963664945820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8223568524751406257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 0
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &8483881083819554482
 GameObject:
   m_ObjectHideFlags: 0
@@ -5172,6 +5760,7 @@ GameObject:
   - component: {fileID: 3713008458619912537}
   - component: {fileID: 2871366687625940048}
   - component: {fileID: 6346410862339848203}
+  - component: {fileID: 874926977701113561}
   m_Layer: 0
   m_Name: mixamorig:RightToeBase
   m_TagString: agent
@@ -5262,8 +5851,8 @@ ConfigurableJoint:
   m_YMotion: 0
   m_ZMotion: 0
   m_AngularXMotion: 1
-  m_AngularYMotion: 1
-  m_AngularZMotion: 1
+  m_AngularYMotion: 0
+  m_AngularZMotion: 0
   m_LinearLimitSpring:
     spring: 0
     damper: 0
@@ -5345,6 +5934,38 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &874926977701113561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8483881083819554482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 0
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &8496026378735583949
 GameObject:
   m_ObjectHideFlags: 0
@@ -5357,6 +5978,7 @@ GameObject:
   - component: {fileID: 173750494000922175}
   - component: {fileID: 5360677972440671218}
   - component: {fileID: 5742593218243987828}
+  - component: {fileID: 8809160066154287204}
   m_Layer: 0
   m_Name: mixamorig:RightUpLeg
   m_TagString: agent
@@ -5532,6 +6154,38 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &8809160066154287204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8496026378735583949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &8561134724037663615
 GameObject:
   m_ObjectHideFlags: 0
@@ -5576,6 +6230,7 @@ GameObject:
   - component: {fileID: 3622788716437036924}
   - component: {fileID: 924644118701659848}
   - component: {fileID: 768897855177821353}
+  - component: {fileID: 6940129652726441823}
   m_Layer: 0
   m_Name: mixamorig:LeftHand
   m_TagString: agent
@@ -5669,9 +6324,9 @@ ConfigurableJoint:
   m_XMotion: 0
   m_YMotion: 0
   m_ZMotion: 0
-  m_AngularXMotion: 1
-  m_AngularYMotion: 1
-  m_AngularZMotion: 1
+  m_AngularXMotion: 0
+  m_AngularYMotion: 0
+  m_AngularZMotion: 0
   m_LinearLimitSpring:
     spring: 0
     damper: 0
@@ -5753,6 +6408,38 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &6940129652726441823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8743226080203271548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &8831360387969447529
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,119 +7,22 @@ using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 using Random = UnityEngine.Random;
 
-public class WalkerAgent4 : MonoBehaviour
+public class WalkerAgent4 : WalkerAgent1
 {
-    /* [Header("Reference Controller To Match Reference Motion From")]
+    [Header("Reference Controller To Match Reference Motion From")]
     public ReferenceController referenceController;
 
-    [Header("End Effectors")]
-    public Transform handL;
-    public Transform handR;
-    public Transform footL;
-    public Transform footR;
+    [Header("Imitation Reward Weights")]
+    public float imitationRewardWeight = 0.3f;
+    public float poseRewardWeight = 1f;
 
-    private Vector3 previousPos;
-    private float distanceMovedInTargetDirection;
-
-    public override void UpdateEnvVariablesOnEpisode()
+    public override void OnEpisodeBegin()
     {
-        //record then reset distance moved in target direction
-        statsRecorder.Add("Environment/DistanceMovedInTargetDirection", distanceMovedInTargetDirection);
-        distanceMovedInTargetDirection = 0f;
-        previousPos = root.position;
-    }
-
-    public override void UpdateEnvVariablesOnFixedUpdate()
-    {
-        distanceMovedInTargetDirection += GetDistanceMovedInTargetDirection();
-    }
-
-    public override void RandomiseStartPositions()
-    {
+        base.OnEpisodeBegin();
         //init reference animation at random point
         referenceController.ResetReference();
         //reset bodypart position and then set it to the start pose from the reference character
         StartCoroutine(ResetBodypartsOnNextFrame());
-    } */
-
-    /*
-    * implemement observations (state) like defined in paper
-    * https://xbpeng.github.io/projects/DeepMimic/2018_TOG_DeepMimic.pdf
-    */
-    /*  public override void CollectObservationGeneral(VectorSensor sensor)
-     {
-         for (int i = 0; i < bodyparts.Count; i++)
-         {
-             Bodypart bp = bodyparts[i];
-             ReferenceBodypart rbp = referenceController.referenceBodyparts[i];
-             CollectBodypartObservationRelativeToReference(sensor, bp, rbp);
-         }
-     } */
-
-    /* private void CollectReferenceBodypartObservation(VectorSensor sensor, ReferenceBodypart rbp)
-    {
-        //ground check
-        sensor.AddObservation(rbp.touchingGround); // Is this rbp touching the ground
-
-        sensor.AddObservation(rbp.velocity);
-        sensor.AddObservation(rbp.angularVelocity);
-
-        //get position relative to hips
-        sensor.AddObservation(rbp.transform.position - referenceController.referenceRoot.position);
-
-        if (rbp.transform != referenceController.referenceRoot)
-        {
-            sensor.AddObservation(rbp.transform.localRotation);
-        }
-    } */
-
-    /* private void CollectBodypartObservationRelativeToReference(VectorSensor sensor, Bodypart bp, ReferenceBodypart rbp)
-    {
-        //ground check
-        sensor.AddObservation(bp.touchingGround); // Is this bp touching the ground
-
-        //get velocities relative to reference
-        sensor.AddObservation(bp.rb.velocity - rbp.velocity);
-        sensor.AddObservation(bp.rb.angularVelocity - rbp.angularVelocity);
-
-        //get position relative to reference
-        sensor.AddObservation(bp.rb.position - rbp.transform.position);
-
-        if (bp.rb.transform != root)
-        {
-            //get local rotation relative to reference
-            sensor.AddObservation(Quaternion.Inverse(rbp.transform.localRotation) * bp.rb.transform.localRotation);
-            sensor.AddObservation(bp.joint.slerpDrive.maximumForce / bp.physicsConfig.maxJointForceLimit);
-        }
-    } */
-
-    /*
-    * combine rewards like defined in paper
-    * https://xbpeng.github.io/projects/DeepMimic/2018_TOG_DeepMimic.pdf
-    */
-    /* public override float CalculateReward()
-    {
-        //set imitation reward weights
-        float poseRewardWeight = .65f;
-        float angularVelocityRewardWeight = .1f;
-        float endEffectorRewardWeight = .15f;
-        float centerOfMassRewardWeight = .1f;
-
-        //calculate imitation rewards
-        float poseReward = CalculatePoseReward();
-        float angularVelocityReward = CalculateAngularVelocityReward();
-        float endEffectorReward = CalculateEndEffectorReward();
-        float centerOfMassReward = CalculateCenterOfMassReward();
-
-        //Check for NaNs
-        if (float.IsNaN(poseReward)) throw new ArgumentException("NaN in poseReward.");
-        if (float.IsNaN(angularVelocityReward)) throw new ArgumentException("NaN in angularVelocityReward.");
-        if (float.IsNaN(endEffectorReward)) throw new ArgumentException("NaN in endEffectorReward.");
-        if (float.IsNaN(centerOfMassReward)) throw new ArgumentException("NaN in centerOfMassReward.");
-
-        float imitationReward = poseRewardWeight * poseReward + angularVelocityRewardWeight * angularVelocityReward + endEffectorRewardWeight * endEffectorReward + centerOfMassRewardWeight * centerOfMassReward;
-
-        return imitationReward;
     }
 
     IEnumerator ResetBodypartsOnNextFrame()
@@ -132,16 +35,41 @@ public class WalkerAgent4 : MonoBehaviour
         foreach (Bodypart bp in bodyparts)
         {
             Transform referenceBone = referenceController.referenceBodyparts[i].transform;
-            bp.Reset(referenceBone.position, referenceBone.rotation);
+            bp.ResetTransform(referenceBone.position, referenceBone.rotation);
             i++;
         }
-    } */
+    }
+
+    public override void CollectObservations(VectorSensor sensor)
+    {
+        base.CollectObservations(sensor);
+        //add phase to relate movement to relative time
+        sensor.AddObservation(referenceController.GetCurrentPhase());
+    }
+
+    /*
+    * combine rewards like defined in paper
+    * https://xbpeng.github.io/projects/DeepMimic/2018_TOG_DeepMimic.pdf
+    */
+    public float CalculateImitationReward()
+    {
+        //calculate imitation rewards
+        float poseReward = CalculatePoseReward();
+
+        //Check for NaNs
+        if (float.IsNaN(poseReward)) throw new ArgumentException("NaN in poseReward.");
+
+        float imitationReward = 0;
+        imitationReward += poseRewardWeight * poseReward;
+
+        return imitationReward;
+    }
 
     /*
     * implemement rewards like defined in paper
     * https://xbpeng.github.io/projects/DeepMimic/2018_TOG_DeepMimic.pdf
     */
-    /* private float CalculatePoseReward()
+    private float CalculatePoseReward()
     {
         int i = 0;
         float sum = 0f;
@@ -160,103 +88,50 @@ public class WalkerAgent4 : MonoBehaviour
         statsRecorder.Add("Reward/PoseReward", poseReward);
         return poseReward;
     }
-    private float CalculateAngularVelocityReward()
+
+    public override void FixedUpdate()
     {
-        int i = 0;
-        float sum = 0f;
-        //sum over all bodyparts
-        foreach (Bodypart bp in bodyparts)
+        distanceMovedInTargetDirection += GetDistanceMovedInTargetDirection();
+
+        var cubeForward = walkOrientationCube.transform.forward;
+
+        // Set reward for this step according to mixture of the following elements.
+        // a. Match target speed
+        //This reward will approach 1 if it matches perfectly and approach zero as it deviates
+        var matchSpeedReward = GetMatchingVelocityReward(cubeForward * targetWalkingSpeed, GetAvgVelocity());
+        RecordStat("Reward/MatchingVelocityReward", matchSpeedReward);
+
+        //Check for NaNs
+        if (float.IsNaN(matchSpeedReward))
         {
-            ReferenceBodypart referenceBodypart = referenceController.referenceBodyparts[i];
-            Vector3 difference = referenceBodypart.angularVelocity - bp.rb.angularVelocity;
-            float differenceMagnitude = difference.magnitude;
-            float differenceMagnitudeSquared = Mathf.Pow(differenceMagnitude, 2f);
-            sum += differenceMagnitudeSquared;
-            i++;
+            throw new ArgumentException(
+                "NaN in moveTowardsTargetReward.\n" +
+                $" cubeForward: {cubeForward}\n" +
+                $" root.velocity: {bodyparts[0].rb.velocity}\n" +
+                $" maximumWalkingSpeed: {maxWalkingSpeed}"
+            );
         }
-        float angularVelocityReward = Mathf.Exp(-.1f * sum);
-        statsRecorder.Add("Reward/AngularVelocityReward", angularVelocityReward);
-        return angularVelocityReward;
-    }
 
-    private float CalculateEndEffectorReward()
-    {
-        int i = 0;
-        float sum = 0f;
-        Transform[] endEffectors = { handL, handR, footL, footR };
-        //sum over all bodyparts
-        foreach (Bodypart bp in bodyparts)
+        // b. Rotation alignment with target direction.
+        //This reward will approach 1 if it faces the target direction perfectly and approach zero as it deviates
+        var headForward = head.forward;
+        headForward.y = 0;
+        // var lookAtTargetReward = (Vector3.Dot(cubeForward, head.forward) + 1) * .5F;
+        var lookAtTargetReward = (Vector3.Dot(cubeForward, headForward) + 1) * .5F;
+        RecordStat("Reward/LookAtTargetReward", lookAtTargetReward);
+
+        //Check for NaNs
+        if (float.IsNaN(lookAtTargetReward))
         {
-            bool isEndEffector = Array.IndexOf(endEffectors, bp.rb.transform) != -1;
-            if (isEndEffector)
-            {
-                ReferenceBodypart referenceBodypart = referenceController.referenceBodyparts[i];
-                Vector3 difference = referenceBodypart.transform.position - bp.rb.transform.position;
-                float differenceMagnitude = difference.magnitude;
-                float differenceMagnitudeSquared = Mathf.Pow(differenceMagnitude, 2f);
-                sum += differenceMagnitudeSquared;
-            }
-            i++;
+            throw new ArgumentException(
+                "NaN in lookAtTargetReward.\n" +
+                $" cubeForward: {cubeForward}\n" +
+                $" head.forward: {head.forward}"
+            );
         }
-        float endEffectorReward = Mathf.Exp(-40 * sum);
-        statsRecorder.Add("Reward/EndEffectorReward", endEffectorReward);
-        return endEffectorReward;
+
+        float demoReward = matchSpeedReward * lookAtTargetReward;
+        float imitationReward = CalculateImitationReward();
+        AddReward((1 - imitationRewardWeight) * demoReward + imitationRewardWeight * imitationReward);
     }
-
-    //TODO change to use real center of mass instead of hips
-    private float CalculateCenterOfMassReward()
-    {
-        Vector3 difference = referenceController.CalculateCenterOfMass() - CalculateCenterOfMass();
-        float differenceMagnitude = difference.magnitude;
-        float differenceMagnitudeSquared = Mathf.Pow(differenceMagnitude, 2f);
-        float centerOfMassReward = Mathf.Exp(-10 * differenceMagnitudeSquared);
-        statsRecorder.Add("Reward/CenterOfMassReward", centerOfMassReward);
-        return centerOfMassReward;
-    }
-
-    private Vector3 CalculateCenterOfMass()
-    {
-        Vector3 centerOfMass = Vector3.zero;
-        float totalMass = 0f;
-        foreach (Bodypart bp in bodyparts)
-        {
-            centerOfMass += bp.rb.worldCenterOfMass * bp.rb.mass;
-            totalMass += bp.rb.mass;
-        }
-        if (totalMass > 0f)
-        {
-            centerOfMass /= totalMass; // Normalize by total mass
-        }
-        return centerOfMass;
-    }
-
-    public override void OnActionReceived(ActionBuffers actionBuffers)
-    {
-        int index = -1;
-        var continuousActions = actionBuffers.ContinuousActions;
-
-        for (int i = 0; i < bodyparts.Count; i++)
-        {
-            Bodypart bp = bodyparts[i];
-            ReferenceBodypart rbp = referenceController.referenceBodyparts[i];
-            if (bp.rb.transform == root) continue;
-            float jointStrength = bp.dof.sqrMagnitude > 0 ? continuousActions[++index] : 0;
-            ConfigurableJointExtensions.SetTargetRotationLocal(bp.joint, rbp.transform.localRotation, bp.startingRotLocal);
-            bp.SetJointStrength(jointStrength);
-        }
-    }
-
-    private float GetDistanceMovedInTargetDirection()
-    {
-        //calculate the displacement vector
-        Vector3 currentPos = root.position;
-        Vector3 displacement = currentPos - previousPos;
-
-        //project the displacement vector onto the goal direction vector
-        float movementInTargetDirection = displacement.z;
-
-        //update the previous position for the next frame
-        previousPos = currentPos;
-        return movementInTargetDirection;
-    } */
 }

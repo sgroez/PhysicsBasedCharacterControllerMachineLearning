@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 1888937050294291056}
   - component: {fileID: 7256485552490802289}
   - component: {fileID: 4798602494405182724}
-  - component: {fileID: 7991607816106918511}
+  - component: {fileID: 7176110714979322086}
   m_Layer: 0
   m_Name: mixamorig:RightUpLeg
   m_TagString: agent
@@ -316,7 +316,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &7991607816106918511
+--- !u!114 &7176110714979322086
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -325,14 +325,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 337029438773935501}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
-  penalizeGroundContact: 1
-  groundContactPenalty: -1
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &447466182225364487
 GameObject:
   m_ObjectHideFlags: 0
@@ -408,7 +423,7 @@ GameObject:
   - component: {fileID: 1626327796087752018}
   - component: {fileID: 4922363805250153965}
   - component: {fileID: 8344155440918396538}
-  - component: {fileID: 5862699304281211643}
+  - component: {fileID: 9077611075437727433}
   m_Layer: 0
   m_Name: mixamorig:LeftToeBase
   m_TagString: agent
@@ -582,7 +597,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &5862699304281211643
+--- !u!114 &9077611075437727433
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -591,14 +606,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 646841696783282965}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 0
-  penalizeGroundContact: 0
-  groundContactPenalty: -1
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 0
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &693262991310198224
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,7 +704,7 @@ GameObject:
   - component: {fileID: 7220415409763399462}
   - component: {fileID: 7535172304403514520}
   - component: {fileID: 6671543975318152372}
-  - component: {fileID: 3137974222778478390}
+  - component: {fileID: 7265720666057194787}
   m_Layer: 0
   m_Name: mixamorig:LeftShoulder
   m_TagString: agent
@@ -850,7 +880,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &3137974222778478390
+--- !u!114 &7265720666057194787
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -859,14 +889,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 1099605597136629634}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
-  penalizeGroundContact: 1
-  groundContactPenalty: -1
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &1120483305132259704
 GameObject:
   m_ObjectHideFlags: 0
@@ -879,7 +924,7 @@ GameObject:
   - component: {fileID: 3762842099015244371}
   - component: {fileID: 2192656838107738769}
   - component: {fileID: 856375328269578098}
-  - component: {fileID: 3771661045738004444}
+  - component: {fileID: 2453526811479606647}
   m_Layer: 0
   m_Name: mixamorig:RightHand
   m_TagString: agent
@@ -1057,7 +1102,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &3771661045738004444
+--- !u!114 &2453526811479606647
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1066,14 +1111,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 1120483305132259704}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
-  penalizeGroundContact: 1
-  groundContactPenalty: -1
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &1210234220646667125
 GameObject:
   m_ObjectHideFlags: 0
@@ -1149,7 +1209,7 @@ GameObject:
   - component: {fileID: 6031341520999759209}
   - component: {fileID: 835160632630298331}
   - component: {fileID: 7241489203914471455}
-  - component: {fileID: 1506137115317823068}
+  - component: {fileID: 2266857594060110062}
   m_Layer: 0
   m_Name: mixamorig:Spine
   m_TagString: agent
@@ -1325,7 +1385,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &1506137115317823068
+--- !u!114 &2266857594060110062
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1334,14 +1394,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 1538216948765553984}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
-  penalizeGroundContact: 1
-  groundContactPenalty: -1
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &1643869334261445139
 GameObject:
   m_ObjectHideFlags: 0
@@ -1354,7 +1429,7 @@ GameObject:
   - component: {fileID: 2605654616755903525}
   - component: {fileID: 8274451413041550693}
   - component: {fileID: 2287238096762654744}
-  - component: {fileID: 485766054060905228}
+  - component: {fileID: 3136762082401509802}
   m_Layer: 0
   m_Name: mixamorig:Head
   m_TagString: agent
@@ -1530,7 +1605,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &485766054060905228
+--- !u!114 &3136762082401509802
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1539,14 +1614,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 1643869334261445139}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
-  penalizeGroundContact: 1
-  groundContactPenalty: -1
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &1663458812921037656
 GameObject:
   m_ObjectHideFlags: 0
@@ -1559,7 +1649,7 @@ GameObject:
   - component: {fileID: 7204429416163187684}
   - component: {fileID: 7737555892619402238}
   - component: {fileID: 4409744699748473002}
-  - component: {fileID: 7436613289819042864}
+  - component: {fileID: 738329657315182177}
   m_Layer: 0
   m_Name: mixamorig:RightShoulder
   m_TagString: agent
@@ -1735,7 +1825,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &7436613289819042864
+--- !u!114 &738329657315182177
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1744,14 +1834,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 1663458812921037656}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
-  penalizeGroundContact: 1
-  groundContactPenalty: -1
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &1680954369280270766
 GameObject:
   m_ObjectHideFlags: 0
@@ -2018,7 +2123,7 @@ GameObject:
   - component: {fileID: 1325219305766431845}
   - component: {fileID: 4502996580451489717}
   - component: {fileID: 7151811938619423390}
-  - component: {fileID: 9098882449867115173}
+  - component: {fileID: 4334735560944176280}
   m_Layer: 0
   m_Name: mixamorig:RightArm
   m_TagString: agent
@@ -2194,7 +2299,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &9098882449867115173
+--- !u!114 &4334735560944176280
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2203,14 +2308,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 2370918198257954929}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
-  penalizeGroundContact: 1
-  groundContactPenalty: -1
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &2471491278926025400
 GameObject:
   m_ObjectHideFlags: 0
@@ -2255,7 +2375,7 @@ GameObject:
   - component: {fileID: 8327339876859814614}
   - component: {fileID: 9017035256151015916}
   - component: {fileID: 7642587932967508370}
-  - component: {fileID: 6752675155861697544}
+  - component: {fileID: 3233116746678978428}
   m_Layer: 0
   m_Name: mixamorig:LeftLeg
   m_TagString: agent
@@ -2431,7 +2551,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &6752675155861697544
+--- !u!114 &3233116746678978428
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2440,14 +2560,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 2507606853245501139}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 0
-  penalizeGroundContact: 0
-  groundContactPenalty: -1
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 0
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &2755865958930027101
 GameObject:
   m_ObjectHideFlags: 0
@@ -2587,7 +2722,7 @@ GameObject:
   - component: {fileID: 8707283322082226316}
   - component: {fileID: 8119724862705284516}
   - component: {fileID: 2785190274790535977}
-  - component: {fileID: 3829952719207392496}
+  - component: {fileID: 3314007661017040288}
   m_Layer: 0
   m_Name: mixamorig:LeftHand
   m_TagString: agent
@@ -2765,7 +2900,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &3829952719207392496
+--- !u!114 &3314007661017040288
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2774,14 +2909,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 3147073417933990962}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
-  penalizeGroundContact: 1
-  groundContactPenalty: -1
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &3338899547243499793
 GameObject:
   m_ObjectHideFlags: 0
@@ -2910,7 +3060,7 @@ GameObject:
   - component: {fileID: 1744487967991490542}
   - component: {fileID: 578079573685291472}
   - component: {fileID: 3764560982031963040}
-  - component: {fileID: 7394176331415513912}
+  - component: {fileID: 3593232697446786172}
   m_Layer: 0
   m_Name: mixamorig:RightFoot
   m_TagString: agent
@@ -3064,7 +3214,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &7394176331415513912
+--- !u!114 &3593232697446786172
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3073,14 +3223,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 3552409469715871808}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 0
-  penalizeGroundContact: 0
-  groundContactPenalty: -1
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 0
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &3570814513819422895
 GameObject:
   m_ObjectHideFlags: 0
@@ -3093,7 +3258,7 @@ GameObject:
   - component: {fileID: 6402748209267132691}
   - component: {fileID: 7191408818571131186}
   - component: {fileID: 4822439803790392532}
-  - component: {fileID: 685517394302187443}
+  - component: {fileID: 4785444674055803544}
   m_Layer: 0
   m_Name: mixamorig:Spine1
   m_TagString: agent
@@ -3269,7 +3434,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &685517394302187443
+--- !u!114 &4785444674055803544
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3278,14 +3443,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 3570814513819422895}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
-  penalizeGroundContact: 1
-  groundContactPenalty: -1
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &3717180818308552217
 GameObject:
   m_ObjectHideFlags: 0
@@ -3297,7 +3477,7 @@ GameObject:
   - component: {fileID: 905181748685038579}
   - component: {fileID: 7464008812133004442}
   - component: {fileID: 6678609160377554657}
-  - component: {fileID: 3662967948968736568}
+  - component: {fileID: 1472558120806074117}
   m_Layer: 0
   m_Name: mixamorig:Hips
   m_TagString: agent
@@ -3373,7 +3553,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 3
---- !u!114 &3662967948968736568
+--- !u!114 &1472558120806074117
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3382,14 +3562,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 3717180818308552217}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
-  penalizeGroundContact: 1
-  groundContactPenalty: -1
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &3822129114383562896
 GameObject:
   m_ObjectHideFlags: 0
@@ -3466,7 +3661,7 @@ GameObject:
   - component: {fileID: 5249300617795599082}
   - component: {fileID: 7764539630730528747}
   - component: {fileID: 45557845410094459}
-  - component: {fileID: 4297402298230093456}
+  - component: {fileID: 3639836529342734224}
   m_Layer: 0
   m_Name: mixamorig:Neck
   m_TagString: agent
@@ -3642,7 +3837,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &4297402298230093456
+--- !u!114 &3639836529342734224
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3651,14 +3846,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 4019637702437277532}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
-  penalizeGroundContact: 1
-  groundContactPenalty: -1
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &4223565979031586460
 GameObject:
   m_ObjectHideFlags: 0
@@ -3671,7 +3881,7 @@ GameObject:
   - component: {fileID: 4383111704463854153}
   - component: {fileID: 736176115568567068}
   - component: {fileID: 166018019375562729}
-  - component: {fileID: 3270438704060734052}
+  - component: {fileID: 378134894045778993}
   m_Layer: 0
   m_Name: mixamorig:LeftUpLeg
   m_TagString: agent
@@ -3847,7 +4057,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &3270438704060734052
+--- !u!114 &378134894045778993
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3856,14 +4066,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 4223565979031586460}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
-  penalizeGroundContact: 1
-  groundContactPenalty: -1
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &4225346095496662975
 GameObject:
   m_ObjectHideFlags: 0
@@ -3908,7 +4133,7 @@ GameObject:
   - component: {fileID: 7658781183281482526}
   - component: {fileID: 6737371532502394340}
   - component: {fileID: 1824095248015036603}
-  - component: {fileID: 4701349525168851321}
+  - component: {fileID: 2294604775897477014}
   m_Layer: 0
   m_Name: mixamorig:RightLeg
   m_TagString: agent
@@ -4084,7 +4309,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &4701349525168851321
+--- !u!114 &2294604775897477014
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4093,14 +4318,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 4334266913805985705}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 0
-  penalizeGroundContact: 0
-  groundContactPenalty: -1
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 0
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &4336410722398539346
 GameObject:
   m_ObjectHideFlags: 0
@@ -4261,7 +4501,7 @@ GameObject:
   - component: {fileID: 7493154509230435113}
   - component: {fileID: 8383763421816404840}
   - component: {fileID: 2876169296309823750}
-  - component: {fileID: 4879772110698186175}
+  - component: {fileID: 7036063845979068830}
   m_Layer: 0
   m_Name: mixamorig:LeftArm
   m_TagString: agent
@@ -4437,7 +4677,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &4879772110698186175
+--- !u!114 &7036063845979068830
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4446,14 +4686,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 5808790624542559650}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
-  penalizeGroundContact: 1
-  groundContactPenalty: -1
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &5837108162274927861
 GameObject:
   m_ObjectHideFlags: 0
@@ -4498,7 +4753,7 @@ GameObject:
   - component: {fileID: 3915939069747953610}
   - component: {fileID: 6501987969287456046}
   - component: {fileID: 5559352312836354294}
-  - component: {fileID: 7904722160995997551}
+  - component: {fileID: 5408305288371516751}
   m_Layer: 0
   m_Name: mixamorig:RightForeArm
   m_TagString: agent
@@ -4674,7 +4929,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &7904722160995997551
+--- !u!114 &5408305288371516751
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4683,14 +4938,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 5960775970983654241}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
-  penalizeGroundContact: 1
-  groundContactPenalty: -1
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &6222488979950164825
 GameObject:
   m_ObjectHideFlags: 0
@@ -4767,7 +5037,7 @@ GameObject:
   - component: {fileID: 6268722792546651376}
   - component: {fileID: 1447317169355771089}
   - component: {fileID: 5077768843791577724}
-  - component: {fileID: 295481216413914869}
+  - component: {fileID: 7039757647618509303}
   m_Layer: 0
   m_Name: mixamorig:RightToeBase
   m_TagString: agent
@@ -4941,7 +5211,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &295481216413914869
+--- !u!114 &7039757647618509303
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4950,14 +5220,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 7442787000731895765}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 0
-  penalizeGroundContact: 0
-  groundContactPenalty: -1
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 0
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &7447908301860832534
 GameObject:
   m_ObjectHideFlags: 0
@@ -5232,7 +5517,7 @@ GameObject:
   - component: {fileID: 7376887274742799952}
   - component: {fileID: 4220835265439019447}
   - component: {fileID: 3916888006925857858}
-  - component: {fileID: 1694035060734358988}
+  - component: {fileID: 1537903348138651326}
   m_Layer: 0
   m_Name: mixamorig:Spine2
   m_TagString: agent
@@ -5410,7 +5695,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &1694035060734358988
+--- !u!114 &1537903348138651326
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5419,14 +5704,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 7956296108702964835}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
-  penalizeGroundContact: 1
-  groundContactPenalty: -1
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &8080039679064427000
 GameObject:
   m_ObjectHideFlags: 0
@@ -5701,7 +6001,7 @@ GameObject:
   - component: {fileID: 2554000813110190334}
   - component: {fileID: 2387620111360199775}
   - component: {fileID: 8683125386317589842}
-  - component: {fileID: 1131170030211702282}
+  - component: {fileID: 4622770067982494048}
   m_Layer: 0
   m_Name: mixamorig:LeftForeArm
   m_TagString: agent
@@ -5877,7 +6177,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &1131170030211702282
+--- !u!114 &4622770067982494048
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5886,14 +6186,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 9050322310458834390}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 1
-  penalizeGroundContact: 1
-  groundContactPenalty: -1
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &9161632290224593865
 GameObject:
   m_ObjectHideFlags: 0
@@ -5905,7 +6220,7 @@ GameObject:
   - component: {fileID: 5843041480728318149}
   - component: {fileID: 4760132327158502537}
   - component: {fileID: 6922049941889312210}
-  - component: {fileID: 7946125254061494718}
+  - component: {fileID: 6761827873818834935}
   m_Layer: 0
   m_Name: mixamorig:LeftFoot
   m_TagString: agent
@@ -6059,7 +6374,7 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
---- !u!114 &7946125254061494718
+--- !u!114 &6761827873818834935
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6068,14 +6383,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 9161632290224593865}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2666e257ea992476cae0f7f163165e71, type: 3}
+  m_Script: {fileID: 11500000, guid: f8e2e60faae534611b6a66e1fe91ea58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  agentDoneOnGroundContact: 0
-  penalizeGroundContact: 0
-  groundContactPenalty: -1
+  physicsConfig:
+    maxJointSpring: 40000
+    jointDampen: 5000
+    maxJointForceLimit: 20000
+    k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 0
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
   touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
+  rb: {fileID: 0}
+  joint: {fileID: 0}
+  startingPos: {x: 0, y: 0, z: 0}
+  startingRot: {x: 0, y: 0, z: 0, w: 0}
+  dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
+  power: 0
 --- !u!1 &9176646176140394999
 GameObject:
   m_ObjectHideFlags: 0
@@ -6141,7 +6471,7 @@ Transform:
   - {fileID: 5621757199005036335}
   - {fileID: 905181748685038579}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2042336269115490972
 MonoBehaviour:

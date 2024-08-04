@@ -767,7 +767,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f88ad0a796f5347c9ba1ff63ee4fb15c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocity: {x: 0, y: 0, z: 1.72}
+  velocity: {x: 0, y: 0, z: 1.17}
 --- !u!54 &1736084903
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1316,7 +1316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa804be3f46e94a479cfc9b0757bb7cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationName: mixamo_com
+  animationName: walking_x2d
   referenceRoot: {fileID: 4797558917202941228}
   phaseStartMin: 0.3
   phaseStartMax: 0.6

@@ -24,7 +24,7 @@ public class Bodypart : MonoBehaviour
 
     [Header("Ground Contact")]
     public UnityEvent onTouchedGround;
-    public bool touchingGround;
+    [HideInInspector] public bool touchingGround;
 
     [Header("Target Contact")]
     public UnityEvent onTouchedTarget;
@@ -89,10 +89,19 @@ public class Bodypart : MonoBehaviour
     /// <summary>
     /// Reset body part to initial configuration.
     /// </summary>
-    public void Reset()
+    public void ResetTransform()
     {
         rb.transform.position = startingPos;
         rb.transform.rotation = startingRot;
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        touchingGround = false;
+    }
+
+    public void ResetTransform(Vector3 position, Quaternion rotation)
+    {
+        rb.transform.position = position;
+        rb.transform.rotation = rotation;
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         touchingGround = false;
