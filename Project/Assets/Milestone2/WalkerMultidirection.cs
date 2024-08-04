@@ -54,8 +54,6 @@ public class WalkerMultidirection : WalkerAgent1
 
     public override void FixedUpdate()
     {
-        distanceMovedInTargetDirection += GetDistanceMovedInTargetDirection();
-
         var cubeForward = walkOrientationCube.transform.forward;
 
         // Set reward for this step according to mixture of the following elements.
@@ -93,6 +91,15 @@ public class WalkerMultidirection : WalkerAgent1
                 break;
         }
         var lookAtTargetReward = (Vector3.Dot(lookDirection, headForward) + 1) * .5F;
+        //increase intensity (reward falloff)
+        if (Academy.Instance.TotalStepCount > 10000000)
+        {
+            lookAtTargetReward = Mathf.Pow(lookAtTargetReward, 3);
+        }
+        else if (Academy.Instance.TotalStepCount > 20000000)
+        {
+            lookAtTargetReward = Mathf.Pow(lookAtTargetReward, 5);
+        }
         RecordStat("Reward/LookAtTargetReward", lookAtTargetReward);
 
         //Check for NaNs
@@ -106,6 +113,9 @@ public class WalkerMultidirection : WalkerAgent1
         }
 
         AddReward(matchSpeedReward * lookAtTargetReward);
+
+        distanceMovedInTargetDirection += GetDistanceMovedInTargetDirection();
+        RecordStat("Environment/LookAngleDeviation", Vector3.Angle(lookDirection, headForward));
     }
 
     void OnDrawGizmos()

@@ -111,6 +111,7 @@
 <tr><td>140_Milestone2</td><td>Nutzt extra look at target welches relativ zu Läufer und Ziel in einem festen Winkel gesetzt wird. Der Winkel wird zu beginn und beim erreichen eines Ziels zufällig gesetzt. Zusätzlich wurde eine frühe Stopkondition hinzugefügt wenn die momentane Look At Belohnung zu gering ist.</td><td>Instabil, training bricht bei ca. 12mil Schritten ein und pendelt dann auf und ab</td></tr>
 <tr><td>141_Milestone2</td><td>Versuch Training zu stabilisieren mit neuen Hyperparametern</td><td>lernt nur in Zielrichtung zu springen</td></tr>
 <tr><td>142_Milestone2</td><td>Gleich wie 135 aber mit Energiespar Belohnung</td><td>lernt viel langsamer als 135</td></tr>
-<tr><td>143_Milestone2</td><td>Gleich wie 135 nur länger. Test wann das lernen abflacht / stagniert.</td><td></td></tr>
+<tr><td>143_Milestone2</td><td>Gleich wie 135 nur länger. Test wann das lernen abflacht / stagniert.</td><td>abgebrochen</td></tr>
+<tr><td>144_Milestone2</td><td>Gleich wie 135 aber mit zunehmend schwererer Blickbelohnung</td><td></td></tr>
 <tr><td>Name</td><td>beschreibung</td><td>notizen</td></tr>
 </table>
