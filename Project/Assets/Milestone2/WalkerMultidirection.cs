@@ -21,6 +21,7 @@ public class WalkerMultidirection : WalkerAgent1
     public Orientation orientation = Orientation.Forward;
     public bool randomizeWalkOrientation = true;
     Orientation[] orientations;
+    float lesson = 1;
 
     public override void Initialize()
     {
@@ -39,6 +40,7 @@ public class WalkerMultidirection : WalkerAgent1
         {
             SetRandomWalkOrientation();
         }
+        lesson = Academy.Instance.EnvironmentParameters.GetWithDefault("lesson", 1);
     }
 
     public void SetRandomWalkOrientation()
@@ -92,14 +94,7 @@ public class WalkerMultidirection : WalkerAgent1
         }
         var lookAtTargetReward = (Vector3.Dot(lookDirection, headForward) + 1) * .5F;
         //increase intensity (reward falloff)
-        if (Academy.Instance.TotalStepCount > 10000000)
-        {
-            lookAtTargetReward = Mathf.Pow(lookAtTargetReward, 3);
-        }
-        else if (Academy.Instance.TotalStepCount > 20000000)
-        {
-            lookAtTargetReward = Mathf.Pow(lookAtTargetReward, 5);
-        }
+        lookAtTargetReward = Mathf.Pow(lookAtTargetReward, lesson);
         RecordStat("Reward/LookAtTargetReward", lookAtTargetReward);
 
         //Check for NaNs

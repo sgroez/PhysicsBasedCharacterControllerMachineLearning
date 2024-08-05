@@ -112,6 +112,7 @@
 <tr><td>141_Milestone2</td><td>Versuch Training zu stabilisieren mit neuen Hyperparametern</td><td>lernt nur in Zielrichtung zu springen</td></tr>
 <tr><td>142_Milestone2</td><td>Gleich wie 135 aber mit Energiespar Belohnung</td><td>lernt viel langsamer als 135</td></tr>
 <tr><td>143_Milestone2</td><td>Gleich wie 135 nur länger. Test wann das lernen abflacht / stagniert.</td><td>abgebrochen</td></tr>
-<tr><td>144_Milestone2</td><td>Gleich wie 135 aber mit zunehmend schwererer Blickbelohnung</td><td></td></tr>
+<tr><td>144_Milestone2</td><td>Gleich wie 143 aber mit zunehmend schwererer Blickbelohnung</td><td>Wechsel mit Academy Max Steps hat nicht richtig funktioniert</td></tr>
+<tr><td>145_Milestone2</td><td>Gleich wie 144 aber mit curriculum und mehreren Schwierigkeitsstufen</td><td></td></tr>
 <tr><td>Name</td><td>beschreibung</td><td>notizen</td></tr>
 </table>
