@@ -22,12 +22,10 @@ public class Bodypart : MonoBehaviour
     public PhysicsConfig physicsConfig;
     public bool triggerTouchingGroundEvent;
 
-    [Header("Ground Contact")]
-    public UnityEvent onTouchedGround;
+    [HideInInspector] public UnityEvent onTouchedGround;
     [HideInInspector] public bool touchingGround;
 
-    [Header("Target Contact")]
-    public UnityEvent onTouchedTarget;
+    [HideInInspector] public UnityEvent onTouchedTarget;
 
     //component references
     [HideInInspector] public Rigidbody rb;
