@@ -361,17 +361,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 0
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 0
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!1 &542572359795468938
 GameObject:
@@ -716,17 +719,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 1
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!1 &1230010076868204370
 GameObject:
@@ -1062,17 +1068,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 1
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!1 &1679942860649841253
 GameObject:
@@ -1469,17 +1478,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 1
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!1 &2579734673915530151
 GameObject:
@@ -1918,17 +1930,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 1
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!1 &3732611939123667779
 GameObject:
@@ -2274,17 +2289,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 1
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!1 &3845031936277023198
 GameObject:
@@ -2468,17 +2486,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 0
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 0
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!1 &3992958011753952092
 GameObject:
@@ -2716,17 +2737,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 1
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!1 &4395340171094880359
 GameObject:
@@ -2896,10 +2920,14 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 5000
-  m_TargetWalkingSpeed: 10
+  minWalkingSpeed: 0.1
+  maxWalkingSpeed: 10
   randomizeWalkSpeedEachEpisode: 1
+  targetWalkingSpeed: 0.1
   target: {fileID: 119616974326015200}
-  endEpisodeOnTargetReached: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   root: {fileID: 4498049067740231261}
   head: {fileID: 2301238978917530358}
   randomizeRotationOnEpsiode: 1
@@ -3126,17 +3154,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 1
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!1 &4720009775118803976
 GameObject:
@@ -3343,17 +3374,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 1
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!1 &4739373958788685838
 GameObject:
@@ -3636,17 +3670,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 0
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 0
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!1 &4935382936595618650
 GameObject:
@@ -4443,17 +4480,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 0
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 0
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!1 &6058096280114634850
 GameObject:
@@ -4658,17 +4698,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 0
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 0
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!1 &6182401573288670282
 GameObject:
@@ -4939,17 +4982,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 1
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!1 &6272582395040696942
 GameObject:
@@ -5055,17 +5101,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 1
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!1 &6433087129074190825
 GameObject:
@@ -5304,17 +5353,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 1
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!1 &6747404947067430497
 GameObject:
@@ -5788,17 +5840,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 1
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!1 &7168397488080881989
 GameObject:
@@ -6101,17 +6156,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 1
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!1 &7606425033942711969
 GameObject:
@@ -6457,17 +6515,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 1
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!1 &8280234039875805035
 GameObject:
@@ -6769,17 +6830,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 0
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 0
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!1 &8596915402654723171
 GameObject:
@@ -7018,17 +7082,20 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 1
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
 --- !u!1 &9128568891462218452
 GameObject:
@@ -7235,15 +7302,18 @@ MonoBehaviour:
     jointDampen: 5000
     maxJointForceLimit: 20000
     k_MaxAngularVelocity: 50
+  triggerTouchingGroundEvent: 1
+  onTouchedGround:
+    m_PersistentCalls:
+      m_Calls: []
+  touchingGround: 0
+  onTouchedTarget:
+    m_PersistentCalls:
+      m_Calls: []
   rb: {fileID: 0}
   joint: {fileID: 0}
   startingPos: {x: 0, y: 0, z: 0}
   startingRot: {x: 0, y: 0, z: 0, w: 0}
-  triggerTouchingGroundEvent: 1
-  onTouchingGround:
-    m_PersistentCalls:
-      m_Calls: []
-  touchingGround: 0
-  currentStrength: 0
   dof: {x: 0, y: 0, z: 0}
+  currentStrength: 0
   power: 0
