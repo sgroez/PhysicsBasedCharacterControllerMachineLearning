@@ -218,4 +218,15 @@ Der Agent der Walker Demo erlernt über 30 Millionen Trainingsschritte ein Verha
   \label{fig:analyse_training_2}
 \end{figure}
 
-Der Läufer lernt nicht die Belohnungen bis zum Limit auszureizen, aber wie in Abbildung \ref{fig:analyse_training_2} zu sehen läuft er während einer Episode durchschnittlich eine Distanz von 80 Einheiten und erreicht dabei 10.4 Ziele.
+Der Läufer lernt die Belohnungen nicht perfekt sondern optimiert die länge der Episode, was auch zu steigender Belohnung innerhalb der Episode führt. In Abbildung \ref{fig:analyse_training_2} zu sehen läuft er während einer Episode durchschnittlich eine Distanz von 80 Einheiten und erreicht dabei 10.4 Ziele. Der Läufer lernt sehr stabil sich zum Ziel zu bewegen. In Abbildung \ref{fig:analyse_gangbild} ist das Gangbild des Läufers abgebildet. Das Gangbild wechselt periodisch das Standbein, setzt den einen Fuß vor den anderen und drückt sich über das Standbein voran. Die Arme jedoch schwingt der Läufer sehr stark um das Gleichgewicht halten zu können. Das Gangbild ist daher nicht ganz wie von einem zweibeinigen Menschenähnlichen Charakter erwartet.
+
+\begin{figure}[H]
+  \centering
+  \begin{tabular}{ccc}
+    \includegraphics[width=0.27\textwidth]{img/walker_laufen1.png} & \includegraphics[width=0.27\textwidth]{img/walker_laufen2.png} & \includegraphics[width=0.27\textwidth]{img/walker_laufen3.png}\\
+    \includegraphics[width=0.27\textwidth]{img/walker_laufen4.png} & \includegraphics[width=0.27\textwidth]{img/walker_laufen5.png} & \includegraphics[width=0.27\textwidth]{img/walker_laufen6.png}\\
+  \end{tabular}
+  \caption{Walker Demo Analyse Gangbild}
+  \label{fig:analyse_gangbild}
+\end{figure}
+  

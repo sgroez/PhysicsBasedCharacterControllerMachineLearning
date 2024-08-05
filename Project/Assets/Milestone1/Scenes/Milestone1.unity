@@ -324,6 +324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followObject: {fileID: 1894998773}
   offset: 7
+  orientation: 1
 --- !u!1001 &1058449979
 PrefabInstance:
   m_ObjectHideFlags: 0
