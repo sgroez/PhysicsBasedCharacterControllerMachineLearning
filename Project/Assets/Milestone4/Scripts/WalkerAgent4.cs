@@ -85,7 +85,7 @@ public class WalkerAgent4 : WalkerAgent1
             i++;
         }
         float poseReward = Mathf.Exp(-2 * sum);
-        statsRecorder.Add("Reward/PoseReward", poseReward);
+        RecordStat("Reward/PoseReward", poseReward);
         return poseReward;
     }
 

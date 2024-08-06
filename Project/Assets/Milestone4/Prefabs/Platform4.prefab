@@ -878,7 +878,7 @@ MonoBehaviour:
   minWalkingSpeed: 0.1
   maxWalkingSpeed: 10
   randomizeWalkSpeedEachEpisode: 0
-  targetWalkingSpeed: 1.17
+  targetWalkingSpeed: 1.18
   target: {fileID: 8681130540674714722}
   onTouchedTarget:
     m_PersistentCalls:
@@ -897,7 +897,7 @@ MonoBehaviour:
         m_CallState: 2
   root: {fileID: 605552101703071969}
   head: {fileID: 6893330425327547059}
-  randomizeRotationOnEpsiode: 0
+  randomizeRotationOnEpsiode: 1
   bodyparts: []
   logStats: 0
   referenceController: {fileID: 1636711641373864670}

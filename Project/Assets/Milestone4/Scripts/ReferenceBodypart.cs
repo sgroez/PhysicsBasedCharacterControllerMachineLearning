@@ -20,10 +20,10 @@ public class ReferenceBodypart : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         groundContact = GetComponent<GroundContact>();
-        Reset();
+        ResetReferenceBodypart();
     }
 
-    public void Reset()
+    public void ResetReferenceBodypart()
     {
         previousTime = Time.fixedTime;
         previousPos = transform.position;

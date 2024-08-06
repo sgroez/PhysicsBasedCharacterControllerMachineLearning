@@ -52,7 +52,7 @@ public class ReferenceController : MonoBehaviour
         //code to execute on the next frame
         foreach (ReferenceBodypart rbp in referenceBodyparts)
         {
-            rbp.Reset();
+            rbp.ResetReferenceBodypart();
         }
     }
 
