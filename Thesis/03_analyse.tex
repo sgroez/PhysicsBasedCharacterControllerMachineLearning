@@ -1,14 +1,14 @@
 \chapter{Analyse}
 \label{sec:analyse}
-Zusätzlich zu den maschinellen Lernkomponenten stellt Unity auch Demonstrationsumgebungen bereit, in denen verschiedene Lösungen für gängige Verstärkungslernprobleme implementiert sind. In der Walker-Demo wird ein physisch simulierter Charakter darauf trainiert, zu einem Zielwürfel zu laufen. Sie implementiert bereits einige grundlegende Steuerungsmechanismen, die erforderlich sind, um einen Charakter in einer Umgebung zu bewegen und zu kontrollieren. Aus diesem Grund wird in dieser Arbeit die Walker-Demo als Basis für die Entwicklung genutzt. 
+Zusätzlich zu den maschinellen Lernkomponenten stellt Unity auch Demonstrationsumgebungen bereit, in denen verschiedene Lösungen für gängige Verstärkungslernprobleme implementiert sind. In der Walker-Demo wird ein physisch simulierter Charakter darauf trainiert, zu einem Zielwürfel zu laufen. Sie implementiert bereits einige grundlegende Steuerungsmechanismen, die erforderlich sind, um einen Charakter in einer Umgebung zu bewegen. Aus diesem Grund wird in dieser Arbeit die Walker-Demo als Basis für die Entwicklung genutzt. 
 
 In diesem Kapitel wird daher die Walker-Demo analysiert, um in den folgenden Kapiteln darauf aufzubauen. Es wird untersucht wie die Lernumgebung aufgebaut ist. Anschließend wird der Ablauf und die Komponenten für das verstärkende Lernen analysiert. Zum Abschluss wird das Trainingsergebnis und die Bewegungsabläufe der Demo analysiert.
 \section{Lernumgebung}
-Die Umgebung besteht aus einem quadratischen Spielfeld mit einem Boden und Wänden, die der Charakter nicht verlassen kann (siehe Abbildung \ref{fig:walker_aufbau}). Diese Begrenzungen dienen dazu, die Bewegung des Charakters zu kontrollieren und sicherzustellen, dass die Lernumgebung konsistent bleibt. Die Umgebung umfasst weiterhin den Läufer und das Ziel.
+Die Umgebung besteht aus einem quadratischen Spielfeld mit einem Boden und vier Wänden, die der Charakter nicht verlassen kann (siehe Abbildung \ref{fig:walker_aufbau}). Diese Begrenzungen dienen dazu, die Bewegung des Charakters zu kontrollieren und sicherzustellen, dass die Lernumgebung konsistent bleibt. Die Umgebung umfasst weiterhin den Läufer und das Ziel.
 
 \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.35]{img/walker_aufbau.png}
+  \includegraphics[width=0.8\textwidth]{img/walker_aufbau.png}
   \caption{Walker-Demo Umgebung}
   \label{fig:walker_aufbau}
 \end{figure}
@@ -54,11 +54,11 @@ Der Läufer besteht aus einfachen geometrischen Körpern. Insgesamt 11 Kapseln, 
   \label{table:walker_körperteile}
 \end{table}
 
-Das Walker Agent Skript, definiert den Läufer als Agent für das maschinelle Lernen. In Abbildung \ref{fig:agent_konfiguration} wird die Agentenkomponente im Inspektor gezeigt. Diese Komponente ist entscheidend für die Konfiguration des Läufers. Um die Komponente zu nutzen, müssen hier die Körperteile des Walkers referenziert werden. Das Walker Agent Skript registriert die Körperteile bei der Initialisierung in der Gelenk Motor Steuerung, wodurch eine effektive Schnittstelle zur Kontrolle der Gelenke geschaffen wird. Die Gelenk Motor Einstellungen (Joint Drive Settings) siehe Abbildung \ref{fig:agent_konfiguration} \hl{bestimmen die Stärke mit welcher die Gelenke in die Zielstellung bewegt werden.} Zusätzlich kann eine Zielgeschwindigkeit festgelegt werde und ob die Geschwindigkeit variieren soll während dem Training. Die Geschwindigkeit während dem Training zu variieren hilft dem Agent sein Verhalten besser an Umgebungsveränderungen anzupassen. Als letztes muss auch das Zielobjekt referenziert werden.
+Das Walker Agent Skript, definiert den Läufer als Agent für das maschinelle Lernen. In Abbildung \ref{fig:agent_konfiguration} wird die Agentenkomponente im Inspektor gezeigt. Diese Komponente ist entscheidend für die Konfiguration des Läufers. Um die Komponente zu nutzen, müssen hier die Körperteile des Walkers referenziert werden. Das Walker Agent Skript registriert die Körperteile bei der Initialisierung in der Gelenk Motor Steuerung, wodurch eine effektive Schnittstelle zur Kontrolle der Gelenke geschaffen wird. Die Gelenk Motor Einstellungen (Joint Drive Settings) siehe Abbildung \ref{fig:agent_konfiguration} bestimmen die Stärke mit welcher die Gelenke in die Zielstellung bewegt werden. Zusätzlich kann eine Zielgeschwindigkeit festgelegt werden und ob die Geschwindigkeit variieren soll während dem Training. Die Geschwindigkeit während dem Training zu variieren hilft dem Agent sein Verhalten besser an Umgebungsveränderungen anzupassen. Als letztes muss auch das Zielobjekt referenziert werden.
 
 \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.5]{img/gelenk_motor_steuerung.png}
+  \includegraphics[width=0.8\textwidth]{img/gelenk_motor_steuerung.png}
   \caption{Gelenk Motor Steuerung}
   \label{fig:gelenk_motor_steuerung}
 \end{figure}
@@ -71,7 +71,7 @@ Das Walker Agent Skript, definiert den Läufer als Agent für das maschinelle Le
 
 \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.5]{img/agent_konfiguration.png}
+  \includegraphics[width=0.8\textwidth]{img/agent_konfiguration.png}
   \caption{Agent Konfiguration}
   \label{fig:agent_konfiguration}
 \end{figure}
@@ -170,7 +170,7 @@ Die Belohnungsfunktion enthält zwei Komponenten. Zum einen wird die Differenz d
 
 \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.5]{img/match_velocity_demo_vel1.png}
+  \includegraphics[width=0.8\textwidth]{img/match_velocity_demo_vel1.png}
   \caption{Walker Demo Match Velocity Belohnungsfunktion}
   \label{fig:match_velocity_demo_vel1}
 \end{figure}
@@ -180,7 +180,7 @@ $R_V=(1 - (V_\delta / |\vec{Zielgeschwindigkeit}|)^2)^2$ \\
 
 \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.5]{img/look_at_target_demo.png}
+  \includegraphics[width=0.8\textwidth]{img/look_at_target_demo.png}
   \caption{Walker Demo Look At Target Belohnungsfunktion}
   \label{fig:look_at_target_demo}
 \end{figure}
@@ -199,21 +199,21 @@ Der Agent der Walker Demo erlernt über 30 Millionen Trainingsschritte ein Verha
 
 \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.5]{img/analyse_training.png}
+  \includegraphics[width=0.8\textwidth]{img/analyse_training.png}
   \caption{Walker Demo Analyse Trainingsgraphen}
   \label{fig:analyse_training}
 \end{figure}
 
 \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.5]{img/analyse_training_belohnung.png}
+  \includegraphics[width=0.8\textwidth]{img/analyse_training_belohnung.png}
   \caption{Walker Demo Analyse Training Belohnungsgraphen}
   \label{fig:analyse_training_belohnung}
 \end{figure}
 
 \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.5]{img/analyse_training2.png}
+  \includegraphics[width=0.8\textwidth]{img/analyse_training2.png}
   \caption{Walker Demo Analyse Training Zielgraphen}
   \label{fig:analyse_training_2}
 \end{figure}

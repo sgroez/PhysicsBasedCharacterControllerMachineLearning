@@ -901,8 +901,6 @@ MonoBehaviour:
   bodyparts: []
   logStats: 0
   referenceController: {fileID: 1636711641373864670}
-  imitationRewardWeight: 0.3
-  poseRewardWeight: 1
 --- !u!114 &4909437164739994595
 MonoBehaviour:
   m_ObjectHideFlags: 0

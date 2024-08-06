@@ -12,17 +12,35 @@ public class WalkerAgent4 : WalkerAgent1
     [Header("Reference Controller To Match Reference Motion From")]
     public ReferenceController referenceController;
 
-    [Header("Imitation Reward Weights")]
-    public float imitationRewardWeight = 0.3f;
-    public float poseRewardWeight = 1f;
-
     public override void OnEpisodeBegin()
     {
-        base.OnEpisodeBegin();
+        //Reset all of the body parts
+        foreach (Bodypart bp in bodyparts)
+        {
+            bp.ResetTransform();
+        }
+
+        //Set our goal walking speed
+        targetWalkingSpeed =
+            randomizeWalkSpeedEachEpisode ? Random.Range(minWalkingSpeed, maxWalkingSpeed) : targetWalkingSpeed;
+
         //init reference animation at random point
         referenceController.ResetReference();
+
         //reset bodypart position and then set it to the start pose from the reference character
         StartCoroutine(ResetBodypartsOnNextFrame());
+
+        //record walking speed stats
+        RecordStat("Environment/WalkingSpeed", targetWalkingSpeed);
+
+        //record then reset distance moved in target direction
+        RecordStat("Environment/DistanceMovedInTargetDirection", distanceMovedInTargetDirection);
+        distanceMovedInTargetDirection = 0f;
+        previousPos = root.position;
+
+        //record then reset targets reached
+        RecordStat("Environment/ReachedTargets", reachedTargets);
+        reachedTargets = 0;
     }
 
     IEnumerator ResetBodypartsOnNextFrame()
@@ -38,6 +56,12 @@ public class WalkerAgent4 : WalkerAgent1
             bp.ResetTransform(referenceBone.position, referenceBone.rotation);
             i++;
         }
+
+        //Random start rotation to help generalize
+        if (randomizeRotationOnEpsiode)
+        {
+            root.rotation = Quaternion.Euler(0, Random.Range(0.0f, 360.0f), 0);
+        }
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -45,24 +69,6 @@ public class WalkerAgent4 : WalkerAgent1
         base.CollectObservations(sensor);
         //add phase to relate movement to relative time
         sensor.AddObservation(referenceController.GetCurrentPhase());
-    }
-
-    /*
-    * combine rewards like defined in paper
-    * https://xbpeng.github.io/projects/DeepMimic/2018_TOG_DeepMimic.pdf
-    */
-    public float CalculateImitationReward()
-    {
-        //calculate imitation rewards
-        float poseReward = CalculatePoseReward();
-
-        //Check for NaNs
-        if (float.IsNaN(poseReward)) throw new ArgumentException("NaN in poseReward.");
-
-        float imitationReward = 0;
-        imitationReward += poseRewardWeight * poseReward;
-
-        return imitationReward;
     }
 
     /*
@@ -76,15 +82,12 @@ public class WalkerAgent4 : WalkerAgent1
         //sum over all bodyparts
         foreach (Bodypart bp in bodyparts)
         {
-            //Quaternion difference
-            Quaternion difference = referenceController.referenceBodyparts[i].transform.localRotation * Quaternion.Inverse(bp.rb.transform.localRotation);
-            //Scalar of difference
-            float scalarRotationRadians = 2f * Mathf.Acos(Mathf.Clamp(Mathf.Abs(difference.w), -1f, 1f));
-            float scalarRotationRadiansSquared = Mathf.Pow(scalarRotationRadians, 2f);
-            sum += scalarRotationRadiansSquared;
+            float angle = Quaternion.Angle(referenceController.referenceBodyparts[i].transform.localRotation, bp.rb.transform.localRotation);
+            sum += angle;
             i++;
         }
-        float poseReward = Mathf.Exp(-2 * sum);
+        float avg = sum / i;
+        float poseReward = -(avg / 180f);
         RecordStat("Reward/PoseReward", poseReward);
         return poseReward;
     }
@@ -130,8 +133,13 @@ public class WalkerAgent4 : WalkerAgent1
             );
         }
 
+        //calculate imitation rewards
+        float poseReward = CalculatePoseReward();
+
+        //Check for NaNs
+        if (float.IsNaN(poseReward)) throw new ArgumentException("NaN in poseReward.");
+
         float demoReward = matchSpeedReward * lookAtTargetReward;
-        float imitationReward = CalculateImitationReward();
-        AddReward((1 - imitationRewardWeight) * demoReward + imitationRewardWeight * imitationReward);
+        AddReward(demoReward + poseReward);
     }
 }
