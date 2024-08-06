@@ -4,7 +4,7 @@ Um von einem Charaktercontroller sprechen zu können muss der Agent über Nutzer
 \subsection{Versuch 1}
 \label{subsec:versuch_1}
 Das Ziel soll zur Laufzeit durch Tastatureingabe des Nutzers gesteuert werden können.
-Um das zu umzusetzen wird die Tastatureingabe eingelesen und darauf basierend das Ziel relativ zur Hüfte des Walkers gesetzt. Über die Vorwärtsrichtung und Rechte-Richtung multipliziert mit dem Input wird die Position relativ zur Hüfte berechnet (siehe Listing \ref{lst:nutzersteuerung_1}).
+Um das zu umzusetzen wird die Tastatureingabe eingelesen und darauf basierend das Ziel relativ zur Hüfte des Walkers gesetzt. Über die Richtungsvektoren des lokalen Koordinatensystems der Hüfte wird andhand des Inputs eine Position relativ zur Hüfte berechnet (siehe Listing \ref{lst:nutzersteuerung_1}).
 \begin{lstlisting}[caption={Nutzersteuerung erster Prototyp},captionpos=b,label={lst:nutzersteuerung_1}]
 void FixedUpdate()
 {
@@ -16,7 +16,7 @@ void FixedUpdate()
     transform.position = root.position + root.forward * inputVert + root.right * inputHor;
 }
 \end{lstlisting}
-Diese implementierung ermöglicht grundsätzlich das der Läufer über die Tastatureingabe gesteuert werden kann, hat aber noch einige Probleme. Das positionieren des Ziels relativ zur Hüfte hat als Konsequenz das jede Bewegung der Hüfte Einfluss auf die Laufrichtung hat, wodurch sich der Läufer nicht stabil steuern lässt. 
+Diese Implementierung ermöglicht grundsätzlich, dass der Läufer über die Tastatureingabe gesteuert werden kann, hat aber noch einige Probleme. Das positionieren des Ziels relativ zur Hüfte hat als Konsequenz das jede Bewegung der Hüfte Einfluss auf die Laufrichtung hat, wodurch sich der Läufer nicht stabil steuern lässt. 
 
 \subsection{Versuch 2}
 Um die Probleme aus \ref{subsec:versuch_1} zu beheben wird in folgendem Versuch das Ziel relativ zu den Weltachsen gesetzt. In Unity gibt die Vector3 Klasse mit den Feldern forward den Vektor (0,0,1) und mit right den Vektor (1,0,0) in Weltkoordinaten an.
@@ -24,7 +24,7 @@ Um die Probleme aus \ref{subsec:versuch_1} zu beheben wird in folgendem Versuch 
 //Setzen der Zielposition
 transform.position = root.position + Vector3.forward * inputVert + Vector3.right * inputHor;
 \end{lstlisting}
-Durch die Nutzung der Weltachsen anstatt der Hüftrotationsachsen (siehe Listing \ref{lst:nutzersteuerung_2}) kann das Problem behoben werden. Es tritt dadurch jedoch ein weiteres Problem auf. Bei Verwendung der Weltachsen ist die Steuerung des Walkers aus Spielersicht nicht mehr intuitiv, da der Input je nach Rotation des Walkers einen anderen Einfluss hat.
+Durch die Nutzung der Weltachsen anstatt der Hüftrotationsachsen (siehe Listing \ref{lst:nutzersteuerung_2}) kann das Problem behoben werden. Es tritt dadurch jedoch ein weiteres Problem auf. Die Steuerung ist nicht mehr relativ zur Ausrichtung des Läufers und dadurch aus Spielersicht nicht mehr intuitiv, da der Input je nach Rotation des Walkers einen anderen Einfluss hat.
 
 \subsection{Versuch 3}
 Die Lösung ist eine Kombination aus den Ideen der ersten beiden Versuche. Die Laufrichtung soll weiterhin relativ zum Läufer bestimmen werden gleichermaßen aber von der wechselhaften Bewegung des Läufers entkoppeln sein.
