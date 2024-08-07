@@ -48,9 +48,9 @@ Das Verhalten bildet die Zuweisung von Beobachtung auf eine Aktion in der Unity 
 
 \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.5]{img/verhalten_komponente.png}
+  \includegraphics[scale=0.5]{img/komponente_behavior_parameters.png}
   \caption{Unity ML-Agents Verhalten Parameter Komponente}
-  \label{fig:verhalten_komponente}
+  \label{fig:komponente_behavior_parameters}
 \end{figure}
 
 \begin{itemize}
@@ -65,12 +65,12 @@ Die Agent-Komponente bildet die Grundlage für alle Implementierungen. Sie biete
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.5]{img/agent_komponente}
+  \includegraphics[scale=0.5]{img/komponente_agent.png}
   \caption{Unity ML-Agents Agenten Komponente}
-  \label{fig:agent_komponente}
+  \label{fig:komponente_agent}
 \end{figure}
 
-Abbildung \ref{fig:agent_komponente} zeigt die Basiskomponente des Agenten. Ohne das Überschreiben der Funktionen ist die Agentenklasse jedoch ohne Funktion. Die genauen Methoden zur Implementierung eigener Agentenklassen werden im folgenden Abschnitt behandelt. Das einzige Feld zur Konfiguration ist \grqq{}Max Step\grqq{}, welches die maximale Anzahl der Schritte innerhalb einer Episode festlegt.
+Abbildung \ref{fig:komponente_agent} zeigt die Basiskomponente des Agenten. Ohne das Überschreiben der Funktionen ist die Agentenklasse jedoch ohne Funktion. Die genauen Methoden zur Implementierung eigener Agentenklassen werden im folgenden Abschnitt behandelt. Das einzige Feld zur Konfiguration ist \grqq{}Max Step\grqq{}, welches die maximale Anzahl der Schritte innerhalb einer Episode festlegt.
 
 \begin{lstlisting}[caption={Agent Funktionen},captionpos=b,label={lst:agent_funktionen}]
 public override void CollectObservations(VectorSensor sensor)
@@ -99,9 +99,9 @@ Im Beispielcode in Listing \ref{lst:agent_funktionen} Zeile 13-16 wird eine Belo
 
 \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.5]{img/entscheidung_anfragen_komponente.png}
+  \includegraphics[scale=0.5]{img/komponente_decision_requester.png}
   \caption{Unity ML-Agents Entscheidung Anfragen Komponente}
-  \label{fig:entscheidung_anfragen_komponente}
+  \label{fig:komponente_decision_requester}
 \end{figure}
 
-Die Komponente in Abbildung \ref{fig:entscheidung_anfragen_komponente} fragt in regelmäßigen Abständen Entscheidungen an. Das bedeutet, es wird eine Beobachtung erstellt und darauf basierend eine Aktion über das Verhalten ausgewählt. Die \grqq{}Decision Period\grqq{} gibt an, in welchem Intervall der Agent eine Entscheidung treffen soll. Das Kontrollkästchen \grqq{}Take Actions Between Decisions\grqq{} gibt an, ob der Agent die ausgewählte Aktion wiederholen soll, bis die nächste Aktion ausgewählt wurde.
+Die Komponente in Abbildung \ref{fig:komponente_decision_requester} fragt in regelmäßigen Abständen Entscheidungen an. Das bedeutet, es wird eine Beobachtung erstellt und darauf basierend eine Aktion über das Verhalten ausgewählt. Die \grqq{}Decision Period\grqq{} gibt an, in welchem Intervall der Agent eine Entscheidung treffen soll. Das Kontrollkästchen \grqq{}Take Actions Between Decisions\grqq{} gibt an, ob der Agent die ausgewählte Aktion wiederholen soll, bis die nächste Aktion ausgewählt wurde.

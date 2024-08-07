@@ -6,9 +6,9 @@ Die Festkörperkomponente (Rigidbody) erlaubt es, 3D-Objekte als nicht verformba
 
 \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.5]{img/physik_festkoerper.png}
+  \includegraphics[scale=0.5]{img/komponente_rigidbody.png}
   \caption{Unity ML-Agents Physik Festkörper}
-  \label{fig:physik_festkoerper}
+  \label{fig:komponente_rigidbody}
 \end{figure}
 \begin{itemize}
   \item Mass: gibt das Gewicht des Körpers an
@@ -17,29 +17,29 @@ Die Festkörperkomponente (Rigidbody) erlaubt es, 3D-Objekte als nicht verformba
   \item Collision Detection: legt fest wie Kollisionen berechnet werden (Akkurat/Leistung)
  \end{itemize}
  
-Um Kollisionen zwischen Objekten zu berechnen benötigen diese zusätzlich eine Kollisionskomponente. Komplexe 3D-Modelle können in der Kollisionsberechnung jedoch in ihrer direkten Form rechenintensiv sein. Zur Optimierung werden diese Modelle vereinfacht, indem sie durch geometrische Formen wie Kugeln, Kapseln oder Boxen dargestellt werden. Abbildung \ref{fig:physik_kollision} zeigt die Unterschiedlichen Kollisionskomponenten in Unity. Abbildung \ref{fig:physik_kollision_charakter} zeigt wie die Kollisionkomponenten (gelbe Wireframes) genutzt werden um die Körperteile eines komplexen 3D Modells vereinfacht abzubilden.
+Um Kollisionen zwischen Objekten zu berechnen benötigen diese zusätzlich eine Kollisionskomponente. Komplexe 3D-Modelle können in der Kollisionsberechnung jedoch in ihrer direkten Form rechenintensiv sein. Zur Optimierung werden diese Modelle vereinfacht, indem sie durch geometrische Formen wie Kugeln, Kapseln oder Boxen dargestellt werden. Abbildung \ref{fig:komponente_collider} zeigt die Unterschiedlichen Kollisionskomponenten in Unity. Abbildung \ref{fig:charakter_mixamo_collider} zeigt wie die Kollisionkomponenten (gelbe Wireframes) genutzt werden um die Körperteile eines komplexen 3D Modells vereinfacht abzubilden.
 
  \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.5]{img/physik_kollision.png}
+  \includegraphics[scale=0.5]{img/komponente_collider.png}
   \caption{Unity ML-Agents Physik Kollisionskomponenten}
-  \label{fig:physik_kollision}
+  \label{fig:komponente_collider}
 \end{figure}
 
  \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.4]{img/physik_kollision_charakter.png}
+  \includegraphics[scale=0.4]{img/charakter_mixamo_collider.png}
   \caption{Unity ML-Agents Physik Charakter vereinfacht mit Kollisionskomponenten }
-  \label{fig:physik_kollision_charakter}
+  \label{fig:charakter_mixamo_collider}
 \end{figure}
 
 Festkörper können mit Gelenken zu komplexeren Körperstrukturen verbunden werden. Die Konfigurierbare Gelenkkomponente (Configurable Joint) ermöglicht die Simulation von Gelenken mit freier Bewegung und Rotation auf allen drei Achsen. Dies ist wesentlich, um realistische Animationen und Interaktionen in Softwaresimulationen zu erzeugen. Im Kontext dieser Arbeit wird das Gelenk auf Rotation beschränkt und als kugelförmiges Gelenk verwendet. Die Gelenke einer humanoiden Figur können somit vereinfacht aber ausreichend genau simuliert werden.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.5]{img/physik_gelenk.png}
+  \includegraphics[scale=0.5]{img/komponente_configurable_joint.png}
   \caption{Unity ML-Agents Physik Gelenk}
-  \label{fig:physik_gelenk}
+  \label{fig:komponente_configurable_joint}
 \end{figure}
 \begin{itemize}
   \item Connected Body: bestimmt, mit welchem Körper das Gelenke verbunden ist

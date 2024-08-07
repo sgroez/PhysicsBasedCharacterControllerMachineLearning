@@ -1,18 +1,17 @@
-\section{Modell Anpassungen}
-Das trainierte Modell der Walker Demo beherrscht jedoch nur die Fortbewegung in Blickrichtung. Der Läufer ist auch nicht darauf trainiert stehen zu bleiben. Das resultiert darin das der Läufer fällt sobald der Nutzer keinen Tastaturinput gibt. Dieses Kapitel beschäftigt sich mit den Einschränkungen der Walker-Demonstration im Bezug auf unterschiedliche Bewegungsrichtungen.
-
-Im ersten Schritt wird getestet wie der Walker angepasst werden kann um die fehlenden Bewegungsabläufe in separaten Modellen zu erlernen.
+\section{Zusätzliche Bewegungsabläufe}
+Das trainierte Modell der Walker Demo beherrscht nur die Fortbewegung in Blickrichtung. Der Läufer ist auch nicht darauf trainiert stehen zu bleiben. Das resultiert darin, dass der Läufer fällt sobald der Nutzer keinen Tastaturinput gibt. Dieses Kapitel beschäftigt sich mit den Einschränkungen der Walker-Demonstration im Bezug auf unterschiedliche Bewegungsrichtungen. Es werden unterschiedliche Bewegungsabläufe in einzelnen Modellen trainiert. Anschließend werden unterschiedliche Ansätze getestet um die Bewegungsabläufe in einem System zu kombinieren.
 
 \subsection{Versuch 4}
+\label{subsec:versuch4}
 Versuch 4 behandelt die Bewegung auf der Stelle stehen. Für das stehenbleiben wird die Zielgeschwindigkeit auf 0 gesetzt während das Ziel auf der Startposition befindet. Die Belohnungsfunktion der Demo, wird ab jetzt Demo Belohnungsfunktion genannt. Die Demo Belohnungsfunktion hat das Problem das durch die Zielgeschwindigkeit geteilt wird, was bei einer Zielgeschwindigkeit von 0 zu Mathematischen Fehlern führt. Um das zu vermeiden wurde das trainieren mit einer anderen Belohnungsfunktion getestet.
 \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.5]{img/match_velocity_exp.png}
-  \caption{DeepMimic Match Velocity Belohnungsfunktion}
-  \label{fig:match_velocity_exp}
+  \includegraphics[scale=0.5]{img/plot_deepmimic_vel.png}
+  \caption{DeepMimic Geschwindigkeit Belohnungsfunktion}
+  \label{fig:plot_deepmimic_vel}
 \end{figure}
 Die neue Belohnungsfunktion ist inspiriert von den Belohnungsfunktionen des Papers \grqq{}DeepMimic: Example-Guided Deep Reinforcement Learning of Physics-Based Character Skills\grqq{}.\cite{peng2018deepmimic}
-Die Belohnungsfunktion aus Abbildung \ref{fig:match_velocity_exp} wird daher ab hier DeepMimic Belohnungsfunktion genannt.
+Die Belohnungsfunktion aus Abbildung \ref{fig:plot_deepmimic_vel} wird daher ab hier DeepMimic Belohnungsfunktion genannt.
 
 \begin{figure}[H]
   \centering  
@@ -47,7 +46,7 @@ Mit zufälliger Zielgeschwindigkeit zu einem Ziel zu laufen wie im Ursprünglich
 \end{figure}
 
 \subsection{Versuch 5}
-Mit dieser Erkenntnis wurde eine neue Anpassung untersucht. In der folgenden Anpassung blieb die Belohnungsfunktion weitestgehend Unverändert. Lediglich das obere Limit ab welchem die Funktion eine Belohnung von 0 annimmt, wurde auf ein minimum von 0.1 beschränkt. Somit konnte sicher gestellt werden das im Bereich der normalen Fortbewegung keine Veränderung auftritt. Mit der Demo Belohnungsfunktion konnten nur Annäherungen an eine Zielgeschwindigkeit von 0 genutzt werden. Bei einer Annäherung von 0.000001 ist das Spektrum an akzeptablen Geschwindigkeiten bevor die Belohnung 0 ist nahezu unerreichbar (siehe Abbildung \ref{fig:match_velocity_vergleich_clip}). Mit dem Limit von 0.1 ist der Bereich der Belohnungsfunktion > 0 groß genug, sodass der Läufer durch ausprobieren Belohnungen über 0 erreichen kann. Somit kann der Läufer die Belohnung optimieren.\\
+Mit der Erkenntnis aus \ref{subsec:versuch4} wird eine neue Anpassung untersucht. In der folgenden Anpassung bleibt die Belohnungsfunktion weitestgehend Unverändert. Lediglich das obere Limit ab welchem die Funktion eine Belohnung von 0 annimmt, wird auf ein minimum von 0.1 beschränkt. Somit kann sichergestellt werden, dass im Bereich der normalen Fortbewegung keine Veränderung auftritt. Mit der Demo Belohnungsfunktion konnten nur Annäherungen an eine Zielgeschwindigkeit von 0 genutzt werden. Bei einer Annäherung von 0.000001 ist das Spektrum an akzeptablen Geschwindigkeiten bevor die Belohnung 0 ist nahezu unerreichbar (siehe Abbildung \ref{fig:match_velocity_vergleich_clip}). Mit dem Limit von 0.1 ist der Bereich an Abweichungen für die die Belohnungsfunktion einen Wert größer 0 annimmt groß genug. Der Läufer kann durch ausprobieren Belohnungen über 0 erreichen, wodurch eine Richtung für die Optimierung ermittelt werden kann. Somit kann der Läufer die Belohnung optimieren.\\
 
 \begin{figure}[H]
   \centering  
@@ -55,9 +54,6 @@ Mit dieser Erkenntnis wurde eine neue Anpassung untersucht. In der folgenden Anp
   \caption{Vergleich Demo gegen Belohnungsfunktion mit 0.1 Limit}
   \label{fig:match_velocity_vergleich_clip}
 \end{figure}
-$V_\delta=Clip(|\vec{Geschwindigkeit} - \vec{Zielgeschwindigkeit}|, 0, |\vec{Zielgeschwindigkeit}|)$ \\
-$V_\delta=Clip(|\vec{Geschwindigkeit} - \vec{Zielgeschwindigkeit}|, 0, max(0.1, |\vec{Zielgeschwindigkeit}|))$ \\
-
 Das auf einer Stelle stehen hat der Läufer damit in einem separaten Training auch erlernt. Abbildung \ref{fig:versuch5_training} zeigt das der Läufer die maximale Episoden Länge von 1000 erreicht hat ohne zu fallen. Die bewegte Distanz hat sich auch 0 angenähert.
 
 \begin{figure}[H]
@@ -66,7 +62,6 @@ Das auf einer Stelle stehen hat der Läufer damit in einem separaten Training au
   \caption{Versuch 5 Traininggraphen}
   \label{fig:versuch5_training}
 \end{figure}
-
 Die Belohnungen wurden auch weitestgehend optimiert siehe Abbildung \ref{fig:versuch5_training_belohnung}.
 
 \begin{figure}[H]

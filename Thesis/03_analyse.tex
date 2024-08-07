@@ -4,22 +4,22 @@ Zusätzlich zu den maschinellen Lernkomponenten stellt Unity auch Demonstrations
 
 Im folgenden Kapitel wird daher die Walker-Demo analysiert, um in den weiteren Kapiteln darauf aufzubauen. Es wird untersucht, wie die Lernumgebung aufgebaut ist. Anschließend werden der Ablauf und die Komponenten für das verstärkende Lernen analysiert. Zum Abschluss werden das Trainingsergebnis und die Bewegungsabläufe der Demo analysiert.
 \section{Lernumgebung}
-Die Umgebung besteht aus einem quadratischen Spielfeld mit einem Boden und vier Wänden, die der Charakter nicht verlassen kann (siehe Abbildung \ref{fig:walker_aufbau}). Diese Begrenzungen dienen dazu, die Bewegung des Charakters zu kontrollieren und sicherzustellen, dass die Lernumgebung konsistent bleibt. Die Umgebung umfasst weiterhin den Läufer und das Ziel.
+Die Umgebung besteht aus einem quadratischen Spielfeld mit einem Boden und vier Wänden, die der Charakter nicht verlassen kann (siehe Abbildung \ref{fig:szene_demo}). Diese Begrenzungen dienen dazu, die Bewegung des Charakters zu kontrollieren und sicherzustellen, dass die Lernumgebung konsistent bleibt. Die Umgebung umfasst weiterhin den Läufer und das Ziel.
 
 \begin{figure}[H]
   \centering  
-  \includegraphics[width=0.8\textwidth]{img/walker_aufbau.png}
+  \includegraphics[width=0.8\textwidth]{img/szene_demo.png}
   \caption{Walker-Demo Umgebung}
-  \label{fig:walker_aufbau}
+  \label{fig:szene_demo}
 \end{figure}
 
 Der Läufer besteht aus einfachen geometrischen Körpern. Insgesamt 11 Kapseln, drei Kugeln und zwei Quadern, von welchen jede über eine Festkörper- und eine Kollisions-Physikkomponente verfügt. Die Gelenke zwischen den Körperteilen werden als Kugelgelenke simuliert, um eine flexible und natürliche Bewegung zu gewährleisten. Die genaue Physikkonfiguration der Körperteile wird in der Tabelle \ref{table:walker_körperteile} veranschaulicht. Diese Konfiguration spielt eine zentrale Rolle, da die gesetzten Freiheiten sowie Einschränkungen beeinflussen, wie der Läufer lernt, auf das Ziel zuzulaufen.
 
 \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.35]{img/läufer.png}
+  \includegraphics[scale=0.35]{img/charakter_walker.png}
   \caption{Walker-Demo Läufer}
-  \label{fig:läufer}
+  \label{fig:charakter_walker}
 \end{figure}
 
 \begin{table}[H]
@@ -54,13 +54,13 @@ Der Läufer besteht aus einfachen geometrischen Körpern. Insgesamt 11 Kapseln, 
   \label{table:walker_körperteile}
 \end{table}
 
-Das Walker Agent Skript definiert den Läufer als Agent für das maschinelle Lernen. In Abbildung \ref{fig:agent_konfiguration} wird die Agentenkomponente im Inspektor gezeigt. Diese Komponente ist entscheidend für die Konfiguration des Läufers. Um die Komponente zu nutzen, müssen hier die Körperteile des Walkers referenziert werden. Das Walker Agent Skript registriert die Körperteile bei der Initialisierung in der Gelenk-Motor-Steuerung, wodurch eine effektive Schnittstelle zur Kontrolle der Gelenke geschaffen wird. Die Gelenk-Motor-Einstellungen (Joint Drive Settings) siehe Abbildung \ref{fig:agent_konfiguration} bestimmen die Stärke, mit welcher die Gelenke in die Zielstellung bewegt werden. Die Zielgeschwindigkeit kann manuell festgelegt werden oder während des Trainings in einem festgelegten Bereich variieren. Die Geschwindigkeit während des Trainings zu variieren hilft dem Agent sein Verhalten besser an Umgebungsveränderungen anzupassen. Als Letztes muss auch das Zielobjekt referenziert werden.
+Das Walker Agent Skript definiert den Läufer als Agent für das maschinelle Lernen. In Abbildung \ref{fig:komponente_walker_agent} wird die Agentenkomponente im Inspektor gezeigt. Diese Komponente ist entscheidend für die Konfiguration des Läufers. Um die Komponente zu nutzen, müssen hier die Körperteile des Walkers referenziert werden. Das Walker Agent Skript registriert die Körperteile bei der Initialisierung in der Gelenk-Motor-Steuerung, wodurch eine effektive Schnittstelle zur Kontrolle der Gelenke geschaffen wird. Die Gelenk-Motor-Einstellungen (Joint Drive Settings) siehe Abbildung \ref{fig:komponente_joint_drive_controller} bestimmen die Stärke, mit welcher die Gelenke in die Zielstellung bewegt werden. Die Zielgeschwindigkeit kann manuell festgelegt werden oder während des Trainings in einem festgelegten Bereich variieren. Die Geschwindigkeit während des Trainings zu variieren hilft dem Agent sein Verhalten besser an Umgebungsveränderungen anzupassen. Als Letztes muss auch das Zielobjekt referenziert werden.
 
 \begin{figure}[H]
   \centering  
-  \includegraphics[width=0.8\textwidth]{img/gelenk_motor_steuerung.png}
+  \includegraphics[width=0.8\textwidth]{img/komponente_joint_drive_controller.png}
   \caption{Gelenk Motor Steuerung}
-  \label{fig:gelenk_motor_steuerung}
+  \label{fig:komponente_joint_drive_controller}
 \end{figure}
 
 \begin{itemize}
@@ -71,9 +71,9 @@ Das Walker Agent Skript definiert den Läufer als Agent für das maschinelle Ler
 
 \begin{figure}[H]
   \centering  
-  \includegraphics[width=0.8\textwidth]{img/agent_konfiguration.png}
+  \includegraphics[width=0.8\textwidth]{img/komponente_walker_agent.png}
   \caption{Agent Konfiguration}
-  \label{fig:agent_konfiguration}
+  \label{fig:komponente_walker_agent}
 \end{figure}
 
 \section{Training}
@@ -170,62 +170,97 @@ Die Belohnungsfunktion enthält zwei Komponenten. Zum einen wird die Differenz d
 
 \begin{figure}[H]
   \centering  
-  \includegraphics[width=0.8\textwidth]{img/match_velocity_demo_vel1.png}
+  \includegraphics[width=0.8\textwidth]{img/plot_demo_vel_1.png}
   \caption{Walker Demo Match Velocity Belohnungsfunktion}
-  \label{fig:match_velocity_demo_vel1}
+  \label{fig:plot_demo_vel_1}
 \end{figure}
-
-$V_\delta=Clip(|\vec{Geschwindigkeit} - \vec{Zielgeschwindigkeit}|, 0, |\vec{Zielgeschwindigkeit}|)$ \\
-$R_V=(1 - (V_\delta / |\vec{Zielgeschwindigkeit}|)^2)^2$ \\
 
 \begin{figure}[H]
   \centering  
-  \includegraphics[width=0.8\textwidth]{img/look_at_target_demo.png}
+  \includegraphics[width=0.8\textwidth]{img/plot_demo_look.png}
   \caption{Walker Demo Look At Target Belohnungsfunktion}
-  \label{fig:look_at_target_demo}
+  \label{fig:plot_demo_look}
 \end{figure}
-
-$R_L=(\vec{Zielrichtung} \cdot \vec{Blickrichtung})+ 1) \cdot 0.5$ \\
-$R=R_V \cdot R_L$
 
 Die Belohnung wird in jedem Physikupdate neu berechnet und dem Agenten hinzugefügt. Die Belohnung wird für den Zeitraum zwischen zwei Entscheidungen aufsummiert. Bevor die nächste Entscheidung getroffen wird, wird das Tupel aus Beobachtung, Aktion und erhaltener Belohnung im Trainingspuffer gespeichert. Hat der Puffer genug Informationen gespeichert, beginnt ein Lernprozess, in welchem die zuvor gespeicherten Tupel evaluiert werden. Es wird der PPO Algorithmus auf Teilbatches ausgeführt und so schrittweise das Verhalten angepasst.
 
 Erreicht der Läufer ein Ziel, wird dieses an eine neue zufällige Position in der Umgebung bewegt.
 
-Die Trainingsepisode läuft solange, bis entweder 5000 Schritte erreicht sind oder der Läufer fällt. Wenn ein Körperteil des Läufers, ausgenommen den Füßen und Schienbeinen, den Boden berührt, wird die Trainingsepisode sofort beendet. Diese Technik nennt man \grqq{}frühes Stoppen\grqq{}. Fällt der Läufer, benötigt es eine sehr komplexe Reihenfolge an Aktionen, um zurück auf die Beine zu kommen. Das frühe Stoppen ermöglicht dem Läufer, weniger Zeit für das Lernen irelevanter Bewegungsabläufe zu verlieren. Ist die Episode zu Ende, wird sofort eine neue gestartet.
+Die Trainingsepisode läuft solange, bis entweder 5000 Schritte erreicht sind oder der Läufer fällt. Wenn ein Körperteil des Läufers, ausgenommen den Füßen und Schienbeinen, den Boden berührt, wird die Trainingsepisode sofort beendet. Diese Technik nennt man \grqq{}frühes Stoppen\grqq{}. Fällt der Läufer, benötigt es eine sehr komplexe Reihenfolge an Aktionen, um zurück auf die Beine zu kommen. Das frühe Stoppen ermöglicht dem Läufer, weniger Zeit für das Lernen irrelevanter Bewegungsabläufe zu verlieren. Ist die Episode zu Ende, wird sofort eine neue gestartet.
 
 \section{Auswertung}
-Der Agent der Walker Demo erlernt im Laufe von 30 Millionen Trainingsschritten ein Verhalten, welches beinahe die Grenze der Episodenlänge erreicht, ohne zu fallen. In Abbildung \ref{fig:analyse_training} wird die durchschnittlich erreichte Episodenlänge in Anfragen pro Episode dargestellt. Mit 800 Anfragen pro Episode kommt man auf 4000 Trainingsschritte beziehungsweise Physikupdates. Dabei erreicht er eine durchschnittliche Belohnung pro Episode von 1600 (siehe Abbildung \ref{fig:analyse_training}). Die durchschnittliche Belohnung ist ohne Kontext erstmal nur eine Zahl. Schaut man jedoch genauer, ergibt sich die durchschnittliche Belohnung aus der durchschnittlichen Episodenlänge und der durchschnittlich erreichten Belohnung. Teilt man die durchschnittliche Belohnung mit der Anzahl an Schritten, kommt man auf eine durchschnittliche Belohnung von ca. 0.4 pro Schritt. Die im Verlauf der Arbeit hinzugefügten Statistiken der Belohnungen zeigen eine Aufteilung von 0.9 Belohnung für die Blickrichtung und 0.45 für das Halten der Zielgeschwindigkeit (siehe Abbildung \ref{fig:analyse_training_belohnung}). Eine Blickrichtungsbelohnung von 0.9 ergibt eine Abweichung von durchschnittlich 35 Grad. Die Zielgeschwindigkeitsbelohnung ergibt eine Abweichung von ca. 51\%.
-
-\begin{figure}[H]
-  \centering  
-  \includegraphics[width=0.8\textwidth]{img/analyse_training.png}
-  \caption{Walker Demo Analyse Trainingsgraphen}
-  \label{fig:analyse_training}
-\end{figure}
-
-\begin{figure}[H]
-  \centering  
-  \includegraphics[width=0.8\textwidth]{img/analyse_training_belohnung.png}
-  \caption{Walker Demo Analyse Training Belohnungsgraphen}
-  \label{fig:analyse_training_belohnung}
-\end{figure}
-
-\begin{figure}[H]
-  \centering  
-  \includegraphics[width=0.8\textwidth]{img/analyse_training2.png}
-  \caption{Walker Demo Analyse Training Zielgraphen}
-  \label{fig:analyse_training_2}
-\end{figure}
-
-Der Läufer ist nicht in der Lage, die Belohnungen pro Zeitschritt maximal auszureizen, sondern steigert die Länge der Episode, indem er die Sturzrisiken minimiert. Dies führt zu steigender Belohnung innerhalb der Episode. Wie in Abbildung \ref{fig:analyse_training_2} zu sehen ist, läuft er während einer Episode durchschnittlich eine Distanz von 80 Einheiten und erreicht dabei 10,4 Ziele. Der Läufer lernt sich stabil zum Ziel zu bewegen. In Abbildung \ref{fig:analyse_gangbild} ist das Gangbild des Läufers abgebildet. Das Gangbild wechselt periodisch das Standbein, setzt den einen Fuß vor den anderen und drückt sich über das Standbein voran. Die Arme jedoch schwingt der Läufer sehr stark um das Gleichgewicht halten zu können. Das Gangbild ist daher nicht so wie von einem zweibeinigen menschenähnlichen Charakter erwartet.
+Der Agent der Walker Demo erlernt im Laufe von 30 Millionen Trainingsschritten ein Verhalten, welches beinahe die Grenze der Episodenlänge erreicht, ohne zu fallen. In Abbildung \ref{fig:116_episode_length} wird die durchschnittlich erreichte Episodenlänge in Anfragen pro Episode dargestellt. Mit 800 Anfragen pro Episode kommt man auf 4000 Trainingsschritte beziehungsweise Physikupdates. Dabei erreicht er eine durchschnittliche Belohnung pro Episode von 1600 (siehe Abbildung \ref{fig:116_cumulative_reward}). Die durchschnittliche Belohnung ist ohne Kontext erstmal nur eine Zahl. Schaut man jedoch genauer, ergibt sich die durchschnittliche Belohnung aus der durchschnittlichen Episodenlänge und der durchschnittlich erreichten Belohnung. Teilt man die durchschnittliche Belohnung mit der Anzahl an Schritten, kommt man auf eine durchschnittliche Belohnung von ca. 0.4 pro Schritt. Die im Verlauf der Arbeit hinzugefügten Statistiken der Belohnungen zeigen eine Aufteilung von 0.9 Belohnung für die Blickrichtung und 0.45 für das Halten der Zielgeschwindigkeit (siehe Abbildung \ref{fig:116_look_reward}, \ref{fig:116_vel_reward}). Eine Blickrichtungsbelohnung von 0.9 ergibt eine Abweichung von durchschnittlich 35 Grad. Die Zielgeschwindigkeitsbelohnung ergibt eine Abweichung von ca. 51\%.
 
 \begin{figure}[H]
   \centering
-  \begin{tabular}{ccc}
-    \includegraphics[width=0.27\textwidth]{img/walker_laufen1.png} & \includegraphics[width=0.27\textwidth]{img/walker_laufen2.png} & \includegraphics[width=0.27\textwidth]{img/walker_laufen3.png}\\
-    \includegraphics[width=0.27\textwidth]{img/walker_laufen4.png} & \includegraphics[width=0.27\textwidth]{img/walker_laufen5.png} & \includegraphics[width=0.27\textwidth]{img/walker_laufen6.png}\\
-  \end{tabular}
+    \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/116_episode_length}
+      \caption{Episodenlänge}
+      \label{fig:116_episode_length}
+    \end{subfigure}
+    \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/116_cumulative_reward}
+      \caption{Angehäufte Belohnung}
+      \label{fig:116_cumulative_reward}
+    \end{subfigure}
+     \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/116_look_reward}
+      \caption{Blickbelohnung}
+      \label{fig:116_look_reward}
+    \end{subfigure}
+    \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/116_vel_reward}
+      \caption{Geschwindigkeitsbelohnung}
+      \label{fig:116_vel_reward}
+    \end{subfigure}
+    \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/116_move_target_dir}
+      \caption{Zurückgelegte Stecke in Zielrichtung}
+      \label{fig:116_move_target_dir}
+    \end{subfigure}
+    \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/116_reach_target}
+      \caption{Anzahl erreichte Ziele}
+      \label{fig:116_reach_target}
+    \end{subfigure}
+    \caption{Walker Demo Training Graphen}
+      \label{fig:116_training_graph}
+\end{figure}
+
+Der Läufer ist nicht in der Lage, die Belohnungen pro Zeitschritt maximal auszureizen, sondern steigert die Länge der Episode, indem er die Sturzrisiken minimiert. Dies führt zu steigender Belohnung innerhalb der Episode. Wie in Abbildung \ref{fig:116_move_target_dir} und \ref{fig:116_reach_target} zu sehen ist, läuft er während einer Episode durchschnittlich eine Distanz von 80 Einheiten und erreicht dabei 10,4 Ziele. Der Läufer lernt sich stabil zum Ziel zu bewegen. In Abbildung \ref{fig:analyse_gangbild} ist das Gangbild des Läufers abgebildet. Das Gangbild wechselt periodisch das Standbein, setzt den einen Fuß vor den anderen und drückt sich über das Standbein voran. Die Arme jedoch schwingt der Läufer sehr stark um das Gleichgewicht halten zu können. Das Gangbild ist daher nicht so wie von einem zweibeinigen menschenähnlichen Charakter erwartet.
+
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}{.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{img/charakter_walker_1.png}
+  \end{subfigure}
+  \begin{subfigure}{.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{img/charakter_walker_2.png}
+  \end{subfigure}
+  \begin{subfigure}{.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{img/charakter_walker_3.png}
+  \end{subfigure}
+  \begin{subfigure}{.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{img/charakter_walker_4.png}
+  \end{subfigure}
+  \begin{subfigure}{.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{img/charakter_walker_5.png}
+  \end{subfigure}
+  \begin{subfigure}{.3\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{img/charakter_walker_6.png}
+  \end{subfigure}
   \caption{Walker Demo Analyse Gangbild}
   \label{fig:analyse_gangbild}
 \end{figure}
