@@ -15,23 +15,56 @@ Die Belohnungsfunktion aus Abbildung \ref{fig:plot_deepmimic_vel} wird daher ab 
 
 \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.5]{img/versuch4_training}
-  \caption{Versuch 4 Traininggraphen}
+  \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/126_episode_length}
+      \caption{Episodenlänge}
+      \label{fig:126_episode_length}
+    \end{subfigure}
+    \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/126_cumulative_reward}
+      \caption{Angehäufte Belohnung}
+      \label{fig:126_cumulative_reward}
+    \end{subfigure}
+     \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/126_look_reward}
+      \caption{Blickbelohnung}
+      \label{fig:126_look_reward}
+    \end{subfigure}
+    \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/126_vel_reward}
+      \caption{Geschwindigkeitsbelohnung}
+      \label{fig:126_vel_reward}
+    \end{subfigure}
+    \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/126_move_target_dir}
+      \caption{Zurückgelegte Stecke in Zielrichtung}
+      \label{fig:126_move_target_dir}
+    \end{subfigure}
+  \caption{Versuch 4 Training Graphen}
   \label{fig:versuch4_training}
 \end{figure}
 
-\begin{figure}[H]
-  \centering  
-  \includegraphics[scale=0.5]{img/versuch4_training_belohnung}
-  \caption{Versuch4 Training Belohnungsgraphen}
-  \label{fig:versuch4_training_belohnung}
-\end{figure}
-
-Der Walker konnte mit der DeepMimic Belohnungsfunktion lernen auf der Stelle zu stehen.  Abbildung \ref{fig:versuch4_training} zeigt wie die zurück gelegte Distanz um 0 herum pendelt, während die Episodenlänge die maximale Länge von 1000 erreicht hat. Die Belohnungen sind auch nahezu maximal ausgereizt siehe Abbildung \ref{fig:versuch4_training_belohnung}.
+Der Walker konnte mit der DeepMimic Belohnungsfunktion lernen auf der Stelle zu stehen.  Abbildung \ref{fig:126_move_target_dir}, \ref{fig:126_episode_length} zeigt wie die zurück gelegte Distanz um 0 herum pendelt, während die Episodenlänge die maximale Länge von 1000 erreicht hat. Die Belohnungen sind auch nahezu maximal ausgereizt siehe Abbildung \ref{fig:126_look_reward}, \ref{fig:126_vel_reward}.
 
 \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.5]{img/versuch4_laufen_vergleich.png}
+  \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/116_127_move_target_dir}
+      \caption{Zurückgelegte Stecke in Zielrichtung}
+      \label{fig:116_127_move_target_dir}
+    \end{subfigure}
+    \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/116_127_reach_target}
+      \caption{Anzahl erreichte Ziele}
+      \label{fig:116_127_reach_target}
+    \end{subfigure}
   \caption{Vergleich von Lauftraining mit Demo Belohnungsfunktion gegen DeepMimic Belohnungsfunktion}
   \label{fig:versuch4_laufen_vergleich}
 \end{figure}
@@ -54,21 +87,43 @@ Mit der Erkenntnis aus \ref{subsec:versuch4} wird eine neue Anpassung untersucht
   \caption{Vergleich Demo gegen Belohnungsfunktion mit 0.1 Limit}
   \label{fig:match_velocity_vergleich_clip}
 \end{figure}
-Das auf einer Stelle stehen hat der Läufer damit in einem separaten Training auch erlernt. Abbildung \ref{fig:versuch5_training} zeigt das der Läufer die maximale Episoden Länge von 1000 erreicht hat ohne zu fallen. Die bewegte Distanz hat sich auch 0 angenähert.
+Das auf einer Stelle stehen hat der Läufer damit in einem separaten Training auch erlernt. Abbildung \ref{fig:128_episode_length} zeigt das der Läufer die maximale Episoden Länge von 1000 erreicht hat ohne zu fallen. Die bewegte Distanz hat sich auch 0 angenähert (siehe \ref{fig:128_move_target_dir}. Die Belohnungen wurden auch weitestgehend optimiert siehe Abbildung \ref{fig:128_look_reward}, \ref{fig:128_vel_reward}.
+
 
 \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.5]{img/versuch5_training.png}
-  \caption{Versuch 5 Traininggraphen}
+  \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/128_episode_length}
+      \caption{Episodenlänge}
+      \label{fig:128_episode_length}
+    \end{subfigure}
+    \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/128_cumulative_reward}
+      \caption{Angehäufte Belohnung}
+      \label{fig:128_cumulative_reward}
+    \end{subfigure}
+     \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/128_look_reward}
+      \caption{Blickbelohnung}
+      \label{fig:128_look_reward}
+    \end{subfigure}
+    \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/128_vel_reward}
+      \caption{Geschwindigkeitsbelohnung}
+      \label{fig:128_vel_reward}
+    \end{subfigure}
+    \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/128_move_target_dir}
+      \caption{Zurückgelegte Stecke in Zielrichtung}
+      \label{fig:128_move_target_dir}
+    \end{subfigure}
+  \caption{Versuch 5 Training Graphen}
   \label{fig:versuch5_training}
-\end{figure}
-Die Belohnungen wurden auch weitestgehend optimiert siehe Abbildung \ref{fig:versuch5_training_belohnung}.
-
-\begin{figure}[H]
-  \centering  
-  \includegraphics[scale=0.5]{img/versuch5_training_belohnung.png}
-  \caption{Versuch 5 Training Belohnungsgraphen}
-  \label{fig:versuch5_training_belohnung}
 \end{figure}
 
 \subsection{Versuch 6}
@@ -109,12 +164,47 @@ Das gehen in Zielrichtung wurde durch die Änderungen nicht beeinflusst. Separat
 
 \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.5]{img/versuch6_training.png}
-  \caption{Versuch 6 Traininggraphen}
+  \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/116_130_131_132_episode_length}
+      \caption{Episodenlänge}
+      \label{fig:116_130_131_132_episode_length}
+    \end{subfigure}
+    \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/116_130_131_132_cumulative_reward}
+      \caption{Angehäufte Belohnung}
+      \label{fig:116_130_131_132_cumulative_reward}
+    \end{subfigure}
+     \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/116_130_131_132_look_reward}
+      \caption{Blickbelohnung}
+      \label{fig:116_130_131_132_look_reward}
+    \end{subfigure}
+    \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/116_130_131_132_vel_reward}
+      \caption{Geschwindigkeitsbelohnung}
+      \label{fig:116_130_131_132_vel_reward}
+    \end{subfigure}
+    \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/116_130_131_132_move_target_dir}
+      \caption{Zurückgelegte Stecke in Zielrichtung}
+      \label{fig:116_130_131_132_move_target_dir}
+    \end{subfigure}
+    \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/116_130_131_132_reach_target}
+      \caption{Anzahl erreichte Ziele}
+      \label{fig:116_130_131_132_reach_target}
+    \end{subfigure}
+  \caption{Versuch 6 Training Graphen}
   \label{fig:versuch6_training}
 \end{figure}
 
-Abbildung \ref{fig:versuch6_training} zeigt die zurückgelegte Distanz und die Anzahl an erreichten Zielen in einer Trainingsepisode. Die Ergebnisse der 3 Laufrichtungen (rot = Rückwärts, gelb = rechts, blau = links) sind alle vergleichbar mit den Ergebnissen der Demo. Die Abweichung der Laufrichtung Links ist vermutlich der zufällligen Natur des Trainings anzurechnen.
+Abbildung \ref{fig:116_130_131_132_move_target_dir}, \ref{fig:116_130_131_132_reach_target} zeigen die zurückgelegte Distanz und die Anzahl an erreichten Zielen in einer Trainingsepisode. Die Ergebnisse der 3 Laufrichtungen \hl{(rot = Rückwärts, gelb = rechts, blau = links)} sind alle vergleichbar mit den Ergebnissen der Demo. Die Abweichung der Laufrichtung Links ist vermutlich der zufällligen Natur des Trainings anzurechnen.
 
 \subsection{Versuch 7}
 Die Charaktersteuerung benötigt je nach Tastatureingabe eine der vier Bewegungsrichtungen. Der Unity ML-Agents Agent enthält eine Funktion zum wechseln des verwendeten Modells. Mit dieser Funktion wird in folgender Implementierung zwischen den Modellen aus Versuch 6 gewechselt um alle Bewegungsrichtungen mit einer Steuerung abzudecken. Zu Erwarten ist das die Bewegung in die einzelnen Richtungen funktioniert, der Läufer aber beim Wechsel zwischen den Modellen das Gleichgewicht nicht halten kann.
@@ -186,20 +276,48 @@ public override void CollectObservations(VectorSensor sensor)
 
 Codeausschnitt \ref{lst:laufrichtung_wechsel_start_ziel} erstellt beim Initialisieren des Agenten ein Array mit allen Werten, welche das Richtungs-Enum zulässt. Die Funktion SetRandomWalkDirection wählt eine zufällige Richtung aus und setzt diese für den Agenten. Die Funktion wird zu Beginn in Initialize aufgerufe. Zusätzlich wird die Methode mit einem Listener auf das onTouchedTarget des Agenten registriert. Die Methode wird somit bei jedem berühren eines Ziels ausgeführt. Das der Agent während dem Training sowie nach dem Training zwischen den Laufrichtungen entscheiden kann, bekommt er einen Zahlenwert repräsentativ für die Richtung in der Beobachtung angehängt.
 
-Der Läufer lernt unter diesen Bedingungen sehr langsam und das Training stagniert. Ab ca. 20 millionen Trainingsschritten fängt der Läufer an regelmäßig Ziele zu erreichen (siehe Abbildung \ref{fig:versuch8_training}). Durch das häufige erreichen von Zielen steigt aber auch die Anzahl der Ziel- und Laufrichtungswechsel. Aus diesem Grund brechen die Belohnungen ein und der Fortschritt stagniert (siehe Abbildung \ref{fig:versuch8_training_belohnung}).
+Der Läufer lernt unter diesen Bedingungen sehr langsam und das Training stagniert. Ab ca. 20 millionen Trainingsschritten fängt der Läufer an regelmäßig Ziele zu erreichen. Durch das häufige erreichen von Zielen steigt aber auch die Anzahl der Ziel- und Laufrichtungswechsel. Aus diesem Grund brechen die Belohnungen ein und der Fortschritt stagniert (siehe Abbildung \ref{fig:versuch8_training}).
 
 \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.5]{img/versuch8_training.png}
-  \caption{Versuch 8 Traininggraphen}
+  \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/134_episode_length}
+      \caption{Episodenlänge}
+      \label{fig:134_episode_length}
+    \end{subfigure}
+    \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/134_cumulative_reward}
+      \caption{Angehäufte Belohnung}
+      \label{fig:134_cumulative_reward}
+    \end{subfigure}
+     \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/134_look_reward}
+      \caption{Blickbelohnung}
+      \label{fig:134_look_reward}
+    \end{subfigure}
+    \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/134_vel_reward}
+      \caption{Geschwindigkeitsbelohnung}
+      \label{fig:134_vel_reward}
+    \end{subfigure}
+    \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/134_move_target_dir}
+      \caption{Zurückgelegte Stecke in Zielrichtung}
+      \label{fig:134_move_target_dir}
+    \end{subfigure}
+    \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/134_reach_target}
+      \caption{Anzahl erreichte Ziele}
+      \label{fig:134_reach_target}
+    \end{subfigure}
+  \caption{Versuch 8 Training Graphen}
   \label{fig:versuch8_training}
-\end{figure}
-
-\begin{figure}[H]
-  \centering  
-  \includegraphics[scale=0.5]{img/versuch8_training_belohnung.png}
-  \caption{Versuch 8 Training Belohnungsgraphen}
-  \label{fig:versuch8_training_belohnung}
 \end{figure}
 
 \subsection{Versuch 9}
@@ -207,16 +325,44 @@ Um den Richtungswechsel regelmäßiger zu gestalten, wird getestet wie das Train
 
 \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.5]{img/versuch9_training.png}
-  \caption{Versuch 9 Traininggraphen}
+  \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/135_episode_length}
+      \caption{Episodenlänge}
+      \label{fig:135_episode_length}
+    \end{subfigure}
+    \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/135_cumulative_reward}
+      \caption{Angehäufte Belohnung}
+      \label{fig:135_cumulative_reward}
+    \end{subfigure}
+     \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/135_look_reward}
+      \caption{Blickbelohnung}
+      \label{fig:135_look_reward}
+    \end{subfigure}
+    \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/135_vel_reward}
+      \caption{Geschwindigkeitsbelohnung}
+      \label{fig:135_vel_reward}
+    \end{subfigure}
+    \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/135_move_target_dir}
+      \caption{Zurückgelegte Stecke in Zielrichtung}
+      \label{fig:135_move_target_dir}
+    \end{subfigure}
+    \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/135_reach_target}
+      \caption{Anzahl erreichte Ziele}
+      \label{fig:135_reach_target}
+    \end{subfigure}
+  \caption{Versuch 9 Training Graphen}
   \label{fig:versuch9_training}
 \end{figure}
 
-\begin{figure}[H]
-  \centering  
-  \includegraphics[scale=0.5]{img/versuch9_training_belohnung.png}
-  \caption{Versuch 9 Training Belohnungsgraphen}
-  \label{fig:versuch9_training_belohnung}
-\end{figure}
-
-Das gleichbleiben der Laufbewegung über die komplette Trainingsepisode hat zur folge dass das Training stabiler verläuft siehe Abbildung \ref{fig:versuch8_training}. Der Nachteil ist jedoch das der Läufer keine Bewegungswechsel lernt. Beim steuern des Läufers ist das wechseln zwischen den Laufrichtungen noch immer ein Problem. Dazu kommt das der in diesem training die Blickrichtungs Belohnung geringer ist als bei vorherigen Trainingseinheiten. Der Läufer lernt die seitwärts Bewegungen nicht richtig sondern nimmt einen Verlust in der Belohnung in kauf für die Steigerung der Episodenlänge.
+Das gleichbleiben der Laufbewegung über die komplette Trainingsepisode hat zur folge dass das Training stabiler verläuft siehe Abbildung \ref{fig:versuch9_training}. Der Nachteil ist jedoch das der Läufer keine Bewegungswechsel lernt. Beim steuern des Läufers ist das wechseln zwischen den Laufrichtungen noch immer ein Problem. Dazu kommt das der in diesem training die Blickrichtungs Belohnung geringer ist als bei vorherigen Trainingseinheiten. Der Läufer lernt die seitwärts Bewegungen nicht richtig sondern nimmt einen Verlust in der Belohnung in kauf für die Steigerung der Episodenlänge.
