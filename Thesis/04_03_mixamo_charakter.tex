@@ -1,13 +1,13 @@
 \section{Unterschiedliche Charakter}
 Spiele verwenden die unterschiedlichsten Charaktere, nicht nur das Aussehen sondern auch die Komplexität der Körperteile und die Anzahl der Knochen variiert. Um den Charaktercontroller vielseitig einsetzbar zu gestalten wird in diesem Kapitel die Walker Demo Komponenten angepasst um den Einrichtungsprozess zu vereinfachen und unterschiedliche Charakter Körperstrukturen zu erlauben. Es wird der Einrichtungsprozess am Beispiel eines Mixamo 3D Charakter Modells dargestellt. Anschließend werden mit der Mixamo Charakter trainiert und das Ergebnis analysiert. Abschließend werden Verbesserungsansätze für aufgetretene Probleme behandelt.
 
-Der ausgewählte Charakter ist der Y Bot Charakter welcher in Abbildung \ref{fig:y_bot} zu sehen ist. Der Y Bot besteht ausgenommen der Finger und Zehen aus 22 Knochen. Um das Training zu beschleunigen werden für alle Versuche die Zehen als Vorderfuß und die Finger mit dem Handknochen zusammengefaßt.
+Der ausgewählte Charakter ist der Y Bot Charakter welcher in Abbildung \ref{fig:charakter_mixamo} zu sehen ist. Der Y Bot besteht ausgenommen der Finger und Zehen aus 22 Knochen. Um das Training zu beschleunigen werden für alle Versuche die Zehen als Vorderfuß und die Finger mit dem Handknochen zusammengefaßt.
 
 \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.5]{img/y_bot.png}
+  \includegraphics[scale=0.5]{img/charakter_mixamo}
   \caption{Mixamo Charakter Y Bot}
-  \label{fig:y_bot}
+  \label{fig:charakter_mixamo}
 \end{figure}
 
 \subsection{Anpassungen}
@@ -58,12 +58,12 @@ Als erstes muss für jedes Körperteile eine passende Kollisionskomponenten ausg
   \label{table:mixamo_körperteile}
 \end{table}
 
-Anschließend kann jedem Körperteil die Körperteilkomponente hinzugefügt werden. Die Körperteilkomponente (Abbildung \ref{fig:körperteil_komponente}) definiert die Körperteile für den Agenten.
+Anschließend kann jedem Körperteil die Körperteilkomponente hinzugefügt werden. Die Körperteilkomponente (Abbildung \ref{fig:komponente_bodypart}) definiert die Körperteile für den Agenten.
 \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.5]{img/körperteil_komponente.png}
+  \includegraphics[scale=0.5]{img/komponente_bodypart}
   \caption{Körperteilkomponente}
-  \label{fig:körperteil_komponente}
+  \label{fig:komponente_bodypart}
 \end{figure}
 
 \begin{itemize}
