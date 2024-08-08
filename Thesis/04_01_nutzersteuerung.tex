@@ -1,61 +1,66 @@
 \section{Nutzersteuerung}
-Um von einem Charaktercontroller sprechen zu können, muss der Agent über Nutzerinput gesteuert werden. Mit dieser Anforderung wurden die ersten Anpassungen der Walker Demo implementiert.
+\subsection{Anforderungen}
+Um von einem Charaktercontroller sprechen zu können, muss der Agent über Benutzereingaben gesteuert werden. Je nach Spielgenre erfolgt die Steuerung des Charakters unterschiedlich. Für eine intuitive Steuerung wird der Charakter in den meisten Spielen relativ zur Kameraansicht bewegt. Bei First- oder Third-Person-Spielen kann die Kameraansicht zusätzlich über Mausbewegungen gedreht werden. Andere Titel mit einer Top-Down-Ansicht haben hingegen eine feste Kameraansicht. In diesen Spielen wird die Ausrichtung des Charakters daher durch die Mausposition bestimmt. Um den Walker-Agenten zu steuern, muss das Ziel des Läufers zur Laufzeit je nach Benutzereingabe bewegt werden.
 
-\subsection{Versuch 1}
-\label{subsec:versuch_1}
-Das Ziel soll zur Laufzeit durch Tastatureingabe des Nutzers gesteuert werden können.
-Um das zu umzusetzen wird die Tastatureingabe eingelesen und darauf basierend das Ziel relativ zur Hüfte des Walkers gesetzt. Der Input bestimmt dabei die Distanz zum Läufer auf den Richtungsvektoren des lokalen Koordinatensystems der Hüfte (siehe Listing \ref{lst:nutzersteuerung_1}). Mit den Achsen Vorwärts und Rechts zur Hüfte und dem Input horizontal wie vertikal von -1 bis 1 kann der Läufer in alle vier Richtungen und diagonal bewegt werden.
-\begin{lstlisting}[caption={Nutzersteuerung erster Prototyp},captionpos=b,label={lst:nutzersteuerung_1}]
-void FixedUpdate()
-{
-    //Einlesen Tastatur Input
-    float inputHor = Input.GetAxis("Horizontal");
-    float inputVert = Input.GetAxis("Vertical");
-        
-    //Setzen der Zielposition
-    transform.position = root.position + root.forward * inputVert + root.right * inputHor;
-}
+In den folgenden Abschnitten wurden beide Ansätze in einem Charaktercontroller-Skript zur Steuerung des Walker-Agents implementiert.
+
+\subsection{First- und Thirdperson-Steuerung}
+Die First- oder Third-Person-Steuerung liest zunächst die Tastatureingaben sowie die Mausbewegung auf der Y-Achse ein. Anschließend wird der aktuelle Rotationswinkel basierend auf der Mausbewegung angepasst. Dabei wird die Distanz, die die Maus seit dem letzten Update zurückgelegt hat, nach links als negativer Wert und nach rechts als positiver Wert auf den aktuellen Rotationswinkel addiert. Die Rotation wird durch eine Quaternion bestimmt, die um die vertikale Weltachse gedreht wird. Um die Richtungsvektoren zu berechnen, wird die zuvor berechnete Rotation auf die Basisvektoren angewendet. Zum Schluss werden die Richtungsvektoren mit den Tastatureingaben multipliziert. Mit den Tastatureingaben W und S wird der Input in vertikaler Richtung im Bereich von -1 bis 1 angegeben. Mit den Tastatureingaben A und D wird gleichermaßen die horizontale Richtung angegeben. Abschließend wird das Ziel an die errechnete Position gesetzt, wodurch der Läufer in die angegebene Richtung läuft.
+
+\begin{lstlisting}[caption={ Nutzersteuerung für First- und Thirdperson},captionpos=b,label={lst:nutzersteuerung_3}]
+public virtual void FixedUpdate()
+    {
+        //Einlesen Tastatur Input
+        float inputHor = Input.GetAxis("Horizontal");
+        float inputVert = Input.GetAxis("Vertical");
+
+        Vector3 position;
+
+        //Einlesen Maus Input
+        float mouseX = Input.GetAxis("Mouse X");
+        rotAngle += mouseX;
+
+        //Berechnung der Rotation
+        rotation = Quaternion.AngleAxis(rotAngle, Vector3.up);
+
+        //Anwendung der Rotation auf Richtungsvektoren
+        Vector3 directionForward = rotation * Vector3.forward;
+        Vector3 directionRight = rotation * Vector3.right;
+
+        //Position berechnen
+        position = root.position + directionForward * inputVert + directionRight * inputHor;
+
+        //Setzen der Zielposition
+        target.position = position;
+    }
 \end{lstlisting}
-Diese Implementierung ermöglicht, dass der Läufer über die Tastatureingabe gesteuert werden kann, hat aber noch einige Probleme. Das positionieren des Ziels relativ zur Hüfte hat als Konsequenz das jede Bewegung der Hüfte Einfluss auf die Laufrichtung hat, wodurch sich der Läufer nicht stabil steuern lässt. 
 
-\subsection{Versuch 2}
-Um das Problem aus \ref{subsec:versuch_1} zu beheben wird in folgendem Versuch das Ziel relativ zu den Weltachsen gesetzt. In Unity gibt die Vector3 Klasse mit den Feldern forward den Vektor (0,0,1) und mit right den Vektor (1,0,0) in Weltkoordinaten an.
-\begin{lstlisting}[caption={Nutzersteuerung berechnung mit Weltachsen},captionpos=b,label={lst:nutzersteuerung_2}]
-//Setzen der Zielposition
-transform.position = root.position + Vector3.forward * inputVert + Vector3.right * inputHor;
+\subsection{Top-Down-Steuerung}
+Das Grundgerüst für die Top-Down-Steuerung ist das gleiche wie bei der First- oder Third-Person-Steuerung. Es unterscheidet sich jedoch darin, dass nicht die Mausbewegung, sondern die Mausposition eingelesen wird. Die Mausposition wird zunächst von einer Pixelkoordinate in eine relative Koordinate im Bereich von 0 bis 1 normiert. Diese Normierung gewährleistet eine konsistente Steuerung unabhängig von der Bildschirmgröße. Anschließend wird die relative Koordinate in einen Bereich von -1 bis 1 konvertiert, um die Position in Relation zum Bildschirmmittelpunkt darzustellen, anstatt zur unteren linken Ecke. Der Vektor, bestehend aus den relativen Koordinaten, gibt die Blickrichtung an. Um die Zielposition zu berechnen, wird die Tastatureingabe mit den Richtungsvektoren der Weltachsen multipliziert. Abschließend wird das Ziel an die berechnete Position gesetzt, wodurch der Läufer in die angegebene Richtung läuft.
+\begin{lstlisting}[caption={Nutzersteuerung für Top-Down},captionpos=b,label={lst:nutzersteuerung_2}]
+public virtual void FixedUpdate()
+    {
+        //Einlesen Tastatur Input
+        float inputHor = Input.GetAxis("Horizontal");
+        float inputVert = Input.GetAxis("Vertical");
+
+        Vector3 position;
+
+        //Einlesen Maus Position
+        Vector3 mousePos = Input.mousePosition;
+
+        //Maus Position normalisieren relativ zu Bildschirmauflösung
+        float normalizedMouseX = 2 * (mousePos.x / Screen.width) - 1;
+        float normalizedMouseY = 2 * (mousePos.y / Screen.height) - 1;
+        mousePos = new Vector3(normalizedMouseX, 0, normalizedMouseY);
+
+        //Berechnung der Rotation
+        rotation = Quaternion.LookRotation(mousePos, Vector3.up);
+
+        //Position berechnen
+        position = root.position + Vector3.forward * inputVert + Vector3.right * inputHor;
+
+        //Setzen der Zielposition
+        target.position = position;
+    }
 \end{lstlisting}
-Durch die Nutzung der Weltachsen anstatt der Hüftrotationsachsen (siehe Listing \ref{lst:nutzersteuerung_2}) kann das Problem behoben werden. Die Steuerung ist nicht relativ zur Ausrichtung des Läufers und dadurch am besten für eine Steuerung aus der Top Down Ansicht geeignet.
-
-\subsection{Versuch 3}
-Für die Nutzung in First- oder Thirdperson Ansicht soll die Laufrichtung weiterhin relativ zum Läufer bestimmen werden gleichermaßen aber von der wechselhaften Bewegung des Läufers entkoppeln sein.
-Das hinzufügen einer separaten Rotationskomponente für die Bestimmung der Blickrichtung erfüllt hier die Kriterien.
-Zu beginn wird die Blickrichtung mit der Vorwärtskomponente der Hüftrotation gleichgesetzt. Ausgehend von der Startrichtung wird dann über horizontalen Mausinput die Richtung angepasst (siehe Listing \ref{lst:nutzersteuerung_3}).
-\begin{lstlisting}[caption={Erweiterung der Nutzersteuerung mit separater Blickrichtung},captionpos=b,label={lst:nutzersteuerung_3}]
-void Start()
-{
-    //Root Position als Startposition festhalten
-    startForward = root.forward;
-    startRight = root.right;
-}
-void FixedUpdate()
-{
-    //Einlesen Tastatur Input
-    float inputHor = Input.GetAxis("Horizontal");
-    float inputVert = Input.GetAxis("Vertical");
-
-    //Einlesen Maus Input
-    float mouseX = Input.GetAxis("Mouse X");
-    rotAngle += mouseX;
-
-    //Berechnung der Rotation
-    Quaternion rotation = Quaternion.AngleAxis(rotAngle, rotationAxis);
-
-    //Anwendung der Rotation auf Richtungsvektoren
-    Vector3 directionForward = rotation * startForward;
-    Vector3 directionRight = rotation * startRight;
-
-    //Setzen der Zielposition
-    transform.position = root.position + directionForward * inputVert + directionRight * inputHor;
-}
-\end{lstlisting}
-Das Ergebnis ermöglicht die Steuerung des Läufers als Spielcharakter, mit einer gewohnten Steuerung aus schon bestehenden Spieltiteln und ist kompatibel mit einer dritte Person Ansicht als auch mit der erste Person Ansicht.

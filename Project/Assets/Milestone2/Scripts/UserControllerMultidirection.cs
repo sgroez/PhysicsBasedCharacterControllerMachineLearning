@@ -46,17 +46,13 @@ public class UserControllerMultiDirection : UserController
         } */
 
         //Berechnung der Rotation
-        Quaternion rotation = Quaternion.AngleAxis(rotAngle, rotationAxis);
+        Quaternion rotation = Quaternion.AngleAxis(rotAngle, Vector3.up);
 
         //Anwendung der Rotation auf Richtungsvektoren
-        Vector3 directionForward = rotation * startForward;
-        Vector3 directionRight = rotation * startRight;
+        Vector3 directionForward = rotation * Vector3.forward;
+        Vector3 directionRight = rotation * Vector3.right;
 
         //Setzen der Zielposition
         target.position = root.position + directionForward * inputVert + directionRight * inputHor;
-
-        //Setzen der Kamera Position
-        cam.position = root.position + directionForward * camOffset;
-        cam.LookAt(root);
     }
 }

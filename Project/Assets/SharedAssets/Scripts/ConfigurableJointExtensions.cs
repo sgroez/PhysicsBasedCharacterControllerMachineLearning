@@ -30,6 +30,14 @@ public static class ConfigurableJointExtensions
 
     static void SetTargetRotationInternal(ConfigurableJoint joint, Quaternion targetRotation, Quaternion startRotation, Space space)
     {
+        Quaternion resultRotation = GetTargetRotation(joint, targetRotation, startRotation, space);
+
+        // Set target rotation to our newly calculated rotation
+        joint.targetRotation = resultRotation;
+    }
+
+    public static Quaternion GetTargetRotation(ConfigurableJoint joint, Quaternion targetRotation, Quaternion startRotation, Space space)
+    {
         // Calculate the rotation expressed by the joint's axis and secondary axis
         var right = joint.axis;
         var forward = Vector3.Cross(joint.axis, joint.secondaryAxis).normalized;
@@ -53,7 +61,6 @@ public static class ConfigurableJointExtensions
         // Transform back into joint space
         resultRotation *= worldToJointSpace;
 
-        // Set target rotation to our newly calculated rotation
-        joint.targetRotation = resultRotation;
+        return resultRotation;
     }
 }

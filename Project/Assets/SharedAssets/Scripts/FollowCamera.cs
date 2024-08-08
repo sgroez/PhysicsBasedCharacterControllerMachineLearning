@@ -3,27 +3,26 @@ using UnityEngine;
 
 public class FollowCamera : MonoBehaviour
 {
-    public Transform followObject;
+    public UserController userController;
     public float offset;
-    public Orientation orientation;
 
     void FixedUpdate()
     {
-        Vector3 direction = followObject.forward;
-        switch (orientation)
+        Vector3 direction = Vector3.forward;
+        if (userController == null)
         {
-            case Orientation.Right:
-                direction = followObject.right;
-                break;
-            case Orientation.Left:
-                direction = -followObject.right;
-                break;
-            case Orientation.Backward:
-                direction = -followObject.forward;
-                break;
+            throw new Exception("Missing User Controller");
         }
-        Vector3 flatDirection = new Vector3(direction.x, 0f, direction.z);
-        transform.position = followObject.position + (flatDirection * offset);
-        transform.LookAt(followObject);
+        else if (userController.worldAxisMode)
+        {
+            direction = Vector3.up;
+        }
+        else
+        {
+            direction = userController.rotation * -Vector3.forward;
+            direction = new Vector3(direction.x, 0f, direction.z);
+        }
+        transform.position = userController.root.position + (direction * offset);
+        transform.LookAt(userController.root);
     }
 }

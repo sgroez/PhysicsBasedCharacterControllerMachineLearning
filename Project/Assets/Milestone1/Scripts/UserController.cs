@@ -3,57 +3,63 @@ using UnityEngine;
 public class UserController : MonoBehaviour
 {
     public Transform root;
-    public Transform cam;
-    public float camOffset;
+    public Transform head;
     public Transform target;
     public bool worldAxisMode = false;
+    public Quaternion rotation = Quaternion.identity;
 
-    protected Vector3 rotationAxis = Vector3.up;
-    protected Vector3 startForward;
-    protected Vector3 startRight;
     protected float rotAngle = 0;
 
-    void Start()
-    {
-        //Root Position als Startposition festhalten
-        startForward = root.forward;
-        startRight = root.right;
-    }
     public virtual void FixedUpdate()
     {
         //Einlesen Tastatur Input
         float inputHor = Input.GetAxis("Horizontal");
         float inputVert = Input.GetAxis("Vertical");
 
-        //Einlesen Maus Input
-        float mouseX = Input.GetAxis("Mouse X");
-        rotAngle += mouseX;
-
-        Vector3 position = root.position;
+        Vector3 position;
 
         if (worldAxisMode)
         {
+            //Einlesen Maus Position
+            Vector3 mousePos = Input.mousePosition;
+
+            //Maus Position normalisieren relativ zu Bildschirmauflösung
+            float normalizedMouseX = 2 * (mousePos.x / Screen.width) - 1;
+            float normalizedMouseY = 2 * (mousePos.y / Screen.height) - 1;
+            mousePos = new Vector3(normalizedMouseX, 0, normalizedMouseY);
+
+            //Berechnung der Rotation
+            rotation = Quaternion.LookRotation(mousePos, Vector3.up);
+
+            //Position berechnen
             position = root.position + Vector3.forward * inputVert + Vector3.right * inputHor;
-            cam.position = root.position + Vector3.up * camOffset;
-            cam.LookAt(root);
         }
         else
         {
+            //Einlesen Maus Input
+            float mouseX = Input.GetAxis("Mouse X");
+            rotAngle += mouseX;
+
             //Berechnung der Rotation
-            Quaternion rotation = Quaternion.AngleAxis(rotAngle, rotationAxis);
+            rotation = Quaternion.AngleAxis(rotAngle, Vector3.up);
 
             //Anwendung der Rotation auf Richtungsvektoren
-            Vector3 directionForward = rotation * startForward;
-            Vector3 directionRight = rotation * startRight;
+            Vector3 directionForward = rotation * Vector3.forward;
+            Vector3 directionRight = rotation * Vector3.right;
 
+            //Position berechnen
             position = root.position + directionForward * inputVert + directionRight * inputHor;
-
-            //Setzen der Kamera Position
-            cam.position = root.position + directionForward * camOffset;
-            cam.LookAt(root);
         }
 
         //Setzen der Zielposition
         target.position = position;
+    }
+
+    void OnDrawGizmos()
+    {
+        // Visualisiert Blickrichtung mit Ray
+        Gizmos.color = Color.yellow;
+        if (!head) return;
+        Gizmos.DrawRay(head.position, rotation * Vector3.forward);
     }
 }
