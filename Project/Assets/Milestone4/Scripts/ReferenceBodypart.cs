@@ -8,7 +8,6 @@ using Unity.MLAgents;
 public class ReferenceBodypart : MonoBehaviour
 {
     [HideInInspector] public Rigidbody rb;
-    [HideInInspector] public GroundContact groundContact;
     [HideInInspector] public Vector3 velocity = Vector3.zero;
     [HideInInspector] public Vector3 angularVelocity = Vector3.zero;
 
@@ -19,7 +18,6 @@ public class ReferenceBodypart : MonoBehaviour
     void OnEnable()
     {
         rb = GetComponent<Rigidbody>();
-        groundContact = GetComponent<GroundContact>();
         ResetReferenceBodypart();
     }
 

@@ -116,5 +116,6 @@
 <tr><td>145_Milestone2</td><td>Gleich wie 144 aber mit curriculum und mehreren Schwierigkeitsstufen</td><td>Verbessert die Blickwinkelabweichung auch nicht. Stagniert zwischen 20 und 30 millionen steps</td></tr>
 <tr><td>146_Milestone4</td><td>Imitationslernen mit Motion Capture fest auf start position und als animations loop. Imitationsbelohnung auf gleichheit der relativen rotationen der Gelenke. Imitationsbelohnungs Gewichtung von 30%</td><td>abgebrochen da Imitationsbelohnung so klein ist das sie keinen Einfluss hat</td></tr>
 <tr><td>147_Milestone4</td><td>Imitationsbelohnung mit Abweichungsbestrafung ersetzt. Berechnung mit durchschnittlicher Winkelabweichung</td><td></td></tr>
+<tr><td>149_Milestone4</td><td>gleich wie 147 aber mit vereinfachten Gelenklimits (gleich wie Walker demo bzw. 110)</td><td></td></tr>
 <tr><td>Name</td><td>beschreibung</td><td>notizen</td></tr>
 </table>

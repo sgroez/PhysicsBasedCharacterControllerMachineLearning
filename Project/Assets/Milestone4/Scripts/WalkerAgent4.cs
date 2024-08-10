@@ -88,7 +88,6 @@ public class WalkerAgent4 : WalkerAgent1
         }
         float avg = sum / i;
         float poseReward = -(avg / 180f);
-        RecordStat("Reward/PoseReward", poseReward);
         return poseReward;
     }
 
@@ -135,6 +134,7 @@ public class WalkerAgent4 : WalkerAgent1
 
         //calculate imitation rewards
         float poseReward = CalculatePoseReward();
+        RecordStat("Reward/PoseReward", poseReward);
 
         //Check for NaNs
         if (float.IsNaN(poseReward)) throw new ArgumentException("NaN in poseReward.");
