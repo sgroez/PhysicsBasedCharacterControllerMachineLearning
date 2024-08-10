@@ -1,18 +1,15 @@
 \section{Gangbild anpassungen}
-\subsection{Versuch 10}
-Training vereinfachter Mixamo Charakter. Lernt zu galoppieren.
+Das Gangbild des Läufers in der Walker Demo ist sofort als Laufen zu erkennen. Bei genauem hinschauen wird jedoch schnell klar das die Bewegung nicht \hl{natürlich} ist. Das galoppieren des Mixamo Charakters ist auf jedenfall nicht ausreichen um als Laufbewegung durchzugehen.
 
+\subsection{Belohnung für Beinwechsel}
+Um sicher zu stellen das der Läufer während dem Training eine Laufbewegung lernt um das Ziel zu erreichen, wird im folgenden Versuch eine Bestrafung eingeführt welche den Läufer bestraft wenn ein Bein zu lange voraus geht.
 \begin{figure}[H]
   \centering
-  \begin{tabular}{cccc}
-    \includegraphics[width=0.2\textwidth]{img/charakter_mixamo_galoppieren1} & \includegraphics[width=0.2\textwidth]{img/charakter_mixamo_galoppieren2} & \includegraphics[width=0.2\textwidth]{img/charakter_mixamo_galoppieren3} & \includegraphics[width=0.2\textwidth]{img/charakter_mixamo_galoppieren4} \\
-  \end{tabular}
-  \caption{Mixamo Versuch 10 Gangbild}
-  \label{fig:mixamo_versuch10_gangbild}
+  \includegraphics[width=0.9\textwidth]{img/plot_beinwechsel} 
+  \caption{Beinwechsel Belohnung}
+  \label{fig:plot_beinwechsel}
 \end{figure}
 
-\subsection{Versuch 11}
-Hinzufügen von Beinwechsel Belohnung. Lernt mit periodischem Beinwechsel zu laufen.
 
 \begin{figure}[H]
   \centering
@@ -24,8 +21,14 @@ Hinzufügen von Beinwechsel Belohnung. Lernt mit periodischem Beinwechsel zu lau
   \label{fig:mixamo_versuch11_gangbild}
 \end{figure}
 
-\subsection{Versuch 12}
-Energiespar Belohnung um Gangbild natürlicher zu machen. Gangbild wird natürlicher aber Arme sind noch sehr starr und nah am Körper.
+\subsection{Belohnung für Energieminimierung}
+Um das Gangbild weiter zu verbessern wird eine Belohnung eingeführt welche den Agenten belohnt wenn er so wenig wie möglich Kraft aufwendet um das Ziel zu erreichen. Genauer gesagt wird er dafür bestraft wenn die Gelenksteuerung einen zu hohe Energiekonsum aufweist.
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{img/plot_energiespar} 
+  \caption{Energiespar Belohnung}
+  \label{fig:plot_energiespar}
+\end{figure}
 
 \begin{figure}[H]
   \centering
@@ -36,6 +39,8 @@ Energiespar Belohnung um Gangbild natürlicher zu machen. Gangbild wird natürli
   \caption{Mixamo Versuch 12 Gangbild}
   \label{fig:mixamo_versuch12_gangbild}
 \end{figure}
+
+\subsection{Imitationslernen}
 
 -Beinwechsel Belohnung um galoppieren zu vermeiden -> funktioniert
 -Leistungsminimierung Belohnung um laufverhalten natürlicher zu machen -> funktioniert nur arme sind sehr nah und starr am Körper

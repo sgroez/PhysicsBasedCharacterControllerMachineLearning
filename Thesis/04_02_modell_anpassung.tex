@@ -7,7 +7,7 @@ Das trainierte Modell der Walker Demo beherrscht nur die Fortbewegung in Blickri
 Versuch 4 behandelt die Bewegung auf der Stelle stehen. Für das stehenbleiben wird die Zielgeschwindigkeit auf 0 gesetzt während das Ziel auf der Startposition befindet. Die Belohnungsfunktion der Demo, wird ab jetzt Demo Belohnungsfunktion genannt. Die Demo Belohnungsfunktion hat das Problem das durch die Zielgeschwindigkeit geteilt wird, was bei einer Zielgeschwindigkeit von 0 zu Mathematischen Fehlern führt. Um das zu vermeiden wurde das trainieren mit einer anderen Belohnungsfunktion getestet.
 \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.5]{img/plot_deepmimic_vel}
+  \includegraphics[width=0.9\textwidth]{img/plot_deepmimic_vel}
   \caption{DeepMimic Geschwindigkeit Belohnungsfunktion}
   \label{fig:plot_deepmimic_vel}
 \end{figure}
@@ -74,7 +74,7 @@ Mit zufälliger Zielgeschwindigkeit zu einem Ziel zu laufen wie im Ursprünglich
 
 \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.5]{img/match_velocity_demo_vergleich}
+  \includegraphics[width=0.9\textwidth]{img/match_velocity_demo_vergleich}
   \caption{Vergleich der Demo Belohnungsfunktion unter verschiedenen Zielgeschwindigkeiten}
   \label{fig:match_velocity_demo_vergleich}
 \end{figure}
@@ -84,7 +84,7 @@ Mit der Erkenntnis aus \ref{subsec:versuch4} wird eine neue Anpassung untersucht
 
 \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.5]{img/match_velocity_vergleich_clip}
+  \includegraphics[width=0.9\textwidth]{img/match_velocity_vergleich_clip}
   \caption{Vergleich Demo gegen Belohnungsfunktion mit 0.1 Limit}
   \label{fig:match_velocity_vergleich_clip}
 \end{figure}

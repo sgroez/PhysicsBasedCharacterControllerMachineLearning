@@ -27,5 +27,5 @@
 ppo aus nutzersicht und referenz auf literatur
 fließtext für zuweisung von abbildung. und table bei komponenten beschreibung oder in fließtext
 codeausschnitte zusammen einfügen und zeilennummer referenzieren in erklärung
-mlagents learning environment abbildungen eine überflüssig?
 Unity physikkomponenten erklären in Grundlagen?
+Gelenk-Rotations-Achsen genau festlegen.

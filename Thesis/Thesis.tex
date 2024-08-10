@@ -55,7 +55,7 @@
 
 % Extra Packages
 \usepackage{float}
-\usepackage[table]{xcolor}
+\usepackage[table,svgnames]{xcolor}
 \usepackage{listings}
 \lstset{
 language=[Sharp]C,
@@ -82,6 +82,12 @@ literate=%
   {ö}{{\"o}}1
   {ä}{{\"a}}1
   }
+\lstdefinelanguage{diff}{
+    basicstyle=\ttfamily\small,
+    morecomment=[f][\color{diffstart}]{@@},
+    morecomment=[f][\color{diffincl}]{+},
+    morecomment=[f][\color{diffrem}]{-},
+  }
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric, arrows, fit}
 \pgfdeclarelayer{bg}
@@ -96,6 +102,9 @@ literate=%
 \definecolor{redstrings}{rgb}{0.64,0.08,0.08}
 \definecolor{xmlcomments}{rgb}{0.5,0.5,0.5}
 \definecolor{types}{rgb}{0.17,0.57,0.68}
+\definecolor{diffstart}{named}{Grey}
+\definecolor{diffincl}{named}{Green}
+\definecolor{diffrem}{named}{OrangeRed}
 
 %table id counter
 \newcounter{rowids}
