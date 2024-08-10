@@ -254,7 +254,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.00000004284084, y: 0.15721548, z: 0.00000016391277}
+  m_ConnectedAnchor: {x: 0.0000000018626451, y: 0.1572156, z: -0.000000029802322}
   serializedVersion: 3
   m_SecondaryAxis: {x: 0, y: 0, z: 1}
   m_XMotion: 0
@@ -767,7 +767,7 @@ Transform:
   - {fileID: 119616974326015200}
   - {fileID: 6944477863832021891}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1264490930274358825
 GameObject:
@@ -3563,7 +3563,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.000000012572855, y: 0.42099023, z: -0.0000000018626451}
+  m_ConnectedAnchor: {x: -0.0000000018626451, y: 0.42099023, z: -0.0000000018626451}
   serializedVersion: 3
   m_SecondaryAxis: {x: 0, y: 0, z: 1}
   m_XMotion: 0

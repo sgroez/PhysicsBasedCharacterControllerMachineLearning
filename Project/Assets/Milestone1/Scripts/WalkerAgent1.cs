@@ -28,7 +28,7 @@ public class WalkerAgent1 : Agent
     public Transform root;
     public Transform head;
     public bool randomizeRotationOnEpsiode = true;
-    public List<Bodypart> bodyparts = new List<Bodypart>();
+    [HideInInspector] public List<Bodypart> bodyparts = new List<Bodypart>();
 
     [Header("Debug Log Stats")]
     public bool logStats = false;
@@ -124,7 +124,6 @@ public class WalkerAgent1 : Agent
 
         sensor.AddObservation(bp.rb.transform.localRotation);
         sensor.AddObservation(bp.currentStrength / bp.physicsConfig.maxJointForceLimit);
-
     }
 
     /// <summary>
