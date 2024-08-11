@@ -137,7 +137,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3607236743596056477, guid: e4dbacf992e054a12922c6f8491a8e08, type: 3}
       propertyPath: defaultEnvCount
-      value: 20
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3607236743596056477, guid: e4dbacf992e054a12922c6f8491a8e08, type: 3}
       propertyPath: environmentPrefab

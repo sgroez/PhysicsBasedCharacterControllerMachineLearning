@@ -117,5 +117,6 @@
 <tr><td>146_Milestone4</td><td>Imitationslernen mit Motion Capture fest auf start position und als animations loop. Imitationsbelohnung auf gleichheit der relativen rotationen der Gelenke. Imitationsbelohnungs Gewichtung von 30%</td><td>abgebrochen da Imitationsbelohnung so klein ist das sie keinen Einfluss hat</td></tr>
 <tr><td>147_Milestone4</td><td>Imitationsbelohnung mit Abweichungsbestrafung ersetzt. Berechnung mit durchschnittlicher Winkelabweichung</td><td></td></tr>
 <tr><td>149_Milestone4</td><td>gleich wie 147 aber mit vereinfachten Gelenklimits (gleich wie Walker demo bzw. 110)</td><td></td></tr>
+<tr><td>150_Milestone4</td><td>gleich wie 149 aber Fußkollision und Schwerpunkt Fehler korrigiert</td><td></td></tr>
 <tr><td>Name</td><td>beschreibung</td><td>notizen</td></tr>
 </table>

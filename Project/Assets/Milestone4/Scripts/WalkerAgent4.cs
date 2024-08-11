@@ -28,7 +28,13 @@ public class WalkerAgent4 : WalkerAgent1
         referenceController.ResetReference();
 
         //reset bodypart position and then set it to the start pose from the reference character
-        StartCoroutine(ResetBodypartsOnNextFrame());
+        //StartCoroutine(ResetBodypartsOnNextFrame());
+
+        //Random start rotation to help generalize
+        if (randomizeRotationOnEpsiode)
+        {
+            root.rotation = Quaternion.Euler(0, Random.Range(0.0f, 360.0f), 0);
+        }
 
         //record walking speed stats
         RecordStat("Environment/WalkingSpeed", targetWalkingSpeed);
@@ -55,12 +61,6 @@ public class WalkerAgent4 : WalkerAgent1
             Transform referenceBone = referenceController.referenceBodyparts[i].transform;
             bp.ResetTransform(referenceBone.position, referenceBone.rotation);
             i++;
-        }
-
-        //Random start rotation to help generalize
-        if (randomizeRotationOnEpsiode)
-        {
-            root.rotation = Quaternion.Euler(0, Random.Range(0.0f, 360.0f), 0);
         }
     }
 
