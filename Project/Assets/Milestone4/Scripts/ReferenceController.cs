@@ -13,6 +13,9 @@ public class ReferenceController : MonoBehaviour
     public float phaseStartMin;
     public float phaseStartMax;
 
+    [Header("Base Speed")]
+    public float baseSpeed;
+
     [Header("Enable debug")]
     public bool enableDebug = false;
 
@@ -42,6 +45,11 @@ public class ReferenceController : MonoBehaviour
         animator.Play(animationName, -1, randomPhase);
         //reset reference bodyparts on next frame when animation has started from random phase
         StartCoroutine(ResetBodypartsOnNextFrame());
+    }
+
+    public void SetAnimationSpeed(float walkSpeed)
+    {
+        animator.speed = walkSpeed / baseSpeed;
     }
 
     public IEnumerator ResetBodypartsOnNextFrame()

@@ -26,6 +26,7 @@ public class WalkerAgent4 : WalkerAgent1
 
         //init reference animation at random point
         referenceController.ResetReference();
+        referenceController.SetAnimationSpeed(targetWalkingSpeed);
 
         //reset bodypart position and then set it to the start pose from the reference character
         //StartCoroutine(ResetBodypartsOnNextFrame());
@@ -77,16 +78,16 @@ public class WalkerAgent4 : WalkerAgent1
     */
     private float CalculatePoseReward()
     {
-        int i = 0;
         float sum = 0f;
         //sum over all bodyparts
-        foreach (Bodypart bp in bodyparts)
+        for (int i = 1; i < bodyparts.Count; i++)
         {
-            float angle = Quaternion.Angle(referenceController.referenceBodyparts[i].transform.localRotation, bp.rb.transform.localRotation);
+            Bodypart bp = bodyparts[i];
+            ReferenceBodypart rbp = referenceController.referenceBodyparts[i];
+            float angle = Quaternion.Angle(rbp.transform.localRotation, bp.rb.transform.localRotation);
             sum += angle;
-            i++;
         }
-        float avg = sum / i;
+        float avg = sum / (bodyparts.Count - 1);
         float poseReward = -(avg / 180f);
         return poseReward;
     }

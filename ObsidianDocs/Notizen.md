@@ -29,3 +29,4 @@ fließtext für zuweisung von abbildung. und table bei komponenten beschreibung 
 codeausschnitte zusammen einfügen und zeilennummer referenzieren in erklärung
 Unity physikkomponenten erklären in Grundlagen?
 Gelenk-Rotations-Achsen genau festlegen.
+Beinwechselbelohnung YT Video Quelle

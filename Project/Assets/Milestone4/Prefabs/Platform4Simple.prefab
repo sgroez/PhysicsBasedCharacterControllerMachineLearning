@@ -443,7 +443,8 @@ MonoBehaviour:
   animationName: walking_x2d
   referenceRoot: {fileID: 2741215589645218757}
   phaseStartMin: 0
-  phaseStartMax: 1
+  phaseStartMax: 0
+  baseSpeed: 1.18
   enableDebug: 0
   referenceBodyparts: []
 --- !u!1 &636140611849861992
@@ -4235,7 +4236,7 @@ PrefabInstance:
     - target: {fileID: 8183247984112609304, guid: ea682f6a12d16485a850334f837c2b09, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: 682b2dac5d3a04e1cabfe09dd4001111, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 8183247984112609304, guid: ea682f6a12d16485a850334f837c2b09, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
       value: 304
@@ -4286,9 +4287,9 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 5000
   minWalkingSpeed: 0.1
-  maxWalkingSpeed: 10
-  randomizeWalkSpeedEachEpisode: 0
-  targetWalkingSpeed: 1.18
+  maxWalkingSpeed: 3
+  randomizeWalkSpeedEachEpisode: 1
+  targetWalkingSpeed: 0.1
   target: {fileID: 1765473200124048447}
   onTouchedTarget:
     m_PersistentCalls:
