@@ -1,1 +1,10 @@
 \subsection{360 Grad Blickziel}
+Der erste Ansatz 
+Look at target mit Winkelabweichung von Zielrichtung platziert. Winkelabweichung von 30 grad zu gering, dadurch ist Belohnungsverlust nicht signifikant genug um ein neues Verhalten zu lernen. (ignoriert Look Target und nimmt bei größerer Winkelabweichung Belohnungsverlust in kauf) 102 / 103
+Winkelabweichung von 90 grad, Läufer lernt Blickrichtung leicht anzupassen. (läuft leicht schräg?) 104
+Winkelabweichung von 180 grad, Läufer lernt durch nach unten schauen für schwere Blickziele kann die Belohnung von negativen Werten auf 0 begrenzt werden. 105
+Hinzufügen von extra Bestrafung für Blickrichtung Abweichung vom Horizont. (Läufer läuft nur rückwärts, vermutlich weil durch die nicht bewegten Ziele und das vorwärts bewegen die Ziele mit einer hohen Wahrscheinlichkeit im laufe der Episode sich hinter dem Läufer befinden.) 112
+Look Target in jedem Update neu gesetzt um Blickrichtungswinkel beizubehalten und Ziel wird nur neu gesetzt wenn Blickbelohnung durchschnittlich größer 0.7 innerhalb der Episode. (Läuft nur noch seitwärts, dadurch werden alle Winkelabweichungen im durchschnitt am besten erreicht) 113
+Belohnungsabfall gesteigert um bei größerer Abweichung kaum noch Belohnung erreicht wird. (Schaut recht zuverlässig zu Ziel aber lernt nicht zu laufen) 114
+Ziel wird neu gesetzt wenn Läufer 3 sek auf das Ziel schaut (mit spherecast). (Schaut zuverlässig zu Ziel aber lernt sehr langsam das Laufen) 117
+Verringern der Look at Zeit auf 2 sek. (Lernt gut zu laufen aber Blickbelohnung fällt extrem ab, schaut nicht auf Ziel) 118 / 119
