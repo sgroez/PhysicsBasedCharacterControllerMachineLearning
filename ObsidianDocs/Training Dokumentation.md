@@ -118,6 +118,7 @@
 <tr><td>147_Milestone4</td><td>Imitationsbelohnung mit Abweichungsbestrafung ersetzt. Berechnung mit durchschnittlicher Winkelabweichung</td><td></td></tr>
 <tr><td>149_Milestone4</td><td>gleich wie 147 aber mit vereinfachten Gelenklimits (gleich wie Walker demo bzw. 110)</td><td></td></tr>
 <tr><td>150_Milestone4</td><td>gleich wie 149 aber Fußkollision und Schwerpunkt Fehler korrigiert</td><td>funktioniert nicht. Macht einen großen Schritt und fällt anschließend</td></tr>
-<tr><td>151_Milestone4</td><td>gleich wie 150 aber mit variabler Zielgeschwindigkeit und Hüfte wurde aus Imitationsvergleich entfernt da Hüfte keine relativ vergleichbare Rotation hat.</td><td></td></tr>
+<tr><td>151_Milestone4</td><td>gleich wie 150 aber mit variabler Zielgeschwindigkeit und Hüfte wurde aus Imitationsvergleich entfernt da Hüfte keine relativ vergleichbare Rotation hat.</td><td>sieht aus als funktioniert das prinzip aber weglassen der Hüftenrotation führt zu rückwärts gebeugtem laufen.</td></tr>
+<tr><td>152_Milestone4</td><td>gleich wie 151 aber mit Hüft Imitationsvergleich über Up Vektor mit y = 0. Somit wird die y rotation nicht mit einberechnet und der Läufer kann in unterschiedliche Richtungen laufen mit gleichbleibender Imitationsbelohnung</td><td>notizen</td></tr>
 <tr><td>Name</td><td>beschreibung</td><td>notizen</td></tr>
 </table>

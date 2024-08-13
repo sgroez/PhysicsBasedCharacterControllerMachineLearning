@@ -80,11 +80,25 @@ public class WalkerAgent4 : WalkerAgent1
     {
         float sum = 0f;
         //sum over all bodyparts
-        for (int i = 1; i < bodyparts.Count; i++)
+        for (int i = 0; i < bodyparts.Count; i++)
         {
             Bodypart bp = bodyparts[i];
             ReferenceBodypart rbp = referenceController.referenceBodyparts[i];
-            float angle = Quaternion.Angle(rbp.transform.localRotation, bp.rb.transform.localRotation);
+            float angle = 0f;
+            if (i == 0)
+            {
+                Vector3 bodypartUp = bp.transform.up;
+                Vector3 referenceUp = rbp.transform.up;
+                bodypartUp.y = 0;
+                referenceUp.y = 0;
+                bodypartUp.Normalize();
+                referenceUp.Normalize();
+                angle = Vector3.Angle(referenceUp, bodypartUp);
+            }
+            else
+            {
+                angle = Quaternion.Angle(rbp.transform.localRotation, bp.rb.transform.localRotation);
+            }
             sum += angle;
         }
         float avg = sum / (bodyparts.Count - 1);
