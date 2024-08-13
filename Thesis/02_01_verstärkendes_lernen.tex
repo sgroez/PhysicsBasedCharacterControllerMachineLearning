@@ -1,0 +1,27 @@
+\section{Verstärkendes Lernen}
+\label{sec:rl}
+Der Begriff 'Verstärkendes Lernen' beschreibt eine Art von Problemstellung und die dafür geeigneten Problemlösungsmethoden im Bereich des maschinellen Lernens. Die grundlegenden Bestandteile einer Trainingsumgebung sind der Agent und die Umgebung. Die Umgebung kann sich unabhängig vom Agenten verändern, jedoch hat der Agent durch seine Aktionen Einfluss auf die Umgebung.
+
+In vielerlei Hinsicht ist dieser Prozess mit dem Lernvorgang von Menschen vergleichbar. Ein Baby lernt das Krabbeln ohne direkte Anweisungen. Es bewegt sich und agiert in der Umgebung und beobachtet, wie diese auf sein Verhalten reagiert. Der daraus resultierende eigene Gefühlszustand und externe Einflüsse werden als Rückmeldung evaluiert. Durch diese Rückmeldung wird das Verhalten entweder antrainiert oder abtrainiert. Auf dieselbe Art lernt der Agent beim verstärkenden Lernen in jedem Zustand, die Aktion auszuführen, um die Belohnung zu maximieren. Die Belohnungen können dabei positiv oder negativ sein. Im Fall des Babys sind die Belohnungen Faktoren wie Schmerz, Hunger, Müdigkeit, gestillte Neugier oder Lob von Mitmenschen. Der Agent hingegen erhält eine numerische Belohnung.\cite{sutton2018reinforcement}
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[node distance=3cm]
+    \node(agent) [rounded, draw=blue, fill=blue!80, text=white]{Agent};
+    \node(umgebung) [rounded, draw=blue, fill=blue!80, text=white, below of=agent]{Umgebung};
+    
+    \draw [-latex, line width=0.3mm] ([xshift=-1cm] umgebung.north) -- ([xshift=-1cm] agent.south) node[midway, right] {Belohnung};
+    
+    \path (0,0) (umgebung) -- (4,1) (agent) coordinate[pos=0.5](aktion);
+    \draw [-latex, line width=0.3mm] (umgebung) -| (aktion) node[pos=0.8, right] {Aktion} |- (agent);
+    
+    \path (0,0) (umgebung) -- (-4,1) (agent) coordinate[pos=0.5](aktion);
+    \draw [-latex, line width=0.3mm] (umgebung) -| (aktion) node[pos=0.8, left] {Beobachtung} |- (agent);
+  \end{tikzpicture}
+  \caption{Verstärkendes Lernen Ablauf}
+  \label{fig:vl_ablauf}
+\end{figure}
+
+Die Abbildung \ref{fig:vl_ablauf} zeigt die Verbindungen zwischen dem Agenten und der Umgebung. Der Agent erhält als Input einen Zustand oder häufig einen Teilzustand der Umgebung und reagiert darauf mit einer Aktion. Dieser Zyklus kann je nach Problem in unterschiedlichen Intervallen durchlaufen werden. Bei kontinuierlichen Kontrollproblemen werden Aktionen meist in regelmäßigen Intervallen angefragt. Bei Problemen mit einem festgelegten Ablauf kann dieser Vorgang jedoch auch nur in einer bestimmten Phase stattfinden.
+
+\newpage
