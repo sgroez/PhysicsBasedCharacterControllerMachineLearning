@@ -13,3 +13,6 @@ extra Laufrichtungen:
   -Extra Belohnung für aufrechte Blickrichtung
   -Blickziel wird jedes Physikupdate neu gesetzt um Winkel gleich zu behalten
   -Blickziel neu setzen wenn bestimmte Zeit auf Ziel geschaut (mit Spherecast) -> funktioniert nicht schlecht aber bei längerem training hört der Agent auf das Blickziel zu erreichen
+
+
+Zu beginn werden unterschiedliche Bewegungsabläufe in einzelnen Modellen trainiert um zu prüfen ob die Limits des Läufers das erlernen dieser erlauben. Anschließend werden unterschiedliche Ansätze getestet um die Bewegungsabläufe in einem System zu kombinieren.
