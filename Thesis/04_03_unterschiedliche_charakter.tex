@@ -98,7 +98,7 @@ Der ausgewählte Charakter ist der Y Bot Charakter welcher in Abbildung \ref{fig
   \label{fig:charakter_mixamo}
 \end{figure}
 
-Jedes Körperteil benötigt für das Steuern und Trainieren mit dem Walker Agenten Skript eine Kollisionskomponente, eine Festkörperkomponente und eine Körperteilkomponente. Zusätzlich müssen Gelenkkomponenten hinzugefügt werden, um die Körperteile miteinander zu verbinden. Dabei wird die Gelenkkomponente jeweils auf das untergeordnete Körperteil angewendet, während das übergeordnete Körperteil als verbundener Körper referenziert wird. Die Kollisionskomponente soll das Körperteil in vereinfachter Form und Größe darstellen, um die Berechnungen zu optimieren. Bei den Festkörpern müssen das Gewicht und der Schwerpunkt festgelegt werden, um eine realistische physikalische Simulation zu gewährleisten. In der Gelenkkomponente können Bewegungen durch das Festlegen von Winkellimits gesperrt oder limitiert werden. Für die Rotationsberechnung wird der Slerp-Modus verwendet, \hl{da dieser eine gleichmäßige Interpolation der Rotation ermöglicht}. In der Körperteilkomponente können Parameter wie Stärke und maximale Rotationsgeschwindigkeit angepasst werden, wobei die Standardwerte aus der Walker Demo in den meisten Fällen ausreichend sind. Bei Bedarf kann auch das Feld \grqq{}Trigger Touching Ground\grqq{} aktiviert werden, um ein Event auszulösen, sobald das Körperteil den Boden berührt.
+Jedes Körperteil benötigt für das Steuern und Trainieren mit dem Walker Agenten Skript eine Kollisionskomponente, eine Festkörperkomponente und eine Körperteilkomponente. Zusätzlich müssen Gelenkkomponenten hinzugefügt werden, um die Körperteile miteinander zu verbinden. Dabei wird die Gelenkkomponente jeweils auf das untergeordnete Körperteil angewendet, während das übergeordnete Körperteil als verbundener Körper referenziert wird. Die Kollisionskomponente soll das Körperteil in vereinfachter Form und Größe darstellen, um die Berechnungen zu optimieren. Bei den Festkörpern müssen das Gewicht und der Schwerpunkt festgelegt werden, um eine realistische physikalische Simulation zu gewährleisten. In der Gelenkkomponente können Bewegungen durch das Festlegen von Winkellimits gesperrt oder limitiert werden. Für die Rotationsberechnung wird der Slerp-Modus verwendet, \hl{da dieser eine gleichmäßige Interpolation der Rotation ermöglicht}. DieKörperteilkomponente übernimmt die Konfigurationsparameter der Gelenk Motor Steuerung (siehe Abbildung \ref{fig:komponente_bodypart}. Parameter wie Stärke und maximale Rotationsgeschwindigkeit können angepasst werden, wobei die Standardwerte aus der Walker Demo in den meisten Fällen ausreichend sind. Bei Bedarf kann auch das Feld \grqq{}Trigger Touching Ground\grqq{} aktiviert werden, um ein Event auszulösen, sobald das Körperteil den Boden berührt.
 
 \begin{figure}[H]
   \centering  
@@ -108,7 +108,7 @@ Jedes Körperteil benötigt für das Steuern und Trainieren mit dem Walker Agent
 \end{figure}
 
 
-Ist der Körper fertig konfiguriert wird zuletzt das Walker Agent Skript und der Decision Requester hinzugefügt.
+Ist der Körper fertig konfiguriert wird zuletzt das Walker Agent Skript, die Behaviour Parameter und der Decision Requester hinzugefügt. 
 
 \begin{figure}[H]
   \centering  
@@ -116,8 +116,6 @@ Ist der Körper fertig konfiguriert wird zuletzt das Walker Agent Skript und der
   \caption{Walker Agentkomponente}
   \label{fig:komponente_agent_walker1}
 \end{figure}
-
-\hl{fehlt behaviour parameter komponente???}
 
 Die Gewichte der Körperteile wurden von der Walker Demo übernommen. Gleichermaßen wurden die Winkellimits für die Gelenke übernommen. Die zusätzlichen Körperteile wurden vereinfacht. Der Oberkörper besteht im Mixamo Modell aus den Schulterknochen sowie dem obersten Wirbel der Wirbelsäule. Die Wirbelsäule besteht im Mixamo Modell aus 2 Wirbeln anstatt dem einen Wirbel des Läufers aus der Demo. Zuletzt sind die Füße noch in Fuß und Vorderfuß aufgeteilt. Bei diesen Änderungen der Körperstruktur wurden die Gewichte und Winkellimits des vereinfachten Körpers auf die komplexeren Körperstrukturen aufgeteilt.
 

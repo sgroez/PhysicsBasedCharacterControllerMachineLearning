@@ -767,7 +767,7 @@ Transform:
   - {fileID: 119616974326015200}
   - {fileID: 6944477863832021891}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1264490930274358825
 GameObject:
@@ -2896,7 +2896,7 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 0a8855c98d2fe4472ab5a09fa0a4459a, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: 886b048052eae44b3a4f03359c7cc0d1, type: 3}
   m_InferenceDevice: 2
   m_BehaviorType: 0
   m_BehaviorName: Walker
