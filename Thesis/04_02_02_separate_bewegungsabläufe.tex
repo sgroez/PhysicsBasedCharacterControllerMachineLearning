@@ -13,8 +13,7 @@ Für das stehenbleiben wird die Zielgeschwindigkeit auf 0 gesetzt während das Z
 
 Als neue Belohnungsfunktion wird eine ähnliche Sigmoid Funktion genutzt. Die Belohnungsfunktion nimmt für eine perfekte Übereinstimmung zwischen aktueller Geschwindigkeit und Zielgeschwindigkeit eine Belohnung von 1 an. Mit steigender Abweichung nimmt auch die Belohnung immer weiter ab. Ist eine Abweichung von größer 1 erreicht ist die Belohnung 0. Die Belohnungsfunktion aus Abbildung \ref{fig:plot_vel_reward_neu} wird daher ab hier Neue Belohnungsfunktion genannt.
 
-Der Walker konnte mit der Neuen Belohnungsfunktion lernen auf der Stelle zu stehen.  Abbildung \ref{fig:126_move_target_dir}, \ref{fig:126_episode_length} zeigt wie die zurück gelegte Distanz um 0 herum pendelt, während die Episodenlänge die maximale Länge von 1000 erreicht hat. Die Belohnungen sind auch nahezu maximal ausgereizt siehe Abbildung \ref{fig:126_look_reward}, \ref{fig:126_vel_reward}.
-
+Der Walker konnte mit der Neuen Belohnungsfunktion lernen auf der Stelle zu stehen.  Abbildung \ref{fig:126_move_target_dir}, \ref{fig:126_episode_length} zeigt wie die zurück gelegte Distanz um 0 herum pendelt, während die Episodenlänge die maximale Länge von 1000 erreicht hat.
 \begin{figure}[H]
   \centering  
   \begin{subfigure}{.49\textwidth}
@@ -22,24 +21,6 @@ Der Walker konnte mit der Neuen Belohnungsfunktion lernen auf der Stelle zu steh
       \includegraphics[width=\textwidth]{img/126_episode_length}
       \caption{Episodenlänge}
       \label{fig:126_episode_length}
-    \end{subfigure}
-    \begin{subfigure}{.49\textwidth}
-      \centering  
-      \includegraphics[width=\textwidth]{img/126_cumulative_reward}
-      \caption{Angehäufte Belohnung}
-      \label{fig:126_cumulative_reward}
-    \end{subfigure}
-     \begin{subfigure}{.49\textwidth}
-      \centering  
-      \includegraphics[width=\textwidth]{img/126_look_reward}
-      \caption{Blickbelohnung}
-      \label{fig:126_look_reward}
-    \end{subfigure}
-    \begin{subfigure}{.49\textwidth}
-      \centering  
-      \includegraphics[width=\textwidth]{img/126_vel_reward}
-      \caption{Geschwindigkeitsbelohnung}
-      \label{fig:126_vel_reward}
     \end{subfigure}
     \begin{subfigure}{.49\textwidth}
       \centering  
@@ -78,7 +59,7 @@ Mit zufälliger Zielgeschwindigkeit zu einem Ziel zu laufen wie im Ursprünglich
   \label{fig:match_velocity_demo_vergleich}
 \end{figure}
 
-Mit dieser Erkenntnis aus wird eine neue Anpassung untersucht. In der folgenden Anpassung bleibt die Belohnungsfunktion weitestgehend Unverändert. Lediglich das obere Limit ab welchem die Funktion eine Belohnung von 0 annimmt, wird auf ein minimum von 0.1 beschränkt. Somit kann sichergestellt werden, dass im Bereich der normalen Fortbewegung keine Veränderung auftritt. Mit der Demo Belohnungsfunktion konnten nur Annäherungen an eine Zielgeschwindigkeit von 0 genutzt werden. Bei immer weiterer Annäherung an 0 wird das Spektrum an akzeptablen Geschwindigkeiten bevor die Belohnung 0 ist nahezu unerreichbar (siehe Abbildung \ref{fig:match_velocity_vergleich_clip}). Mit dem Limit von 0.1 ist der Bereich an Abweichungen für die die Belohnungsfunktion einen Wert größer 0 annimmt groß genug. Der Läufer kann durch ausprobieren Belohnungen über 0 erreichen, wodurch eine Richtung für die Optimierung ermittelt werden kann. Somit kann der Läufer die Belohnung optimieren.\\
+Mit dieser Erkenntnis wird eine neue Anpassung untersucht. In der folgenden Anpassung bleibt die Belohnungsfunktion weitestgehend Unverändert. Lediglich das obere Limit ab welchem die Funktion eine Belohnung von 0 annimmt, wird auf ein minimum von 0.1 beschränkt. Somit kann sichergestellt werden, dass im Bereich der normalen Fortbewegung keine Veränderung auftritt. Mit der Demo Belohnungsfunktion konnten nur Annäherungen an eine Zielgeschwindigkeit von 0 genutzt werden. Bei immer weiterer Annäherung an 0 wird das Spektrum an akzeptablen Geschwindigkeiten bevor die Belohnung 0 ist nahezu unerreichbar (siehe Abbildung \ref{fig:match_velocity_vergleich_clip}). Mit dem Limit von 0.1 ist der Bereich an Abweichungen für die die Belohnungsfunktion einen Wert größer 0 annimmt groß genug. Der Läufer kann durch ausprobieren Belohnungen über 0 erreichen, wodurch eine Richtung für die Optimierung ermittelt werden kann. Somit kann der Läufer die Belohnung optimieren.\\
 
 \begin{figure}[H]
   \centering  
@@ -86,7 +67,7 @@ Mit dieser Erkenntnis aus wird eine neue Anpassung untersucht. In der folgenden 
   \caption{Vergleich Demo gegen Belohnungsfunktion mit 0.1 Limit}
   \label{fig:match_velocity_vergleich_clip}
 \end{figure}
-Das auf einer Stelle stehen hat der Läufer damit in einem separaten Training auch erlernt. Abbildung \ref{fig:128_episode_length} zeigt das der Läufer die maximale Episoden Länge von 1000 erreicht hat ohne zu fallen. Die bewegte Distanz hat sich auch 0 angenähert (siehe \ref{fig:128_move_target_dir}. Die Belohnungen wurden auch weitestgehend optimiert siehe Abbildung \ref{fig:128_look_reward}, \ref{fig:128_vel_reward}.
+Das auf einer Stelle stehen hat der Läufer damit in einem separaten Training auch erlernt. Abbildung \ref{fig:128_episode_length} zeigt das der Läufer die maximale Episoden Länge von 1000 erreicht hat ohne zu fallen. Die bewegte Distanz hat sich auch 0 angenähert (siehe \ref{fig:128_move_target_dir}.
 
 
 \begin{figure}[H]
@@ -96,24 +77,6 @@ Das auf einer Stelle stehen hat der Läufer damit in einem separaten Training au
       \includegraphics[width=\textwidth]{img/128_episode_length}
       \caption{Episodenlänge}
       \label{fig:128_episode_length}
-    \end{subfigure}
-    \begin{subfigure}{.49\textwidth}
-      \centering  
-      \includegraphics[width=\textwidth]{img/128_cumulative_reward}
-      \caption{Angehäufte Belohnung}
-      \label{fig:128_cumulative_reward}
-    \end{subfigure}
-     \begin{subfigure}{.49\textwidth}
-      \centering  
-      \includegraphics[width=\textwidth]{img/128_look_reward}
-      \caption{Blickbelohnung}
-      \label{fig:128_look_reward}
-    \end{subfigure}
-    \begin{subfigure}{.49\textwidth}
-      \centering  
-      \includegraphics[width=\textwidth]{img/128_vel_reward}
-      \caption{Geschwindigkeitsbelohnung}
-      \label{fig:128_vel_reward}
     \end{subfigure}
     \begin{subfigure}{.49\textwidth}
       \centering  

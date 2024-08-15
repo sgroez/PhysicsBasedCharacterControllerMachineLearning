@@ -5,7 +5,7 @@ Spiele verwenden die unterschiedlichsten Charaktere, nicht nur das Aussehen sond
 Der Agent der Walker Demo setzt für jedes Körperteil eine separate Referenz, die über den Inspector in Unity konfiguriert werden muss. Um die damit verbundene Einschränkung einer festgelegten Konfiguration von Körperteilen zu beheben, soll eine flexible Liste von Körperteilen konfiguriert werden. Bei der Zustandserfassung der Körperteile soll anschließend der Zustand aller Körperteile in der Liste erfasst werden. Die Aktion soll gleichermaßen Zielwinkel und Gelenkstärke für alle Körperteile der Liste beinhalten. Um unnötige Komplexität bei der Beobachtung und Aktion zu vermeiden, sollen die Zielwinkel nur für bewegbare Gelenkachsen bestimmt werden. Die Gelenkstärke soll für komplett versteifte Gelenke ebenfalls ausgelassen werden. Um die Konfiguration weiter zu erleichtern, sollen die Körperteile zudem automatisch dem Walker-Agenten hinzugefügt werden. Schließlich soll auch das \hl{Stabilisierungsobjekt} automatisch generiert werden.
 
 \subsection{Anpassungen}
-Um ein Objekt als Körperteil zu definieren, wurde die Bodypart-Klasse in ein MonoBehaviour-Unity-Skript umgewandelt. Zusätzlich wurden die Funktionen zur Steuerung der Körperteile von der Gelenk-Motor-Steuerung in das Körperteil-Skript verlagert. Dadurch ist es möglich, die Körperteile direkt über das Körperteil-Skript zu steuern, ohne den Umweg über die Gelenk-Motor-Steuerung. Die Körperteilkomponente initialisiert sich beim Programmstart und ist anschließend sowohl für die Steuerung als auch für die Aktualisierung der Zustandsparameter des Körperteils zuständig. Jedes Körperteil benötigt eine Festkörperkomponente. Zusätzlich wird überprüft, ob das Objekt über eine Gelenkkomponente verfügt. Existiert eine solche Komponente, wird diese eingerichtet und die Freiheitsgrade bestimmt. Diese Freiheitsgrade geben an, welche Felder für das Körperteil in der Beobachtung und Aktion hinzugefügt werden müssen.
+Um ein Objekt als Körperteil zu definieren, wurde die Bodypart-Klasse in ein MonoBehaviour-Unity-Skript umgewandelt. Als MonoBehaviour kann das Skript im Unity Editor jedem beliebigen Objekt hinzugefügt werden. Zusätzlich wurden die Funktionen zur Steuerung der Körperteile von der Gelenk-Motor-Steuerung in das Körperteil-Skript verlagert. Dadurch ist es möglich, die Körperteile direkt über das Körperteil-Skript zu steuern, ohne den Umweg über die Gelenk-Motor-Steuerung. Die Körperteilkomponente initialisiert sich beim Programmstart und ist anschließend sowohl für die Steuerung als auch für die Aktualisierung der Zustandsparameter des Körperteils zuständig. Jedes Körperteil benötigt eine Festkörperkomponente. Zusätzlich wird überprüft, ob das Objekt über eine Gelenkkomponente verfügt. Existiert eine solche Komponente, wird diese eingerichtet und die Freiheitsgrade bestimmt. Diese Freiheitsgrade geben an, welche Felder für das Körperteil in der Beobachtung und Aktion hinzugefügt werden müssen.
 
 Der Walker-Agent sucht beim Programmstart alle Körperteile und speichert sie in einer Liste ab. Beim Erstellen der Beobachtung und beim Umwandeln der Aktion in eine Bewegung wird über die Körperteilliste iteriert, und für jedes Körperteil wird die entsprechende Beobachtung erstellt oder die Aktion ausgeführt.
 Das \hl{Stabilisierungsobjekt} wird auch automatisch beim initialisieren des Agenten erstellt (siehe \ref{lst:walker_agent_angepasst}).
@@ -98,7 +98,7 @@ Der ausgewählte Charakter ist der Y Bot Charakter welcher in Abbildung \ref{fig
   \label{fig:charakter_mixamo}
 \end{figure}
 
-Jedes Körperteil benötigt für das Steuern und Trainieren mit dem Walker Agenten Skript eine Kollisionskomponente, eine Festkörperkomponente und eine Körperteilkomponente. Zusätzlich müssen Gelenkkomponenten hinzugefügt werden, um die Körperteile miteinander zu verbinden. Dabei wird die Gelenkkomponente jeweils auf das untergeordnete Körperteil angewendet, während das übergeordnete Körperteil als verbundener Körper referenziert wird. Die Kollisionskomponente soll das Körperteil in vereinfachter Form und Größe darstellen, um die Berechnungen zu optimieren. Bei den Festkörpern müssen das Gewicht und der Schwerpunkt festgelegt werden, um eine realistische physikalische Simulation zu gewährleisten. In der Gelenkkomponente können Bewegungen durch das Festlegen von Winkellimits gesperrt oder limitiert werden. Für die Rotationsberechnung wird der Slerp-Modus verwendet, da dieser eine gleichmäßige Interpolation der Rotation ermöglicht. In der Körperteilkomponente können Parameter wie Stärke und maximale Rotationsgeschwindigkeit angepasst werden, wobei die Standardwerte aus der Walker Demo in den meisten Fällen ausreichend sind. Bei Bedarf kann auch das Feld "Trigger Touching Ground" aktiviert werden, um ein Event auszulösen, sobald das Körperteil den Boden berührt.
+Jedes Körperteil benötigt für das Steuern und Trainieren mit dem Walker Agenten Skript eine Kollisionskomponente, eine Festkörperkomponente und eine Körperteilkomponente. Zusätzlich müssen Gelenkkomponenten hinzugefügt werden, um die Körperteile miteinander zu verbinden. Dabei wird die Gelenkkomponente jeweils auf das untergeordnete Körperteil angewendet, während das übergeordnete Körperteil als verbundener Körper referenziert wird. Die Kollisionskomponente soll das Körperteil in vereinfachter Form und Größe darstellen, um die Berechnungen zu optimieren. Bei den Festkörpern müssen das Gewicht und der Schwerpunkt festgelegt werden, um eine realistische physikalische Simulation zu gewährleisten. In der Gelenkkomponente können Bewegungen durch das Festlegen von Winkellimits gesperrt oder limitiert werden. Für die Rotationsberechnung wird der Slerp-Modus verwendet, \hl{da dieser eine gleichmäßige Interpolation der Rotation ermöglicht}. In der Körperteilkomponente können Parameter wie Stärke und maximale Rotationsgeschwindigkeit angepasst werden, wobei die Standardwerte aus der Walker Demo in den meisten Fällen ausreichend sind. Bei Bedarf kann auch das Feld \grqq{}Trigger Touching Ground\grqq{} aktiviert werden, um ein Event auszulösen, sobald das Körperteil den Boden berührt.
 
 \begin{figure}[H]
   \centering  
@@ -116,6 +116,8 @@ Ist der Körper fertig konfiguriert wird zuletzt das Walker Agent Skript und der
   \caption{Walker Agentkomponente}
   \label{fig:komponente_agent_walker1}
 \end{figure}
+
+\hl{fehlt behaviour parameter komponente???}
 
 Die Gewichte der Körperteile wurden von der Walker Demo übernommen. Gleichermaßen wurden die Winkellimits für die Gelenke übernommen. Die zusätzlichen Körperteile wurden vereinfacht. Der Oberkörper besteht im Mixamo Modell aus den Schulterknochen sowie dem obersten Wirbel der Wirbelsäule. Die Wirbelsäule besteht im Mixamo Modell aus 2 Wirbeln anstatt dem einen Wirbel des Läufers aus der Demo. Zuletzt sind die Füße noch in Fuß und Vorderfuß aufgeteilt. Bei diesen Änderungen der Körperstruktur wurden die Gewichte und Winkellimits des vereinfachten Körpers auf die komplexeren Körperstrukturen aufgeteilt.
 
@@ -160,9 +162,43 @@ Die Gewichte der Körperteile wurden von der Walker Demo übernommen. Gleicherma
 \end{table}
 
 \subsection{Auswertung}
-Das Training dauert etwa doppelt so lange um ein ähnliches Resultat zu erreichen. Der Agent lernt mit dem Mixamo Modell lange in der Umgebung zu bestehen und erreicht dabei auch ein gutes Maß an Belohnung pro Schritt (siehe Graphen). In der Abbildung \ref{fig:mixamo_versuch10_gangbild} wird das erlernte Gangbild gezeigt. Der Läufer lernt in diesem Fall nicht das Laufen sondern galoppiert zum Ziel.
+Das Training dauert etwa doppelt so lange um ein etwas schlechteres Resultat zu erreichen. Der Agent lernt mit dem Mixamo Modell lange in der Umgebung zu bestehen und erreicht dabei auch ein gutes Maß an Belohnung pro Schritt (siehe Abbildung \ref{fig:training_mixamo_charakter}). In der Abbildung \ref{fig:mixamo_versuch10_gangbild} wird das erlernte Gangbild gezeigt. Der Läufer lernt in diesem Fall nicht das Laufen sondern galoppiert zum Ziel.
 
-\hl{106 Tensorboard Graphen einfügen}
+\begin{figure}[H]
+  \centering  
+    \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/106_episode_length}
+      \caption{Episodenlänge}
+      \label{fig:106_episode_length}
+    \end{subfigure}
+    \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/106_move_target_dir}
+      \caption{Zurückgelegte Stecke in Zielrichtung}
+      \label{fig:106_move_target_dir}
+    \end{subfigure}
+    \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/106_reach_target}
+      \caption{Erreichte Anzahl an Zielen}
+      \label{fig:106_reach_target}
+    \end{subfigure}
+    \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/106_look_reward}
+      \caption{Blickbelohnung}
+      \label{fig:106_look_reward}
+    \end{subfigure}
+    \begin{subfigure}{.49\textwidth}
+      \centering  
+      \includegraphics[width=\textwidth]{img/106_vel_reward}
+      \caption{Geschwindigkeitsbelohnung}
+      \label{fig:106_vel_reward}
+    \end{subfigure}
+ \caption{Training Mixamo Charakter}
+  \label{fig:training_mixamo_charakter}
+\end{figure}
 
 \begin{figure}[H]
   \centering
