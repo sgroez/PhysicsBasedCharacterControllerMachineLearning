@@ -1,6 +1,6 @@
 \section{Zusätzliche Bewegungsabläufe}
 \subsection{Anforderungen}
-Dieses Kapitel beschäftigt sich mit den Einschränkungen der Walker-Demonstration im Bezug auf unterschiedliche Bewegungabläufe. Das trainierte Modell der Walker Demo beherrscht nur die Fortbewegung in Blickrichtung. Der Läufer ist auch nicht darauf trainiert stehen zu bleiben. Das resultiert darin, dass der Läufer fällt sobald der Nutzer keinen Tastaturinput gibt. Es werden Anpassungen am Trainingsablauf getestet um den Läufer darauf zu trainieren unabhängig von der Bewegungsrichtung eine zusätzliche Blickrichtung zu halten, sowie auf der stelle zu stehen. 
+Dieses Kapitel beschäftigt sich mit den Einschränkungen der Walker-Demonstration im Bezug auf unterschiedliche Bewegungsabläufe. Das trainierte Modell der Walker-Demo beherrscht derzeit nur die Fortbewegung in Blickrichtung und ist nicht in der Lage, auf der Stelle stehen zu bleiben. Dies führt dazu, dass der Läufer stürzt, sobald der Nutzer keinen Tastaturinput mehr gibt. Diese Einschränkungen lassen sich auf die Art und Weise zurückführen, wie das Modell trainiert wurde, da es ausschließlich auf die Vorwärtsbewegung optimiert wird. Um diese Probleme zu beheben, werden Anpassungen am Trainingsablauf vorgenommen. Insbesondere wird untersucht, wie das Modell so erweitert werden kann, dass es unabhängig von der Bewegungsrichtung eine stabile Blickrichtung beibehält und die Fähigkeit erlangt, auf der Stelle zu stehen.
 
 \input{04_02_02_separate_bewegungsabläufe}
 \input{04_02_03_laufrichtungen_kombinieren}

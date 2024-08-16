@@ -1,8 +1,8 @@
 \subsection{Separate Bewegungsabläufe}
 
-Das erste Ziel ist es dem Läufer das stehen bleiben beizubringen. Hierfür soll der Läufer sich möglichst wenig von der aktuellen Position bewegen. Die Hauptaufgabe ist es hierbei das Gleichgewicht zu halten. 
+Das erste Ziel ist es, dem Läufer das Stehenbleiben beizubringen. Hierfür soll der Läufer sich möglichst wenig von der aktuellen Position bewegen, wobei die Hauptaufgabe darin besteht, das Gleichgewicht zu halten.
 
-Für das stehenbleiben wird die Zielgeschwindigkeit auf 0 gesetzt während das Ziel auf der Startposition befindet. Die Belohnungsfunktion der Demo, wird ab jetzt Demo Belohnungsfunktion genannt. Die Demo Belohnungsfunktion hat das Problem das durch die Zielgeschwindigkeit geteilt wird, was bei einer Zielgeschwindigkeit von 0 zu Mathematischen Fehlern führt. Um das zu vermeiden wurde das trainieren mit einer anderen Belohnungsfunktion getestet.
+Um das Stehenbleiben zu erreichen, wird die Zielgeschwindigkeit auf 0 gesetzt, während das Ziel an der Startposition bleibt. Eine Herausforderung hierbei ist die ursprüngliche Demo-Belohnungsfunktion, die durch die Zielgeschwindigkeit dividiert. Da dies bei einer Zielgeschwindigkeit von 0 zu mathematischen Fehlern führt, war eine Anpassung der Belohnungsfunktion notwendig. Statt der ursprünglichen Funktion wurde eine alternative Belohnungsfunktion implementiert, um das Problem zu beheben. Es wird erwartet das die neue Belohnungsfunktion die Lernfähigkeit des Modells verbessert, auf der Stelle zu stehen, ohne zu fallen. Es muss jedoch auch untersucht werden wie die neue Belohnungsfunktion die Lernfähigkeit des Ursprünglichen Verhaltens beeinflusst.
 
 \begin{figure}[H]
   \centering  
@@ -11,9 +11,9 @@ Für das stehenbleiben wird die Zielgeschwindigkeit auf 0 gesetzt während das Z
   \label{fig:plot_vel_reward_neu}
 \end{figure}
 
-Als neue Belohnungsfunktion wird eine ähnliche Sigmoid Funktion genutzt. Die Belohnungsfunktion nimmt für eine perfekte Übereinstimmung zwischen aktueller Geschwindigkeit und Zielgeschwindigkeit eine Belohnung von 1 an. Mit steigender Abweichung nimmt auch die Belohnung immer weiter ab. Ist eine Abweichung von größer 1 erreicht ist die Belohnung 0. Die Belohnungsfunktion aus Abbildung \ref{fig:plot_vel_reward_neu} wird daher ab hier Neue Belohnungsfunktion genannt.
+Als neue Belohnungsfunktion wird eine Sigmoid-Funktion genutzt, die eine glatte Abstufung der Belohnungen ermöglicht. Die Belohnung erreicht den Wert 1, wenn die aktuelle Geschwindigkeit perfekt mit der Zielgeschwindigkeit übereinstimmt. Mit zunehmender Abweichung von der Zielgeschwindigkeit sinkt die Belohnung stetig, und sobald die Abweichung den Wert 1 überschreitet, fällt die Belohnung auf 0. Die Belohnungsfunktion und ihre Parameter wurden so gewählt das die neue Belohnungsfunktion der Demo Belohnungsfunktion gleicht. Die neue Belohnungsfunktion abgebildet in Abbildung \ref{fig:plot_vel_reward_neu} wird daher ab hier Neue Belohnungsfunktion genannt.
 
-Der Walker konnte mit der Neuen Belohnungsfunktion lernen auf der Stelle zu stehen.  Abbildung \ref{fig:126_move_target_dir}, \ref{fig:126_episode_length} zeigt wie die zurück gelegte Distanz um 0 herum pendelt, während die Episodenlänge die maximale Länge von 1000 erreicht hat.
+Der Walker konnte mit der Neuen Belohnungsfunktion erfolgreich lernen, auf der Stelle zu stehen. Dies wird in den Abbildungen \ref{fig:126_episode_length} und \ref{fig:126_move_target_dir} verdeutlicht. Die Abbildung \ref{fig:126_move_target_dir} zeigt, wie die zurückgelegte Distanz um 0 herum schwankt, was darauf hinweist, dass der Läufer in der Lage ist, seine Position zu halten. Gleichzeitig erreicht die Episodenlänge in Abbildung \ref{fig:126_episode_length} die maximale Länge von 1000, was bedeutet, dass der Läufer über die gesamte Episode hinweg stabil blieb.
 \begin{figure}[H]
   \centering  
   \begin{subfigure}{.49\textwidth}
@@ -32,7 +32,7 @@ Der Walker konnte mit der Neuen Belohnungsfunktion lernen auf der Stelle zu steh
   \label{fig:training_stehen_neu}
 \end{figure}
 
-Mit zufälliger Zielgeschwindigkeit zu einem Ziel zu laufen wie im Ursprünglichen Verhalten konnte damit jedoch nicht zufriedenstellend erlernt werden. Die Abbildung \ref{fig:training_vergleich_demo_neu} zeigt mit der orangenen Linie die Leistung der Neuen Belohnungsfunktion und mit der rosa Linie die Leistung der Demo Belohnungsfunktion. Nachfolgender Vergleich der Belohnungsfunktionen zeigt das die Ursprüngliche Belohnungsfunktion durch das Teilen mit der Zielgeschwindigkeit die Sensitivität der Funktion je nach Zielgeschwindigkeit beeinflusst. Daraus folgt das bei steigender Zielgeschwindigkeit eine größere Abweichung der Geschwindigkeit geduldet wird (siehe Abbildung \ref{fig:match_velocity_demo_vergleich}). Diese Anpassung verbessert die Generalisierung zwischen den wechselnden Geschwindigkeiten um ein vielfaches.
+Mit zufälliger Zielgeschwindigkeit zu einem Ziel zu laufen, wie es im ursprünglichen Verhalten vorgesehen war, konnte jedoch mit der Neuen Belohnungsfunktion nicht zufriedenstellend erlernt werden. In Abbildung \ref{fig:training_vergleich_demo_neu} ist die Leistung der Neuen Belohnungsfunktion durch die orangene Linie und die Leistung der Demo-Belohnungsfunktion durch die rosa Linie dargestellt. Die Abbildung \ref{fig:match_velocity_demo_vergleich} zeigt, dass die Ursprüngliche Belohnungsfunktion die Fehlertoleranz in Abhängigkeit von der Zielgeschwindigkeit dynamisch anpasst, was es dem Modell ermöglicht, besser zwischen unterschiedlichen Geschwindigkeiten zu generalisieren. Die Ergebnisse zeigen, dass während die neue Belohnungsfunktion gut für das Erlernen der Stabilisierung des Läufers auf der Stelle bietet, die Ursprüngliche Belohnungsfunktion sich besser für das Erlernen einer Gangbewegung in Zielrichtung eignet.
 
 \begin{figure}[H]
   \centering  
@@ -59,7 +59,7 @@ Mit zufälliger Zielgeschwindigkeit zu einem Ziel zu laufen wie im Ursprünglich
   \label{fig:match_velocity_demo_vergleich}
 \end{figure}
 
-Mit dieser Erkenntnis wird eine neue Anpassung untersucht. In der folgenden Anpassung bleibt die Belohnungsfunktion weitestgehend Unverändert. Lediglich das obere Limit ab welchem die Funktion eine Belohnung von 0 annimmt, wird auf ein minimum von 0.1 beschränkt. Somit kann sichergestellt werden, dass im Bereich der normalen Fortbewegung keine Veränderung auftritt. Mit der Demo Belohnungsfunktion konnten nur Annäherungen an eine Zielgeschwindigkeit von 0 genutzt werden. Bei immer weiterer Annäherung an 0 wird das Spektrum an akzeptablen Geschwindigkeiten bevor die Belohnung 0 ist nahezu unerreichbar (siehe Abbildung \ref{fig:match_velocity_vergleich_clip}). Mit dem Limit von 0.1 ist der Bereich an Abweichungen für die die Belohnungsfunktion einen Wert größer 0 annimmt groß genug. Der Läufer kann durch ausprobieren Belohnungen über 0 erreichen, wodurch eine Richtung für die Optimierung ermittelt werden kann. Somit kann der Läufer die Belohnung optimieren.\\
+Mit dieser Erkenntnis wird eine neue Anpassung untersucht. In der folgenden Anpassung bleibt die Belohnungsfunktion weitestgehend unverändert; lediglich das obere Limit, ab welchem die Funktion eine Belohnung von 0 annimmt, wird auf ein Minimum von 0,1 beschränkt. Diese Anpassung stellt sicher, dass im Bereich der normalen Fortbewegung keine unerwünschten Veränderungen auftreten. Das Problem mit der ursprünglichen Demo-Belohnungsfunktion bestand darin, dass bei Annäherung an eine Zielgeschwindigkeit von 0 das Spektrum an akzeptablen Geschwindigkeiten, bevor die Belohnung auf 0 sinkt, extrem eng wurde (siehe Abbildung \ref{fig:match_velocity_vergleich_clip}). Dies machte es nahezu unmöglich, sinnvolle Lernfortschritte in diesem Bereich zu erzielen. Durch die Einführung eines Limits von 0,1 wird der Bereich der Geschwindigkeitsabweichungen, für die die Belohnungsfunktion einen Wert größer 0 annimmt, ausreichend vergrößert. Dies ermöglicht es dem Läufer, durch Ausprobieren Belohnungen über 0 zu erreichen, was wiederum eine Richtung für die Optimierung des Verhaltens bietet. Somit kann der Läufer die Belohnung optimieren.
 
 \begin{figure}[H]
   \centering  
@@ -67,29 +67,28 @@ Mit dieser Erkenntnis wird eine neue Anpassung untersucht. In der folgenden Anpa
   \caption{Vergleich Demo gegen Belohnungsfunktion mit 0.1 Limit}
   \label{fig:match_velocity_vergleich_clip}
 \end{figure}
-Das auf einer Stelle stehen hat der Läufer damit in einem separaten Training auch erlernt. Abbildung \ref{fig:128_episode_length} zeigt das der Läufer die maximale Episoden Länge von 1000 erreicht hat ohne zu fallen. Die bewegte Distanz hat sich auch 0 angenähert (siehe \ref{fig:128_move_target_dir}).
 
+Mit der angepassten Demo-Belohnungsfunktion konnte nach etwas mehr Trainingsschritten ebenfalls die maximale Episodenlänge von 1000 erreicht werden (siehe Abbildung \ref{fig:126_128_episode_length}. Dies zeigt, dass der Läufer in der Lage war, über eine längere Trainingsdauer hinweg die erforderliche Stabilität zu erlernen. Die in Abbildung \ref{fig:126_128_move_target_dir} dargestellte zurückgelegte Distanz nähert sich gegen Ende fast 0, was darauf hindeutet, dass der Läufer seine Position sehr gut halten kann. Dieses Ergebnis zeigt, dass auch mit der angepassten Demo-Belohnungsfunktion ein vergleichbares Niveau an Stabilität erreicht werden kann ohne den Lernvorgang für das ursprüngliche Verhalt zu beeinflussen.
 
 \begin{figure}[H]
   \centering  
   \begin{subfigure}{.49\textwidth}
       \centering  
-      \includegraphics[width=\textwidth]{img/128_episode_length}
+      \includegraphics[width=\textwidth]{img/126_128_episode_length}
       \caption{Episodenlänge}
-      \label{fig:128_episode_length}
+      \label{fig:126_128_episode_length}
     \end{subfigure}
     \begin{subfigure}{.49\textwidth}
       \centering  
-      \includegraphics[width=\textwidth]{img/128_move_target_dir}
+      \includegraphics[width=\textwidth]{img/126_128_move_target_dir}
       \caption{Zurückgelegte Stecke in Zielrichtung}
-      \label{fig:128_move_target_dir}
+      \label{fig:126_128_move_target_dir}
     \end{subfigure}
-  \caption{Versuch 5 Training Graphen}
-  \label{fig:versuch5_training}
+  \caption{Vergleich Training Stehen mit Neuer Belohnungfunktion (orange) und Angepasster Demo Belohnungsfunktion (blau)}
+  \label{fig:vergleich_126_128}
 \end{figure}
 
-Nach dem erfolgreichen stehen auf einer festen Position, sind die nächsten Bewegungsziele die Bewegung zum Ziel mit unterschiedlichen Blickrichtungen. Die Extremfälle sind hier das Laufen rückwärts und seitwärts.
-Im folgenden wird daher untersucht ob das Laufen in unterschiedliche Richtungen relativ zur Blickrichtung für den Läufer erlernbar ist. Um das zu realisieren wurde die Blickrichtung Belohnungsfunktion relativ zur Zielrichtung angepasst. Bei Vorwärtsbewegung ist die Blickrichtung gleich der Zielrichtung. Bei Seitlicherbewegung ist die Blickrichtung im rechten Winkel zur Zielrichtung. Bei der Rückwärtsbewegung ist die Blickrichtung entgegen der Zielrichtung. In \ref{lst:blickrichtung} ist die Implementierung für das bestimmen der Blickrichtung zu sehen.
+Nach dem erfolgreichen Erlernen des Stehens auf einer festen Position sind die nächsten Bewegungsziele die Fortbewegung zum Ziel in unterschiedlichen Blickrichtungen. Die Extremfälle umfassen dabei das Rückwärts- und Seitwärtslaufen. In diesem Abschnitt wird untersucht, ob der Läufer in der Lage ist, Bewegungen in verschiedene Richtungen relativ zu seiner Blickrichtung zu erlernen. Um dies zu ermöglichen, wurde die Belohnungsfunktion angepasst, sodass sie die Blickrichtung relativ zur Zielrichtung berücksichtigt. Bei der Vorwärtsbewegung entspricht die Blickrichtung der Zielrichtung. Bei der Seitwärtsbewegung steht die Blickrichtung im rechten Winkel zur Zielrichtung, und bei der Rückwärtsbewegung ist die Blickrichtung entgegengesetzt zur Zielrichtung. Die Implementierung zur Bestimmung der Blickrichtung ist in \ref{lst:blickrichtung} dargestellt.
 
 \begin{lstlisting}[caption={Blickrichtung Enum und Belohnung},captionpos=b,label={lst:blickrichtung}]
 public enum Direction
@@ -123,7 +122,7 @@ public override void FixedUpdate()
 }
 \end{lstlisting}
 
-Das gehen in Zielrichtung wurde durch die Änderungen nicht beeinflusst. Separate Trainings zu den drei anderen Laufrichtungen waren erfolgreich. Abbildung \ref{fig:116_130_131_132_move_target_dir}, \ref{fig:116_130_131_132_reach_target} zeigen die zurückgelegte Distanz und die Anzahl an erreichten Zielen in einer Trainingsepisode. Die Ergebnisse der 3 Laufrichtungen sind alle vergleichbar mit den Ergebnissen der Demo. Die Abweichung der Laufrichtung Links ist vermutlich der zufällligen Natur des Trainings anzurechnen.
+Das Gehen in Zielrichtung wurde durch die Änderungen nicht negativ beeinflusst. Separate Trainings für die drei anderen Laufrichtungen – seitlich nach links, seitlich nach rechts und rückwärts – waren ebenfalls erfolgreich. Abbildungen \ref{fig:116_130_131_132_move_target_dir} und \ref{fig:116_130_131_132_reach_target} zeigen die zurückgelegte Distanz und die Anzahl der erreichten Ziele in einer Trainingsepisode. Die Ergebnisse für die drei Laufrichtungen sind alle vergleichbar mit den Ergebnissen der ursprünglichen Demo. Die Tatsache, dass die Ergebnisse  \grqq{}vergleichbar \grqq{} sind, bedeutet, dass der Läufer in der Lage war, eine ähnliche Anzahl von Zielen zu erreichen und ähnliche Distanzen zurückzulegen wie in der ursprünglichen Demo, unabhängig von der Laufrichtung. Insgesamt zeigen die Ergebnisse, dass der Läufer mit den Einschränkungen der Gelenke und der implementierten Belohnungen dazu in der Lage ist die Bewegung zum Ziel mit allen vier Blickrichtungen zu meistern.
 
 \begin{figure}[H]
   \centering  
