@@ -19,12 +19,15 @@ Das \hl{Stabilisierungsobjekt} wird auch automatisch beim initialisieren des Age
     \node(target) [rounded, left of=agent, xshift=-2cm] {Ziel};
     \node(jdc) [rounded, below of=agent] {Motor Gelenk Steuerung};
     \node(bp) [rounded, right of=jdc, xshift=3cm] {Körperteil};
+    \node(gc) [rounded, right of=agent, xshift=4cm] {Bodenkontakt};
     
     \draw [uni] (agent) -- (oc) node[midway, right] {aktualisiert Ausrichtung};
     \draw [uni] ([shift={(0.5,-0.5)}] agent.center) -- ([shift={(0.5,0.5)}] jdc.center) node[midway, right] {init Körperteile};
     \draw [uni] ([shift={(-0.5,0.5)}] jdc.center) -- ([shift={(-0.5,-0.5)}] agent.center) node[midway, left, align=center] {Körperteil-\\liste};
     \draw [uni] (jdc) -- (bp) node[midway, above] {init};
-    \draw [uni] (agent) -| (bp) node[midway, above] {steuert};
+    \draw[uni] ([shift={(0, 0.3)}] gc.west) -- ([shift={(0, 0.3)}] agent.east) node[midway, above] {frühes stoppen};
+    \draw [uni] ([shift={(0, -0.3)}] agent.east) -| ([shift={(-1,0.5)}] bp.center) node[midway, left, yshift=-0.2cm] {steuert};
+    \draw[uni] ([shift={(1,0)}] bp.north) -- (gc) node[midway, right] {hat};
     \draw [uni] (target) to[loop below] () node [yshift=-1.5cm, align=center] {setzt neue\\Position};
         
   \end{tikzpicture}
@@ -43,8 +46,10 @@ Das \hl{Stabilisierungsobjekt} wird auch automatisch beim initialisieren des Age
     
     \draw [uni] (oc) to[loop above] () node[yshift=1.5cm] {aktualisiert Ausrichtung};
     \draw [uni] (agent) -- (oc) node[midway, right] {erstellt};
-    \draw [uni] (agent) -- (bp) node[midway, above] {steuert};
-    \draw [uni] (agent) -- (target) node[midway, above, align=center] {setzt neue\\Position};
+    \draw [uni] ([shift={(0,0.3)}]  agent.east) -- ([shift={(0,0.3)}] bp.west) node[midway, above] {steuert};
+    \draw [dashed,uni] ([shift={(0,-0.3)}] bp.west) -- ([shift={(0,-0.3)}] agent.east) node[midway, below, align=center] {Event\{bodenkontakt\\Zielberührung\}};
+    \draw[uni] (agent) to[loop below] () node[yshift=-1.5cm] {frühes stoppen};
+    \draw [dashed, uni] (agent) -- (target) node[midway, above, align=center] {Event\{setzt neue\\Position\}};
         
   \end{tikzpicture}
   \caption{Neue Architektur}
