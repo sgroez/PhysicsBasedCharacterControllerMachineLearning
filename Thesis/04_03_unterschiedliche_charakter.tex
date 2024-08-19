@@ -1,92 +1,55 @@
 \section{Unterschiedliche Charakter}
-Spiele verwenden die unterschiedlichsten Charaktere, nicht nur das Aussehen sondern auch die Komplexität der Körperteile und die Anzahl der Knochen variiert. Um den Charaktercontroller vielseitig einsetzbar zu gestalten wird in diesem Kapitel die Walker Demo Komponenten angepasst um den Einrichtungsprozess zu vereinfachen und unterschiedliche Charakter Körperstrukturen zu erlauben. Es wird analysiert wie das Agentenskript angepasst werden muss um Charaktere mit unterschiedlichen Körperstrukturen zu steuern und zu trainieren. Anschließend wird der Einrichtungsprozess am Beispiel eines Mixamo 3D Charakter Modells dargestellt. Zum Schluss wird der Mixamo Charakter trainiert und das Ergebnis ausgewertet.
+Spiele verwenden die unterschiedlichsten Charaktere, nicht nur in Bezug auf das Aussehen, sondern auch hinsichtlich der Komplexität der Körperteile und der Anzahl der Knochen. Um den Charaktercontroller vielseitig einsetzbar zu gestalten, werden in diesem Kapitel die Walker-Demo-Komponenten angepasst, um den Einrichtungsprozess zu vereinfachen und unterschiedliche Charakterkörperstrukturen zu ermöglichen. Zunächst wird analysiert, wie das Agentenskript angepasst werden muss, um Charaktere mit unterschiedlichen Körperstrukturen zu steuern und zu trainieren. Anschließend wird der Einrichtungsprozess am Beispiel eines Mixamo-3D-Charaktermodells dargestellt. Zum Schluss wird der Mixamo-Charakter trainiert und das Ergebnis ausgewertet. Die Wahl des Mixamo-Modells als Beispiel soll zeigen, wie die Einrichtung mit den Vereinfachungen funktioniert und wie das Training bei der Verwendung von komplexere Charaktermodelle beeinflusst wird.
 
 \subsection{Anforderungen}	
-Der Agent der Walker Demo setzt für jedes Körperteil eine separate Referenz, die über den Inspector in Unity konfiguriert werden muss. Um die damit verbundene Einschränkung einer festgelegten Konfiguration von Körperteilen zu beheben, soll eine flexible Liste von Körperteilen konfiguriert werden. Bei der Zustandserfassung der Körperteile soll anschließend der Zustand aller Körperteile in der Liste erfasst werden. Die Aktion soll gleichermaßen Zielwinkel und Gelenkstärke für alle Körperteile der Liste beinhalten. Um unnötige Komplexität bei der Beobachtung und Aktion zu vermeiden, sollen die Zielwinkel nur für bewegbare Gelenkachsen bestimmt werden. Die Gelenkstärke soll für komplett versteifte Gelenke ebenfalls ausgelassen werden. Um die Konfiguration weiter zu erleichtern, sollen die Körperteile zudem automatisch dem Walker-Agenten hinzugefügt werden. Schließlich soll auch das \hl{Stabilisierungsobjekt} automatisch generiert werden.
+Der Agent der Walker Demo setzt für jedes Körperteil eine separate Referenz, die über den Inspector in Unity konfiguriert werden muss. Um die damit verbundene Einschränkung einer festgelegten Konfiguration von Körperteilen zu beheben, soll eine flexible Liste von Körperteilen konfiguriert werden. Bei der Zustandserfassung der Körperteile soll anschließend der Zustand aller Körperteile in der Liste erfasst werden. Die Aktion soll gleichermaßen Zielwinkel und Gelenkstärke für alle Körperteile der Liste beinhalten. Um unnötige Komplexität bei der Beobachtung und Aktion zu vermeiden, sollen die Zielwinkel nur für bewegbare Gelenkachsen bestimmt werden. Die Gelenkstärke soll für komplett versteifte Gelenke ebenfalls ausgelassen werden. Um die Konfiguration weiter zu erleichtern, sollen die Körperteile zudem automatisch dem Walker-Agenten hinzugefügt werden. Schließlich soll auch das \hl{Stabilisierungsobjekt} automatisch generiert werden. Diese Änderungen zielen darauf ab, die Flexibilität und Benutzerfreundlichkeit des Walker-Demo-Agenten zu verbessern. Es soll manuelle Konfiguration auf das nötigste reduziert werden, gleichzeitig soll aber auch eine Skalierbare Lösung für unterschiedliche Charakterkörperstrukturen implementiert werden.
 
 \subsection{Anpassungen}
 Um ein Objekt als Körperteil zu definieren, wurde die Bodypart-Klasse in ein MonoBehaviour-Unity-Skript umgewandelt. Als MonoBehaviour kann das Skript im Unity Editor jedem beliebigen Objekt hinzugefügt werden. Zusätzlich wurden die Funktionen zur Steuerung der Körperteile von der Gelenk-Motor-Steuerung in das Körperteil-Skript verlagert. Dadurch ist es möglich, die Körperteile direkt über das Körperteil-Skript zu steuern, ohne den Umweg über die Gelenk-Motor-Steuerung. Die Körperteilkomponente initialisiert sich beim Programmstart und ist anschließend sowohl für die Steuerung als auch für die Aktualisierung der Zustandsparameter des Körperteils zuständig. Jedes Körperteil benötigt eine Festkörperkomponente. Zusätzlich wird überprüft, ob das Objekt über eine Gelenkkomponente verfügt. Existiert eine solche Komponente, wird diese eingerichtet und die Freiheitsgrade bestimmt. Diese Freiheitsgrade geben an, welche Felder für das Körperteil in der Beobachtung und Aktion hinzugefügt werden müssen.
 
 Der Walker-Agent sucht beim Programmstart alle Körperteile und speichert sie in einer Liste ab. Beim Erstellen der Beobachtung und beim Umwandeln der Aktion in eine Bewegung wird über die Körperteilliste iteriert, und für jedes Körperteil wird die entsprechende Beobachtung erstellt oder die Aktion ausgeführt.
-Das \hl{Stabilisierungsobjekt} wird auch automatisch beim initialisieren des Agenten erstellt (siehe \ref{lst:walker_agent_angepasst}).
+Das \hl{Stabilisierungsobjekt} wird auch automatisch beim initialisieren des Agenten erstellt.
 
-\begin{lstlisting}[caption={Ausschnitt Angepasstes Walker Agent Skript},captionpos=b,label={lst:walker_agent_angepasst}]
-public override void Initialize()
-{
-    //Stabilisierungs- / Orientierungsobjekt erstellen
-    GameObject orientationObject = new GameObject("OrientationObject");
-    orientationObject.transform.parent = transform;
-    walkOrientationCube = orientationObject.AddComponent<OrientationCubeController1>();
-    walkOrientationCube.root = root;
-    walkOrientationCube.target = target;
+\begin{figure}[H]
+  \centering  
+  \begin{tikzpicture}[node distance=3cm]
+  
+    \node(oc) [rounded] {Stabilisierungsobjekt};  
+    \node(agent) [rounded, below of=oc] {Agent};
+    \node(target) [rounded, left of=agent, xshift=-2cm] {Ziel};
+    \node(jdc) [rounded, below of=agent] {Motor Gelenk Steuerung};
+    \node(bp) [rounded, right of=jdc, xshift=3cm] {Körperteil};
+    
+    \draw [uni] (agent) -- (oc) node[midway, right] {aktualisiert Ausrichtung};
+    \draw [uni] ([shift={(0.5,-0.5)}] agent.center) -- ([shift={(0.5,0.5)}] jdc.center) node[midway, right] {init Körperteile};
+    \draw [uni] ([shift={(-0.5,0.5)}] jdc.center) -- ([shift={(-0.5,-0.5)}] agent.center) node[midway, left, align=center] {Körperteil-\\liste};
+    \draw [uni] (jdc) -- (bp) node[midway, above] {init};
+    \draw [uni] (agent) -| (bp) node[midway, above] {steuert};
+    \draw [uni] (target) to[loop below] () node [yshift=-1.5cm, align=center] {setzt neue\\Position};
+        
+  \end{tikzpicture}
+  \caption{Alte Architektur}
+  \label{fig:architektur_alt}
+\end{figure}
 
-    //Körperteile initialisieren und zur Liste hinzufügen
-    foreach (Bodypart bps in root.GetComponentsInChildren<Bodypart>())
-    {
-        bps.Initialize();
-        bps.onTouchingGround.AddListener(OnTouchingGround);
-        bp.onTouchedTarget.AddListener(OnTouchedTarget);
-        bodyparts.Add(bps);
-    }
-}
-
-//Körperteile zurücksetzen
-public override void OnEpisodeBegin()
-{
-    foreach (Bodypart bps in bodyparts)
-    {
-        bps.Reset();
-    }
-}
-
-//Beobachtung für Körperteil hinzufügen
-public void CollectObservationBodyPart(Bodypart bps, VectorSensor sensor)
-{
-    sensor.AddObservation(bps.touchingGround);
-
-    sensor.AddObservation(m_OrientationCube.transform
-    .InverseTransformDirection(bps.rb.velocity));
-    sensor.AddObservation(m_OrientationCube.transform
-    .InverseTransformDirection(bps.rb.angularVelocity));
-
-    sensor.AddObservation(m_OrientationCube.transform
-    .InverseTransformDirection(bps.rb.position - root.position));
-
-    if (bps.dof.sqrMagnitude <= 0) return;
-
-    sensor.AddObservation(bps.rb.transform.localRotation);
-    sensor.AddObservation(bps.currentStrength / bps.physicsConfig.maxJointForceLimit);
-
-}
-
-//Körperteilbeobachtungen an Beobachtung anfügen
-public override void CollectObservations(VectorSensor sensor)
-{
-foreach (Bodypart bps in bodyparts)
-    {
-        CollectObservationBodyPart(bps, sensor);
-    }
-}
-
-//Aktion in Bewegung umwandeln
-public override void OnActionReceived(ActionBuffers actionBuffers)
-{
-    var continuousActions = actionBuffers.ContinuousActions;
-    int i = -1;
-
-    foreach (Bodypart bp in bodyparts)
-    {
-        if (bp.dof.sqrMagnitude <= 0) continue;
-        float targetRotX = bp.dof.x == 1 ? continuousActions[++i] : 0;
-        float targetRotY = bp.dof.y == 1 ? continuousActions[++i] : 0;
-        float targetRotZ = bp.dof.z == 1 ? continuousActions[++i] : 0;
-        float jointStrength = continuousActions[++i];
-        bp.SetJointTargetRotation(targetRotX, targetRotY, targetRotZ);
-        bp.SetJointStrength(jointStrength);
-    }
-}
-\end{lstlisting}
-
+\begin{figure}[H]
+  \centering  
+  \begin{tikzpicture}[node distance=3cm]
+  
+    \node(oc) [rounded] {Stabilisierungsobjekt};  
+    \node(agent) [rounded, below of=oc] {Agent};
+    \node(target) [rounded, left of=agent, xshift=-2cm] {Ziel};
+    \node(bp) [rounded, right of=agent, xshift=3cm] {Körperteil};
+    
+    \draw [uni] (oc) to[loop above] () node[yshift=1.5cm] {aktualisiert Ausrichtung};
+    \draw [uni] (agent) -- (oc) node[midway, right] {erstellt};
+    \draw [uni] (agent) -- (bp) node[midway, above] {steuert};
+    \draw [uni] (agent) -- (target) node[midway, above, align=center] {setzt neue\\Position};
+        
+  \end{tikzpicture}
+  \caption{Neue Architektur}
+  \label{fig:architektur_neu}
+\end{figure}
 
 \subsection{Einrichtung}
 Der ausgewählte Charakter ist der Y Bot Charakter welcher in Abbildung \ref{fig:charakter_mixamo} zu sehen ist. Der Y Bot besteht ausgenommen der Finger aus 22 Knochen. Um das Training zu beschleunigen werden für alle Versuche die Finger mit dem Handknochen als ein Körperteil zusammengefasst.

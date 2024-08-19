@@ -15,8 +15,8 @@ In vielerlei Hinsicht ist dieser Prozess mit dem Lernvorgang von Menschen vergle
     \path (0,0) (umgebung) -- (4,1) (agent) coordinate[pos=0.5](aktion);
     \draw [-latex, line width=0.3mm] (umgebung) -| (aktion) node[pos=0.8, right] {Aktion} |- (agent);
     
-    \path (0,0) (umgebung) -- (-4,1) (agent) coordinate[pos=0.5](aktion);
-    \draw [-latex, line width=0.3mm] (umgebung) -| (aktion) node[pos=0.8, left] {Beobachtung} |- (agent);
+    \path (0,0) (umgebung) -- (-4,1) (agent) coordinate[pos=0.5](beobachtung);
+    \draw [-latex, line width=0.3mm] (umgebung) -| (beobachtung) node[pos=0.8, left] {Beobachtung} |- (agent);
   \end{tikzpicture}
   \caption{Verstärkendes Lernen Ablauf}
   \label{fig:vl_ablauf}

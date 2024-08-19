@@ -183,7 +183,7 @@ Das Problem wurde behoben, indem das Blickziel in nachfolgenden Trainings kontin
   \label{fig:training_blickrichtungsziel_wechsel_07}
 \end{figure}
 
-Um von Anfang an und separat vom Erlernen des Laufens die Blickbelohnung zu erlernen, wird die Bedingung für das Erreichen eines Blickziels erneut angepasst. Im folgenden Versuch wird der Blickzielwinkel gewechselt, sobald der Läufer 3 Sekunden auf das Ziel blickt. Implementiert wurde das Ganze mit einem Spherecast, um gleichzeitig die Genauigkeit, mit der der Läufer auf das Ziel schauen muss, anpassen zu können (siehe Abbildung \ref{fig:spherecast}). Spherecast, eine Technik, die verwendet wird, um eine kugelförmige Abfrage um die Blickrichtung des Läufers durchzuführen, ermöglicht es, über den Kugeldurchmesser die Blickfeld Größe anzupassen. je nach Kugelgröße und Dauer des Blickkontakts kann die Schwierigkeit variiert werden. Grundlegend lässt sich darüber aber die Abhängigkeit zum Lernverlauf der Fortbewegung lösen. Gleichermaßen kann zusätzlich auch die geforderte Präzision angepasst werden.
+Um von Anfang an und separat vom Erlernen des Laufens die Blickbelohnung zu erlernen, wird die Bedingung für das Erreichen eines Blickziels erneut angepasst. Im folgenden Versuch wird der Blickzielwinkel gewechselt, sobald der Läufer 3 Sekunden auf das Ziel blickt. Implementiert wurde das Ganze mit einem Spherecast, um gleichzeitig die Genauigkeit, mit der der Läufer auf das Ziel schauen muss, anpassen zu können (siehe Abbildung \ref{fig:spherecast}). Spherecast, eine Technik, die verwendet wird, um eine kugelförmige Kollisionsabfrage durchzuführen. Zusätzlich zur Funktionsweise eines Raycast ermöglicht der Spherecast, über den Kugeldurchmesser die Blickfeld Größe anzupassen. je nach Kugelgröße und Dauer des Blickkontakts kann die Schwierigkeit variiert werden. Grundlegend lässt sich darüber aber die Abhängigkeit zum Lernverlauf der Fortbewegung lösen. Gleichermaßen kann zusätzlich auch die geforderte Präzision angepasst werden.
 
 \begin{figure}[H]
   \centering  
@@ -192,7 +192,8 @@ Um von Anfang an und separat vom Erlernen des Laufens die Blickbelohnung zu erle
   \label{fig:spherecast}
 \end{figure}
 
-Das Training wurde einmal mit 3 Sekunden und einmal mit 2 Sekunden Blickkontaktzeit zum Erreichen des Blickziels durchgeführt, wobei das Training mit 2 Sekunden Blickkontaktzeit besser abschneidet. Trotz dieser Anpassungen ist der Schwierigkeitsgrad des Training noch sehr hoch. Selbst das bessere der beiden Trainings nach 120 Millionen Trainingsschritten ist noch weit davon entfernt, stabil mehrere Ziele am Stück zu erreichen. Es ist zu vermuten das weitere Anpassungen erforderlich sind um die gewünschte Stabilität zu erreichen.
+Das Training wurde einmal mit 3 Sekunden und einmal mit 2 Sekunden Blickkontaktzeit zum Erreichen des Blickziels durchgeführt, wobei das Training mit 2 Sekunden Blickkontaktzeit besser abschneidet. Trotz dieser Anpassungen ist der Schwierigkeitsgrad des Training noch sehr hoch. Selbst das bessere der beiden Trainings ist nach 120 Millionen Trainingsschritten noch weit davon entfernt, stabil mehrere Ziele am Stück zu erreichen. Es ist zu vermuten das weitere Anpassungen erforderlich sind um die gewünschte Stabilität zu erreichen.
+\hl{anmerkung das evtl problem das belohnung ohne erreichen von blickziel optimiert werden kann???}
 
 \begin{figure}[H]
   \centering  
