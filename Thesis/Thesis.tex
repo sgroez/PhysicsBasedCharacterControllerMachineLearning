@@ -98,6 +98,7 @@ literate=%
 \tikzstyle{bi} = [latex-latex, line width=0.3mm]
 \usepackage{soul}
 \usepackage{subcaption}
+\usepackage{longtable}
   
 \definecolor{bluekeywords}{rgb}{0,0,1}
 \definecolor{greencomments}{rgb}{0,0.5,0}
@@ -158,9 +159,12 @@ Zweitprüfer: \hhnsecondlecturer \\
 \input{03_analyse}
 \input{04_charaktercontroller}
 \input{05_fazit}
-\appendix
 
 %Literaturverzeichnis
 \printbibliography[title=Literaturverzeichnis]
+
+\newpage
+\appendix
+\input{a_training_doc}
 
 \end{document}

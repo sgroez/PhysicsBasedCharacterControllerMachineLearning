@@ -1,0 +1,86 @@
+\chapter{Training Documentation}
+{\rowcolors{1}{gray!10}{white}
+\begin{longtable}{ |p{1cm}|p{9cm}|p{5cm}|}
+\hline
+\textbf{ID} & \textbf{Beschreibung} & \textbf{Ergebnis}  \\
+\hline
+\rowids & Walker Demo als Vergleich für kommende Trainings & \\
+\hline
+\rowids & Walker Demo mit angepasster halbierter maximal Geschwindigkeit & lernt schneller ein gutes Verhalten \\
+\hline
+\rowids & Walker Demo mit angepassten Hyperparametern (batch und buffer size) um die Werte an die erhöhte Anzahl an parallelen Trainingsumgebungen anzupassen & lernt wesentlich langsamer \\
+\hline
+\rowids & Walker Demo mit angepassten Hyperparametern num\_epoch um mehrere Lernschritte auf die erfassten Daten auszuführen & lernt wesentlich langsamer \\
+\hline
+\rowids & Walker Demo mit Laufrichtung als Goal Observation für Hyper Network training & für komplexe Probleme wie das kontinuierliche Kontrollproblem eines zweibeinigen Läufers viel zu langsam \\
+\hline
+\rowids & Imitationslernen mit Mixamo Charakter und "kneeing soccer ball" Animation & lernt Teile der Bewegung aber hebt Bein nicht \\
+\hline
+\rowids & Imitationslernen mit Mixamo Charakter und "backflip" Animation und zufälliger Initialisierung mit Pose von Animation & lernt nicht abzuspringen \\
+\hline
+\rowids & Imitationslernen mit Mixamo Charakter und "laufen" Animation und zufälliger Initialisierung mit Pose von Animation & lernt nicht zu laufen \\
+\hline
+\rowids & Walker Demo mit Mixamo Charakter, realistischen Gelenklimits und Körperteil Gewichten & lernt sich auf das Ziel zu zu bewegen aber fällt nach kurzer Zeit \\
+\hline
+\rowids & Walker Demo mit Mixamo Charakter, realistischen Gelenklimits, Körperteil Gewichten und 1 extra Hidden Layer & lernt langsamer und auch mit mehreren Trainingsschritten kein besseres Ergebnis \\
+\hline
+\rowids & Walker Demo mit Mixamo Charakter, realistischen Gelenklimits, Körperteil Gewichten und doppelte Anzahl an Knoten in jedem Layer  & lernt langsamer und auch mit mehreren Trainingsschritten kein besseres Ergebnis \\
+\hline
+\rowids & Walker Demo mit umstrukturiertem Code & lernt langsamer \\
+\hline
+\rowids & Walker Demo mit Mixamo Charakter, gleiche Gelenklimits und Gewichte wie Demo & lernt trotzdem viel langsamer \\
+\hline
+\rowids & Walker Demo mit umstrukturiertem Code aber Ziel wird wieder nur beim erreichen neu gesetzt & lernt in gleicher Zeit wie Demo vergleichbares Verhalten \\
+\hline
+\rowids & Walker Demo mit Gelenkschon Belohnung (Gelenke gleichmäßig belasten) & Belohnung mit 3 multiplizierten Komponenten zu komplex \\
+\hline
+\rowids & Walker Demo mit Gelenkschon Belohnung (Gelenke gleichmäßig belasten) und Belohnungen mit Gewichtung addiert & Läufer nutzt Blickbelohnung aus \\
+\hline
+\rowids & Walker Demo auf der Stelle stehen mit Geschwindigkeit 0,0001 & lernt nicht \\
+\hline
+\rowids & Walker Demo auf der Stelle stehen mit neuer Geschwindigkeitsbelohnung & lernt sehr schnell gutes Verhalten \\
+\hline
+\rowids & Walker Demo laufen mit neuer Geschwindigkeitsbelohnung & lernt sehr langsam \\
+\hline
+\rowids & Walker Demo laufen mit Limit für Geschwindigkeitbelohnung Sensitivität & lernt schnell gutes Verhalten \\
+\hline
+\rowids & Walker Demo rückwärts laufen & lernt gutes Verhalten \\
+\hline
+\rowids & Walker Demo seitwärts (rechts) laufen & lernt gutes Verhalten \\
+\hline
+\rowids & Walker Demo seitwärts (links) laufen & lernt etwas schlechteres Verhalten \\
+\hline
+\rowids & Walker Demo mit Blickziel und Winkelabweichung Lernplan & ignoriert wechselndes Blickziel \\
+\hline
+\rowids & Walker Demo mit Blickziel und Winkelabweichung fest auf 90 Grad & passt Blickrichtung leicht an \\
+\hline
+\rowids & Walker Demo mit Blickziel und Winkelabweichung fest auf 180 Grad & schaut zu Boden \\
+\hline
+\rowids & Walker Demo mit Mixamo Charakter Fehler mit Fuß-kollider behoben & lernt sehr gut aber galoppiert anstatt zu laufen \\
+\hline
+\rowids & Walker Demo mit Mixamo Charakter mit Belohnung für Fußwechsel alles 2 Sekunden & galoppiert immer noch \\
+\hline
+\rowids & Walker Demo mit Mixamo Charakter mit Belohnung für Fußwechsel alles 1,2 Sekunden & lernt zu laufen und erreicht stabil mehrere Ziele \\
+\hline
+\rowids & Walker Demo mit Mixamo Charakter mit Belohnung Energieminimierung & Gangbild verbessert aber Arme ohne Bewegung \\
+\hline
+\rowids & Walker Demo mit Blickziel, Winkelabweichung fest auf 180 Grad und Bestrafung für das neigen des Kopfs & läuft nur rückwärts \\
+\hline
+\rowids & Walker Demo mit Blickziel, Winkelabweichung jedes Update gesetzt & läuft nur seitwärts \\
+\hline
+\rowids & Walker Demo, Blickziel jedes Update gesetzt, Winkelabweichung nur bei erreichen von Ziel und durchschnittlicher Belohnung größer 0,7 neu gesetzt & läuft nur seitwärts \\
+\hline
+\rowids & Walker Demo, Blickziel jedes Update gesetzt, Winkelabweichung nur bei erreichen von Ziel und durchschnittlicher Belohnung größer 0,7 neu gesetzt, extremerer Anstieg der Blickbelohnung & schaut zuverlässig zum Blickziel aber fällt sehr schnell \\
+\hline
+\rowids & Walker Demo, Blickziel jedes Update gesetzt, Winkelabweichung bei Blickkontakt größer 3 Sekunden & schaut zuverlässig zum Blickziel aber fällt sehr schnell \\
+\hline
+\rowids & Walker Demo, Blickziel jedes Update gesetzt, Winkelabweichung bei Blickkontakt größer 2 Sekunden & schaut zuverlässig zum Blickziel aber fällt auch schnell \\
+\hline
+\rowids & Walker Demo, Blickziel jedes Update gesetzt, Winkelabweichung bei Blickkontakt größer 2 Sekunden, Beta höher (0,01) für mehr ausprobieren während dem Training & Entropy zu hoch Verhalten wird immer zufälliger anstatt sich zu festigen \\
+\hline
+\rowids & Walker Demo, Blickziel jedes Update gesetzt, Winkelabweichung bei Blickkontakt größer 2 Sekunden, Beta höher (0,0075) für mehr ausprobieren während dem Training & ähnliche Leistung wie vor der Änderung \\
+\hline
+\caption{Training Documentation}
+\label{table:training_doc}
+\end{longtable}}
+\rowidsclear
