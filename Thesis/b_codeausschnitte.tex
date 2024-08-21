@@ -1,0 +1,668 @@
+\chapter{Codeausschnitte}
+\section{Angepasstes Körperteil Skript}
+\begin{lstlisting}[caption={Körperteil Skript},captionpos=b,label={lst:skript_körperteil}]
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Events;
+
+[System.Serializable]
+public class PhysicsConfig
+{
+    public float maxJointSpring = 40000f;
+    public float jointDampen = 5000f;
+    public float maxJointForceLimit = 20000f;
+    public float k_MaxAngularVelocity = 50f;
+}
+
+/*
+* Bodypart
+* implementes functions to controll the joints and holds information about bodypart
+*/
+[RequireComponent(typeof(Rigidbody))]
+public class Bodypart : MonoBehaviour
+{
+    [Header("Body Part Config")]
+    public PhysicsConfig physicsConfig;
+    public bool triggerTouchingGroundEvent;
+
+    [HideInInspector] public UnityEvent onTouchedGround;
+    [HideInInspector] public bool touchingGround;
+
+    [HideInInspector] public UnityEvent onTouchedTarget;
+
+    //component references
+    [HideInInspector] public Rigidbody rb;
+    [HideInInspector] public ConfigurableJoint joint;
+
+    //starting pos and rot
+    [HideInInspector] public Vector3 startingPos;
+    [HideInInspector] public Quaternion startingRot;
+
+    //bodypart information
+    [HideInInspector] public Vector3 dof; //degrees of freedom
+    [HideInInspector] public float currentStrength;
+    [HideInInspector] public float power;
+
+    void Awake()
+    {
+        //get component references
+        rb = GetComponent<Rigidbody>();
+        if (TryGetComponent(out ConfigurableJoint foundJoint))
+        {
+            joint = foundJoint;
+        }
+
+        //save starting pos and rot
+        startingPos = transform.position;
+        startingRot = transform.rotation;
+
+        //setup rigidbody max angular velocity
+        rb.maxAngularVelocity = physicsConfig.k_MaxAngularVelocity;
+
+        //setup base degrees of freedom
+        dof = new Vector3(0f, 0f, 0f);
+
+        if (joint)
+        {
+            //set joint settings from physics config
+            JointDrive jd = new JointDrive
+            {
+                positionSpring = physicsConfig.maxJointSpring,
+                positionDamper = physicsConfig.jointDampen,
+                maximumForce = physicsConfig.maxJointForceLimit
+            };
+            joint.slerpDrive = jd;
+
+            //calculate degrees of freedom
+            dof.x = joint.angularXMotion != ConfigurableJointMotion.Locked ? 1 : 0;
+            dof.y = joint.angularYMotion != ConfigurableJointMotion.Locked ? 1 : 0;
+            dof.z = joint.angularZMotion != ConfigurableJointMotion.Locked ? 1 : 0;
+        }
+    }
+
+    public void Initialize()
+    {
+        //setup events
+        onTouchedGround = new UnityEvent();
+        onTouchedTarget = new UnityEvent();
+    }
+
+    /// <summary>
+    /// Reset body part to initial configuration.
+    /// </summary>
+    public void ResetTransform()
+    {
+        rb.transform.position = startingPos;
+        rb.transform.rotation = startingRot;
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        touchingGround = false;
+    }
+
+    public void ResetTransform(Vector3 position, Quaternion rotation)
+    {
+        rb.transform.position = position;
+        rb.transform.rotation = rotation;
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        touchingGround = false;
+    }
+
+    /// <summary>
+    /// Apply torque according to defined goal `x, y, z` angle and force `strength`.
+    /// </summary>
+    public void SetJointTargetRotation(float x, float y, float z)
+    {
+        x = (x + 1f) * 0.5f;
+        y = (y + 1f) * 0.5f;
+        z = (z + 1f) * 0.5f;
+
+        var xRot = Mathf.Lerp(joint.lowAngularXLimit.limit, joint.highAngularXLimit.limit, x);
+        var yRot = Mathf.Lerp(-joint.angularYLimit.limit, joint.angularYLimit.limit, y);
+        var zRot = Mathf.Lerp(-joint.angularZLimit.limit, joint.angularZLimit.limit, z);
+
+        joint.targetRotation = Quaternion.Euler(xRot, yRot, zRot);
+    }
+
+    public void SetJointStrength(float strength)
+    {
+        var rawVal = (strength + 1f) * 0.5f * physicsConfig.maxJointForceLimit;
+        var jd = new JointDrive
+        {
+            positionSpring = physicsConfig.maxJointSpring,
+            positionDamper = physicsConfig.jointDampen,
+            maximumForce = rawVal
+        };
+        joint.slerpDrive = jd;
+        currentStrength = jd.maximumForce;
+    }
+
+    void OnCollisionEnter(Collision col)
+    {
+        if (col.transform.CompareTag("ground"))
+        {
+            touchingGround = true;
+            if (triggerTouchingGroundEvent)
+            {
+                onTouchedGround.Invoke();
+            }
+        }
+        if (col.transform.CompareTag("target"))
+        {
+            onTouchedTarget.Invoke();
+        }
+    }
+
+    void OnCollisionExit(Collision other)
+    {
+        if (other.transform.CompareTag("ground"))
+        {
+            touchingGround = false;
+        }
+    }
+
+    void FixedUpdate()
+    {
+        //calculate joint power
+        if (joint)
+        {
+            Vector3 currentTorque = joint.currentTorque;
+            Vector3 angularVel = rb.angularVelocity;
+
+            power = Mathf.Abs(Vector3.Dot(currentTorque, angularVel));
+        }
+    }
+}
+\end{lstlisting}
+
+\section{Angepasstes Agenten Skript}
+\begin{lstlisting}[caption={Agenten Skript},captionpos=b,label={lst:skript_agent1}]
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Events;
+using Unity.MLAgents;
+using Unity.MLAgents.Actuators;
+using Unity.MLAgents.Sensors;
+using Random = UnityEngine.Random;
+
+/*
+* Walker Agent 1
+* brain of the walker controlling the bodyparts and implementing the rl loop
+*/
+public class WalkerAgent1 : Agent
+{
+    [Header("Walk Speed")]
+    public float minWalkingSpeed = 0.1f;
+    public float maxWalkingSpeed = 10f;
+    public bool randomizeWalkSpeedEachEpisode;
+    public float targetWalkingSpeed = 0.1f;
+
+
+    [Header("Target To Walk Towards")]
+    public Transform target;
+    public UnityEvent onTouchedTarget = new UnityEvent();
+
+    [Header("Bodyparts")]
+    public Transform root;
+    public Transform head;
+    public bool randomizeRotationOnEpsiode = true;
+    [HideInInspector] public List<Bodypart> bodyparts = new List<Bodypart>();
+
+    [Header("Debug Log Stats")]
+    public bool logStats = false;
+
+    //This will be used as a stabilized model space reference point for observations
+    //Because ragdolls can move erratically during training, using a stabilized reference transform improves learning
+    protected OrientationCubeController1 walkOrientationCube;
+    public EnvironmentParameters m_ResetParams;
+    public StatsRecorder statsRecorder;
+
+    /*
+    * Environment stats
+    */
+    protected Vector3 previousPos;
+    protected float distanceMovedInTargetDirection;
+    protected float lastReachedTargetTime = 0f;
+    protected int reachedTargets;
+
+    public override void Initialize()
+    {
+        //init orientation object
+        GameObject orientationObject = new GameObject("OrientationObject");
+        orientationObject.transform.parent = transform;
+        walkOrientationCube = orientationObject.AddComponent<OrientationCubeController1>();
+        walkOrientationCube.root = root;
+        walkOrientationCube.target = target;
+
+        //change to auto setup each body part
+        foreach (Bodypart bp in root.GetComponentsInChildren<Bodypart>())
+        {
+            bp.Initialize();
+            bp.onTouchedGround.AddListener(OnTouchedGround);
+            bp.onTouchedTarget.AddListener(OnTouchedTarget);
+            bodyparts.Add(bp);
+        }
+
+        m_ResetParams = Academy.Instance.EnvironmentParameters;
+        statsRecorder = Academy.Instance.StatsRecorder;
+    }
+
+    /// <summary>
+    /// Loop over body parts and reset them to initial conditions.
+    /// </summary>
+    public override void OnEpisodeBegin()
+    {
+        //Reset all of the body parts
+        foreach (Bodypart bp in bodyparts)
+        {
+            bp.ResetTransform();
+        }
+
+        //Random start rotation to help generalize
+        if (randomizeRotationOnEpsiode)
+        {
+            root.rotation = Quaternion.Euler(0, Random.Range(0.0f, 360.0f), 0);
+        }
+
+        //Set our goal walking speed
+        targetWalkingSpeed =
+            randomizeWalkSpeedEachEpisode ? Random.Range(minWalkingSpeed, maxWalkingSpeed) : targetWalkingSpeed;
+
+        //record walking speed stats
+        RecordStat("Environment/WalkingSpeed", targetWalkingSpeed);
+
+        //record then reset distance moved in target direction
+        RecordStat("Environment/DistanceMovedInTargetDirection", distanceMovedInTargetDirection);
+        distanceMovedInTargetDirection = 0f;
+        previousPos = root.position;
+
+        //record then reset targets reached
+        RecordStat("Environment/ReachedTargets", reachedTargets);
+        reachedTargets = 0;
+    }
+
+    /// <summary>
+    /// Add relevant information on each body part to observations.
+    /// </summary>
+    public void CollectObservationBodyPart(Bodypart bp, VectorSensor sensor)
+    {
+        //GROUND CHECK
+        sensor.AddObservation(bp.touchingGround); // Is this bp touching the ground
+
+        //Get velocities in the context of our orientation cube's space
+        //Note: You can get these velocities in world space as well but it may not train as well.
+        sensor.AddObservation(walkOrientationCube.transform.InverseTransformDirection(bp.rb.velocity));
+        sensor.AddObservation(walkOrientationCube.transform.InverseTransformDirection(bp.rb.angularVelocity));
+
+        //Get position relative to root in the context of our orientation cube's space
+        sensor.AddObservation(walkOrientationCube.transform.InverseTransformDirection(bp.rb.position - root.position));
+
+        //return when bodypart joint has no free rotation axis
+        if (bp.dof.sqrMagnitude <= 0) return;
+
+        sensor.AddObservation(bp.rb.transform.localRotation);
+        sensor.AddObservation(bp.currentStrength / bp.physicsConfig.maxJointForceLimit);
+    }
+
+    /// <summary>
+    /// Loop over body parts to add them to observation.
+    /// </summary>
+    public override void CollectObservations(VectorSensor sensor)
+    {
+        var cubeForward = walkOrientationCube.transform.forward;
+
+        //velocity we want to match
+        var velGoal = cubeForward * targetWalkingSpeed;
+        //ragdoll's avg vel
+        var avgVel = GetAvgVelocity();
+
+        //current ragdoll velocity. normalized
+        sensor.AddObservation(Vector3.Distance(velGoal, avgVel));
+        //avg body vel relative to cube
+        sensor.AddObservation(walkOrientationCube.transform.InverseTransformDirection(avgVel));
+        //vel goal relative to cube
+        sensor.AddObservation(walkOrientationCube.transform.InverseTransformDirection(velGoal));
+
+        //rotation deltas
+        sensor.AddObservation(Quaternion.FromToRotation(root.forward, cubeForward));
+        sensor.AddObservation(Quaternion.FromToRotation(head.forward, cubeForward));
+
+        //Position of target position relative to cube
+        sensor.AddObservation(walkOrientationCube.transform.InverseTransformPoint(target.transform.position));
+
+        foreach (Bodypart bp in bodyparts)
+        {
+            CollectObservationBodyPart(bp, sensor);
+        }
+    }
+
+    public override void OnActionReceived(ActionBuffers actionBuffers)
+    {
+        var continuousActions = actionBuffers.ContinuousActions;
+        int i = -1;
+
+        foreach (Bodypart bp in bodyparts)
+        {
+            if (bp.dof.sqrMagnitude <= 0) continue;
+            float targetRotX = bp.dof.x == 1 ? continuousActions[++i] : 0;
+            float targetRotY = bp.dof.y == 1 ? continuousActions[++i] : 0;
+            float targetRotZ = bp.dof.z == 1 ? continuousActions[++i] : 0;
+            float jointStrength = continuousActions[++i];
+            bp.SetJointTargetRotation(targetRotX, targetRotY, targetRotZ);
+            bp.SetJointStrength(jointStrength);
+        }
+    }
+
+    public virtual void FixedUpdate()
+    {
+        distanceMovedInTargetDirection += GetDistanceMovedInTargetDirection();
+
+        var cubeForward = walkOrientationCube.transform.forward;
+
+        // Set reward for this step according to mixture of the following elements.
+        // a. Match target speed
+        //This reward will approach 1 if it matches perfectly and approach zero as it deviates
+        var matchSpeedReward = GetMatchingVelocityReward(cubeForward * targetWalkingSpeed, GetAvgVelocity());
+        RecordStat("Reward/MatchingVelocityReward", matchSpeedReward);
+
+        //Check for NaNs
+        if (float.IsNaN(matchSpeedReward))
+        {
+            throw new ArgumentException(
+                "NaN in moveTowardsTargetReward.\n" +
+                $" cubeForward: {cubeForward}\n" +
+                $" root.velocity: {bodyparts[0].rb.velocity}\n" +
+                $" maximumWalkingSpeed: {maxWalkingSpeed}"
+            );
+        }
+
+        // b. Rotation alignment with target direction.
+        //This reward will approach 1 if it faces the target direction perfectly and approach zero as it deviates
+        var headForward = head.forward;
+        headForward.y = 0;
+        // var lookAtTargetReward = (Vector3.Dot(cubeForward, head.forward) + 1) * .5F;
+        var lookAtTargetReward = (Vector3.Dot(cubeForward, headForward) + 1) * .5F;
+        RecordStat("Reward/LookAtTargetReward", lookAtTargetReward);
+
+        //Check for NaNs
+        if (float.IsNaN(lookAtTargetReward))
+        {
+            throw new ArgumentException(
+                "NaN in lookAtTargetReward.\n" +
+                $" cubeForward: {cubeForward}\n" +
+                $" head.forward: {head.forward}"
+            );
+        }
+
+        AddReward(matchSpeedReward * lookAtTargetReward);
+    }
+
+    //Returns the average velocity of all of the body parts
+    //Using the velocity of the hips only has shown to result in more erratic movement from the limbs, so...
+    //...using the average helps prevent this erratic movement
+    public Vector3 GetAvgVelocity()
+    {
+        Vector3 velSum = Vector3.zero;
+
+        foreach (Bodypart bp in bodyparts)
+        {
+            velSum += bp.rb.velocity;
+        }
+
+        var avgVel = velSum / bodyparts.Count;
+        return avgVel;
+    }
+
+    //normalized value of the difference in avg speed vs goal walking speed.
+    public float GetMatchingVelocityReward(Vector3 velocityGoal, Vector3 actualVelocity)
+    {
+        //distance between our actual velocity and goal velocity
+        float upperLimit = Mathf.Max(0.1f, targetWalkingSpeed);
+        var velDeltaMagnitude = Mathf.Clamp(Vector3.Distance(actualVelocity, velocityGoal), 0, upperLimit);
+
+        //return the value on a declining sigmoid shaped curve that decays from 1 to 0
+        //This reward will approach 1 if it matches perfectly and approach zero as it deviates
+        float matchingVelocityReward = Mathf.Pow(1 - Mathf.Pow(velDeltaMagnitude / upperLimit, 2), 2);
+        return matchingVelocityReward;
+    }
+
+    protected float GetDistanceMovedInTargetDirection()
+    {
+        //calculate the displacement vector
+        Vector3 currentPos = root.position;
+        Vector3 displacement = currentPos - previousPos;
+
+        //project the displacement vector onto the goal direction vector
+        float movementInTargetDirection = Vector3.Dot(displacement, walkOrientationCube.transform.forward);
+
+        //update the previous position for the next frame
+        previousPos = currentPos;
+        return movementInTargetDirection;
+    }
+
+    protected void OnTouchedTarget()
+    {
+        if (lastReachedTargetTime + 0.1f <= Time.time)
+        {
+            lastReachedTargetTime = Time.time;
+            reachedTargets++;
+            onTouchedTarget.Invoke();
+        }
+    }
+
+    protected void OnTouchedGround()
+    {
+        //check that the episode did not start in the last step to remove duplicate calls
+        if (Academy.Instance.StepCount < 1) return;
+        SetReward(-1f);
+        EndEpisode();
+    }
+
+    protected void RecordStat(string path, float value)
+    {
+        if (logStats) Debug.Log($"{path}: {value}");
+        statsRecorder.Add(path, value);
+    }
+}
+\end{lstlisting}
+
+\section{Angepasstes Zielsteuerung Skript}
+\begin{lstlisting}[caption={Zielsteuerung Skript},captionpos=b,label={lst:skript_zielsteuerung}]
+using UnityEngine;
+using Random = UnityEngine.Random;
+using Unity.MLAgents;
+using UnityEngine.Events;
+
+public class TargetController1 : MonoBehaviour
+{
+    [Header("Target Config")]
+    public float spawnRadius; //The radius in which a target can be randomly spawned.
+    public bool setRandomStartPos = true;
+
+    private Vector3 m_startingPos; //the starting position of the target
+
+    void OnEnable()
+    {
+        m_startingPos = transform.position;
+        if (setRandomStartPos)
+        {
+            MoveTargetToRandomPosition();
+        }
+    }
+
+    /// <summary>
+    /// Moves target to a random position within specified radius.
+    /// </summary>
+    public void MoveTargetToRandomPosition()
+    {
+        var newTargetPos = m_startingPos + (Random.insideUnitSphere * spawnRadius);
+        newTargetPos.y = m_startingPos.y;
+        transform.position = newTargetPos;
+    }
+}
+\end{lstlisting}
+
+\section{Angepasstes Orientierungsobjekt Skript}
+\begin{lstlisting}[caption={Orientationsobjekt Skript},captionpos=b,label={lst:skript_orientationsobjekt}]
+using UnityEngine;
+
+/// <summary>
+/// Utility class to allow a stable observation platform.
+/// </summary>
+public class OrientationCubeController1 : MonoBehaviour
+{
+    public Transform root;
+    public Transform target;
+
+    //Update position and Rotation
+    public void UpdateOrientation()
+    {
+        var dirVector = target.position - transform.position;
+        dirVector.y = 0; //flatten dir on the y. this will only work on level, uneven surfaces
+        var lookRot =
+            dirVector == Vector3.zero
+                ? Quaternion.identity
+                : Quaternion.LookRotation(dirVector); //get our look rot to the target
+
+        //UPDATE ORIENTATION CUBE POS & ROT
+        transform.SetPositionAndRotation(root.position, lookRot);
+    }
+
+    void FixedUpdate()
+    {
+        UpdateOrientation();
+    }
+}
+\end{lstlisting}
+
+\section{Implementierung Spherecast}
+\begin{lstlisting}[caption={Implementierung von Spherecast um Blickkontakt überprüfen zu können},captionpos=b,label={lst:skript_spherecast}]
+void CheckLookAtTarget()
+{
+    RaycastHit hit;
+    if (Physics.SphereCast(head.position, lookAtTargetMargin, head.forward, out hit, 9f) && hit.collider.gameObject.CompareTag("lookTarget"))
+    {
+        if (isLookingAtTarget)
+        {
+            if (startetLookingAtTarget + durationLookAtTarget <= Time.fixedTime)
+            {
+                onLookedAtTarget.Invoke();
+                isLookingAtTarget = false;
+            }
+        }
+        else
+        {
+            startetLookingAtTarget = Time.fixedTime;
+            isLookingAtTarget = true;
+        }
+    }
+    else
+    {
+        isLookingAtTarget = false;
+    }
+}
+\end{lstlisting}
+
+\section{Implementierungen der Belohnungen für eine verbesserte Gehbewegung}
+\begin{lstlisting}[caption={Implementierung von zusätzliche Belohnungen für Gehbewegungsanpassungen},captionpos=b,label={lst:skript_gehbewegungsbelohnungen}]
+float leftFootDistance = Vector3.Distance(footL.position, target.position);
+float rightFootDistance = Vector3.Distance(footR.position, target.position);
+if (!leftForward && leftFootDistance < rightFootDistance)
+{
+    leftForward = true;
+    switchTime = Time.fixedTime;
+}
+else if (leftForward && rightFootDistance < leftFootDistance)
+{
+    leftForward = false;
+    switchTime = Time.fixedTime;
+}
+float switchDeltaTime = Time.fixedTime - switchTime;
+float footSwitchReward = -Mathf.Clamp((switchDeltaTime / 4) - 0.3f, 0f, 1f);
+if (logStats && footSwitchReward < 0) Debug.Log($"foot switch reward: {footSwitchReward}, switched: {switchDeltaTime} seconds ago");
+RecordStat("Reward/FootSwitchReward", footSwitchReward);
+
+float leftHandDistance = Vector3.Distance(handL.position, target.position);
+float rightHandDistance = Vector3.Distance(handR.position, target.position);
+float rootDistance = Vector3.Distance(root.position, target.position);
+float pendulumSum = 0f;
+if (leftForward)
+{
+    pendulumSum = (rootDistance - rightHandDistance) + (leftHandDistance - rootDistance);
+}
+else
+{
+    pendulumSum = (rootDistance - leftHandDistance) + (rightHandDistance - rootDistance);
+}
+float armPendulumReward = Mathf.Clamp((pendulumSum / 2) - 0.5f, -1f, 0f);
+RecordStat("Reward/ArmPendulumReward", armPendulumReward);
+
+float totalPower = GetTotalPower();
+float powerSaveReward = -Mathf.Clamp(totalPower / 3000 - 0.05f, 0f, 1f);
+if (logStats) Debug.Log($"power save reward: {powerSaveReward}, total: {totalPower}");
+RecordStat("Reward/PowerSaveReward", powerSaveReward);
+
+AddReward(Mathf.Min(footSwitchReward, powerSaveReward, armPendulumReward));
+\end{lstlisting}
+
+\section{Implementierung von Deep Mimic Körperhaltungsbelohnung}
+\begin{lstlisting}[caption={Implementierung von Deep Mimic Körperhaltungsbelohnung},captionpos=b,label={lst:skript_gehbewegungsbelohnungen}]
+private float CalculatePoseReward()
+{
+    float sum = 0f;
+    //sum over all bodyparts
+    for (int i = 0; i < bodyparts.Count; i++)
+    {
+        Bodypart bp = bodyparts[i];
+        ReferenceBodypart rbp = referenceController.referenceBodyparts[i];
+        float angle = 0f;
+        if (i == 0)
+        {
+            Vector3 bodypartUp = bp.transform.up;
+            Vector3 referenceUp = rbp.transform.up;
+            bodypartUp.y = 0;
+            referenceUp.y = 0;
+            bodypartUp.Normalize();
+            referenceUp.Normalize();
+            angle = Vector3.Angle(referenceUp, bodypartUp);
+        }
+        else
+        {
+            angle = Quaternion.Angle(rbp.transform.localRotation, bp.rb.transform.localRotation);
+        }
+        sum += angle;
+    }
+    float avg = sum / (bodyparts.Count - 1);
+    float poseReward = -(avg / 180f);
+    return poseReward;
+}
+\end{lstlisting}
+
+\section{Initialisierung der Körperhaltung von Animation}
+\begin{lstlisting}[caption={Implementierung Initialisierung des Charakters mit Körperhaltung aus Animation},captionpos=b,label={lst:skript_körperhaltung_initialisierung}]
+ public void ResetReference()
+{
+    transform.position = startingPos;
+    //call the Play method of the Animator to start playing the animation at a specific point
+    float randomPhase = Random.Range(phaseStartMin, phaseStartMax);
+    animator.Play(animationName, -1, randomPhase);
+    //reset reference bodyparts on next frame when animation has started from random phase
+    StartCoroutine(ResetBodypartsOnNextFrame());
+}
+
+IEnumerator ResetBodypartsOnNextFrame()
+{
+    //wait for the next frame
+    yield return null;
+
+    // Code to be executed on next frame
+    int i = 0;
+    foreach (Bodypart bp in bodyparts)
+    {
+        Transform referenceBone = referenceController.referenceBodyparts[i].transform;
+        bp.ResetTransform(referenceBone.position, referenceBone.rotation);
+        i++;
+    }
+}
+\end{lstlisting}
