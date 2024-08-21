@@ -7,7 +7,7 @@ Um das Stehenbleiben zu erreichen, wird die Zielgeschwindigkeit auf 0 gesetzt, w
 \begin{figure}[H]
   \centering  
   \includegraphics[width=0.9\textwidth]{img/plot_vel_reward_neu}
-  \caption{Neue Sigmoid Geschwindigkeit Belohnungsfunktion}
+  \caption{Neue Sigmoid Geschwindigkeitbelohnungsfunktion}
   \label{fig:plot_vel_reward_neu}
 \end{figure}
 
@@ -28,7 +28,7 @@ Der Walker konnte mit der Neuen Belohnungsfunktion erfolgreich lernen, auf der S
       \caption{Zurückgelegte Stecke in Zielrichtung}
       \label{fig:126_move_target_dir}
     \end{subfigure}
-  \caption{Training Stehen mit neuer Belohnungsfunktion}
+  \caption{Training stehen mit neuer Belohnungsfunktion}
   \label{fig:training_stehen_neu}
 \end{figure}
 
@@ -84,13 +84,13 @@ Mit der angepassten Demo-Belohnungsfunktion konnte nach etwas mehr Trainingsschr
       \caption{Zurückgelegte Stecke in Zielrichtung}
       \label{fig:126_128_move_target_dir}
     \end{subfigure}
-  \caption{Vergleich Training Stehen mit Neuer Belohnungfunktion (orange) und Angepasster Demo Belohnungsfunktion (blau)}
+  \caption{Vergleich Training stehen mit Neuer Belohnungfunktion (orange) und angepasster Demo Belohnungsfunktion (blau)}
   \label{fig:vergleich_126_128}
 \end{figure}
 
 Nach dem erfolgreichen Erlernen des Stehens auf einer festen Position sind die nächsten Bewegungsziele die Fortbewegung zum Ziel mit unterschiedlichen Blickrichtungen. Die Extremfälle umfassen dabei das Rückwärts- und Seitwärtslaufen. In diesem Abschnitt wird untersucht, ob der Läufer in der Lage ist, Bewegungen in verschiedene Richtungen relativ zu seiner Blickrichtung zu erlernen. Um dies zu ermöglichen, wurde die Belohnungsfunktion angepasst, sodass sie die Blickrichtung relativ zur Zielrichtung berücksichtigt. Bei der Vorwärtsbewegung entspricht die Blickrichtung der Zielrichtung. Bei der Seitwärtsbewegung steht die Blickrichtung im rechten Winkel zur Zielrichtung, und bei der Rückwärtsbewegung ist die Blickrichtung entgegengesetzt zur Zielrichtung. Die Implementierung zur Bestimmung der Blickrichtung ist in \ref{lst:blickrichtung} dargestellt.
 
-\begin{lstlisting}[caption={Blickrichtung Enum und Belohnung},captionpos=b,label={lst:blickrichtung}]
+\begin{lstlisting}[caption={Blickrichtung festlegen mit Richtungs Enum},captionpos=b,label={lst:blickrichtung}]
 public enum Direction
 {
     Forward,

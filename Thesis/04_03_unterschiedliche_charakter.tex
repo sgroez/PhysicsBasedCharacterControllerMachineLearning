@@ -5,7 +5,7 @@ Spiele verwenden die unterschiedlichsten Charaktere, nicht nur in Bezug auf das 
 Der Agent der Walker Demo setzt für jedes Körperteil eine separate Referenz, die über den Inspector in Unity konfiguriert werden muss. Um die damit verbundene Einschränkung einer festgelegten Konfiguration von Körperteilen zu beheben, soll eine flexible Liste von Körperteilen konfiguriert werden. Bei der Zustandserfassung der Körperteile soll anschließend der Zustand aller Körperteile in der Liste erfasst werden. Die Aktion soll gleichermaßen Zielwinkel und Gelenkstärke für alle Körperteile der Liste beinhalten. Um unnötige Komplexität bei der Beobachtung und Aktion zu vermeiden, sollen die Zielwinkel nur für bewegbare Gelenkachsen bestimmt werden. Die Gelenkstärke soll für komplett versteifte Gelenke ebenfalls ausgelassen werden. Um die Konfiguration weiter zu erleichtern, sollen die Körperteile zudem automatisch dem Walker-Agenten hinzugefügt werden. Schließlich soll auch das Stabilisierungsobjekt automatisch generiert werden. Diese Änderungen zielen darauf ab, die Flexibilität und Benutzerfreundlichkeit des Walker-Demo-Agenten zu verbessern. Manuelle Konfiguration soll auf das nötigste reduziert werden, gleichzeitig soll aber auch eine Skalierbare Lösung für unterschiedliche Charakterkörperstrukturen implementiert werden.
 
 \subsection{Anpassungen}
-Der Aufbau der Walker-Demo-Skripte, zu sehen in \ref{fig:architektur_alt}, verteilt die Aufgaben auf viele unterschiedliche Komponenten. Diese Aufteilung erschwert die Einrichtung und das Erweitern der Funktionalität erheblich. Die Aufgabenverteilung ist zudem nicht sinnvoll durchdacht. Ein Beispiel dafür ist die Zielsteuerung, die eigenständig funktioniert, während das Stabilisierungsobjekt vom Agenten aktualisiert werden muss. \hl{erklärung getrennt}
+Der Aufbau der Walker-Demo-Skripte, zu sehen in \ref{fig:architektur_alt}, verteilt die Aufgaben auf viele unterschiedliche Komponenten. Diese Aufteilung erschwert die Einrichtung und das Erweitern der Funktionalität erheblich. Die Aufgabenverteilung ist zudem nicht sinnvoll durchdacht. Ein Beispiel dafür ist die Zielsteuerung, die eigenständig funktioniert, während das Stabilisierungsobjekt vom Agenten aktualisiert werden muss.
 
 \begin{figure}[H]
   \centering  
@@ -148,7 +148,7 @@ Ist der Körper fertig konfiguriert, wird zuletzt das Walker Agent Skript zusamm
 \end{figure}
 
 \subsection{Auswertung}
-Das Training dauert etwa doppelt so lange, um ein etwas schlechteres Resultat zu erreichen. Der Agent lernt mit dem Mixamo Modell, lange in der Umgebung zu bestehen, und erreicht dabei auch ein gutes Maß an Belohnung pro Schritt (siehe Abbildung \ref{fig:training_mixamo_charakter}). In der Abbildung \ref{fig:mixamo_versuch10_gangbild} wird das erlernte Gangbild gezeigt. Der Läufer lernt in diesem Fall nicht das Laufen, sondern galoppiert zum Ziel. \hl{weiter ausführen???}
+Das Training dauert etwa doppelt so lange, um ein etwas schlechteres Resultat zu erreichen. Der Agent lernt mit dem Mixamo Modell, lange in der Umgebung zu bestehen, und erreicht dabei auch ein gutes Maß an Belohnung pro Schritt (siehe Abbildung \ref{fig:training_mixamo_charakter}). In der Abbildung \ref{fig:mixamo_versuch10_gangbild} wird das erlernte Gangbild gezeigt. Der Läufer lernt in diesem Fall nicht das Laufen, sondern galoppiert zum Ziel.
 
 \begin{figure}[H]
   \centering
@@ -156,7 +156,7 @@ Das Training dauert etwa doppelt so lange, um ein etwas schlechteres Resultat zu
     \includegraphics[width=0.27\textwidth]{img/charakter_mixamo_galoppieren1} & \includegraphics[width=0.27\textwidth]{img/charakter_mixamo_galoppieren2} & \includegraphics[width=0.27\textwidth]{img/charakter_mixamo_galoppieren3} \\
     \includegraphics[width=0.27\textwidth]{img/charakter_mixamo_galoppieren4} & \includegraphics[width=0.27\textwidth]{img/charakter_mixamo_galoppieren5} & \includegraphics[width=0.27\textwidth]{img/charakter_mixamo_galoppieren6} \\
   \end{tabular}
-  \caption{Mixamo Versuch 10 Gangbild}
+  \caption{Mixamo Charakter Gangbild mit Walker Demo Gelenklimits und Gewichten}
   \label{fig:mixamo_versuch10_gangbild}
 \end{figure}
 
@@ -192,6 +192,6 @@ Das Training dauert etwa doppelt so lange, um ein etwas schlechteres Resultat zu
       \caption{Geschwindigkeitsbelohnung}
       \label{fig:106_vel_reward}
     \end{subfigure}
- \caption{Training Mixamo Charakter}
+ \caption{Mixamo Charakter Training mit Walker Demo Gelenklimits und Gewichten}
   \label{fig:training_mixamo_charakter}
 \end{figure}
