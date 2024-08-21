@@ -13,7 +13,7 @@ Die Umgebung besteht aus einem quadratischen Spielfeld mit einem Boden und vier 
   \label{fig:szene_demo}
 \end{figure}
 
-Der Läufer besteht aus einfachen geometrischen Körpern. Insgesamt 11 Kapseln, drei Kugeln und zwei Quadern, von welchen jede über eine Festkörper- und eine Kollisions-Physikkomponente verfügt. Die Gelenke zwischen den Körperteilen werden als Kugelgelenke simuliert, um eine flexible und natürliche Bewegung zu gewährleisten. Die genaue Physikkonfiguration der Körperteile wird in der Tabelle \ref{table:walker_körperteile} veranschaulicht. Diese Konfiguration spielt eine zentrale Rolle, da die gesetzten Freiheiten sowie Einschränkungen beeinflussen, wie der Läufer lernt, auf das Ziel zuzulaufen.
+Der Läufer (zu sehen in Abbildung \ref{fig:charakter_walker}) besteht aus einfachen geometrischen Körpern. Insgesamt 11 Kapseln, drei Kugeln und zwei Quadern, von welchen jede über eine Festkörper- und eine Kollisions-Physikkomponente verfügt. Die Gelenke zwischen den Körperteilen werden als Kugelgelenke simuliert, um eine flexible und natürliche Bewegung zu gewährleisten. Die genaue Physikkonfiguration der Körperteile wird in der Tabelle \ref{table:walker_körperteile} veranschaulicht. Diese Konfiguration spielt eine zentrale Rolle, da die gesetzten Freiheiten sowie Einschränkungen beeinflussen, wie der Läufer lernt, auf das Ziel zuzulaufen.
 
 \begin{figure}[H]
   \centering  
@@ -54,7 +54,14 @@ Der Läufer besteht aus einfachen geometrischen Körpern. Insgesamt 11 Kapseln, 
   \label{table:walker_körperteile}
 \end{table}
 
-Das Walker Agent Skript definiert den Läufer als Agent für das maschinelle Lernen. In Abbildung \ref{fig:komponente_walker_agent} wird die Agentenkomponente im Inspektor gezeigt. Diese Komponente ist entscheidend für die Konfiguration des Läufers. Um die Komponente zu nutzen, müssen hier die Körperteile des Walkers referenziert werden. Das Walker Agent Skript registriert die Körperteile bei der Initialisierung in der Gelenk-Motor-Steuerung, wodurch eine effektive Schnittstelle zur Kontrolle der Gelenke geschaffen wird. Die Gelenk-Motor-Einstellungen (Joint Drive Settings) siehe Abbildung \ref{fig:komponente_joint_drive_controller} bestimmen die Stärke, mit welcher die Gelenke in die Zielstellung bewegt werden. Die Zielgeschwindigkeit kann manuell festgelegt werden oder während des Trainings in einem festgelegten Bereich variieren. Die Geschwindigkeit während des Trainings zu variieren hilft dem Agent sein Verhalten besser an Umgebungsveränderungen anzupassen. Als Letztes muss auch das Zielobjekt referenziert werden.
+Das Walker Agent Skript definiert den Läufer als Agent für das maschinelle Lernen. In Abbildung \ref{fig:komponente_walker_agent} wird die Agentenkomponente im Inspektor gezeigt. Diese Komponente ist entscheidend für die Konfiguration des Läufers. Um die Komponente zu nutzen, müssen hier die Körperteile des Walkers referenziert werden. Das Walker Agent Skript registriert die Körperteile bei der Initialisierung in der Gelenk-Motor-Steuerung, wodurch eine effektive Schnittstelle zur Kontrolle der Gelenke geschaffen wird. Die Gelenk-Motor-Einstellungen (Joint Drive Settings) siehe Abbildung \ref{fig:komponente_joint_drive_controller} bestimmen die Stärke, mit welcher die Gelenke in die Zielstellung bewegt werden. Die Joint Drive Settings werden unterhalb von Abbildung \ref{fig:komponente_joint_drive_controller} einzeln erklärt. Die Zielgeschwindigkeit kann manuell festgelegt werden oder während des Trainings in einem festgelegten Bereich variieren. Die Geschwindigkeit während des Trainings zu variieren hilft dem Agent sein Verhalten besser an Umgebungsveränderungen anzupassen. Als Letztes muss auch das Zielobjekt referenziert werden.
+
+\begin{figure}[H]
+  \centering  
+  \includegraphics[width=0.8\textwidth]{img/komponente_walker_agent}
+  \caption{Agent Konfiguration}
+  \label{fig:komponente_walker_agent}
+\end{figure}
 
 \begin{figure}[H]
   \centering  
@@ -68,13 +75,6 @@ Das Walker Agent Skript definiert den Läufer als Agent für das maschinelle Ler
   \item Joint Dampen: Verringert den Drehmoment proportional zur Differenz zwischen aktueller Geschwindigkeit und der Zielgeschwindigkeit. Dadurch verringert es Schwingungen.
   \item Max Joint Force Limit: Gibt die maximale Kraft des Gelenks an (verhindert zu schnelle Bewegung bei großer Abweichung).
 \end{itemize}
-
-\begin{figure}[H]
-  \centering  
-  \includegraphics[width=0.8\textwidth]{img/komponente_walker_agent}
-  \caption{Agent Konfiguration}
-  \label{fig:komponente_walker_agent}
-\end{figure}
 
 \section{Training}
 

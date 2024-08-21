@@ -10,6 +10,9 @@ Die Festkörperkomponente (Rigidbody) erlaubt es, 3D-Objekte als nicht verformba
   \caption{Unity ML-Agents Physik Festkörper}
   \label{fig:komponente_rigidbody}
 \end{figure}
+
+Die Parameter der Komponente aus Abbildung \ref{fig:komponente_rigidbody} werden in folgender Auflistung erleutert.
+
 \begin{itemize}
   \item Mass: gibt das Gewicht des Körpers an
   \item Drag: definiert den Geschwindigkeitsverlust eines Körpers in Bewegung durch Reibung, Luftwiederstand
@@ -34,6 +37,8 @@ Um Kollisionen zwischen Objekten zu berechnen benötigen diese zusätzlich eine 
 \end{figure}
 
 Festkörper können mit Gelenken zu komplexeren Körperstrukturen verbunden werden. Die Konfigurierbare Gelenkkomponente (Configurable Joint) ermöglicht die Simulation von Gelenken mit freier Bewegung und Rotation auf allen drei Achsen. Dies ist wesentlich, um realistische Animationen und Interaktionen in Softwaresimulationen zu erzeugen. Im Kontext dieser Arbeit wird das Gelenk auf Rotation beschränkt und als kugelförmiges Gelenk verwendet. Die Gelenke einer humanoiden Figur können somit vereinfacht aber ausreichend genau simuliert werden.
+
+Abbildung \ref{fig:komponente_configurable_joint} zeigt die Gelenkkomponente im Unity Inspector, in der Auflistung darunter werden ihre Parameter näher erklärt.
 
 \begin{figure}[H]
   \centering
