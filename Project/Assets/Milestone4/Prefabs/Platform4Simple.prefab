@@ -4236,7 +4236,7 @@ PrefabInstance:
     - target: {fileID: 8183247984112609304, guid: ea682f6a12d16485a850334f837c2b09, type: 3}
       propertyPath: m_Model
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5022602860645237092, guid: 1ea4e6d540b6440b9ae5687c0171051d, type: 3}
     - target: {fileID: 8183247984112609304, guid: ea682f6a12d16485a850334f837c2b09, type: 3}
       propertyPath: m_BrainParameters.VectorObservationSize
       value: 304
