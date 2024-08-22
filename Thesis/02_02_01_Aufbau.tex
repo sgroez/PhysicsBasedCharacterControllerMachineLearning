@@ -13,7 +13,7 @@ Das Toolkit ist in zwei Teile unterteilt (siehe Abbildung \ref{fig:mlagents_aufb
   \label{fig:mlagents_aufbau}
 \end{figure}
 
-Um eine Szene in Unity für das verstärkende Lernen zu nutzen, muss die Szene mindestens einen Agenten beinhalten. Jeder Agent referenziert ein Verhalten. Ein Verhalten kann eins von drei verschiedenen Modi verwenden. In Abbildung \ref{fig:mlagents_aufbau_unity} werden drei Agenten mit den unterschiedlichen Verhaltens Modi dargestellt.
+Um eine Szene in Unity für das verstärkende Lernen zu nutzen, muss die Szene mindestens einen Agenten beinhalten. Jeder Agent referenziert ein Verhalten. Ein Verhalten kann eins von drei verschiedenen Modi verwenden. In Abbildung \ref{fig:mlagents_aufbau_unity} werden drei Agenten mit den unterschiedlichen Verhaltens-Modi dargestellt.
 
 \begin{figure}[H]
   \centering  
@@ -40,7 +40,7 @@ Um eine Szene in Unity für das verstärkende Lernen zu nutzen, muss die Szene m
     \draw [latex-latex, line width=0.3mm] (verhalten3) -- (heuristik);
     
   \end{tikzpicture}
-  \caption{Unity ML-Agents Aufbau Unity Umgebung}
+  \caption{Unity ML-Agents Aufbau Unity Umgebung \protect\cite{juliani2020}}
   \label{fig:mlagents_aufbau_unity}
 \end{figure}
 
@@ -48,7 +48,7 @@ Das Verhalten bildet die Zuweisung von Beobachtung auf eine Aktion in der Unity 
 
 \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.5]{img/komponente_behavior_parameters}
+  \includegraphics[width=0.75\textwidth]{img/komponente_behavior_parameters}
   \caption{Unity ML-Agents Verhalten Parameter Komponente}
   \label{fig:komponente_behavior_parameters}
 \end{figure}
@@ -67,7 +67,7 @@ Die Agent-Komponente bildet die Grundlage für alle Implementierungen. Sie biete
 
 \begin{figure}[H]
   \centering
-  \includegraphics[scale=0.5]{img/komponente_agent}
+  \includegraphics[width=0.75\textwidth]{img/komponente_agent}
   \caption{Unity ML-Agents Agenten Komponente}
   \label{fig:komponente_agent}
 \end{figure}
@@ -93,11 +93,11 @@ public virtual void FixedUpdate()
 }
 \end{lstlisting}
 
-In der CollectObservations-Methode wird festgelegt, welche Daten dem Agent für das Training bereitgestellt werden (siehe Listing \ref{lst:agent_funktionen} Zeile 1-3). CollectObservations wird für jede angefragte Entscheidung ausgeführt und das Ergebnis an das NN-Modell oder den Python Trainer übergeben. Wenn eine Entscheidung angefragt wurde und das NN-Modell ein Ergebnis liefert, wird dieses hier von numerischen Werten in Aktionen umgewandelt. In Listing \ref{lst:agent_funktionen} Zeile 6-11 wird gezeigt, wie die Aktion in X- und Y-Bewegung umgesetzt wird. Im Beispielcode in Listing \ref{lst:agent_funktionen} Zeile 13-16 wird eine Belohnung in jedem FixedUpdate vergeben, und zwar über die AddReward Methode, die auch Teil der Agentenkomponente ist. Die Belohnung kann aber an jeder Stelle im Code vergeben werden, der Code dient hier nur als ein Beispiel.
+In der CollectObservations-Methode wird festgelegt, welche Daten dem Agenten für das Training bereitgestellt werden (siehe Listing \ref{lst:agent_funktionen} Zeile 1-3). CollectObservations wird für jede angefragte Entscheidung ausgeführt und das Ergebnis an das NN-Modell oder den Python Trainer übergeben. Wenn eine Entscheidung angefragt wurde und das NN-Modell ein Ergebnis liefert, wird dieses hier von numerischen Werten in Aktionen umgewandelt. In Listing \ref{lst:agent_funktionen} Zeile 6-11 wird gezeigt, wie die Aktion in X- und Y-Bewegung umgesetzt wird. Im Beispielcode in Listing \ref{lst:agent_funktionen} Zeile 13-16 wird eine Belohnung in jedem FixedUpdate vergeben, und zwar über die AddReward Methode, die auch Teil der Agentenkomponente ist. Die Belohnung kann aber an jeder Stelle im Code vergeben werden, der Code dient hier nur als ein Beispiel.
 
 \begin{figure}[H]
   \centering  
-  \includegraphics[scale=0.5]{img/komponente_decision_requester}
+  \includegraphics[width=0.75\textwidth]{img/komponente_decision_requester}
   \caption{Unity ML-Agents Entscheidung Anfragen Komponente}
   \label{fig:komponente_decision_requester}
 \end{figure}

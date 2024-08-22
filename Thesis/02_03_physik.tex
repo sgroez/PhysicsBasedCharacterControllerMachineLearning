@@ -7,11 +7,11 @@ Die Festkörperkomponente (Rigidbody) erlaubt es, 3D-Objekte als nicht verformba
 \begin{figure}[H]
   \centering  
   \includegraphics[scale=0.5]{img/komponente_rigidbody}
-  \caption{Unity ML-Agents Physik Festkörper}
+  \caption{Unity Physik Festkörper}
   \label{fig:komponente_rigidbody}
 \end{figure}
 
-Die Parameter der Komponente aus Abbildung \ref{fig:komponente_rigidbody} werden in folgender Auflistung erleutert.
+Die Parameter der Komponente aus Abbildung \ref{fig:komponente_rigidbody} werden in folgender Auflistung erläutert.
 
 \begin{itemize}
   \item Mass: gibt das Gewicht des Körpers an
@@ -20,39 +20,39 @@ Die Parameter der Komponente aus Abbildung \ref{fig:komponente_rigidbody} werden
   \item Collision Detection: legt fest wie Kollisionen berechnet werden (Akkurat/Leistung)
  \end{itemize}
  
-Um Kollisionen zwischen Objekten zu berechnen benötigen diese zusätzlich eine Kollisionskomponente. Komplexe 3D-Modelle können in der Kollisionsberechnung jedoch in ihrer direkten Form rechenintensiv sein. Zur Optimierung werden diese Modelle vereinfacht, indem sie durch geometrische Formen wie Kugeln, Kapseln oder Boxen dargestellt werden. Abbildung \ref{fig:komponente_collider} zeigt die Unterschiedlichen Kollisionskomponenten in Unity. Abbildung \ref{fig:charakter_mixamo_collider} zeigt wie die Kollisionkomponenten (gelbe Wireframes) genutzt werden um die Körperteile eines komplexen 3D Modells vereinfacht abzubilden.
+Um Kollisionen zwischen Objekten zu berechnen, benötigen diese zusätzlich eine Kollisionskomponente. Komplexe 3D-Modelle können in der Kollisionsberechnung jedoch in ihrer direkten Form rechenintensiv sein. Zur Optimierung werden diese Modelle vereinfacht, indem sie durch geometrische Formen wie Kugeln, Kapseln oder Boxen dargestellt werden. Abbildung \ref{fig:komponente_collider} zeigt die Unterschiedlichen Kollisionskomponenten in Unity. Abbildung \ref{fig:charakter_mixamo_collider} zeigt, wie die Kollisionkomponenten (gelbe Wireframes) genutzt werden um die Körperteile eines komplexen 3D Modells vereinfacht abzubilden.
 
  \begin{figure}[H]
   \centering  
   \includegraphics[scale=0.5]{img/komponente_collider}
-  \caption{Unity ML-Agents Physik Kollisionskomponenten}
+  \caption{Unity Physik Kollisionskomponenten}
   \label{fig:komponente_collider}
 \end{figure}
 
  \begin{figure}[H]
   \centering  
   \includegraphics[scale=0.4]{img/charakter_mixamo_collider}
-  \caption{Unity ML-Agents Physik Charakter vereinfacht mit Kollisionskomponenten }
+  \caption{Unity Physik Charakter vereinfacht mit Kollisionskomponenten }
   \label{fig:charakter_mixamo_collider}
 \end{figure}
 
-Festkörper können mit Gelenken zu komplexeren Körperstrukturen verbunden werden. Die Konfigurierbare Gelenkkomponente (Configurable Joint) ermöglicht die Simulation von Gelenken mit freier Bewegung und Rotation auf allen drei Achsen. Dies ist wesentlich, um realistische Animationen und Interaktionen in Softwaresimulationen zu erzeugen. Im Kontext dieser Arbeit wird das Gelenk auf Rotation beschränkt und als kugelförmiges Gelenk verwendet. Die Gelenke einer humanoiden Figur können somit vereinfacht aber ausreichend genau simuliert werden.
+Festkörper können mit Gelenken zu komplexeren Körperstrukturen verbunden werden. Die Konfigurierbare Gelenkkomponente (Configurable Joint) ermöglicht die Simulation von Gelenken mit freier Bewegung und Rotation auf allen drei Achsen. Dies ist wesentlich, um realistische Animationen und Interaktionen in Softwaresimulationen zu erzeugen. Im Kontext dieser Arbeit wird das Gelenk auf Rotation beschränkt und als kugelförmiges Gelenk verwendet. Die Gelenke einer humanoiden Figur können somit vereinfacht, aber ausreichend genau simuliert werden.
 
 Abbildung \ref{fig:komponente_configurable_joint} zeigt die Gelenkkomponente im Unity Inspector, in der Auflistung darunter werden ihre Parameter näher erklärt.
 
 \begin{figure}[H]
   \centering
   \includegraphics[scale=0.5]{img/komponente_configurable_joint}
-  \caption{Unity ML-Agents Physik Gelenk}
+  \caption{Unity Physik Gelenk}
   \label{fig:komponente_configurable_joint}
 \end{figure}
 \begin{itemize}
-  \item Connected Body: bestimmt, mit welchem Körper das Gelenke verbunden ist
+  \item Connected Body: bestimmt, mit welchem Körper das Gelenk verbunden ist
   \item Anchor: legt fest, an welchem Punkt die Verbindung zum verbundenen Körper besteht
   \item Axis: legt die Hauptbewegungs- und Rotationsachse fest
   \item Secondary Axis: legt die sekundäre Beweungs- und Rotationsachse fest
   \item Angular X Y Z Motion: bestimmt, ob das Gelenk Rotation zwischen den Körpern auf der X Y Z Achse zulässt
   \item Target Position: bestimmt das Ziel, zu welchem das Gelenk sich bewegen soll
   \item Angular X Y Z Limit: ermöglicht das Festlegen von Winkellimits für die Rotationsbewegungen
-  \item X Y Z  und Slerp Drive: bestimmen die Stärke der Federkraft welche das Gelenk in die Zielposition bewegt
+  \item X Y Z  und Slerp Drive: bestimmen die Stärke der Federkraft, welche das Gelenk in die Zielposition bewegt
 \end{itemize}

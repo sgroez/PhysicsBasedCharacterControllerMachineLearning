@@ -1,5 +1,6 @@
 \chapter{Codeausschnitte}
-\section{Angepasstes Körperteil Skript}
+\section{Angepasstes Skript Körperteil}
+\label{code:körperteil}
 \begin{lstlisting}[caption={Körperteil Skript},captionpos=b,label={lst:skript_körperteil}]
 using System.Collections.Generic;
 using UnityEngine;
@@ -175,7 +176,9 @@ public class Bodypart : MonoBehaviour
 }
 \end{lstlisting}
 
-\section{Angepasstes Agenten Skript}
+\newpage
+\section{Angepasstes Skript Agenten}
+\label{code:agent}
 \begin{lstlisting}[caption={Agenten Skript},captionpos=b,label={lst:skript_agent1}]
 using System;
 using System.Collections.Generic;
@@ -231,7 +234,8 @@ public class WalkerAgent1 : Agent
         //init orientation object
         GameObject orientationObject = new GameObject("OrientationObject");
         orientationObject.transform.parent = transform;
-        walkOrientationCube = orientationObject.AddComponent<OrientationCubeController1>();
+        walkOrientationCube = orientationObject
+        .AddComponent<OrientationCubeController1>();
         walkOrientationCube.root = root;
         walkOrientationCube.target = target;
 
@@ -292,11 +296,14 @@ public class WalkerAgent1 : Agent
 
         //Get velocities in the context of our orientation cube's space
         //Note: You can get these velocities in world space as well but it may not train as well.
-        sensor.AddObservation(walkOrientationCube.transform.InverseTransformDirection(bp.rb.velocity));
-        sensor.AddObservation(walkOrientationCube.transform.InverseTransformDirection(bp.rb.angularVelocity));
+        sensor.AddObservation(walkOrientationCube.transform
+        .InverseTransformDirection(bp.rb.velocity));
+        sensor.AddObservation(walkOrientationCube.transform
+        .InverseTransformDirection(bp.rb.angularVelocity));
 
         //Get position relative to root in the context of our orientation cube's space
-        sensor.AddObservation(walkOrientationCube.transform.InverseTransformDirection(bp.rb.position - root.position));
+        sensor.AddObservation(walkOrientationCube.transform
+        .InverseTransformDirection(bp.rb.position - root.position));
 
         //return when bodypart joint has no free rotation axis
         if (bp.dof.sqrMagnitude <= 0) return;
@@ -320,16 +327,19 @@ public class WalkerAgent1 : Agent
         //current ragdoll velocity. normalized
         sensor.AddObservation(Vector3.Distance(velGoal, avgVel));
         //avg body vel relative to cube
-        sensor.AddObservation(walkOrientationCube.transform.InverseTransformDirection(avgVel));
+        sensor.AddObservation(walkOrientationCube.transform
+        .InverseTransformDirection(avgVel));
         //vel goal relative to cube
-        sensor.AddObservation(walkOrientationCube.transform.InverseTransformDirection(velGoal));
+        sensor.AddObservation(walkOrientationCube.transform
+        .InverseTransformDirection(velGoal));
 
         //rotation deltas
         sensor.AddObservation(Quaternion.FromToRotation(root.forward, cubeForward));
         sensor.AddObservation(Quaternion.FromToRotation(head.forward, cubeForward));
 
         //Position of target position relative to cube
-        sensor.AddObservation(walkOrientationCube.transform.InverseTransformPoint(target.transform.position));
+        sensor.AddObservation(walkOrientationCube.transform
+        .InverseTransformPoint(target.transform.position));
 
         foreach (Bodypart bp in bodyparts)
         {
@@ -467,7 +477,9 @@ public class WalkerAgent1 : Agent
 }
 \end{lstlisting}
 
-\section{Angepasstes Zielsteuerung Skript}
+\newpage
+\section{Angepasstes Skript Zielsteuerung}
+\label{code:zielsteuerung}
 \begin{lstlisting}[caption={Zielsteuerung Skript},captionpos=b,label={lst:skript_zielsteuerung}]
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -503,7 +515,9 @@ public class TargetController1 : MonoBehaviour
 }
 \end{lstlisting}
 
-\section{Angepasstes Orientierungsobjekt Skript}
+\newpage
+\section{Angepasstes Skript Orientierungsobjekt}
+\label{code:orientierungsobjekt}
 \begin{lstlisting}[caption={Orientationsobjekt Skript},captionpos=b,label={lst:skript_orientationsobjekt}]
 using UnityEngine;
 
@@ -536,7 +550,9 @@ public class OrientationCubeController1 : MonoBehaviour
 }
 \end{lstlisting}
 
+\newpage
 \section{Implementierung Spherecast}
+\label{code:spherecast}
 \begin{lstlisting}[caption={Implementierung von Spherecast um Blickkontakt überprüfen zu können},captionpos=b,label={lst:skript_spherecast}]
 void CheckLookAtTarget()
 {
@@ -564,7 +580,9 @@ void CheckLookAtTarget()
 }
 \end{lstlisting}
 
+\newpage
 \section{Implementierungen der Belohnungen für eine verbesserte Gehbewegung}
+\label{code:gehbewegung_belohnung}
 \begin{lstlisting}[caption={Implementierung von zusätzliche Belohnungen für Gehbewegungsanpassungen},captionpos=b,label={lst:skript_gehbewegungsbelohnungen}]
 float leftFootDistance = Vector3.Distance(footL.position, target.position);
 float rightFootDistance = Vector3.Distance(footR.position, target.position);
@@ -606,6 +624,7 @@ RecordStat("Reward/PowerSaveReward", powerSaveReward);
 AddReward(Mathf.Min(footSwitchReward, powerSaveReward, armPendulumReward));
 \end{lstlisting}
 
+\label{code:imitation_belohnung}
 \section{Implementierung von Deep Mimic Körperhaltungsbelohnung}
 \begin{lstlisting}[caption={Implementierung von Deep Mimic Körperhaltungsbelohnung},captionpos=b,label={lst:skript_gehbewegungsbelohnungen}]
 private float CalculatePoseReward()
@@ -640,6 +659,7 @@ private float CalculatePoseReward()
 \end{lstlisting}
 
 \section{Initialisierung der Körperhaltung von Animation}
+\label{code:animation_init}
 \begin{lstlisting}[caption={Implementierung Initialisierung des Charakters mit Körperhaltung aus Animation},captionpos=b,label={lst:skript_körperhaltung_initialisierung}]
  public void ResetReference()
 {

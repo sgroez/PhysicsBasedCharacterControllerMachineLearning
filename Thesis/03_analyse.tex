@@ -1,6 +1,6 @@
 \chapter{Analyse Walker Demo}
 \label{sec:analyse}
-Zusätzlich zu den maschinellen Lernkomponenten stellt Unity auch Demonstrationsumgebungen bereit, in denen verschiedene Lösungen für gängige Verstärkungslernprobleme implementiert sind. In der Walker-Demo wird ein physisch simulierter Charakter darauf trainiert, zu einem Zielwürfel zu laufen. Die Demo implementiert bereits einige grundlegende Steuerungsmechanismen, die erforderlich sind, um einen Charakter in einer Umgebung zu bewegen. Aus diesem Grund wird in dieser Arbeit die Walker-Demo als Basis für die Entwicklung genutzt. 
+Zusätzlich zu den maschinellen Lernkomponenten stellt Unity auch Demonstrationsumgebungen bereit, in denen verschiedene Lösungen für gängige Verstärkungslernprobleme implementiert sind. In der Walker-Demo wird ein physisch simulierter Charakter darauf trainiert, zu einem Zielwürfel zu laufen. Die Demo implementiert bereits einige grundlegende Steuerungsmechanismen, die erforderlich sind, um einen Charakter in einer Umgebung zu bewegen. Aus diesem Grund wird in dieser Arbeit die Walker-Demo als Basis für die Entwicklung genutzt.\cite{juliani2020}
 
 Im folgenden Kapitel wird daher die Walker-Demo analysiert, um in den weiteren Kapiteln darauf aufzubauen. Es wird untersucht, wie die Lernumgebung aufgebaut ist. Anschließend werden der Ablauf und die Komponenten für das verstärkende Lernen analysiert. Zum Abschluss werden das Trainingsergebnis und die Bewegungsabläufe der Demo analysiert.
 \section{Lernumgebung}
@@ -137,11 +137,7 @@ Die Beobachtung des Agenten wird in Tabelle \ref{table:walker_beobachtung} darge
 \end{table}
 \rowidsclear
 
-Das Format einer Aktion besteht aus den in Tabelle \ref{table:walker_aktion} aufgeführten Feldern für jedes Körperteil des Läufers, ausgenommen der Hüfte und Hände. Jedes Körperteil wird somit separat bewegt, um die Bewegungen zu optimieren und schlussendlich das Gleichgewicht zu halten und das Fortbewegen zu erlernen.
-
-Die Hüfte ist das zentrale Körperteil, woran alle weiteren Körperteile mit Gelenken direkt oder indirekt anknüpfen. Aufgrund dieser zentralen Rolle wird die Hüftbeugung über das Gelenk des verbundenen Körpers gesteuert.
-
-Da die Hände kaum Relevanz für das laufen haben, sind sie in der Demo fest mit dem Unterarm verbunden und brauchen daher nicht gesteuert werden.
+Das Format einer Aktion besteht aus den in Tabelle \ref{table:walker_aktion} aufgeführten Feldern für jedes Körperteil des Läufers, ausgenommen der Hüfte und Hände. Jedes Körperteil wird somit separat bewegt, um die Bewegungen zu optimieren und schlussendlich das Gleichgewicht zu halten und das Fortbewegen zu ermöglichen. Die Hüfte ist das zentrale Körperteil, woran alle weiteren Körperteile mit Gelenken direkt oder indirekt anknüpfen. Aufgrund dieser zentralen Rolle wird die Hüftbeugung über das Gelenk des verbundenen Körpers gesteuert. Da die Hände kaum Relevanz für das Laufen haben, sind sie in der Demo fest mit dem Unterarm verbunden und brauchen daher nicht gesteuert werden.
 
 \begin{table}[H]
   \centering
@@ -171,7 +167,7 @@ Die Belohnungsfunktion enthält zwei Komponenten. Zum einen wird die Differenz d
 \begin{figure}[H]
   \centering  
   \includegraphics[width=0.85\textwidth]{img/plot_demo_vel_1}
-  \caption{Walker Demo Geschwindigkeitbelohnungsfunktion}
+  \caption{Walker Demo Geschwindigkeitsbelohnungsfunktion}
   \label{fig:plot_demo_vel_1}
 \end{figure}
 
@@ -182,7 +178,7 @@ Die Belohnungsfunktion enthält zwei Komponenten. Zum einen wird die Differenz d
   \label{fig:plot_demo_look}
 \end{figure}
 
-Die Belohnung wird in jedem Physikupdate neu berechnet und dem Agenten hinzugefügt. Die Belohnung wird für den Zeitraum zwischen zwei Entscheidungen aufsummiert. Bevor die nächste Entscheidung getroffen wird, wird das Tupel aus Beobachtung, Aktion und erhaltener Belohnung im Trainingspuffer gespeichert. Hat der Puffer genug Informationen gespeichert, beginnt ein Lernprozess, in welchem die zuvor gespeicherten Tupel evaluiert werden. Es wird der PPO Algorithmus auf Teilbatches ausgeführt und so schrittweise das Verhalten angepasst.
+Die Belohnung wird in jedem Physikupdate neu berechnet und dem Agenten hinzugefügt. Sie wird für den Zeitraum zwischen zwei Entscheidungen aufsummiert. Bevor die nächste Entscheidung getroffen wird, wird das Tupel aus Beobachtung, Aktion und erhaltener Belohnung im Trainingspuffer gespeichert. Hat der Puffer genug Informationen gespeichert, beginnt ein Lernprozess, in welchem die zuvor gespeicherten Tupel evaluiert werden. Es wird der PPO Algorithmus auf Teilbatches ausgeführt und so schrittweise das Verhalten angepasst.
 
 Erreicht der Läufer ein Ziel, wird dieses an eine neue zufällige Position in der Umgebung bewegt.
 
@@ -235,7 +231,7 @@ Der Agent der Walker Demo erlernt im Laufe von 30 Millionen Trainingsschritten e
       \label{fig:116_training_graph}
 \end{figure}
 
-Der Läufer ist nicht in der Lage, die Belohnungen pro Zeitschritt maximal auszureizen, sondern steigert die Länge der Episode, indem er die Sturzrisiken minimiert. Dies führt zu steigender Belohnung innerhalb der Episode. Wie in Abbildung \ref{fig:116_move_target_dir} und \ref{fig:116_reach_target} zu sehen ist, läuft er während einer Episode durchschnittlich eine Distanz von 80 Einheiten und erreicht dabei 10,4 Ziele. Der Läufer lernt sich stabil zum Ziel zu bewegen. In Abbildung \ref{fig:analyse_gangbild} ist das Gangbild des Läufers abgebildet. Der Läufer wechselt periodisch das Standbein, setzt den einen Fuß vor den anderen und drückt sich über das Standbein voran. Durch die vereinfachte Darstellung der Füße kann der Läufer jedoch nicht richtig abrollen. Die Arme hält der Läufer nahezu horizontal und schwingt diese sehr stark um das Gleichgewicht halten zu können. Das Gangbild ist daher menschenähnlich, aber nicht detailliert genug um in realistischeren Anwendungsbereichen als natürliche Gehbewegung dargestellt zu werden.
+Der Läufer ist nicht in der Lage, die Belohnungen pro Zeitschritt maximal auszureizen, sondern steigert die Länge der Episode, indem er die Sturzrisiken minimiert. Dies führt zu steigender Belohnung innerhalb der Episode. Wie in Abbildung \ref{fig:116_move_target_dir} und \ref{fig:116_reach_target} zu sehen ist, läuft er während einer Episode durchschnittlich eine Distanz von 80 Einheiten und erreicht dabei 10,4 Ziele. Der Läufer lernt, sich stabil zum Ziel zu bewegen. In Abbildung \ref{fig:analyse_gangbild} ist das Gangbild des Läufers abgebildet. Der Läufer wechselt periodisch das Standbein, setzt den einen Fuß vor den anderen und drückt sich über das Standbein voran. Durch die vereinfachte Darstellung der Füße kann der Läufer jedoch nicht richtig abrollen. Die Arme hält der Läufer nahezu horizontal und schwingt diese sehr stark um das Gleichgewicht halten zu können. Das Gangbild ist daher menschenähnlich, aber nicht detailliert genug um in realistischeren Anwendungsbereichen als natürliche Gehbewegung dargestellt zu werden.
 
 \begin{figure}[H]
   \centering
