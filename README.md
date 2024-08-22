@@ -1,21 +1,3 @@
 # PhysicsBasedCharacterControllerMachineLearning
 
-## Problemstellung
-
-Machine Learning Modelle bieten neue Möglichkeiten den Prozess der Charakter animation zu erleichtern. In der Thesis soll ein Ansatz anhand bestehender Literatur und Beispiele erforscht werden, in dem Spielcharaktere physikalisch mit Rigidbodies und Joints simuliert und mit Hilfe von Machine Learning trainiert werden, um möglichst realistische Bewegung nachahmen zu können.
-
-## Ziel der Arbeit
-
-### Mindestens:
-
-- M1 Ausführung und Analyse Unity ML Agents Walker Demo.
-- M2 Erweiterung Walker Demo mit zusätzlichen Bewegungsrichtungen (auf der Stelle stehen, Rückwärts).
-- M2.1 Erweiterung Walker Demo mit Nutzergesteuertem Target (WASD setzt Target in entsprechender Richtung relativ zum Charakter).
-- M3 Mixamo Charakter mit Rigidbodies und Joints als active ragdoll konfigurieren.
-- M3.1 Walker Demo für Humanoid Charakter mit mehreren Gelenken erweitern (Mixamo Charakter).
-
-### Optional:
-
-- M4 Erweiterung Walker Demo mit Imitation learning (Reward für Ähnlichkeit der Bewegung) Gelenkrotation vergleichen mit bestehender traditioneller animation.
-- M5 Prototyp für verschiedene Bewegungen testen (unterschiedliche Animationen imitieren).
-- M6 Wechsel zwischen unterschiedlicher Bewegungen analysieren und implementieren mit State input (Sprinting, Injured).
+Ziel der Arbeit ist es, einen Charakter physikalisch in der Unity Spieleumgebung zu si- mulieren. Der Charakter soll mit maschinellen Lernverfahren darauf trainiert werden, das Gleichgewicht zu halten und sich zu einem Ziel zu bewegen. Als Basis für die Trainings- umgebung soll die im Unity ML-Agents Framework entwickelte Walker Demo zum Einsatz kommen. Die Demo soll erweitert werden, sodass der Walker über Tastatureingaben gesteuert und somit in Videospielen als Ersatz für traditionelle Animationssysteme verwendet werden kann. Um die Vielfalt von Charakteranimationen abzudecken wird analysiert, wie weitere Bewegungsabläufe in das bestehende System eingefügt werden können. Außerdem soll auch die Kompatibilität mit unterschiedlichen Charaktermodellen geprüft werden.
